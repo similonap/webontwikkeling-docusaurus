@@ -1,0 +1,78 @@
+# Insert
+
+## insertOne
+
+Voor het toevoegen van 1 element gebruiken we de functie `insertOne`. Door een object mee te geven als parameter wordt dit object toegevoegd aan de database:
+
+```typescript
+import &#123; MongoClient, ObjectId &#125; from "mongodb";
+
+const uri = "mongodb+srv://&lt;username>:&lt;password>@&lt;your-cluster-url>/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri);
+
+interface Pokemon &#123;
+    _id?: ObjectId,
+    name: string,
+    age: number
+&#125;
+
+async function main() &#123;
+    try &#123;
+        // Connect to the MongoDB cluster
+        await client.connect();
+ 
+        let pikachu: Pokemon = &#123; name:"pikachu", age:12 &#125;;
+        const result = await client.db("Les").collection("pokemon").insertOne(pikachu);
+        console.log(`New document created with the following id: $&#123;result.insertedId&#125;`);
+    &#125; catch (e) &#123;
+        console.error(e);
+    &#125; finally &#123;
+        await client.close();
+    &#125;
+&#125;
+main();
+```
+
+Aan de hand van de `db` en `collection` functies kunnen we de database en collectie selecteren waar we willen toevoegen. In dit geval voegen we een Pokemon object toe aan de collectie "pokemon".
+
+:::info
+Let op: elk object krijgt automatisch een \_id wanneer die wordt toegevoegd aan de database. MongoDB kiest hier zelf een uniek id. Om later deze property te kunnen aanspreken, hebben we dit veld voorzien in de interface van Pokemon. We maken die echter optioneel zodat we die zelf geen waarde geven.
+:::
+
+## insertMany
+
+Wanneer we verschillende elementen willen toevoegen, gebruiken we `insertMany`. Stel dat we een array van Pokemon objecten hebben:
+
+```typescript
+const pokemon: Pokemon[] = [
+  &#123;name: "pichu", age:7&#125;,
+  &#123;name: "flareon",age:3&#125;
+];
+```
+
+dan kunnen we deze allemaal tegelijk toevoegen:
+
+```typescript
+const result = await client.db("Les").collection("pokemon").insertMany(pokemon);
+console.log(`$&#123;result.insertedCount&#125; new documents(s) created with the following id(s):`);
+console.log(result.insertedIds);
+```
+
+MongoDB laat toe verschillende types in 1 collectie toe te voegen. Stel dat we een array van objecten hebben met verschillende properties:
+
+```typescript
+const pokemon: any[] = [
+    &#123;name: "pichu", age:7&#125;,
+    &#123;trainer: "ash"&#125;
+];
+```
+
+dan kunnen we deze toevoegen in 1 collectie:
+
+```typescript
+let result = await client.db("Les").collection("pokemon").insertMany(pokemon);
+console.log(`$&#123;result.insertedCount&#125; new documents(s) created with the following id(s):`);
+console.log(result.insertedIds);
+```
+
+Alhoewel dit mogelijk is, is dit niet altijd een goed idee. Het is beter om een duidelijke structuur te hebben in je collecties. Dit maakt het makkelijker om queries uit te voeren. Maar het is wel een van de voordelen van NoSQL databases.

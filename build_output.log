@@ -1,0 +1,1233 @@
+[INFO] [en] Creating an optimized production build...
+[webpackbar] ℹ Compiling Client
+[webpackbar] ℹ Compiling Server
+[WARNING] Markdown link with URL `../newspaper-route/README.md` in source file "docs/exercises/express/newspaper-search/index.md" (3:20) couldn't be resolved.
+Make sure it references a local Markdown file that exists within the current plugin.
+[WARNING] Markdown link with URL `../../node-typescript/bitcoin-api/README.md` in source file "docs/exercises/express/bitcoin-current/index.md" (7:36) couldn't be resolved.
+Make sure it references a local Markdown file that exists within the current plugin.
+[WARNING] Markdown link with URL `../login-express/README.md` in source file "docs/exercises/security/login-express-jwt/index.md" (3:21) couldn't be resolved.
+Make sure it references a local Markdown file that exists within the current plugin.
+[WARNING] Markdown link with URL `../newspaper/README.md` in source file "docs/exercises/express/newspaper-route/index.md" (3:20) couldn't be resolved.
+Make sure it references a local Markdown file that exists within the current plugin.
+[WARNING] Markdown link with URL `../pokemon-team/README.md` in source file "docs/exercises/mongodb/pokemon-team-express/index.md" (5:63) couldn't be resolved.
+Make sure it references a local Markdown file that exists within the current plugin.
+[WARNING] Markdown link with URL `../../express.js/requests/README.md` in source file "docs/labos/labo9/index.md" (7:3) couldn't be resolved.
+Make sure it references a local Markdown file that exists within the current plugin.
+[WARNING] Markdown link with URL `../guestbook/README.md` in source file "docs/exercises/mongodb/guestbook-express/index.md" (3:147) couldn't be resolved.
+Make sure it references a local Markdown file that exists within the current plugin.
+[WARNING] Markdown link with URL `../view-counter-cookies/README.md` in source file "docs/exercises/security/view-counter-sessions/index.md" (3:38) couldn't be resolved.
+Make sure it references a local Markdown file that exists within the current plugin.
+[WARNING] Markdown link with URL `../math-service-express/README.md` in source file "docs/exercises/express/router-combi/index.md" (3:71) couldn't be resolved.
+Make sure it references a local Markdown file that exists within the current plugin.
+[WARNING] Markdown link with URL `../newspaper-search/README.md` in source file "docs/exercises/express/router-combi/index.md" (3:122) couldn't be resolved.
+Make sure it references a local Markdown file that exists within the current plugin.
+[WARNING] Markdown link with URL `../contact-form/README.md` in source file "docs/exercises/express/router-combi/index.md" (3:176) couldn't be resolved.
+Make sure it references a local Markdown file that exists within the current plugin.
+[WARNING] Markdown link with URL `../pet-shelter/README.md` in source file "docs/exercises/mongodb/pet-shelter-express/index.md" (5:63) couldn't be resolved.
+Make sure it references a local Markdown file that exists within the current plugin.
+[webpackbar] ✔ Server: Compiled with some errors in 7.73s
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/mongodb/mongodb-driver.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo5/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/express.js/requests/get-request.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/express.js/authenticatie-en-autorisatie/json-web-token-jwt/voorbeeld-oefening-jwt-authenticatie.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/express/viewcounter/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/node-typescript/tic-tac-toe/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/security-and-testing/jwt-tokens/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo7/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/nodejs-+-typescript/wat-is-nodejs.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/nodejs-+-typescript/type-systeem/arrays.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/project/dev-container.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/express/dadjoke-express/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/mongodb/find.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/express.js/cookies-en-sessions/jwt-tokens/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/mongodb/wat-is-mongodb.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/mongodb/insert.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/project/semester-2/milestone-2-express.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/express.js/ejs.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo3/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/node-typescript/joke-api/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/express.js/cookies-en-sessions/jwt-tokens/jwt-npm-package.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/node-typescript/rot13/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo4/interfaces/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo6/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/tooling/devcontainers.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/project/semester-2/milestone-0-json.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo2/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/security-and-testing/jwt-tokens/jwt-npm-package.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo13/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/nodejs-+-typescript/waarom-typescript.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/express.js/basis.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/node-typescript/todo-list-string/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/nodejs-+-typescript/modules.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo4/functions/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/Users/similon/Git/webontwikkeling/cursus/node-express-course/node_modules/@docusaurus/mdx-loader/lib/index.js??ruleSet[1].rules[8].use[0]!/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/node-typescript/hello-name/index.md': No serializer registered for VFileMessage
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> Error -> VFileMessage
+[webpackbar] ✔ Client: Compiled with some errors in 13.57s
+[ERROR] Client bundle compiled with errors therefore further build is impossible.
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/express/dadjoke-express/index.md"
+Cause: Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (22:9-22:44)
+Details:
+{
+  "column": 86,
+  "file": "",
+  "message": "Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (22:9-22:44)",
+  "line": 22,
+  "name": "22:86-22:95",
+  "place": {
+    "start": {
+      "_bufferIndex": 85,
+      "_index": 0,
+      "line": 22,
+      "column": 86,
+      "offset": 857
+    },
+    "end": {
+      "_bufferIndex": -1,
+      "_index": 1,
+      "line": 22,
+      "column": 95,
+      "offset": 866
+    }
+  },
+  "reason": "Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (22:9-22:44)",
+  "ruleId": "end-tag-mismatch",
+  "source": "mdast-util-mdx-jsx"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/express/viewcounter/index.md"
+Cause: Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (13:9-13:38)
+Details:
+{
+  "column": 63,
+  "file": "",
+  "message": "Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (13:9-13:38)",
+  "line": 13,
+  "name": "13:63-13:72",
+  "place": {
+    "start": {
+      "_bufferIndex": 62,
+      "_index": 18,
+      "line": 13,
+      "column": 63,
+      "offset": 620
+    },
+    "end": {
+      "_bufferIndex": -1,
+      "_index": 19,
+      "line": 13,
+      "column": 72,
+      "offset": 629
+    }
+  },
+  "reason": "Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (13:9-13:38)",
+  "ruleId": "end-tag-mismatch",
+  "source": "mdast-util-mdx-jsx"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/node-typescript/hello-name/index.md"
+Cause: Expected a closing tag for `<name>` (5:89-5:95) before the end of `paragraph`
+Details:
+{
+  "column": 1,
+  "file": "",
+  "message": "Expected a closing tag for `<name>` (5:89-5:95) before the end of `paragraph`",
+  "line": 5,
+  "name": "5:1-5:105",
+  "place": {
+    "start": {
+      "_bufferIndex": 0,
+      "_index": 0,
+      "line": 5,
+      "column": 1,
+      "offset": 110
+    },
+    "end": {
+      "_bufferIndex": -1,
+      "_index": 1,
+      "line": 5,
+      "column": 105,
+      "offset": 214
+    }
+  },
+  "reason": "Expected a closing tag for `<name>` (5:89-5:95) before the end of `paragraph`",
+  "ruleId": "end-tag-mismatch",
+  "source": "mdast-util-mdx-jsx"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/node-typescript/joke-api/index.md"
+Cause: Expected a closing tag for `<type>` (13:49-13:55) before the end of `paragraph`
+Details:
+{
+  "column": 1,
+  "file": "",
+  "message": "Expected a closing tag for `<type>` (13:49-13:55) before the end of `paragraph`",
+  "line": 13,
+  "name": "13:1-13:112",
+  "place": {
+    "start": {
+      "_bufferIndex": 0,
+      "_index": 0,
+      "line": 13,
+      "column": 1,
+      "offset": 580
+    },
+    "end": {
+      "_bufferIndex": -1,
+      "_index": 1,
+      "line": 13,
+      "column": 112,
+      "offset": 691
+    }
+  },
+  "reason": "Expected a closing tag for `<type>` (13:49-13:55) before the end of `paragraph`",
+  "ruleId": "end-tag-mismatch",
+  "source": "mdast-util-mdx-jsx"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/node-typescript/rot13/index.md"
+Cause: Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (9:9-9:37)
+Details:
+{
+  "column": 62,
+  "file": "",
+  "message": "Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (9:9-9:37)",
+  "line": 9,
+  "name": "9:62-9:71",
+  "place": {
+    "start": {
+      "_bufferIndex": 61,
+      "_index": 12,
+      "line": 9,
+      "column": 62,
+      "offset": 516
+    },
+    "end": {
+      "_bufferIndex": -1,
+      "_index": 13,
+      "line": 9,
+      "column": 71,
+      "offset": 525
+    }
+  },
+  "reason": "Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (9:9-9:37)",
+  "ruleId": "end-tag-mismatch",
+  "source": "mdast-util-mdx-jsx"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/node-typescript/tic-tac-toe/index.md"
+Cause: Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (19:9-19:41)
+Details:
+{
+  "column": 66,
+  "file": "",
+  "message": "Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (19:9-19:41)",
+  "line": 19,
+  "name": "19:66-19:75",
+  "place": {
+    "start": {
+      "_bufferIndex": 65,
+      "_index": 27,
+      "line": 19,
+      "column": 66,
+      "offset": 1283
+    },
+    "end": {
+      "_bufferIndex": -1,
+      "_index": 28,
+      "line": 19,
+      "column": 75,
+      "offset": 1292
+    }
+  },
+  "reason": "Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (19:9-19:41)",
+  "ruleId": "end-tag-mismatch",
+  "source": "mdast-util-mdx-jsx"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/node-typescript/todo-list-string/index.md"
+Cause: Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (46:9-46:37)
+Details:
+{
+  "column": 62,
+  "file": "",
+  "message": "Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (46:9-46:37)",
+  "line": 46,
+  "name": "46:62-46:71",
+  "place": {
+    "start": {
+      "_bufferIndex": 61,
+      "_index": 75,
+      "line": 46,
+      "column": 62,
+      "offset": 1545
+    },
+    "end": {
+      "_bufferIndex": -1,
+      "_index": 76,
+      "line": 46,
+      "column": 71,
+      "offset": 1554
+    }
+  },
+  "reason": "Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (46:9-46:37)",
+  "ruleId": "end-tag-mismatch",
+  "source": "mdast-util-mdx-jsx"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/exercises/security/shopping-cookie/index.md"
+Cause: Markdown image with URL `image.png` in source file "docs/exercises/security/shopping-cookie/index.md" (7:1) couldn't be resolved to an existing local image file.
+To ignore this error, use the `siteConfig.markdown.hooks.onBrokenMarkdownImages` option, or apply the `pathname://` protocol to the broken image URLs.
+Details:
+Error: Markdown image with URL `image.png` in source file "docs/exercises/security/shopping-cookie/index.md" (7:1) couldn't be resolved to an existing local image file.
+To ignore this error, use the `siteConfig.markdown.hooks.onBrokenMarkdownImages` option, or apply the `pathname://` protocol to the broken image URLs.
+    at async Promise.all (index 0)
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/express.js/authenticatie-en-autorisatie/json-web-token-jwt/voorbeeld-oefening-jwt-authenticatie.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 65,
+    "loc": {
+      "line": 5,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 5,
+  "name": "5:2",
+  "place": {
+    "line": 5,
+    "column": 2,
+    "offset": 65
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/express.js/basis.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 6324,
+    "loc": {
+      "line": 154,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 154,
+  "name": "154:2",
+  "place": {
+    "line": 154,
+    "column": 2,
+    "offset": 6324
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/express.js/cookies-en-sessions/jwt-tokens/index.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 7285,
+    "loc": {
+      "line": 113,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 113,
+  "name": "113:2",
+  "place": {
+    "line": 113,
+    "column": 2,
+    "offset": 7285
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/express.js/cookies-en-sessions/jwt-tokens/jwt-npm-package.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 3406,
+    "loc": {
+      "line": 72,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 72,
+  "name": "72:2",
+  "place": {
+    "line": 72,
+    "column": 2,
+    "offset": 3406
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/express.js/ejs.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 2760,
+    "loc": {
+      "line": 104,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 104,
+  "name": "104:2",
+  "place": {
+    "line": 104,
+    "column": 2,
+    "offset": 2760
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/express.js/requests/get-request.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 1381,
+    "loc": {
+      "line": 34,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 34,
+  "name": "34:2",
+  "place": {
+    "line": 34,
+    "column": 2,
+    "offset": 1381
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/express.js/requests/post-request.md"
+Cause: Markdown image with URL `../../.gitbook/assets/formhandling.png` in source file "docs/express.js/requests/post-request.md" (52:1) couldn't be resolved to an existing local image file.
+To ignore this error, use the `siteConfig.markdown.hooks.onBrokenMarkdownImages` option, or apply the `pathname://` protocol to the broken image URLs.
+Details:
+Error: Markdown image with URL `../../.gitbook/assets/formhandling.png` in source file "docs/express.js/requests/post-request.md" (52:1) couldn't be resolved to an existing local image file.
+To ignore this error, use the `siteConfig.markdown.hooks.onBrokenMarkdownImages` option, or apply the `pathname://` protocol to the broken image URLs.
+    at async Promise.all (index 0)
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo2/index.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 947,
+    "loc": {
+      "line": 23,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 23,
+  "name": "23:2",
+  "place": {
+    "line": 23,
+    "column": 2,
+    "offset": 947
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo3/index.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 369,
+    "loc": {
+      "line": 15,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 15,
+  "name": "15:2",
+  "place": {
+    "line": 15,
+    "column": 2,
+    "offset": 369
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo4/functions/index.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 33,
+    "loc": {
+      "line": 5,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 5,
+  "name": "5:2",
+  "place": {
+    "line": 5,
+    "column": 2,
+    "offset": 33
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo4/interfaces/index.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 39,
+    "loc": {
+      "line": 5,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 5,
+  "name": "5:2",
+  "place": {
+    "line": 5,
+    "column": 2,
+    "offset": 39
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo5/index.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 197,
+    "loc": {
+      "line": 11,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 11,
+  "name": "11:2",
+  "place": {
+    "line": 11,
+    "column": 2,
+    "offset": 197
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo6/index.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 173,
+    "loc": {
+      "line": 11,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 11,
+  "name": "11:2",
+  "place": {
+    "line": 11,
+    "column": 2,
+    "offset": 173
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo7/index.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 154,
+    "loc": {
+      "line": 11,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 11,
+  "name": "11:2",
+  "place": {
+    "line": 11,
+    "column": 2,
+    "offset": 154
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/labos/labo13/index.md"
+Cause: Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (43:9-43:66)
+Details:
+{
+  "column": 91,
+  "file": "",
+  "message": "Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (43:9-43:66)",
+  "line": 43,
+  "name": "43:91-43:100",
+  "place": {
+    "start": {
+      "_bufferIndex": 90,
+      "_index": 6,
+      "line": 43,
+      "column": 91,
+      "offset": 1855
+    },
+    "end": {
+      "_bufferIndex": -1,
+      "_index": 7,
+      "line": 43,
+      "column": 100,
+      "offset": 1864
+    }
+  },
+  "reason": "Unexpected closing tag `</figure>`, expected corresponding closing tag for `<img>` (43:9-43:66)",
+  "ruleId": "end-tag-mismatch",
+  "source": "mdast-util-mdx-jsx"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/mongodb/find.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 1306,
+    "loc": {
+      "line": 35,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 35,
+  "name": "35:2",
+  "place": {
+    "line": 35,
+    "column": 2,
+    "offset": 1306
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/mongodb/insert.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 1119,
+    "loc": {
+      "line": 38,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 38,
+  "name": "38:2",
+  "place": {
+    "line": 38,
+    "column": 2,
+    "offset": 1119
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/mongodb/mongodb-driver.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 3064,
+    "loc": {
+      "line": 70,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 70,
+  "name": "70:2",
+  "place": {
+    "line": 70,
+    "column": 2,
+    "offset": 3064
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/mongodb/wat-is-mongodb.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 4020,
+    "loc": {
+      "line": 80,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 80,
+  "name": "80:2",
+  "place": {
+    "line": 80,
+    "column": 2,
+    "offset": 4020
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/nodejs-+-typescript/modules.md"
+Cause: Could not parse import/exports with acorn
+Details:
+{
+  "cause": {
+    "pos": 1276,
+    "loc": {
+      "line": 35,
+      "column": 28
+    },
+    "raisedAt": 29
+  },
+  "column": 29,
+  "file": "",
+  "message": "Could not parse import/exports with acorn",
+  "line": 35,
+  "name": "35:29",
+  "place": {
+    "line": 35,
+    "column": 29,
+    "offset": 1276
+  },
+  "reason": "Could not parse import/exports with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdxjs-esm",
+  "url": "https://github.com/micromark/micromark-extension-mdxjs-esm#could-not-parse-importexports-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/nodejs-+-typescript/type-systeem/arrays.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 974,
+    "loc": {
+      "line": 21,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 21,
+  "name": "21:2",
+  "place": {
+    "line": 21,
+    "column": 2,
+    "offset": 974
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/nodejs-+-typescript/waarom-typescript.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 394,
+    "loc": {
+      "line": 5,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 5,
+  "name": "5:2",
+  "place": {
+    "line": 5,
+    "column": 2,
+    "offset": 394
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/nodejs-+-typescript/wat-is-nodejs.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 1819,
+    "loc": {
+      "line": 28,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 28,
+  "name": "28:2",
+  "place": {
+    "line": 28,
+    "column": 2,
+    "offset": 1819
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/project/dev-container.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 42,
+    "loc": {
+      "line": 3,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 3,
+  "name": "3:2",
+  "place": {
+    "line": 3,
+    "column": 2,
+    "offset": 42
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/project/semester-1/node-client.md"
+Cause: Markdown image with URL `../../.gitbook/assets/milestone-1.gif` in source file "docs/project/semester-1/node-client.md" (51:1) couldn't be resolved to an existing local image file.
+To ignore this error, use the `siteConfig.markdown.hooks.onBrokenMarkdownImages` option, or apply the `pathname://` protocol to the broken image URLs.
+Details:
+Error: Markdown image with URL `../../.gitbook/assets/milestone-1.gif` in source file "docs/project/semester-1/node-client.md" (51:1) couldn't be resolved to an existing local image file.
+To ignore this error, use the `siteConfig.markdown.hooks.onBrokenMarkdownImages` option, or apply the `pathname://` protocol to the broken image URLs.
+    at async Promise.all (index 0)
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/project/semester-2/milestone-0-json.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 1506,
+    "loc": {
+      "line": 25,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 25,
+  "name": "25:2",
+  "place": {
+    "line": 25,
+    "column": 2,
+    "offset": 1506
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/project/semester-2/milestone-2-express.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 58,
+    "loc": {
+      "line": 7,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 7,
+  "name": "7:2",
+  "place": {
+    "line": 7,
+    "column": 2,
+    "offset": 58
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/security-and-testing/cookies.md"
+Cause: Markdown image with URL `../.gitbook/assets/stateless.png` in source file "docs/security-and-testing/cookies.md" (7:1) couldn't be resolved to an existing local image file.
+To ignore this error, use the `siteConfig.markdown.hooks.onBrokenMarkdownImages` option, or apply the `pathname://` protocol to the broken image URLs.
+Details:
+Error: Markdown image with URL `../.gitbook/assets/stateless.png` in source file "docs/security-and-testing/cookies.md" (7:1) couldn't be resolved to an existing local image file.
+To ignore this error, use the `siteConfig.markdown.hooks.onBrokenMarkdownImages` option, or apply the `pathname://` protocol to the broken image URLs.
+    at async Promise.all (index 0)
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/security-and-testing/hashing-encryption.md"
+Cause: Markdown image with URL `../.gitbook/assets/hashes-vscode.png` in source file "docs/security-and-testing/hashing-encryption.md" (90:1) couldn't be resolved to an existing local image file.
+To ignore this error, use the `siteConfig.markdown.hooks.onBrokenMarkdownImages` option, or apply the `pathname://` protocol to the broken image URLs.
+Details:
+Error: Markdown image with URL `../.gitbook/assets/hashes-vscode.png` in source file "docs/security-and-testing/hashing-encryption.md" (90:1) couldn't be resolved to an existing local image file.
+To ignore this error, use the `siteConfig.markdown.hooks.onBrokenMarkdownImages` option, or apply the `pathname://` protocol to the broken image URLs.
+    at async Promise.all (index 0)
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/security-and-testing/jwt-tokens/index.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 7286,
+    "loc": {
+      "line": 113,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 113,
+  "name": "113:2",
+  "place": {
+    "line": 113,
+    "column": 2,
+    "offset": 7286
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/security-and-testing/jwt-tokens/jwt-npm-package.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 3228,
+    "loc": {
+      "line": 67,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 67,
+  "name": "67:2",
+  "place": {
+    "line": 67,
+    "column": 2,
+    "offset": 3228
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/security-and-testing/sessions.md"
+Cause: Markdown image with URL `../.gitbook/assets/sessionidbrowser.png` in source file "docs/security-and-testing/sessions.md" (59:1) couldn't be resolved to an existing local image file.
+To ignore this error, use the `siteConfig.markdown.hooks.onBrokenMarkdownImages` option, or apply the `pathname://` protocol to the broken image URLs.
+Details:
+Error: Markdown image with URL `../.gitbook/assets/sessionidbrowser.png` in source file "docs/security-and-testing/sessions.md" (59:1) couldn't be resolved to an existing local image file.
+To ignore this error, use the `siteConfig.markdown.hooks.onBrokenMarkdownImages` option, or apply the `pathname://` protocol to the broken image URLs.
+    at async Promise.all (index 0)
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/tooling/bash.md"
+Cause: Markdown image with URL `../.gitbook/assets/newterminal.png` in source file "docs/tooling/bash.md" (13:1) couldn't be resolved to an existing local image file.
+To ignore this error, use the `siteConfig.markdown.hooks.onBrokenMarkdownImages` option, or apply the `pathname://` protocol to the broken image URLs.
+Details:
+Error: Markdown image with URL `../.gitbook/assets/newterminal.png` in source file "docs/tooling/bash.md" (13:1) couldn't be resolved to an existing local image file.
+To ignore this error, use the `siteConfig.markdown.hooks.onBrokenMarkdownImages` option, or apply the `pathname://` protocol to the broken image URLs.
+    at async Promise.all (index 0)
+
+--------------------------
+
+Error: MDX compilation failed for file "/Users/similon/Git/webontwikkeling/cursus/node-express-course/docs/tooling/devcontainers.md"
+Cause: Could not parse expression with acorn
+Details:
+{
+  "cause": {
+    "pos": 18,
+    "loc": {
+      "line": 3,
+      "column": 1
+    },
+    "raisedAt": 1
+  },
+  "column": 2,
+  "file": "",
+  "message": "Could not parse expression with acorn",
+  "line": 3,
+  "name": "3:2",
+  "place": {
+    "line": 3,
+    "column": 2,
+    "offset": 18
+  },
+  "reason": "Could not parse expression with acorn",
+  "ruleId": "acorn",
+  "source": "micromark-extension-mdx-expression",
+  "url": "https://github.com/micromark/micromark-extension-mdx-expression/tree/main/packages/micromark-extension-mdx-expression#could-not-parse-expression-with-acorn"
+}

@@ -1,0 +1,277 @@
+# Gebruik in Express.js
+
+Tot nu toe hebben we enkel de MongoDB driver gebruikt in een Node.js applicatie. In dit hoofdstuk gaan we de MongoDB driver gebruiken in een Express.js applicatie. Over het algemeen is het gebruik van de MongoDB driver in een Express.js applicatie niet veel anders dan in een Node.js applicatie. We gaan echter wel enkele best practices bespreken.
+
+## Connect per request
+
+Een aanpak die je kan gebruiken is om een connectie met de database te maken bij elke request die binnenkomt. Dit zorgt ervoor dat je altijd een verse connectie hebt met de database. Dit is echter niet de meest efficiënte manier van werken. Het is beter om een connectie te maken bij het opstarten van de applicatie en deze connectie open te houden zolang de applicatie draait. Die manier zullen we verder in dit hoofdstuk bespreken.
+
+```typescript
+import &#123; MongoClient &#125; from "mongodb";
+
+const client = new MongoClient("mongodb://localhost:27017");
+
+const app = express();
+
+app.get("/students", async (req, res) => &#123;
+    try &#123;
+        await client.connect();
+        const db = client.db("example");
+        const students = await db.collection("student").find().toArray();
+        res.json(students);
+    &#125; catch (error) &#123;
+        console.error(error);
+        res.status(500).send("Internal server error");
+    &#125; finally &#123;
+        await client.close();
+    &#125;
+&#125;);
+```
+
+We gebruiken een `try catch finally` blok om ervoor te zorgen dat de connectie met de database altijd wordt afgesloten. Dit is belangrijk omdat je anders een connectie lek kan krijgen. Dit kan ervoor zorgen dat je applicatie vastloopt of dat je database overbelast raakt.
+
+## Database module
+
+Het is een goed idee om een aparte module (in een apart bestand) aan te maken waarin je al je database gerelateerde code plaatst. Dit zorgt ervoor dat je code beter georganiseerd is en dat je je database code makkelijker kan hergebruiken. 
+
+We zullen afspreken dat we deze module `database.ts` noemen. In deze module plaatsen we alle code die gerelateerd is aan de database. 
+
+```typescript
+import &#123; MongoClient &#125; from "mongodb";
+
+export const client = new MongoClient("mongodb://localhost:27017");
+
+async function exit() &#123;
+    try &#123;
+        await client.close();
+        console.log("Disconnected from database");
+    &#125; catch (error) &#123;
+        console.error(error);
+    &#125;
+    process.exit(0);
+&#125;
+
+export async function connect() &#123;
+    try &#123;
+        await client.connect();
+        console.log("Connected to database");
+        process.on("SIGINT", exit);
+    &#125; catch (error) &#123;
+        console.error(error);
+    &#125;
+&#125;
+```
+
+In dit voorbeeld maken we een connectie met de MongoDB database. We maken ook een functie `exit` die we gebruiken om de connectie met de database te sluiten. We gebruiken de `process.on` methode om een event listener toe te voegen voor het `SIGINT` event. Dit event wordt getriggerd als je `CTRL+C` drukt in de terminal. Zo zorgen we ervoor dat de connectie met de database netjes wordt afgesloten als je de applicatie stopt.
+
+Vervolgens kunnen we deze module gebruiken in onze Express.js applicatie.
+
+```typescript
+import express from "express";
+
+import &#123; connect &#125; from "./database";
+
+const app = express();
+
+app.listen(3000, async () => &#123;
+    await connect();
+    console.log("Server is running on port 3000");
+&#125;);
+```
+
+## Collections exporteren
+
+Het is een goed idee om de collections die je gebruikt in je applicatie te exporteren vanuit je `database.ts` module. Dit zorgt ervoor dat je de collections makkelijk kan hergebruiken in andere modules. 
+
+```typescript
+export const studentsCollection: Collection&lt;Student> = client.db("example").collection&lt;Student>("student");
+```
+
+Je kan zo alle collections exporteren die je nodig hebt in je applicatie.
+
+## Database vullen bij opstart
+
+Het is een goed idee om je database te vullen bij de opstart van je applicatie. Zo kan je ervoor zorgen dat je altijd data hebt om mee te werken. Deze code plaatsen we eveneens in de `database.ts` module. We noemen deze functie `seed`. Dit is afkomstig van het Engelse woord voor zaaien en betekent dat we de database vullen met data.
+
+```typescript
+async function seed() &#123;
+    const students : Student[] = [
+        &#123; name: "Alice", age: 20 &#125;,
+        &#123; name: "Bob", age: 21 &#125;,
+        &#123; name: "Charlie", age: 22 &#125;,
+        &#123; name: "David", age: 23 &#125;,
+        &#123; name: "Eve", age: 24 &#125;,
+        &#123; name: "Frank", age: 25 &#125;,
+        &#123; name: "Grace", age: 26 &#125;,
+        &#123; name: "Heidi", age: 27 &#125;,
+        &#123; name: "Ivan", age: 28 &#125;,
+        &#123; name: "Judy", age: 29 &#125;
+    ];
+    if (await studentsCollection.countDocuments() === 0) &#123;
+        await studentsCollection.insertMany(students);
+    &#125;
+&#125;
+```
+
+We kunnen deze functie aanroepen in de `connect` functie.
+
+```typescript
+export async function connect() &#123;
+    try &#123;
+        await client.connect();
+        console.log("Connected to database");
+        await seed();
+        process.on("SIGINT", exit);
+    &#125; catch (error) &#123;
+        console.error(error);
+    &#125;
+&#125;
+```
+
+## Data ophalen in routes
+
+Nu we de connectie met de database hebben gemaakt en de database hebben gevuld met data, kunnen we deze data ophalen in onze Express.js applicatie. Het enige wat we nu moeten importeren is de collection die we willen gebruiken.
+
+```typescript
+import &#123; studentsCollection &#125; from "./database";
+```
+
+en dan kunnen we deze collection gebruiken in onze Express.js routes.
+
+```typescript
+app.get("/students", async (req, res) => &#123;
+    const students = await studentsCollection.find().toArray();
+    res.json(students);
+&#125;);
+```
+
+We zouden eventueel ook de functies om data op te halen kunnen exporteren vanuit de `database.ts` module. Dit zorgt ervoor dat we de code beter kunnen hergebruiken en blijft de code in onze routes overzichtelijk en leesbaar. Nog een voordeel hiervan is dat we de code later makkelijker kunnen testen.
+
+```typescript
+export async function getStudents() &#123;
+    return await studentsCollection.find().toArray();
+&#125;
+```
+
+en deze functie gebruiken in onze routes.
+
+```typescript
+app.get("/students", async (req, res) => &#123;
+    const students = await getStudents();
+    res.json(students);
+&#125;);
+```
+
+## Alles samen
+
+Hieronder vind je een voorbeeld van hoe je de code kan structureren in je Express.js applicatie.
+
+Types module (`types.ts`):
+
+```typescript
+import &#123; ObjectId &#125; from "mongodb";
+
+export interface Student &#123;
+    _id?: ObjectId;
+    name: string;
+    age: number;
+&#125;
+```
+
+Database module (`database.ts`):
+
+```typescript
+import &#123; Collection, MongoClient &#125; from "mongodb";
+import &#123; Student &#125; from "./types";
+
+export const client = new MongoClient("mongodb://localhost:27017");
+export const studentsCollection: Collection&lt;Student> = client.db("example").collection&lt;Student>("student");
+
+async function exit() &#123;
+    try &#123;
+        await client.close();
+        console.log('Disconnected from database');
+    &#125; catch (error) &#123;
+        console.error(error);
+    &#125;
+    process.exit(0);
+&#125;
+
+async function seed() &#123;
+    const students : Student[] = [
+        &#123; name: "Alice", age: 20 &#125;,
+        &#123; name: "Bob", age: 21 &#125;,
+        &#123; name: "Charlie", age: 22 &#125;,
+        &#123; name: "David", age: 23 &#125;,
+        &#123; name: "Eve", age: 24 &#125;,
+        &#123; name: "Frank", age: 25 &#125;,
+        &#123; name: "Grace", age: 26 &#125;,
+        &#123; name: "Heidi", age: 27 &#125;,
+        &#123; name: "Ivan", age: 28 &#125;,
+        &#123; name: "Judy", age: 29 &#125;
+    ];
+    if (await studentsCollection.countDocuments() === 0) &#123;
+        await studentsCollection.insertMany(students);
+    &#125;
+&#125;
+
+async function getStudents() &#123;
+    return await studentsCollection.find().toArray();
+&#125;
+
+export async function connect() &#123;
+    try &#123;
+        await client.connect();
+        await seed();
+        console.log('Connected to database');
+        process.on('SIGINT', exit);
+    &#125; catch (error) &#123;
+        console.error(error);
+    &#125;
+&#125;
+```
+
+Je Express.js applicatie (`index.ts`):
+
+```typescript
+import express, &#123; Express &#125; from "express";
+import path from "path";
+import &#123; connect, getStudents &#125; from "./database";
+
+const app : Express = express();
+
+app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, "views"));
+
+app.set("port", 3000);
+
+app.get("/students", async (req, res) => &#123;
+    let books = await getStudents();
+    res.json(books);
+&#125;);
+
+app.listen(app.get("port"), async() => &#123;
+    await connect();
+    console.log("Server started on http://localhost:" + app.get('port'));
+&#125;);
+```
+
+Dit is een voorbeeld van hoe je de code kan structureren in je Express.js applicatie. Je kan deze structuur aanpassen naar eigen inzicht. Het belangrijkste is dat je de code goed organiseert en dat je de code herbruikbaar maakt. Zo kan je makkelijk nieuwe functionaliteit toevoegen en blijft je code overzichtelijk en leesbaar. 
+
+## Environment variabelen
+
+Tot nu toe hebben we de connectie string voor de MongoDB database hard gecodeerd in onze applicatie. Dit is echter geen goede manier van werken. Het is beter om de connectie string op te slaan in een environment variabele. Zo kan je de connectie string makkelijk aanpassen zonder dat je de code moet aanpassen.
+
+Je kan meer over environment variabelen lezen in [dit hoofdstuk](../security-and-testing/environment-variables.md).
+
+Je maakt dan een `.env` bestand aan in de root van je project en plaatst daar de connectie string in.
+
+```
+MONGO_URI=mongodb://localhost:27017
+```
+
+Vervolgens kan je de connectie string ophalen in je code met `process.env.MONGO_URI`.
+
+```typescript
+export const client = new MongoClient(process.env.MONGO_URI);
+```
