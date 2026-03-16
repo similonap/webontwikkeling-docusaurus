@@ -23,6 +23,10 @@ app.get("/", (req, res) => {
 
 Vergeet niet om de `next()` functie aan te roepen. Anders zal de request niet naar de volgende middleware functie in de stack gaan en zal deze request ook niet naar de route gaan.
 
+import InteractiveMiddleware from '@site/src/components/InteractiveMiddleware';
+
+<InteractiveMiddleware />
+
 ### Locals voorbeeld
 
 Soms is het handig om bepaalde variabelen beschikbaar te maken in alle views. Je kan deze variabelen toevoegen aan de `res.locals` object. Deze variabelen zijn dan beschikbaar in alle views. Zo moet je niet elke keer dezelfde variabelen doorgeven aan de `render()` functie. Je moet deze dan wel toevoegen aan de `res.locals` object in een middleware functie.

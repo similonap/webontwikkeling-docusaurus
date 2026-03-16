@@ -1,0 +1,184 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: var(--ifm-color-emphasis-100);
+    border-radius: var(--ifm-global-radius);
+    border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.editorContainer {
+    background: #1e1e1e;
+    border-radius: 6px;
+    overflow: hidden;
+    color: #d4d4d4;
+    font-family: var(--ifm-font-family-monospace);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.editorHeader {
+    background: #2d2d2d;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #444;
+    display: flex;
+    color: #fff;
+}
+
+.editorContent {
+    padding: 1rem 0;
+}
+
+.codeLine {
+    display: flex;
+    padding: 0.15rem 0;
+    position: relative;
+    transition: background-color 0.2s;
+}
+
+.activeLine {
+    background-color: rgba(60, 115, 170, 0.4);
+}
+
+.lineNumber {
+    width: 2.5rem;
+    min-width: 2.5rem;
+    text-align: right;
+    padding-right: 1rem;
+    color: #858585;
+    user-select: none;
+}
+
+.codeText {
+    flex: 1;
+    white-space: pre;
+}
+
+.arrowContainer {
+    position: absolute;
+    left: 0.2rem;
+    color: #f8c51c;
+    font-weight: bold;
+    animation: bounceRight 1s infinite alternate;
+}
+
+@keyframes bounceRight {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(5px);
+    }
+}
+
+.simulators {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+    .simulators {
+        flex-direction: column;
+    }
+}
+
+.console,
+.browser {
+    flex: 1;
+    background: #1e1e1e;
+    border-radius: 6px;
+    overflow: hidden;
+    color: #fff;
+    font-family: var(--ifm-font-family-monospace);
+    display: flex;
+    flex-direction: column;
+}
+
+.consoleHeader,
+.browserHeader {
+    background: #333;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #444;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.browserHeader {
+    background: #e0e0e0;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+}
+
+.dots {
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dotRed {
+    background: #ff5f56;
+}
+
+.dotYellow {
+    background: #ffbd2e;
+}
+
+.dotGreen {
+    background: #27c93f;
+}
+
+.content {
+    padding: 1rem;
+    min-height: 100px;
+    flex: 1;
+}
+
+.browserContent {
+    background: #fff;
+    color: #000;
+    font-family: var(--ifm-font-family-base);
+}
+
+.browserPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.browserPage h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.logLine {
+    color: #a6e22e;
+    margin-bottom: 0.25rem;
+}
+
+.loadingText {
+    color: #888;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
