@@ -9,16 +9,16 @@ Bekijk voor het labo aan te vangen eerst de volgende topics:
 ### Hello Express
 
 
-[hello-express](../../exercises/express/hello-express/)
+[hello-express](../../exercises/express/hello-express/index.md)
 
 
 ### DadJoke Express
 
 
-[dadjoke-express](../../exercises/express/dadjoke-express/)
+[dadjoke-express](../../exercises/express/dadjoke-express/index.md)
 
 
 ### Bitcoin Current
 
 
-[bitcoin-current](../../exercises/express/bitcoin-current/)
+[bitcoin-current](../../exercises/express/bitcoin-current/index.md)

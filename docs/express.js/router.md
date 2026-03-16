@@ -34,31 +34,31 @@ Om een router aan te maken, gebruik je de `express.Router` functie. Deze functie
 We maken een bestand `posts.ts` aan in de `routers` map en definiëren daar de routes voor de posts.
 
 ```typescript
-export default function postRouter(posts: Post[]) &#123;
+export default function postRouter(posts: Post[]) {
     const router = express.Router();
 
-    router.get("/", (req, res) => &#123;
+    router.get("/", (req, res) => {
         res.json(posts);
-    &#125;);
+    });
 
-    router.get("/:id", (req, res) => &#123;
+    router.get("/:id", (req, res) => {
         const id = parseInt(req.params.id);
         const post = posts.find(post => post.id === id);
-        if (post) &#123;
+        if (post) {
             res.json(post);
-        &#125; else &#123;
+        } else {
             res.status(404).send("Post not found");
-        &#125;
-    &#125;);
+        }
+    });
 
-    router.post("/", (req, res) => &#123;
+    router.post("/", (req, res) => {
         const newPost: Post = req.body;
         posts.push(newPost);
         res.json(newPost);
-    &#125;);
+    });
 
     return router;
-&#125;
+}
 ```
 
 In je hoofdbestand kan je dan deze functie importeren en gebruiken om de routes te definiëren.

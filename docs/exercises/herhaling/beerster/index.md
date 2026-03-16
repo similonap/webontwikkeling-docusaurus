@@ -42,16 +42,16 @@ Ook maak je 2 gebruikers aan in de database. Bv:
 
 ```typescript
 const initialUsers: User[] = [
-    &#123;
+    {
         username: "solo",
         fullname: "Han Solo",
         password: "hanshotfirst"
-    &#125;,
-    &#123;
+    },
+    {
         username: "princess",
         fullname: "Leia Organa",
         password: "obiwan"
-    &#125;
+    }
 ];
 ```
 

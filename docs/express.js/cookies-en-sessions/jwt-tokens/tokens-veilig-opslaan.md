@@ -24,5 +24,5 @@ Om een JWT token in te stellen in een Express applicatie, kan je volgende code g
 // token is een eerder aangemaakt JWT token
 // "jwt" is hier een identifier voor je cookie
 // de exacte betekenis van de waarden vind je op https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
-res.cookie("jwt", token, &#123; httpOnly: true, sameSite: "lax", secure: true &#125;);
+res.cookie("jwt", token, { httpOnly: true, sameSite: "lax", secure: true });
 ```

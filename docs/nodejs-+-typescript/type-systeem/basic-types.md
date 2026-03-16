@@ -17,9 +17,9 @@ id = "123e4567-e89b-12d3-a456-426614174000";
 en dat we ook een functie hebben die deze id gebruikt en eventueel verhoogt met 1:
 
 ```typescript
-function increaseId(id) &#123;
+function increaseId(id) {
     return id + 1;
-&#125;
+}
 ```
 
 Dit is een soort fout die je makkelijk kan maken en die je niet snel zal opmerken. JavaScript zal dit gewoon uitvoeren en geen foutmelding geven maar dit kan wel voor problemen zorgen. In TypeScript zou dit niet mogelijk zijn. We zouden een foutmelding krijgen bij het toekennen van de string aan de variabele id en ook bij het aanroepen van de functie increaseId. Dit is een van de vele voordelen van TypeScript. Ze noemen dit in de programmeerwereld: **strongly typed**. Eenmaal je een variabele een type heeft gekregen dan kan dit type nooit meer veranderd worden. De waarde mag wel veranderd worden als het type hetzelfde blijft.
@@ -83,7 +83,7 @@ Een string in TypeScript moet omringd zijn met quotes.
 ```typescript
 let str : string = "Hello";
 let str2 : string = 'Single quotes are ok too';
-let phrase : string = `can embed another $&#123;str&#125;`;
+let phrase : string = `can embed another ${str}`;
 ```
 
 In TypeScript zijn er drie types van quotes
@@ -100,10 +100,10 @@ De derde soort quotes is een speciaal soort.  Ze laten ons toe om variabelen en 
 let name : string = "Andie";
 
 // met een variable
-console.log( `Hello, $&#123;name&#125;!` ); // Hello, Andie!
+console.log( `Hello, ${name}!` ); // Hello, Andie!
 
 // met een expression
-console.log( `the result is $&#123;1 + 2&#125;` ); // the result is 3
+console.log( `the result is ${1 + 2}` ); // the result is 3
 ```
 
 Alles wat tussen de `$&#123;...&#125;` staat wordt geëvalueerd en het resultaat wordt deel van de string.&#x20;
@@ -199,9 +199,9 @@ let num: number;
 num = value; // Error: Type 'unknown' is not assignable to type 'number'
 
 // Je moet het type eerst controleren of omzetten:
-if (typeof value === "number") &#123;
+if (typeof value === "number") {
   num = value; // Dit is nu geldig omdat we het type hebben gecontroleerd
-&#125;
+}
 ```
 
 ## Union types
@@ -263,9 +263,9 @@ Je moet dus eerst controleren of de waarde die je hebt ingelezen wel een van de 
 
 ```typescript
 let lightStatusStr : string = readline.question("status");
-if (lightStatusStr === "ON" || lightStatusStr === "DIMMED" || lightStatusStr === "OFF") &#123;
+if (lightStatusStr === "ON" || lightStatusStr === "DIMMED" || lightStatusStr === "OFF") {
     let lightStatus : LightStatus = lightStatusStr;
-&#125; else &#123;
+} else {
     console.log("Invalid status");
-&#125;
+}
 ```

@@ -39,16 +39,16 @@ In NoSQL stellen we dit als volgt voor:
 
 ```typescript
 [
-  &#123;
+  {
     firstname: "Sven",
     lastname: "Charleer",
     email: "sven.charleer@ap.be"
-  &#125;,
-  &#123;
+  },
+  {
     firstname: "Andie",
     lastname: "Similon",
     email: "andie.similon@ap.be"
-  &#125;,
+  },
 
 ]
 ```

@@ -27,10 +27,10 @@ Hier is een voorbeeld van hoe je de `jwt.sign` functie zou kunnen gebruiken in T
 import * as jwt from 'jsonwebtoken';
 
 // Dit is de informatie die we willen opslaan in de JWT
-const payload = &#123;
+const payload = {
   userId: 123,
   username: 'johndoe',
-&#125;;
+};
 
 // Dit is het geheim dat we gebruiken om de JWT te ondertekenen en te beveiligen
 const secret = 'my_secret_key';
@@ -54,17 +54,17 @@ import * as jwt from 'jsonwebtoken';
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 const secret = 'my_secret_key';
 
-jwt.verify(token, secret, (err: any, decoded: any) => &#123;
-  if (err) &#123;
+jwt.verify(token, secret, (err: any, decoded: any) => {
+  if (err) {
     // Er is een error opgetreden bij het verifiëren van de token
     console.error(err);
     return;
-  &#125;
+  }
 
   // Token is geverifieërd
   console.log(decoded);
-  // Output: &#123; sub: '1234567890', name: 'John Doe', iat: 1516239022 &#125;
-&#125;);
+  // Output: { sub: '1234567890', name: 'John Doe', iat: 1516239022 }
+});
 ```
 
 In dit voorbeeld wordt de `jwt.verify()` functie gebruikt om een JWT te verifiëren en te decoderen met behulp van de gegeven geheime sleutel. Als de verificatie en decodering succesvol is, worden de gegevens van de JWT weergegeven als een object. Als er een fout optreedt bij het verifiëren of decoderen van de token, wordt een foutmelding weergegeven.

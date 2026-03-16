@@ -33,10 +33,10 @@ const app = express();
 
 app.set("port", 3000);
 
-app.get("/", (req, res) => &#123;
+app.get("/", (req, res) => {
   res.type("text/html");
   res.send("Hello <strong>World</strong>");
-&#125;);
+});
 
 app.listen(app.get("port"), () =>
   console.log("[server] http://localhost:" + app.get("port"))
@@ -79,10 +79,10 @@ Web applicaties en websites bevatten meestal meer dan 1 pagina. Tot nu toe zie j
 Express laat ons toe zelf te bepalen welke data wordt teruggestuurd aan de hand van de URL. In ons voorbeeld zal `localhost:3000/` de tekst "Hello World" tonen:
 
 ```typescript
-app.get("/",(req,res)=>&#123;
+app.get("/",(req,res)=>{
     res.type("text/html");
     res.send("Hello <strong>World</strong>")
-&#125;)
+})
 ```
 
 Express werkt met routes. Een route bepaalt welk path welke data terugstuurt. Je doet dit aan de hand van de methode `app.get`. `app.get` heeft 2 parameters:
@@ -116,18 +116,18 @@ Om data terug te sturen gebruiken we de `send()` functie. Omdat we HTML willen t
 Verschillende routes toevoegen is makkelijk:
 
 ```typescript
-app.get("/",(req,res)=>&#123;
+app.get("/",(req,res)=>{
     res.type("text/html");
     res.send("Yet another hello world app...")
-&#125;);
-app.get("/helloworld",(req,res)=>&#123;
+});
+app.get("/helloworld",(req,res)=>{
     res.type("text/html");
     res.send("Hello World")
-&#125;);
-app.get("/goodbye",(req,res)=>&#123;
+});
+app.get("/goodbye",(req,res)=>{
     res.type("text/html");
     res.send("Later <strong>World</strong>")
-&#125;);
+});
 ```
 
 Voor elke route roepen we `app.get` op met het path dat we willen instellen en de data die we willen terugsturen.
@@ -135,11 +135,11 @@ Voor elke route roepen we `app.get` op met het path dat we willen instellen en d
 We kunnen ook verkeerde paths opvangen. Als de gebruiker naar een path gaat dat niet bestaat, kunnen we ze bv. een foutmelding geven.
 
 ```typescript
-app.use((req, res) => &#123;
+app.use((req, res) => {
     res.type("text/html");
     res.status(404);
     res.send("404 - Not Found");
-    &#125;
+    }
 );
 ```
 
@@ -164,30 +164,30 @@ Tot nu toe stuurden we html terug. Maar we kunnen ook data terugsturen. Dit vera
 </strong>
 const app = express();
 
-interface Person &#123;
+interface Person {
     name: string;
     age: number;
-&#125;
+}
 
 const data : Person[] = [
-    &#123;   
+    {   
         name: "george",
         age: 50
-    &#125;,
-    &#123;   
+    },
+    {   
         name: "jane",
         age: 32
-    &#125;,
-    &#123;   
+    },
+    {   
         name: "john",
         age: 42
-    &#125;,
+    },
 ];
 
-app.get("/getData",(req,res)=>&#123;
+app.get("/getData",(req,res)=>{
     res.type("application/json");
     res.json(data);
-&#125;)
+})
 
 app.listen(app.get("port"), ()=>console.log( "[server] http://localhost:" + app.get("port")));
 
@@ -216,12 +216,12 @@ Eigenlijk moeten we het type hier niet definieren. res.json zal zelf de content-
 We kunnen ook async routes maken. Dit is handig als we bv. data moeten ophalen uit een API.
 
 ```typescript
-app.get("/users",async (req,res) =>&#123;
+app.get("/users",async (req,res) =>{
     let response = await fetch("https://jsonplaceholder.typicode.com/users");
     let data = await response.json();
     res.type("application/json");
     res.json(data);
-&#125;);
+});
 ```
 
 Deze route zal dus eerst de data ophalen van de API en pas daarna terugsturen. De response zal dus niet onmiddellijk terugkomen. De snelheid van de API zal dus ook de snelheid van onze applicatie bepalen.
@@ -231,14 +231,14 @@ Wil je niet afhankelijk zijn van de snelheid van een externe API, dan kan je ook
 ```typescript
 let data : Person[] = [];
 
-app.get("/getData",(req,res)=>&#123;
+app.get("/getData",(req,res)=>{
     res.type("application/json");
     res.json(data);
-&#125;);
+});
 
-app.listen(app.get("port"), async ()=>&#123;
+app.listen(app.get("port"), async ()=>{
     let response = await fetch("https://jsonplaceholder.typicode.com/users");
     data = await response.json();
     console.log( "[server] http://localhost:" + app.get("port"));
-&#125;);
+});
 ```

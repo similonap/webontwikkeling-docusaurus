@@ -5,30 +5,30 @@ Tot nu toe hebben we enkel gezien hoe we exacte waarden kunnen gebruiken om te f
 Stel dat we een collectie hebben met de naam `books` en we willen alle boeken vinden waarvan de titel het woord "MongoDB" bevat. 
 
 ```typescript
-interface Book &#123;
+interface Book {
     _id: ObjectId;
     title: string;
     summary: string;
-&#125;
+}
 ```
 
 en
 
 ```typescript
-const collection : Collection&lt;Book> = client.db("library").collection&lt;Book>("books");
+const collection : Collection<Book> = client.db("library").collection<Book>("books");
 ```
 
 Deze collection bevat de volgende boeken: 
 
 ```typescript
  const books: Book[] = [
-    &#123; title: "The Great Gatsby", summary: "A book about a rich guy" &#125;,
-    &#123; title: "MongoDB for Dummies", summary: "A book about a database" &#125;,
-    &#123; title: "The Catcher in the Rye", summary: "A book about a kid" &#125;,
-    &#123; title: "The Da Vinci Code", summary: "A book about a code" &#125;,
-    &#123; title: "The Hobbit", summary: "A book about a hobbit" &#125;,
-    &#123; title: "Star Wars: The novel", summary: "A book about a galaxy far far away" &#125;,
-    &#123; title: "Lief klein konijn", summary: "Een boek over een konijntje" &#125;
+    { title: "The Great Gatsby", summary: "A book about a rich guy" },
+    { title: "MongoDB for Dummies", summary: "A book about a database" },
+    { title: "The Catcher in the Rye", summary: "A book about a kid" },
+    { title: "The Da Vinci Code", summary: "A book about a code" },
+    { title: "The Hobbit", summary: "A book about a hobbit" },
+    { title: "Star Wars: The novel", summary: "A book about a galaxy far far away" },
+    { title: "Lief klein konijn", summary: "Een boek over een konijntje" }
 ]
 ```
 
@@ -38,7 +38,7 @@ Deze collection bevat de volgende boeken:
 Je kan reguliere expressies gebruiken om tekstuele velden te doorzoeken. Je kan een reguliere expressie meegeven aan de `find` methode om te filteren op een bepaald patroon. 
 
 ```typescript
-const result = await collection.find(&#123; title: /MongoDB/ &#125;).toArray();
+const result = await collection.find({ title: /MongoDB/ }).toArray();
 ```
 
 Dit geeft alle documenten terug waarvan het veld `title` het woord "MongoDB" bevat.
@@ -46,7 +46,7 @@ Dit geeft alle documenten terug waarvan het veld `title` het woord "MongoDB" bev
 Als je een case-insensitive zoekopdracht wil uitvoeren, dan kan je de `i` vlag toevoegen aan de reguliere expressie.
 
 ```typescript
-const result = await collection.find(&#123; title: /mongodb/i &#125;).toArray();
+const result = await collection.find({ title: /mongodb/i }).toArray();
 ```
 
 Dit geeft alle documenten terug waarvan het veld `title` het woord "MongoDB" bevat, ongeacht de case. 
@@ -55,7 +55,7 @@ Wil je nu zoeken op een bepaalde variabelen, dan kan je de reguliere expressie d
 
 ```typescript
 const search : string = "MongoDB";
-const result : Book[] = await collection.find&lt;Book>(&#123; title: new RegExp(search, "i") &#125;).toArray();
+const result : Book[] = await collection.find<Book>({ title: new RegExp(search, "i") }).toArray();
 ```
 
 ## Text search
@@ -65,7 +65,7 @@ const result : Book[] = await collection.find&lt;Book>(&#123; title: new RegExp(
 Je kan ook een text index aanmaken op een veld om te zoeken op tekst. Je kan een text index aanmaken door de `createIndex` methode aan te roepen met als argument een object met als key het veld dat je wil indexeren en als value `"text"`. 
 
 ```typescript
-await collection.createIndex(&#123; title: "text" &#125;);
+await collection.createIndex({ title: "text" });
 ```
 
 Dit zal een text index aanmaken op het veld `title`. Je kan nu de `$text` operator gebruiken om te zoeken op tekst.
@@ -73,7 +73,7 @@ Dit zal een text index aanmaken op het veld `title`. Je kan nu de `$text` operat
 ### Zoeken op een woord
 
 ```typescript
-const result = await collection.find(&#123; $text: &#123; $search: "MongoDB" &#125; &#125;).toArray();
+const result = await collection.find({ $text: { $search: "MongoDB" } }).toArray();
 ```
 
 Over het algemeen is het aanmaken van een text index en text search efficiënter dan het gebruik van reguliere expressies. 
@@ -81,7 +81,7 @@ Over het algemeen is het aanmaken van een text index en text search efficiënter
 ### Zoeken op meerdere woorden
 
 ```typescript
-const result = await collection.find(&#123; $text: &#123; $search: "MongoDB database" &#125; &#125;).toArray();
+const result = await collection.find({ $text: { $search: "MongoDB database" } }).toArray();
 ```
 
 Dit geeft alle documenten terug waarvan het veld `title` de woorden "MongoDB" en "database" bevat.
@@ -91,7 +91,7 @@ Dit geeft alle documenten terug waarvan het veld `title` de woorden "MongoDB" en
 Text search is zelfs zo krachtig dat het het onderscheid kan maken tussen enkelvoud en meervoud.
 
 ```typescript
-const result = await collection.find(&#123; $text: &#123; $search: "dummy" &#125; &#125;).toArray();
+const result = await collection.find({ $text: { $search: "dummy" } }).toArray();
 ```
 
 zal ook het boek "MongoDB for Dummies" teruggeven want het bevat het woord "dummy" in het meervoud.
@@ -101,7 +101,7 @@ zal ook het boek "MongoDB for Dummies" teruggeven want het bevat het woord "dumm
 Text search houdt ook rekening met stopwoorden. Dit zijn woorden die vaak voorkomen en geen betekenis hebben. Deze worden genegeerd in de zoekopdracht. 
 
 ```typescript
-const result = await collection.find(&#123; $text: &#123; $search: "the" &#125; &#125;).toArray();
+const result = await collection.find({ $text: { $search: "the" } }).toArray();
 ```
 
 Dit geeft geen resultaten terug omdat "the" een stopwoord is.
@@ -111,7 +111,7 @@ Dit geeft geen resultaten terug omdat "the" een stopwoord is.
 Als je wil zoeken op meerdere velden, dan kan je een text index aanmaken op meerdere velden.
 
 ```typescript
-await collection.createIndex(&#123; title: "text", summary: "text" &#125;);
+await collection.createIndex({ title: "text", summary: "text" });
 ```
 
 De kans bestaat dat je een foutmelding krijgt omdat er al een index bestaat op het title veld. Je kan dit oplossen door eerst de index te verwijderen.
@@ -125,7 +125,7 @@ Dit zal alle indexen verwijderen.
 Je kan nu zoeken op meerdere velden.
 
 ```typescript
-const result = await collection.find(&#123; $text: &#123; $search: "database" &#125; &#125;).toArray();
+const result = await collection.find({ $text: { $search: "database" } }).toArray();
 ```
 
 Dit geeft alle documenten terug waarvan het veld `title` of `summary` het woord "database" bevat.
@@ -135,7 +135,7 @@ Dit geeft alle documenten terug waarvan het veld `title` of `summary` het woord 
 Je kan ook de `$language` optie meegeven aan de `$text` operator om de taal van de tekst te specificeren.
 
 ```typescript
-const result = await collection.find(&#123; $text: &#123; $search: "konijnen", $language: "nl" &#125; &#125;).toArray();
+const result = await collection.find({ $text: { $search: "konijnen", $language: "nl" } }).toArray();
 ```
 
 Dit geeft alle documenten terug waarvan het veld `title` of `summary` het woord "konijnen" bevat in het Nederlands. En ja, het boek "Lief klein konijn" zal teruggegeven worden.
@@ -143,7 +143,7 @@ Dit geeft alle documenten terug waarvan het veld `title` of `summary` het woord 
 Wil je volledig taal onafhankelijk zoeken dan moet je de index aanmaken met de `default_language` optie en deze op `none` zetten.
 
 ```typescript
-await collection.createIndex(&#123; title: "text", summary: "text" &#125;, &#123; default_language: "none" &#125;);
+await collection.createIndex({ title: "text", summary: "text" }, { default_language: "none" });
 ```
 
 Dit is ook handig als je meerdere talen in je collectie hebt en je geen rekening wil houden met stopwoorden en dergelijke.

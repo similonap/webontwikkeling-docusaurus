@@ -17,27 +17,27 @@ Over het algemeen worden `POST` requests gebruikt om formulieren te versturen. E
 Zo"n formulier kan er als volgt uit zien:
 
 ```html
-&lt;form action="/register" method="post">
+<form action="/register" method="post">
       <div>
-        &lt;label for="fname">First name?&lt;/label>
-        &lt;input name="fname" id="fname" placeholder="George" type="text">
+        <label for="fname">First name?</label>
+        <input name="fname" id="fname" placeholder="George" type="text">
       </div>
       <div>
-        &lt;label for="lname">Last Name?&lt;/label>
-        &lt;input name="lname" id="lname" placeholder="Smith" type="text">
+        <label for="lname">Last Name?</label>
+        <input name="lname" id="lname" placeholder="Smith" type="text">
       </div>
       <div>
-        &lt;label for="email">Email?&lt;/label>
-        &lt;input name="email" id="email" type="email">
+        <label for="email">Email?</label>
+        <input name="email" id="email" type="email">
       </div>
       <div>
-        &lt;label for="lname">Password&lt;/label>
-        &lt;input name="password" id="password" type="password">
+        <label for="lname">Password</label>
+        <input name="password" id="password" type="password">
       </div>
       <div>
-        &lt;button type="submit">Register&lt;/button>
+        <button type="submit">Register</button>
       </div>
-&lt;/form>
+</form>
 ```
 
 Er zijn hier twee belangrijke dingen op te merken in dit voorbeeld:
@@ -70,9 +70,9 @@ Vaak wordt form handling code geïmplementeerd met een GET route voor de initië
 Het eerste wat je moet doen is een route maken die het lege formulier toont. Dit is een `GET` route die de HTML van het formulier teruggeeft.
 
 ```typescript
-app.get("/register", (req, res) => &#123;
+app.get("/register", (req, res) => {
   res.render("register");
-&#125;);
+});
 ```
 
 ### Het formulier verwerken
@@ -80,16 +80,16 @@ app.get("/register", (req, res) => &#123;
 Naast een `GET` route, maken we ook een `POST` route die de data van het formulier verwerkt. Die mag op dezelfde URL staan als de `GET` route. Express weet welke functie uitgevoerd moet worden op basis van de HTTP method die gebruikt wordt.
 
 ```typescript
-app.post("/register", (req, res) => &#123;
+app.post("/register", (req, res) => {
   // code hier
-&#125;);
+});
 ```
 
 Willen we de inhoud van de body van het `POST` request lezen dan moeten we nog een kleine aanpassing maken aan onze applicatie. Bovenaan onze applicatie (bij de andere `app.use` statements) voegen we de volgende regels toe:
 
 ```typescript
-app.use(express.json(&#123; limit: "1mb" &#125;));
-app.use(express.urlencoded(&#123; extended:true&#125;))
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended:true}))
 ```
 
 De waarde voor `limit` kies je zelf. Dit is de maximale grootte van het request. De tweede lijn zorgt ervoor dat de inhoud van de `POST` omgezet wordt in een handig JSON object.
@@ -97,13 +97,13 @@ De waarde voor `limit` kies je zelf. Dit is de maximale grootte van het request.
 We kunnen nu de velden van het formulier uitlezen met `req.body`.
 
 ```typescript
-app.post("/register", (req, res) => &#123;
+app.post("/register", (req, res) => {
   let fname: string = req.body.fname;
   let lname: string = req.body.lname;
   let email: string = req.body.email;
   let password: string = req.body.password;
   ...
-&#125;);
+});
 ```
 
 ### Validatie en error handling
@@ -113,36 +113,36 @@ Omdat je nooit kan vertrouwen op de data die je ontvangt, zelfs als er al in de 
 En als er iets misloopt willen we ook een foutmelding tonen. Deze moeten we dan meegeven aan de hand van het object in de `res.render` methode.
 
 ```typescript
-app.post("/register", (req, res) => &#123;
+app.post("/register", (req, res) => {
   let fname: string = req.body.fname;
   let lname: string = req.body.lname;
   let email: string = req.body.email;
   let password: string = req.body.password;
 
-  if (fname === "" || lname === "" || email === "" || password === "") &#123;
-    res.render("register", &#123; error: "All fields are required" &#125;);
-  &#125; else if (!email.includes("@")) &#123;
-    res.render("register", &#123; error: "Invalid email" &#125;);
-  &#125; else &#123;
+  if (fname === "" || lname === "" || email === "" || password === "") {
+    res.render("register", { error: "All fields are required" });
+  } else if (!email.includes("@")) {
+    res.render("register", { error: "Invalid email" });
+  } else {
     // code om de data te verwerken
-  &#125;
-&#125;);
+  }
+});
 ```
 
 We moeten dan ook de error tonen in de view.
 
 ```html
-&lt;% if (error) &#123; %>
-  <p>&lt;%= error %></p>
-&lt;% &#125; %>
+<% if (error) { %>
+  <p><%= error %></p>
+<% } %>
 ```
 
 Vergeet ook geen lege error message mee te geven in de `GET` route of we krijgen een error.
 
 ```typescript
-app.get("/register", (req, res) => &#123;
-  res.render("register", &#123; error: "" &#125;);
-&#125;);
+app.get("/register", (req, res) => {
+  res.render("register", { error: "" });
+});
 ```
 
 Er zijn ook libraries die je kan gebruiken om de validatie te vereenvoudigen. Een populaire library is [express-validator](https://express-validator.github.io/docs/).
@@ -152,22 +152,22 @@ Er zijn ook libraries die je kan gebruiken om de validatie te vereenvoudigen. Ee
 Als de data geldig is, kunnen we de nodige acties uitvoeren. Dit kan vanalles zijn: de data opslaan in een database, een notificatie email versturen, een bestand uploaden, etc. En vervolgens sturen we de gebruiker door naar een andere pagina aan de hand van een redirect.
 
 ```typescript
-app.post("/register", (req, res) => &#123;
+app.post("/register", (req, res) => {
   let fname: string = req.body.fname;
   let lname: string = req.body.lname;
   let email: string = req.body.email;
   let password: string = req.body.password;
 
-  if (fname === "" || lname === "" || email === "" || password === "") &#123;
-    res.render("register", &#123; error: "All fields are required" &#125;);
-  &#125; else if (!email.includes("@")) &#123;
-    res.render("register", &#123; error: "Invalid email" &#125;);
-  &#125; else &#123;
+  if (fname === "" || lname === "" || email === "" || password === "") {
+    res.render("register", { error: "All fields are required" });
+  } else if (!email.includes("@")) {
+    res.render("register", { error: "Invalid email" });
+  } else {
     console.log("Data is valid, saving user");
     
     res.redirect("/success");
-  &#125;
-&#125;);
+  }
+});
 ```
 
 ## Andere form elementen
@@ -175,90 +175,90 @@ app.post("/register", (req, res) => &#123;
 Hier onder een formulier met een groot aantal mogelijke form elementen.
 
 ```html
-&lt;form action="/submit_form" method="post">
-    &lt;!-- Text Input -->
-    &lt;label for="name">Name:&lt;/label><br />
-    &lt;input type="text" id="name" name="name"><br />
+<form action="/submit_form" method="post">
+    <!-- Text Input -->
+    <label for="name">Name:</label><br />
+    <input type="text" id="name" name="name"><br />
 
-    &lt;!-- Email Input -->
-    &lt;label for="email">Email:&lt;/label><br />
-    &lt;input type="email" id="email" name="email"><br />
+    <!-- Email Input -->
+    <label for="email">Email:</label><br />
+    <input type="email" id="email" name="email"><br />
 
-    &lt;!-- Password Input -->
-    &lt;label for="password">Password:&lt;/label><br />
-    &lt;input type="password" id="password" name="password"><br />
+    <!-- Password Input -->
+    <label for="password">Password:</label><br />
+    <input type="password" id="password" name="password"><br />
 
-    &lt;!-- Number Input -->
-    &lt;label for="age">Age:&lt;/label><br />
-    &lt;input type="number" id="age" name="age" min="0"><br />
+    <!-- Number Input -->
+    <label for="age">Age:</label><br />
+    <input type="number" id="age" name="age" min="0"><br />
 
-    &lt;!-- Date Input -->
-    &lt;label for="dob">Date of Birth:&lt;/label><br />
-    &lt;input type="date" id="dob" name="dob"><br />
+    <!-- Date Input -->
+    <label for="dob">Date of Birth:</label><br />
+    <input type="date" id="dob" name="dob"><br />
 
-    &lt;!-- Radio Buttons -->
+    <!-- Radio Buttons -->
     <p>Gender:</p>
-    &lt;input type="radio" id="male" name="gender" value="male">
-    &lt;label for="male">Male&lt;/label><br />
-    &lt;input type="radio" id="female" name="gender" value="female">
-    &lt;label for="female">Female&lt;/label><br />
-    &lt;input type="radio" id="other" name="other" value="other">
-    &lt;label for="other">Other&lt;/label><br />
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="male">Male</label><br />
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">Female</label><br />
+    <input type="radio" id="other" name="other" value="other">
+    <label for="other">Other</label><br />
 
-    &lt;!-- Checkbox -->
+    <!-- Checkbox -->
     <p>Terms and conditions:</p>
-    &lt;input type="checkbox" id="terms" name="terms" value="agree">
-    &lt;label for="terms"> Accept terms and conditions&lt;/label><br />
+    <input type="checkbox" id="terms" name="terms" value="agree">
+    <label for="terms"> Accept terms and conditions</label><br />
 
-    &lt;!-- Dropdown List -->
-    &lt;label for="country">Country:&lt;/label><br />
-    &lt;select id="country" name="country">
-        &lt;option value="usa">United States&lt;/option>
-        &lt;option value="canada">Canada&lt;/option>
-        &lt;option value="uk">United Kingdom&lt;/option>
-    &lt;/select><br />
+    <!-- Dropdown List -->
+    <label for="country">Country:</label><br />
+    <select id="country" name="country">
+        <option value="usa">United States</option>
+        <option value="canada">Canada</option>
+        <option value="uk">United Kingdom</option>
+    </select><br />
 
-    &lt;!-- Dropdown Mutliple -->
-    &lt;label for="languages">Languages&lt;/label><br />
-    &lt;select id="languages" name="languages" multiple>
-        &lt;option value="english">English&lt;/option>
-        &lt;option value="spanish">Spanish&lt;/option>
-        &lt;option value="french">French&lt;/option>
-        &lt;option value="german">German&lt;/option>
-    &lt;/select><br />
+    <!-- Dropdown Mutliple -->
+    <label for="languages">Languages</label><br />
+    <select id="languages" name="languages" multiple>
+        <option value="english">English</option>
+        <option value="spanish">Spanish</option>
+        <option value="french">French</option>
+        <option value="german">German</option>
+    </select><br />
 
-    &lt;!-- Textarea -->
-    &lt;label for="bio">Bio:&lt;/label><br />
-    &lt;textarea id="bio" name="bio" rows="4" cols="50">&lt;/textarea><br />
+    <!-- Textarea -->
+    <label for="bio">Bio:</label><br />
+    <textarea id="bio" name="bio" rows="4" cols="50"></textarea><br />
 
-    &lt;!-- Hidden Input -->
-    &lt;input type="hidden" id="hiddenElement" name="hiddenElement" value="hiddenValue">
+    <!-- Hidden Input -->
+    <input type="hidden" id="hiddenElement" name="hiddenElement" value="hiddenValue">
 
-    &lt;!-- Color Input -->
-    &lt;label for="color">Favorite Color:&lt;/label><br />
-    &lt;input type="color" id="color" name="color"><br />
+    <!-- Color Input -->
+    <label for="color">Favorite Color:</label><br />
+    <input type="color" id="color" name="color"><br />
 
-    &lt;!-- Range Input -->
-    &lt;label for="range">Range:&lt;/label><br />
-    &lt;input type="range" id="range" name="range" min="0" max="100"><br />
+    <!-- Range Input -->
+    <label for="range">Range:</label><br />
+    <input type="range" id="range" name="range" min="0" max="100"><br />
 
-    &lt;!-- Year Input -->
-    &lt;label for="year">Year:&lt;/label><br />
-    &lt;input type="number" id="year" name="year" min="1900" max="2099" step="1" value="2021"><br />
+    <!-- Year Input -->
+    <label for="year">Year:</label><br />
+    <input type="number" id="year" name="year" min="1900" max="2099" step="1" value="2021"><br />
 
-    &lt;!-- Week Input -->
-    &lt;label for="week">Week:&lt;/label><br />
-    &lt;input type="week" id="week" name="week"><br />
+    <!-- Week Input -->
+    <label for="week">Week:</label><br />
+    <input type="week" id="week" name="week"><br />
     
 
-    &lt;button type="submit">Submit&lt;/button>
-&lt;/form>
+    <button type="submit">Submit</button>
+</form>
 ```
 
 Deze kan je op de volgende manier uitlezen:
 
 ```typescript
-app.post("/submit_form", (req, res) => &#123;
+app.post("/submit_form", (req, res) => {
     let name : string = req.body.name;   
     let terms : boolean = req.body.terms === "agree";
     let email : string = req.body.email;
@@ -277,7 +277,7 @@ app.post("/submit_form", (req, res) => &#123;
 
 
     res.send(req.body);
-&#125;);
+});
 ```
 
 Twijfel je? Dan kan je altijd gewoon het `req.body` object afprinten via `console.log` en kijken wat erin zit.

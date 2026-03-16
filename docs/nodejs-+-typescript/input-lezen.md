@@ -24,7 +24,7 @@ Nu kan je de `question` functie gebruiken om een vraag te stellen aan de gebruik
 
 ```typescript
 let name = readline.question("What's your name? ");
-console.log(`Hello $&#123;name&#125;!`);
+console.log(`Hello ${name}!`);
 ```
 
 ### Een getal lezen
@@ -33,7 +33,7 @@ Als je een getal wil lezen van de gebruiker dan moet je de `question` functie ge
 
 ```typescript
 let age : number = Number(readline.question("What's your age? "));
-console.log(`You are $&#123;age&#125; years old.`);
+console.log(`You are ${age} years old.`);
 ```
 
 Je bent hier ook niet zeker dat de gebruiker wel een getal zal ingeven. Als de gebruiker geen getal ingeeft dan zal de `Number` functie een `NaN` teruggeven. Dit is een speciale waarde die staat voor "Not a Number". Als je deze waarde probeert te gebruiken in een berekening dan zal je een `NaN` terugkrijgen. Wil je dit vermijden dan kan je best eerst nakijken of de waarde wel een getal is.
@@ -42,20 +42,20 @@ Je bent hier ook niet zeker dat de gebruiker wel een getal zal ingeven. Als de g
 import * as readline from 'readline-sync';
 
 let age : number | undefined = undefined;
-do &#123;
+do {
     age = Number(readline.question("What's your age? "));
-    if (isNaN(age)) &#123;
+    if (isNaN(age)) {
         console.log("Input valid number, please.");
-    &#125;
-&#125; while (isNaN(age))
-console.log(`You are $&#123;age&#125; years old.`);
+    }
+} while (isNaN(age))
+console.log(`You are ${age} years old.`);
 ```
 
 Je kan ook de `questionInt` functie gebruiken. Deze functie doet hetzelfde als de `question` functie maar zet het antwoord van de gebruiker automatisch om naar een getal. Ook als de gebruiker geen getal ingeeft zal deze functie een foutmelding geven.
 
 ```typescript
 let age : number = readline.questionInt("What's your age? ");
-console.log(`You are $&#123;age&#125; years old.`);
+console.log(`You are ${age} years old.`);
 ```
 
 Zo verkrijg je dezelfde output als hierboven maar met minder code.
@@ -70,15 +70,15 @@ You are 3 years old.
 Wil je de error message aanpassen dan kan je een tweede parameter meegeven aan de `questionInt` functie.
 
 ```typescript
-let age : number = readline.questionInt("What's your age? ", &#123;limitMessage: "I only like numbers!"&#125;);
-console.log(`You are $&#123;age&#125; years old.`);
+let age : number = readline.questionInt("What's your age? ", {limitMessage: "I only like numbers!"});
+console.log(`You are ${age} years old.`);
 ```
 
 Wil je een kommagetal lezen dan kan je de `questionFloat` functie gebruiken. Deze functie doet hetzelfde als de `questionInt` functie maar zet het antwoord van de gebruiker automatisch om naar een kommagetal.
 
 ```typescript
 let price : number = readline.questionFloat("What's the price? ");
-console.log(`The price is $&#123;price&#125; euro.`);
+console.log(`The price is ${price} euro.`);
 ```
 
 ### Een boolean lezen
@@ -88,11 +88,11 @@ Soms wil je een vraag stellen aan de gebruiker waar hij alleen Yes of No kan op 
 ```typescript
 let answer : boolean = readline.keyInYNStrict("Do you like TypeScript? ");
 
-if (answer) &#123;
+if (answer) {
     console.log("Me too!");
-&#125; else &#123;
+} else {
     console.log("Too bad!");
-&#125;
+}
 ```
 
 ### Menu tonen
@@ -103,7 +103,7 @@ Soms wil je een menu tonen aan de gebruiker waar hij een keuze kan maken. Je kan
 let choices : string[] = ["TypeScript", "JavaScript", "Python", "Java", "C#"];
 
 let index : number = readline.keyInSelect(choices, "What's your favorite programming language? ");
-console.log(`You chose $&#123;choices[index]&#125;.`);
+console.log(`You chose ${choices[index]}.`);
 ```
 
 Dit ziet er als volgt uit:

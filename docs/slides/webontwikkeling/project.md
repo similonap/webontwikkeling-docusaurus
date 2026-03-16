@@ -66,7 +66,7 @@ Cards.json:
 
 ```json
 [
-  &#123;
+  {
     "id": "FTC-001",
     "name": "Aether Knight",
     "description": "A legendary knight who harnesses the ethereal powers of the Aether, wielding them to maintain balance across the realms.",
@@ -77,15 +77,15 @@ Cards.json:
     "rarity": "Legendary",
     "abilities": ["Teleportation", "Energy Manipulation", "Dimensional Travel"],
     "element": "Aether",
-    "guildAffiliation": &#123;
+    "guildAffiliation": {
       "id": "GUILD-009",
       "name": "Order of the Cosmic Veil",
       "guildMaster": "Celestial Mage",
       "guildEmblemUrl": "https://example.com/images/guilds/cosmic-veil-emblem.jpg",
       "foundedYear": 1423,
       "motto": "Balance in All, All in Balance"
-    &#125;
-  &#125;,
+    }
+  },
   ...
 ]
 ```
@@ -98,22 +98,22 @@ Guilds.json:
 
 ```json
 
-  &#123;
+  {
     "id": "GUILD-009",
     "name": "Order of the Cosmic Veil",
     "guildMaster": "Celestial Mage",
     "guildEmblemUrl": "https://example.com/images/guilds/cosmic-veil-emblem.jpg",
     "foundedYear": 1423,
     "motto": "Balance in All, All in Balance"
-  &#125;,
-  &#123;
+  },
+  {
     "id": "GUILD-015",
     "name": "Brotherhood of the Dusk",
     "guildMaster": "Darkness Wielder",
     "guildEmblemUrl": "https://example.com/images/guilds/dusk-brotherhood-emblem.jpg",
     "foundedYear": 1578,
     "motto": "In Shadows, Truth"
-  &#125;
+  }
 ]
 ```
 

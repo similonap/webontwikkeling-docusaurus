@@ -9,60 +9,60 @@ We gaan geen rekening houden met error afhandeling in dit deel van de cursus. We
 We gaan eerst de JSON data vanuit de API inladen in onze MongoDB database. We plaatsen de volgende code in een nieuw bestand `database.ts`.
 
 ```typescript
-import &#123; Collection, MongoClient &#125; from "mongodb";
+import { Collection, MongoClient } from "mongodb";
 import dotenv from "dotenv";
-import &#123; User &#125; from "./types";
+import { User } from "./types";
 dotenv.config();
 
 export const client = new MongoClient(process.env.MONGODB_URI || "mongodb://localhost:27017");
 
-export const collection : Collection&lt;User> = client.db("exercises").collection&lt;User>("users");
+export const collection : Collection<User> = client.db("exercises").collection<User>("users");
 
-export async function getUsers() &#123;
-    return await collection.find(&#123;&#125;).toArray();
-&#125;
+export async function getUsers() {
+    return await collection.find({}).toArray();
+}
 
-async function exit() &#123;
-    try &#123;
+async function exit() {
+    try {
         await client.close();
         console.log("Disconnected from database");
-    &#125; catch (error) &#123;
+    } catch (error) {
         console.error(error);
-    &#125;
+    }
     process.exit(0);
-&#125;
+}
 
-export async function loadUsersFromApi() &#123;
+export async function loadUsersFromApi() {
     const users : User[] = await getUsers();
-    if (users.length == 0) &#123;
+    if (users.length == 0) {
         console.log("Database is empty, loading users from API")
         const response = await fetch("https://jsonplaceholder.typicode.com/users");
         const users : User[] = await response.json();
         await collection.insertMany(users);
-    &#125;
-&#125;
+    }
+}
 
-export async function connect() &#123;
-    try &#123;
+export async function connect() {
+    try {
         await client.connect();
         await loadUsersFromApi();   
         console.log("Connected to database");
         process.on("SIGINT", exit);
-    &#125; catch (error) &#123;
+    } catch (error) {
         console.error(error);
-    &#125;
-&#125;
+    }
+}
 ```
 
 En we roepen de `connect` functie aan in ons `index.ts` bestand.
 
 ```typescript
-import &#123; connect &#125; from "./database";
+import { connect } from "./database";
 
-app.listen(3000, async () => &#123;
+app.listen(3000, async () => {
     await connect();
     console.log("Server is running on port 3000");
-&#125;);
+});
 ```
 
 Bij het opstarten van de server gaan we de connectie maken met de database en de data inladen vanuit de API. We gaan de data enkel inladen als de database leeg is. We gaan de data inladen in de `users` collectie van de `exercises` database.
@@ -72,43 +72,43 @@ Bij het opstarten van de server gaan we de connectie maken met de database en de
 We gaan nu de data lezen vanuit de database en tonen op de webpagina. We gaan de volgende code toevoegen aan ons `index.ts` bestand. Eerst importeren we de `getUser` functie vanuit de `database.ts` bestand.
 
 ```typescript
-import &#123; connect, getUsers &#125; from "./database";
+import { connect, getUsers } from "./database";
 ```
 
 ```typescript
-app.get("/users", async(req, res) => &#123;
+app.get("/users", async(req, res) => {
     let users : User[] = await getUsers();
-    res.render("users/index", &#123;
+    res.render("users/index", {
         users: users
-    &#125;);
-&#125;);
+    });
+});
 ```
 
 en maken we een `index.ejs` bestand aan in de `views/users` map. We zorgen ook voor een `partials` map in de `views` map en maken een `header.ejs` en `footer.ejs` bestand aan.
 
 ```html
-&lt;%- include("../partials/header") %>
-    &lt;section>
-        &lt;header>
+<%- include("../partials/header") %>
+    <section>
+        <header>
             <h1>Manage Users</h1>
-        &lt;/header>
-        &lt;% for (let user of users) &#123; %>
-            &lt;article>
-                &lt;header>
-                    <h2>&lt;%= user.name %></h2>
-                    <p><strong>Username:</strong> &lt;%= user.username %></p>
-                &lt;/header>
-                <p><strong>Email:</strong> &lt;%= user.email %></p>
-                &lt;address>
-                    <strong>Address:</strong> &lt;%= user.address.street %>, &lt;%= user.address.suite %>, &lt;%= user.address.city %>, &lt;%= user.address.zipcode %>
-                &lt;/address>
-                <p><strong>Phone:</strong> &lt;%= user.phone %></p>
-                <p><strong>Website:</strong> <a href="http://&lt;%= user.website %>">&lt;%= user.website %></a></p>
-                <p><strong>Company:</strong> &lt;%= user.company.name %></p>
-            &lt;/article>
-        &lt;% &#125; %>
-    &lt;/section>
-&lt;%- include("../partials/footer") %>
+        </header>
+        <% for (let user of users) { %>
+            <article>
+                <header>
+                    <h2><%= user.name %></h2>
+                    <p><strong>Username:</strong> <%= user.username %></p>
+                </header>
+                <p><strong>Email:</strong> <%= user.email %></p>
+                <address>
+                    <strong>Address:</strong> <%= user.address.street %>, <%= user.address.suite %>, <%= user.address.city %>, <%= user.address.zipcode %>
+                </address>
+                <p><strong>Phone:</strong> <%= user.phone %></p>
+                <p><strong>Website:</strong> <a href="http://<%= user.website %>"><%= user.website %></a></p>
+                <p><strong>Company:</strong> <%= user.company.name %></p>
+            </article>
+        <% } %>
+    </section>
+<%- include("../partials/footer") %>
 ```
 
 We tonen de gebruikers in een lijst op de webpagina. We tonen de naam, gebruikersnaam, email, adres, telefoonnummer, website en bedrijfsnaam van de gebruiker.
@@ -118,84 +118,84 @@ We tonen de gebruikers in een lijst op de webpagina. We tonen de naam, gebruiker
 We maken nu een nieuw formulier aan om een gebruiker toe te voegen en plaatsen deze code in een nieuw bestand `views/users/create.ejs`.
 
 ```html
-&lt;%- include("../partials/header") %>
-&lt;section>
-    &lt;header>
+<%- include("../partials/header") %>
+<section>
+    <header>
         <h1>Create User</h1>
-    &lt;/header>
-    &lt;form action="/users/create" method="POST">
+    </header>
+    <form action="/users/create" method="POST">
         <div>
-            &lt;label for="name">Name:&lt;/label>
-            &lt;input type="text" id="name" name="name" required>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
         </div>
         <div>
-            &lt;label for="username">Username:&lt;/label>
-            &lt;input type="text" id="username" name="username" required>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
         </div>
         <div>
-            &lt;label for="email">Email:&lt;/label>
-            &lt;input type="email" id="email" name="email" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
         </div>
-        &lt;fieldset>
-            &lt;legend>Address&lt;/legend>
+        <fieldset>
+            <legend>Address</legend>
             <div>
-                &lt;label for="street">Street:&lt;/label>
-                &lt;input type="text" id="street" name="address[street]" required>
+                <label for="street">Street:</label>
+                <input type="text" id="street" name="address[street]" required>
             </div>
             <div>
-                &lt;label for="suite">Suite:&lt;/label>
-                &lt;input type="text" id="suite" name="address[suite]">
+                <label for="suite">Suite:</label>
+                <input type="text" id="suite" name="address[suite]">
             </div>
             <div>
-                &lt;label for="city">City:&lt;/label>
-                &lt;input type="text" id="city" name="address[city]" required>
+                <label for="city">City:</label>
+                <input type="text" id="city" name="address[city]" required>
             </div>
             <div>
-                &lt;label for="zipcode">Zipcode:&lt;/label>
-                &lt;input type="text" id="zipcode" name="address[zipcode]" required>
+                <label for="zipcode">Zipcode:</label>
+                <input type="text" id="zipcode" name="address[zipcode]" required>
             </div>
-        &lt;/fieldset>
+        </fieldset>
         <div>
-            &lt;label for="phone">Phone:&lt;/label>
-            &lt;input type="text" id="phone" name="phone" required>
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" required>
         </div>
         <div>
-            &lt;label for="website">Website:&lt;/label>
-            &lt;input type="text" id="website" name="website">
+            <label for="website">Website:</label>
+            <input type="text" id="website" name="website">
         </div>
-        &lt;fieldset>
-            &lt;legend>Company&lt;/legend>
+        <fieldset>
+            <legend>Company</legend>
             <div>
-                &lt;label for="companyName">Company Name:&lt;/label>
-                &lt;input type="text" id="companyName" name="company[name]" required>
+                <label for="companyName">Company Name:</label>
+                <input type="text" id="companyName" name="company[name]" required>
             </div>
             <div>
-                &lt;label for="catchPhrase">Catch Phrase:&lt;/label>
-                &lt;input type="text" id="catchPhrase" name="company[catchPhrase]">
+                <label for="catchPhrase">Catch Phrase:</label>
+                <input type="text" id="catchPhrase" name="company[catchPhrase]">
             </div>
             <div>
-                &lt;label for="bs">BS:&lt;/label>
-                &lt;input type="text" id="bs" name="company[bs]">
+                <label for="bs">BS:</label>
+                <input type="text" id="bs" name="company[bs]">
             </div>
-        &lt;/fieldset>
-        &lt;button type="submit">Create User&lt;/button>
-    &lt;/form>
-&lt;/section>
-&lt;%- include("../partials/footer") %>
+        </fieldset>
+        <button type="submit">Create User</button>
+    </form>
+</section>
+<%- include("../partials/footer") %>
 ```
 
 We voorzien hier voor elk veld een input veld. We gebruiken een `fieldset` element om de adres en bedrijfsgegevens te groeperen. Door de naam van de input velden te voorzien van `address[street]` en `company[name]` kunnen we deze gegevens later makkelijk groeperen in een object. Als je dan de body van de request bekijkt in de Express server, dan zie je dat de `address` en `company` gegevens in een object komen te staan. We gaan nu twee routes aanmaken om de data te verwerken: een GET route om het formulier te tonen en een POST route om de data te verwerken.
 
 ```typescript
-app.get("/users/create", async(req, res) => &#123;
+app.get("/users/create", async(req, res) => {
     res.render("users/create");
-&#125;);
+});
 
-app.post("/users/create", async(req, res) => &#123;
+app.post("/users/create", async(req, res) => {
     let user : User = req.body;
     await createUser(user);
     res.redirect("/users");
-&#125;);
+});
 ```
 
 We doen op het einde van de POST route een redirect naar de gebruikerslijst. Dit zorgt ervoor dat de gebruiker na het toevoegen van een gebruiker terug naar de gebruikerslijst gaat. We voorzien hier nog geen error afhandeling.
@@ -203,25 +203,25 @@ We doen op het einde van de POST route een redirect naar de gebruikerslijst. Dit
 We gaan nu de `createUser` functie toevoegen aan ons `database.ts` bestand.
 
 ```typescript
-export async function getNextId() &#123;
-    let users : User[] = await collection.find(&#123;&#125;).sort(&#123;id: -1&#125;).limit(1).toArray();
-    if (users.length == 0) &#123;
+export async function getNextId() {
+    let users : User[] = await collection.find({}).sort({id: -1}).limit(1).toArray();
+    if (users.length == 0) {
         return 1;
-    &#125; else &#123;
+    } else {
         return users[0].id + 1;
-    &#125;
-&#125;
+    }
+}
 
-export async function createUser(user: User) &#123;
+export async function createUser(user: User) {
     user.id = await getNextId();
     return await collection.insertOne(user);
-&#125;
+}
 ```
 
 We voorzien hier ook een `getNextId` functie die het volgende id ophaalt uit de database. We sorteren de gebruikers op id in aflopende volgorde en nemen de eerste gebruiker. Als er geen gebruikers zijn dan geven we 1 terug. We voegen dan 1 toe aan het id en geven dit terug. We gaan nu de gebruiker toevoegen aan de database. Vergeet de `createUser` functie niet te importeren in het `index.ts` bestand.
 
 ```typescript
-import &#123; connect, getUsers, createUser &#125; from "./database";
+import { connect, getUsers, createUser } from "./database";
 ```
 
 ## Delete van data (DELETE)
@@ -229,13 +229,13 @@ import &#123; connect, getUsers, createUser &#125; from "./database";
 We gaan nu een button toevoegen aan de gebruikerslijst om een gebruiker te verwijderen. We voegen de volgende code toe aan het `index.ejs` bestand.
 
 ```html
-&lt;% for (let user of users) &#123; %>
+<% for (let user of users) { %>
 ...
-&lt;form action="/users/&lt;%= user.id %>/delete" method="POST">
-    &lt;button type="submit">Delete&lt;/button>
-&lt;/form>
+<form action="/users/<%= user.id %>/delete" method="POST">
+    <button type="submit">Delete</button>
+</form>
 ...
-&lt;% &#125; %>
+<% } %>
 ```
 
 Er wordt dus voor elke gebruiker in de lijst een formulier aangemaakt met een button om de gebruiker te verwijderen. Dit doen we omdat we geen POST requets kunnen doen vanuit een anchor tag. Merk ook op dat we hier een POST gebruiken en geen DELETE. Dit is omdat we geen DELETE requests kunnen doen vanuit een formulier. We gaan nu de route aanmaken om de gebruiker te verwijderen.
@@ -243,25 +243,25 @@ Er wordt dus voor elke gebruiker in de lijst een formulier aangemaakt met een bu
 We voorzien een nieuwe route in het `index.ts` bestand.
 
 ```typescript
-app.post("/users/:id/delete", async(req, res) => &#123;
+app.post("/users/:id/delete", async(req, res) => {
     let id : number = parseInt(req.params.id);
     await deleteUser(id);
     res.redirect("/users");
-&#125;);
+});
 ```
 
 We gaan nu de `deleteUser` functie toevoegen aan ons `database.ts` bestand.
 
 ```typescript
-export async function deleteUser(id: number) &#123;
-    return await collection.deleteOne(&#123;id: id&#125;);
-&#125;
+export async function deleteUser(id: number) {
+    return await collection.deleteOne({id: id});
+}
 ```
 
 We gaan nu de gebruiker verwijderen uit de database. Vergeet de `deleteUser` functie niet te importeren in het `index.ts` bestand.
 
 ```typescript
-import &#123; connect, getUsers, createUser, deleteUser &#125; from "./database";
+import { connect, getUsers, createUser, deleteUser } from "./database";
 ```
 
 ## Updaten van data (UPDATE)
@@ -269,70 +269,70 @@ import &#123; connect, getUsers, createUser, deleteUser &#125; from "./database"
 We kunnen nu de code van het create formulier hergebruiken om een update formulier te maken. We maken een nieuw bestand `views/users/update.ejs` aan.
 
 ```html
-&lt;%- include("../partials/header") %>
-&lt;section>
-    &lt;header>
+<%- include("../partials/header") %>
+<section>
+    <header>
         <h1>Update User</h1>
-    &lt;/header>
-    &lt;form action="/users/&lt;%= user.id %>/update" method="POST">
+    </header>
+    <form action="/users/<%= user.id %>/update" method="POST">
         <div>
-            &lt;label for="name">Name:&lt;/label>
-            &lt;input type="text" id="name" name="name" value="&lt;%= user.name %>" required>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="<%= user.name %>" required>
         </div>
         <div>
-            &lt;label for="username">Username:&lt;/label>
-            &lt;input type="text" id="username" name="username" value="&lt;%= user.username %>" required>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="<%= user.username %>" required>
         </div>
         <div>
-            &lt;label for="email">Email:&lt;/label>
-            &lt;input type="email" id="email" name="email" value="&lt;%= user.email %>" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="<%= user.email %>" required>
         </div>
-        &lt;fieldset>
-            &lt;legend>Address&lt;/legend>
+        <fieldset>
+            <legend>Address</legend>
             <div>
-                &lt;label for="street">Street:&lt;/label>
-                &lt;input type="text" id="street" name="address[street]" value="&lt;%= user.address.street %>" required>
+                <label for="street">Street:</label>
+                <input type="text" id="street" name="address[street]" value="<%= user.address.street %>" required>
             </div>
             <div>
-                &lt;label for="suite">Suite:&lt;/label>
-                &lt;input type="text" id="suite" name="address[suite]" value="&lt;%= user.address.suite %>">
+                <label for="suite">Suite:</label>
+                <input type="text" id="suite" name="address[suite]" value="<%= user.address.suite %>">
             </div>
             <div>
-                &lt;label for="city">City:&lt;/label>
-                &lt;input type="text" id="city" name="address[city]" value="&lt;%= user.address.city %>" required>
+                <label for="city">City:</label>
+                <input type="text" id="city" name="address[city]" value="<%= user.address.city %>" required>
             </div>
             <div>
-                &lt;label for="zipcode">Zipcode:&lt;/label>
-                &lt;input type="text" id="zipcode" name="address[zipcode]" value="&lt;%= user.address.zipcode %>" required>
+                <label for="zipcode">Zipcode:</label>
+                <input type="text" id="zipcode" name="address[zipcode]" value="<%= user.address.zipcode %>" required>
             </div>
-        &lt;/fieldset>
+        </fieldset>
         <div>
-            &lt;label for="phone">Phone:&lt;/label>
-            &lt;input type="text" id="phone" name="phone" value="&lt;%= user.phone %>" required>
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" value="<%= user.phone %>" required>
         </div>
         <div>
-            &lt;label for="website">Website:&lt;/label>
-            &lt;input type="text" id="website" name="website" value="&lt;%= user.website %>">
+            <label for="website">Website:</label>
+            <input type="text" id="website" name="website" value="<%= user.website %>">
         </div>
-        &lt;fieldset>
-            &lt;legend>Company&lt;/legend>
+        <fieldset>
+            <legend>Company</legend>
             <div>
-                &lt;label for="companyName">Company Name:&lt;/label>
-                &lt;input type="text" id="companyName" name="company[name]" value="&lt;%= user.company.name %>" required>
+                <label for="companyName">Company Name:</label>
+                <input type="text" id="companyName" name="company[name]" value="<%= user.company.name %>" required>
             </div>
             <div>
-                &lt;label for="catchPhrase">Catch Phrase:&lt;/label>
-                &lt;input type="text" id="catchPhrase" name="company[catchPhrase]" value="&lt;%= user.company.catchPhrase %>">
+                <label for="catchPhrase">Catch Phrase:</label>
+                <input type="text" id="catchPhrase" name="company[catchPhrase]" value="<%= user.company.catchPhrase %>">
             </div>
             <div>
-                &lt;label for="bs">BS:&lt;/label>
-                &lt;input type="text" id="bs" name="company[bs]" value="&lt;%= user.company.bs %>">
+                <label for="bs">BS:</label>
+                <input type="text" id="bs" name="company[bs]" value="<%= user.company.bs %>">
             </div>
-        &lt;/fieldset>
-        &lt;button type="submit">Update User&lt;/button> &lt;!-- Changed the button text to `Update User` -->
-    &lt;/form>
-&lt;/section>
-&lt;%- include("../partials/footer") %>
+        </fieldset>
+        <button type="submit">Update User</button> <!-- Changed the button text to `Update User` -->
+    </form>
+</section>
+<%- include("../partials/footer") %>
 ```
 
 We zorgen ervoor dat de input velden gevuld zijn met de huidige waarden van de gebruiker en dat we als action de update route gebruiken. We gaan nu de route aanmaken om de gebruiker te updaten.
@@ -340,36 +340,36 @@ We zorgen ervoor dat de input velden gevuld zijn met de huidige waarden van de g
 We voorzien weer twee routes in het `index.ts` bestand. Een GET route om het formulier te tonen en een POST route om de data te verwerken.
 
 ```typescript
-app.get("/users/:id/update", async(req, res) => &#123;
+app.get("/users/:id/update", async(req, res) => {
     let id : number = parseInt(req.params.id);
     let user : User | null = await getUserById(id);
-    res.render("users/update", &#123;
+    res.render("users/update", {
         user: user
-    &#125;);
-&#125;);
+    });
+});
 
-app.post("/users/:id/update", async(req, res) => &#123;
+app.post("/users/:id/update", async(req, res) => {
     let id : number = parseInt(req.params.id);
     let user : User = req.body;
     await updateUser(id, user);
     res.redirect("/users");
-&#125;);
+});
 ```
 
 We redirecten ook hier op het einde van de POST route naar de gebruikerslijst. We gaan nu de `getUserById` en `updateUser` functies toevoegen aan ons `database.ts` bestand.
 
 ```typescript
-export async function getUserById(id: number) &#123;
-    return await collection.findOne(&#123; id: id &#125;);
-&#125;
+export async function getUserById(id: number) {
+    return await collection.findOne({ id: id });
+}
 
-export async function updateUser(id: number, user: User) &#123;
-    return await collection.updateOne(&#123; id : id &#125;, &#123; $set:  user &#125;);
-&#125;
+export async function updateUser(id: number, user: User) {
+    return await collection.updateOne({ id : id }, { $set:  user });
+}
 ```
 
 Vergeet de `getUserById` en `updateUser` functies niet te importeren in het `index.ts` bestand.
 
 ```typescript
-import &#123; connect, getUsers, createUser, deleteUser, getUserById, updateUser &#125; from "./database";
+import { connect, getUsers, createUser, deleteUser, getUserById, updateUser } from "./database";
 ```

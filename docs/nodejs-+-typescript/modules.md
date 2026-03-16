@@ -13,33 +13,33 @@ Eigenlijk heb je al modules gebruikt in vorige delen in de vorm van npm packages
 Stel dat je een functie hebt om de oppervlakte te berekenen van een cirkel, vierkant en rechthoek.
 
 ```typescript
-function areaCircle(r: number): number &#123;
+function areaCircle(r: number): number {
     return Math.PI * r * r;
-&#125;
+}
 
-function areaSquare(s: number): number &#123;
+function areaSquare(s: number): number {
     return s * s;
-&#125;
+}
 
-function areaRectangle(l: number, w: number): number &#123;
+function areaRectangle(l: number, w: number): number {
     return l * w;
-&#125;
+}
 ```
 
 Tot nu toe heb je altijd deze functies in hetzelfde bestand gezet. Maar stel dat je deze functies ook in een ander bestand wil gebruiken. Dan kan je deze functies in een module zetten door gebruik te maken van een `export` statement.
 
 ```
-<strong>export function areaCircle(r: number): number &#123;
+<strong>export function areaCircle(r: number): number {
 </strong>    return Math.PI * r * r;
-&#125;
+}
 
-export function areaSquare(s: number): number &#123;
+export function areaSquare(s: number): number {
     return s * s;
-&#125;
+}
 
-export function areaRectangle(l: number, w: number): number &#123;
+export function areaRectangle(l: number, w: number): number {
     return l * w;
-&#125;
+}
 
 ```
 
@@ -50,13 +50,13 @@ Zorg er wel voor dat je deze functies in een apart bestand zet met de extensie `
 Wil je deze functies gebruiken in een ander bestand? Dan moet je deze eerst importeren aan de hand van het volgende commando.
 
 ```typescript
-import &#123; areaCircle, areaSquare, areaRectangle &#125; from './area';
+import { areaCircle, areaSquare, areaRectangle } from './area';
 ```
 
 De functies die je wil importeren zet je tussen de accolades. Het gedeelte achter `from` is het pad naar het bestand waar de module in staat. In dit geval is dat `./area` omdat het bestand `area.ts` in dezelfde map staat als het bestand waar je de functies wil gebruiken. Plaats je de module in een andere map, dan moet je het pad aanpassen. Staat je `area.ts` bestand in de directory `functions` dan moet je het volgende commando gebruiken.
 
 ```typescript
-import &#123; areaCircle, areaSquare, areaRectangle &#125; from './functions/area';
+import { areaCircle, areaSquare, areaRectangle } from './functions/area';
 ```
 
 nu kan je deze functies gebruiken in je code net zoals je dat zou doen alsof ze in hetzelfde bestand staan.
@@ -71,9 +71,9 @@ console.log(areaSquare(2));
 Heel vaak wordt er door een module maar één functie geëxporteerd. In dat geval kan je gebruik maken van een default export. Dit is een export zonder naam.
 
 ```typescript
-export default function(r: number): number &#123;
+export default function(r: number): number {
     return Math.PI * r * r;
-&#125;
+}
 ```
 
 Je kan deze functie dan importeren zonder tussen de accolades te zetten.
@@ -93,22 +93,22 @@ import area from './area';
 Tot nu toe hebben we altijd interfaces in hetzelfde bestand gezet als de code die deze interface gebruikt. Maar je kan ook interfaces exporteren uit een module.
 
 ```typescript
-export interface Person &#123;
+export interface Person {
     name: string;
     age: number;
-&#125;
+}
 ```
 
 We plaatsen deze interfaces vaak in een apart bestand met de naam `types.ts`. We kunnen deze dan importeren in een ander bestand.
 
 ```typescript
-import &#123; Person &#125; from './types';
+import { Person } from './types';
 ```
 
 Je kan ook specifiek aangeven dat je een interface wil importeren door gebruik te maken van de `import type` syntax.
 
 ```typescript
-import type &#123; Person &#125; from './types';
+import type { Person } from './types';
 ```
 
 ## Npm Packages
@@ -146,24 +146,24 @@ npm install @types/readline-sync --save-dev
 **package.json**
 
 ```json
-&#123;
+{
   "name": "project-name",
   "version": "1.0.0",
   "description": "Project description",
   "main": "index.js",
-  "scripts": &#123;
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  &#125;,
+  },
   "keywords": [],
   "author": "Andie Similon",
   "license": "ISC",
-  "dependencies": &#123;
+  "dependencies": {
     "readline-sync": "^1.4.10"
-  &#125;,
-  "devDependencies": &#123;
+  },
+  "devDependencies": {
 	  "@types/readline-sync": "^1.4.8"
-  &#125;
-&#125;
+  }
+}
 ```
 
 Je kan alle dependencies installeren aan de hand van het volgende commando. Dus je moet niet elke package apart installeren.
@@ -181,7 +181,7 @@ Omdat alle dependencies opgegeven staan in het `package.json` bestand en je deze
 Wanneer je een package terug zou willen verwijderen uit je node\_modules folder kan je dit doen met het volgende commando:
 
 ```bash
-npm uninstall &lt;package-name>
+npm uninstall <package-name>
 ```
 
 Al de bestanden die je voordien had gedownload bij het installeren van deze package in de node\_modules folder zijn nu terug verwijderd. De package is ook verwijderd uit de `package.json` file.

@@ -5,10 +5,10 @@ Maak een nieuw node.js project aan met de naam `jwt-sign`. In dit project gaan w
 Maak een object aan met de volgende interface: 
 
 ```
-interface User &#123;
+interface User {
     id: number;
     email: string;
-&#125;
+}
 ```
 
 - Maak een object aan dat deze interface implementeert en vul het met waarden naar keuze.

@@ -9,11 +9,11 @@ const app = express();
 
 app.set("port", 3000);
 
-app.get("/",(req,res)=>&#123;
+app.get("/",(req,res)=>{
     let randomGetal = Math.random()*100;
     res.type("text/html");
-    res.send(`Het random getal is $&#123;randomGetal&#125;`);
-&#125;);
+    res.send(`Het random getal is ${randomGetal}`);
+});
 
 app.listen(app.get("port"), () =>
   console.log("[server] http://localhost:" + app.get("port"))
@@ -31,7 +31,7 @@ let randomGetal = Math.random()*100;
 Deze lijn geeft een willekeurig getal terug. We gebruiken Math.random dat een random getal geeft tussen 0 en 1 en vermenigvuldigen dat met 100.&#x20;
 
 ```typescript
-res.send(`Het random getal is $&#123;randomGetal&#125;`);
+res.send(`Het random getal is ${randomGetal}`);
 ```
 
 In plaats van een vaste string, geven we nu het randomgetal mee. Elke refresh voert de callback in app.get uit, dus elke refresh zorgt voor een ander getal.
@@ -43,21 +43,21 @@ Volledige web paginas in variabelen steken is niet ideaal. Wanneer je weet dat o
 &#x20;We kunnen bv een Hello World pagina maken:
 
 ```markup
-&lt;html>
-&lt;body>
+<html>
+<body>
 Hello world!
-&lt;/body>
-&lt;/html>
+</body>
+</html>
 ```
 
 Maar wat als we nu een willekeurige boodschap willen tonen? &#x20;
 
 ```markup
-&lt;html>
-&lt;body>
+<html>
+<body>
 [DIT MOET DYNAMISCH ZIJN]
-&lt;/body>
-&lt;/html>
+</body>
+</html>
 ```
 
 Templates laten ons toe HTML paginas te schrijven zoals we dat gewoon zijn maar met variabele inhoud. Express ondersteunt verschillende template "engines". Hier gaan we gebruik maken van EJS.
@@ -116,9 +116,9 @@ const app = express();
 app.set("view engine", "ejs"); // EJS als view engine
 app.set("port", 3000);
 
-app.get("/",(req,res)=>&#123;
+app.get("/",(req,res)=>{
   res.render("index");
-&#125;)
+})
 
 app.listen(app.get("port"), ()=>console.log( "[server] http://localhost:" + app.get("port")));
 ```
@@ -126,9 +126,9 @@ app.listen(app.get("port"), ()=>console.log( "[server] http://localhost:" + app.
 Merk op hoe eenvoudig onze route naar / is geworden:
 
 ```typescript
-app.get("/",(req,res)=>&#123;
+app.get("/",(req,res)=>{
     res.render("index");
-&#125;)
+})
 ```
 
 Ipv `res.send` gebruiken we `res.render`. Render verwacht als parameter de naam van een template die zich in de views folder bevindt. Hier tonen we de index file. Ga naar localhost:3000/ om jouw EJS file als HTML te zien.
@@ -140,10 +140,10 @@ Je kan nu verschillende EJS files toevoegen. Render ze via verschillende routes 
 Templates helpen ons de HTML dynamisch te maken. Laten we ons voorbeeld aanpassen zodat we het willekeurig getal weer zien verschijnen. Eerst passen we onze TypeScript aan.
 
 ```typescript
-app.get("/",(req,res)=>&#123;
+app.get("/",(req,res)=>{
     let randomGetal : number = Math.random()*100;
-    res.render("index", &#123;aRandomNumber: randomGetal&#125;);
-&#125;)
+    res.render("index", {aRandomNumber: randomGetal});
+})
 ```
 
 `res.render()` heeft ook een tweede optionele parameter: een object waar elke property een variabel is die beschikbaar zal zijn in de EJS file.
@@ -153,17 +153,17 @@ In dit voorbeeld heeft de tweede parameter maar 1 property: `aRandomNumber`. We 
 We kunnen ook meerdere properties meegeven:
 
 ```typescript
-app.get("/",(req,res)=>&#123;
+app.get("/",(req,res)=>{
     let randomGetal : number = Math.random()*100;
     let randomGetal2 : number = randomGetal * 2;
     res.render("index", 
-        &#123;    
+        {    
             aRandomNumber: randomGetal,
             name: "Sven",
             age: 40,
             someOtherNumber: randomGetal2
-        &#125;);
-&#125;)
+        });
+})
 ```
 
 Express zal nu index tonen, maar geeft eerst deze lijst van properties mee. Deze properties zijn nu beschikbaar als variabelen in de EJS file!
@@ -177,7 +177,7 @@ Laten we de index.ejs file aanpassen:
 </p>
 <p>
     But this time we have a random 
-    number which is &lt;%= aRandomNumber %>
+    number which is <%= aRandomNumber %>
 </p>
 ```
 
@@ -188,19 +188,19 @@ Wanneer je nu naar localhost:3000 gaat, zal je het random getal in de tekst zien
 Om een variabele te tonen die werd meegegeven in de render functie, gebruiken we volgende notatie:
 
 ```markup
-&lt;%= variable_name %>
+<%= variable_name %>
 ```
 
 Het is perfect mogelijk om ook properties van een object te tonen:
 
 ```markup
-&lt;%= person.name %>
+<%= person.name %>
 ```
 
 Als je een array hebt, kan je ook een element tonen:
 
 ```markup
-&lt;%= people[0] %>
+<%= people[0] %>
 ```
 
 ### JavaScript in EJS
@@ -208,7 +208,7 @@ Als je een array hebt, kan je ook een element tonen:
 EJS laat ons toe JavaScript te gebruiken om meer controle te hebben over de dynamische inhoud van het template. Tussen &lt;% %> kunnen we JavaScript plaatsen:
 
 ```markup
-&lt;% 
+<% 
     let firstName = "John";
     let lastName = "Smith";
     let age = Math.random() * 100;
@@ -216,8 +216,8 @@ EJS laat ons toe JavaScript te gebruiken om meer controle te hebben over de dyna
 
 <h1>Hi</h1>
 <p>
-    My name is &lt;%= firstName %> &lt;%= lastName %> 
-    and I"m &lt;%= age %> years old.
+    My name is <%= firstName %> <%= lastName %> 
+    and I"m <%= age %> years old.
 </p>
 ```
 
@@ -230,11 +230,11 @@ In EJS bestanden kan je geen TypeScript types gebruiken. Let hier zeker op dat j
 Een if statement kan ook toegevoegd worden:
 
 ```markup
-&lt;% if (age > 50) &#123; %>
+<% if (age > 50) { %>
     <p>Je bent oud</p>
-&lt;% &#125; else &#123; %>
+<% } else { %>
     <p>Je bent jong</p>
-&lt;% &#125; %>
+<% } %>
 ```
 
 Let hier op dat de if statement en het afsluiten van het `&#125;` teken tussen `&lt;% %>` moet staan.
@@ -244,9 +244,9 @@ Let hier op dat de if statement en het afsluiten van het `&#125;` teken tussen `
 Er bestaat ook een mogelijkheid om een loop toe te voegen. We hebben al gezien dat we &lt;% %> gebruiken om JavaScript uit te voeren. Stel je voor dat 10 keer "Hallo" getoond moet worden. We kunnen dit doen met een for loop:
 
 ```markup
-&lt;% for(let i=1; i&lt;10;i++) &#123; %>
+<% for(let i=1; i<10;i++) { %>
     <p>Hallo</p>
-&lt;% &#125; %>
+<% } %>
 ```
 
 Het is belangrijk om te weten dat alle javascript code tussen `&lt;% %>` moet staan en dus ook de for statement en het afsluiten van het `&#125;` teken. 
@@ -254,9 +254,9 @@ Het is belangrijk om te weten dat alle javascript code tussen `&lt;% %>` moet st
 Wil je de waarde van `i` tonen, dan moet je `&lt;%= i %>` gebruiken. 
 
 ```markup
-&lt;% for(let i=1; i&lt;10;i++) &#123; %>
-    <p>&lt;%= i %></p>
-&lt;% &#125; %>
+<% for(let i=1; i<10;i++) { %>
+    <p><%= i %></p>
+<% } %>
 ```
 
 ### Voorbeeld lijst
@@ -264,10 +264,10 @@ Wil je de waarde van `i` tonen, dan moet je `&lt;%= i %>` gebruiken.
 Laten we een voorbeeld bekijken waar we een lijst van mensen tonen. We hebben een array van mensen en we willen de naam van elke persoon tonen.
 
 ```typescript
-app.get("/",(req,res)=>&#123;
+app.get("/",(req,res)=>{
     let people : string[] = ["Sven", "Andie", "Sam", "Barbara"];
-    res.render("index", &#123; people: people &#125;);
-&#125;);
+    res.render("index", { people: people });
+});
 ```
 
 In de index.ejs file tonen we nu de lijst van mensen:
@@ -275,9 +275,9 @@ In de index.ejs file tonen we nu de lijst van mensen:
 ```markup
 <h1>People</h1>
 <ul>
-    &lt;% for(let person of people) &#123; %>
-        <li>&lt;%= people[i] %></li>
-    &lt;% &#125; %>
+    <% for(let person of people) { %>
+        <li><%= people[i] %></li>
+    <% } %>
 </ul>
 ```
 
@@ -286,21 +286,21 @@ In de index.ejs file tonen we nu de lijst van mensen:
 Laten we een voorbeeld bekijken waar we een tabel tonen. We hebben een array van mensen. Deze keer worden deze mensen voorgesteld als objecten. We willen de naam, stad en leeftijd van elke persoon tonen.
 
 ```typescript
-interface Person &#123;
+interface Person {
     name: string;
     city: string;
     age: number;
-&#125;
+}
 
-app.get("/",(req,res)=>&#123;
+app.get("/",(req,res)=>{
     let persons : Person[] = [
-        &#123;name: "Sven", city: "Antwerpen", age: 40&#125;,
-        &#123;name: "Andie", city: "Gent", age: 30&#125;,
-        &#123;name: "Sam", city: "Brussel", age: 25&#125;,
-        &#123;name: "Barbara", city: "Leuven", age: 35&#125;
+        {name: "Sven", city: "Antwerpen", age: 40},
+        {name: "Andie", city: "Gent", age: 30},
+        {name: "Sam", city: "Brussel", age: 25},
+        {name: "Barbara", city: "Leuven", age: 35}
     ];
-    res.render("index", &#123; persons: persons &#125;);
-&#125;);
+    res.render("index", { persons: persons });
+});
 ```
 
 In de index.ejs file tonen we nu de tabel van mensen:
@@ -313,13 +313,13 @@ In de index.ejs file tonen we nu de tabel van mensen:
         <th>City</th>
         <th>Age</th>
     </tr>
-    &lt;% for(let person of persons) &#123; %>
+    <% for(let person of persons) { %>
         <tr>
-            <td>&lt;%= person.name %></td>
-            <td>&lt;%= person.city %></td>
-            <td>&lt;%= person.age %></td>
+            <td><%= person.name %></td>
+            <td><%= person.city %></td>
+            <td><%= person.age %></td>
         </tr>
-    &lt;% &#125; %>
+    <% } %>
 </table>
 ```
 
@@ -333,15 +333,15 @@ Het is ook mogelijk om een if statement toe te voegen. Stel dat we enkel persone
         <th>City</th>
         <th>Age</th>
     </tr>
-    &lt;% for(let person of persons) &#123; %>
-        &lt;% if (person.age > 30) &#123; %>
+    <% for(let person of persons) { %>
+        <% if (person.age > 30) { %>
             <tr>
-                <td>&lt;%= person.name %></td>
-                <td>&lt;%= person.city %></td>
-                <td>&lt;%= person.age %></td>
+                <td><%= person.name %></td>
+                <td><%= person.city %></td>
+                <td><%= person.age %></td>
             </tr>
-        &lt;% &#125; %>
-    &lt;% &#125; %>
+        <% } %>
+    <% } %>
 </table>
 ```
 
@@ -350,31 +350,31 @@ Het is ook mogelijk om een if statement toe te voegen. Stel dat we enkel persone
 Je kan ook andere EJS files includen in een EJS file. Dit is handig wanneer je bv een header en footer hebt die je in elke pagina wil tonen. Stel je voor dat we de volgende pagina hebben:
 
 ```markup
-&lt;!DOCTYPE html>
-&lt;html>
-&lt;head>
-    &lt;title>My website&lt;/title>
-&lt;/head>
-&lt;body>
-    &lt;header>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My website</title>
+</head>
+<body>
+    <header>
         <h1>My website</h1>
-    &lt;/header>
-    &lt;nav>
+    </header>
+    <nav>
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
         </ul>
-    &lt;/nav>
-    &lt;main>
+    </nav>
+    <main>
         <h1>Home</h1>
         <p>Welcome to my website</p>
-    &lt;/main>
-    &lt;footer>
+    </main>
+    <footer>
         <p>&copy; 2021</p>
-    &lt;/footer>
-&lt;/body>
-&lt;/html>
+    </footer>
+</body>
+</html>
 ```
 
 In principe wil je op elke pagina dezelfde header en footer tonen. We kunnen de header en footer in aparte EJS files steken en deze includen in de index.ejs file. Deze EJS files bewaren we meestal in een directory genaamd partials in de view directory.
@@ -382,43 +382,43 @@ In principe wil je op elke pagina dezelfde header en footer tonen. We kunnen de 
 We maken dus een header.ejs file:
 
 ```markup
-&lt;!DOCTYPE html>
-&lt;html>
-&lt;head>
-    &lt;title>My website&lt;/title>
-&lt;/head>
-&lt;body>
-    &lt;header>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My website</title>
+</head>
+<body>
+    <header>
         <h1>My website</h1>
-    &lt;/header>
-    &lt;nav>
+    </header>
+    <nav>
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
         </ul>
-    &lt;/nav>
-    &lt;main>
+    </nav>
+    <main>
 ```
 
 En een footer.ejs file:
 
 ```markup
-    &lt;/main>
-    &lt;footer>
+    </main>
+    <footer>
         <p>&copy; 2021</p>
-    &lt;/footer>
-&lt;/body>
-&lt;/html>
+    </footer>
+</body>
+</html>
 ```
 
 nu kunnen we in elke EJS file de header en footer includen:
 
 ```markup
-&lt;%- include("partials/header") %>
+<%- include("partials/header") %>
     <h1>Home</h1>
     <p>Welcome to my website</p>
-&lt;%- include("partials/footer") %>
+<%- include("partials/footer") %>
 ```
 
 Alle variabelen die doorgegeven worden met de render functie zijn ook beschikbaar in de included files.

@@ -6,13 +6,13 @@ Maak volgende variabele aan:
 
 ```typescript
 let movies = [
-    &#123;name: "The Matrix", myScore: 90, timesViewed: 10&#125;,
-    &#123;name: "Pulp Fuction", myScore: 100, timesViewed: 100&#125;,
-    &#123;name: "Monster Hunter", myScore: 5, timesViewed:1&#125;,
-    &#123;name: "Blade Runner", myScore: 100, timesViewed:30&#125;,
-    &#123;name: "Austin Powers", myScore: 80, timesViewed:10&#125;,
-    &#123;name: "Jurasic Park 2", myScore: 40, timesViewed:1&#125;,
-    &#123;name: "Ichi the Killer", myScore: 80, timesViewed:1&#125;
+    {name: "The Matrix", myScore: 90, timesViewed: 10},
+    {name: "Pulp Fuction", myScore: 100, timesViewed: 100},
+    {name: "Monster Hunter", myScore: 5, timesViewed:1},
+    {name: "Blade Runner", myScore: 100, timesViewed:30},
+    {name: "Austin Powers", myScore: 80, timesViewed:10},
+    {name: "Jurasic Park 2", myScore: 40, timesViewed:1},
+    {name: "Ichi the Killer", myScore: 80, timesViewed:1}
 ];
 ```
 

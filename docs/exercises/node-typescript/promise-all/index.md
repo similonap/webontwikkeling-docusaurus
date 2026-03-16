@@ -3,16 +3,16 @@
 Na hoeveel tijd zal deze code "done!" op het scherm tonen? Voer de code dus niet uit maar denk even zelf na.
 
 ```
-const delay = (delay: number): Promise&lt;void> => &#123;
-    return new Promise((resolve, reject) => &#123;
-        setTimeout(() => &#123;
+const delay = (delay: number): Promise<void> => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
             resolve();
-        &#125;, delay);
-    &#125;);
-&#125;
+        }, delay);
+    });
+}
 
-(async() => &#123;
+(async() => {
     await Promise.all([delay(1000), delay(10000), delay(15000)])
     console.log("Done!");
-&#125;)();
+})();
 ```

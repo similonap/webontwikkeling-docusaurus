@@ -59,10 +59,10 @@ De header bestaat doorgaans uit twee delen:
 Bijvoorbeeld:
 
 ```json
-&#123;
+{
   "alg": "HS256",
   "typ": "JWT"
-&#125;
+}
 ```
 
 Vervolgens is deze JSON Base64Url-gecodeerd om het eerste deel van de JWT te vormen.
@@ -76,11 +76,11 @@ De payload bevat de informatie die opgeslagen en verzonden moet worden in de tok
 Een JWT kan bijvoorbeeld een claim met de naam `name` bevatten die beweert dat de naam van de gebruiker "AP user" is. In een JWT wordt een claim weergegeven als een **key/value-pair** waarbij de key altijd een tekenreeks is en de value een JSON-waarde kan zijn. Het volgende JSON-object bevat bijvoorbeeld drie claims (`sub`, `name`, `iat`):
 
 ```json
-&#123;
+{
    "sub": "1234567890",
    "name": "AP user",
    "iat": "1516239022"
-&#125;
+}
 ```
 
 Vervolgens de payload ook JSON Base64Url-gecodeerd om het tweede deel van de JWT te vormen.

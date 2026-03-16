@@ -13,13 +13,13 @@ const app = express();
 app.set("port",3000);
 app.set("view engine", "ejs");
 
-app.get("/", (req,res) => &#123;
+app.get("/", (req,res) => {
     res.render("maaltafels");
-&#125;)
+})
 
-app.listen(app.get("port"), () => &#123;
-    console.log(`Web application started at http://localhost:$&#123;app.get("port")&#125;`)
-&#125;);
+app.listen(app.get("port"), () => {
+    console.log(`Web application started at http://localhost:${app.get("port")}`)
+});
 ```
 
 Maak nu een nieuwe ejs file aan die de maaltafels van 1 tot en met 10 toont in je browser als je surft naar http://localhost:3000

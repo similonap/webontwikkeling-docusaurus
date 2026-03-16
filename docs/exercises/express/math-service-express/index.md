@@ -20,39 +20,39 @@ Je moet dus query parameters (voor a en b) EN route parameters (voor de operator
 Je krijgt dan een output in de volgende vorm (json):
 
 ```
-&#123;
+{
     "result": 8
-&#125;
+}
 ```
 
 Als 1 van de twee parameters (a en b) niet zijn opgegeven krijg je het volgende json object terug:
 
 ```
-&#123;
+{
     "error": "Both query parameters (a,b) have to be specified."
-&#125;
+}
 ```
 
 Bij een deling door 0 krijg je het volgende json object terug:
 
 ```
-&#123;
+{
     "error": "Division by 0 is not allowed."
-&#125;
+}
 ```
 
 Als de query parameters niet van het type number zijn krijg je het volgende json object terug:
 
 ```
-&#123;
+{
     "error": "Both query parameters (a,b) have to be of type number."
-&#125;
+}
 ```
 
 Bij een onbekekende operator krijg je het volgende json object terug:
 
 ```
-&#123;
+{
     "error": "Unknown operator."
-&#125;
+}
 ```

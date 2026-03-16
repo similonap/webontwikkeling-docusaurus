@@ -26,10 +26,10 @@ import bcrypt from 'bcrypt';
 
 const saltRounds : number = 10;
 
-async function main() : Promise&lt;string> &#123;
+async function main() : Promise<string> {
     let hashedPassword : string =  await bcrypt.hash("hunter2", saltRounds);
     console.log(hashedPassword);
-&#125;
+}
 main();
 ```
 
@@ -55,11 +55,11 @@ import bcrypt from 'bcrypt';
 
 const saltRounds : number = 10;
 
-async function main() : Promise&lt;boolean> &#123;
+async function main() : Promise<boolean> {
     let hashedPassword : string =  await bcrypt.hash("hunter2", saltRounds);
     let isSame : boolean = await bcrypt.compare("hunter2", hashedPassword);
     console.log(isSame); // true
-&#125;
+}
 main();
 ```
 

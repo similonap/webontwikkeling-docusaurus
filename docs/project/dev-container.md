@@ -21,16 +21,16 @@ Je kan nakijken of alles correct is ingesteld door het bestand `.devcontainer/de
 ```json
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
-&#123;
+{
 	"name": "Node.js & TypeScript",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
-	"features": &#123;
-		"ghcr.io/devcontainers-contrib/features/ts-node:1": &#123;&#125;
-	&#125;
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/ts-node:1": {}
+	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": &#123;&#125;,
+	// "features": {},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
@@ -39,10 +39,10 @@ Je kan nakijken of alles correct is ingesteld door het bestand `.devcontainer/de
 	// "postCreateCommand": "yarn install",
 
 	// Configure tool-specific properties.
-	// "customizations": &#123;&#125;,
+	// "customizations": {},
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
-&#125;
+}
 ```
 

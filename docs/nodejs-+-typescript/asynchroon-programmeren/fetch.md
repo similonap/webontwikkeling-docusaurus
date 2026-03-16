@@ -10,37 +10,37 @@ We gaan in dit voorbeeld gebruik maken van de [JSONPlaceholder](https://jsonplac
 
 ```json
 [
-  &#123;
+  {
     "userId": 1,
     "id": 1,
     "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
     "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-  &#125;,
-  &#123;
+  },
+  {
     "userId": 1,
     "id": 2,
     "title": "qui est esse",
     "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
-  &#125;,
+  },
   ...
-  &#123;
+  {
     "userId": 10,
     "id": 100,
     "title": "at nam consequatur ea labore ea harum",
     "body": "cupiditate quo est a modi nesciunt soluta\nipsa voluptas error itaque dicta in\nautem qui minus magnam et distinctio eum\naccusamus ratione error aut"
-  &#125;
+  }
 ]
 ```
 
 Het eerste wat je moet doen is een interface maken die de data beschrijft die je verwacht terug te krijgen. In dit geval is dit een array van objecten. Elk object heeft een userId, id, title en body property. De userId en id property zijn van het type number. De title en body property zijn van het type string. 
 
 ```typescript
-interface Post &#123;
+interface Post {
     userId: number;
     id: number;
     title: string;
     body: string;
-&#125;
+}
 ```
 
 Je kan deze interface zelf maken, maar je kan ook gebruik maken van een tool zoals [QuickType](https://app.quicktype.io/) om deze automatisch te genereren. Zorg vooral dat de interface correct is en overeenkomt met de data die je verwacht terug te krijgen.
@@ -54,25 +54,25 @@ Stel dat we de titel van de eerste post willen loggen naar de console. We kunnen
 ```typescript
 fetch('https://jsonplaceholder.typicode.com/posts')
     .then((response) => response.json())
-    .then((response: Post[]) => &#123;
+    .then((response: Post[]) => {
         console.log(response[0].title);
-    &#125;).catch((error) => &#123;
+    }).catch((error) => {
         console.log(error);
-    &#125;);
+    });
 ```
 
 of met async en await:
 
 ```typescript
-(async function () &#123;
-    try &#123;
+(async function () {
+    try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
         const posts : Post[] = await response.json();
         console.log(posts[0].title);
-    &#125; catch (error: any) &#123;
+    } catch (error: any) {
         console.log(error);
-    &#125;
-&#125;)();
+    }
+})();
 ```
 
 Let op dat een API niet altijd een array teruggeeft. Het kan ook een object zijn dat op zijn beurt weer een array bevat. Je moet dus altijd controleren wat de data is die je terugkrijgt. 
@@ -85,10 +85,10 @@ Als je toch een error wil afhandelen die veroorzaakt wordt door een fout in de c
 
 ```typescript
 fetch('https://jsonplaceholder.typicode.com/posts/123')
-    .then(r => &#123;
+    .then(r => {
         if (!r.ok) throw new Error(r.status)
         return r.json()
-    &#125;)
+    })
     .then(r => console.log(r))
     .catch(e => console.log(e));
 ```
@@ -98,23 +98,23 @@ We kijken hier na of de status code niet 2xx is aan de hand van de `ok` property
 Deze code is ook weer sterk te vereenvoudigen met async en await:
 
 ```typescript
-(async function () &#123;
-    try &#123;
+(async function () {
+    try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts/123');
         if (!response.ok) throw new Error(response.status);
         const posts : Post[] = await response.json();
         console.log(posts[0].title);
-    &#125; catch (error: any) &#123;
+    } catch (error: any) {
         console.log(error);
-    &#125;
-&#125;)();
+    }
+})();
 ```
 
 Je kan ook de `status` property gebruiken om de status code op te vragen. Deze property bevat een nummer. 
 
 ```typescript
-(async function () &#123;
-    try &#123;
+(async function () {
+    try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts/123');
         
         if (response.status === 404) throw new Error('Not found');
@@ -122,8 +122,8 @@ Je kan ook de `status` property gebruiken om de status code op te vragen. Deze p
 
         const posts : Post[] = await response.json();
         console.log(posts[0].title);
-    &#125; catch (error: any) &#123;
+    } catch (error: any) {
         console.log(error);
-    &#125;
-&#125;)();
+    }
+})();
 ```

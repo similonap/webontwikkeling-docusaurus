@@ -5,21 +5,21 @@ Maak een nieuw project aan met de naam `slow-sum` waarin je jouw bronbestanden v
 Plaats de onderstaande code in een bestand `index.ts`
 
 ```typescript
-const slowSum = (a: number, b: number) => &#123;
-    return new Promise&lt;number>((resolve, reject) => &#123;
-        setTimeout(() => &#123;
+const slowSum = (a: number, b: number) => {
+    return new Promise<number>((resolve, reject) => {
+        setTimeout(() => {
             resolve(a+b);
-        &#125;,1000)
-    &#125;);
-&#125;
+        },1000)
+    });
+}
 
-const slowMult = (a: number, b: number) => &#123;
-    return new Promise&lt;number>((resolve, reject) => &#123;
-        setTimeout(() => &#123;
+const slowMult = (a: number, b: number) => {
+    return new Promise<number>((resolve, reject) => {
+        setTimeout(() => {
             resolve(a*b);
-        &#125;,1500)
-    &#125;);
-&#125;
+        },1500)
+    });
+}
 ```
 
 Dit zijn 2 functies die een promise terug geven. Ze simuleren een trage som functie en een trage vermenigvuldigings functie.

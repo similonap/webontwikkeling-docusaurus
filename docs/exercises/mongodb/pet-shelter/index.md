@@ -6,26 +6,26 @@ We beginnen met de volgende array:
 
 ```typescript
 const pets : Pet[] = [
-    &#123; name: "Buddy", age: 2, type: "dog", breed: "Golden Retriever" &#125;,
-    &#123; name: "Daisy", age: 3, type: "dog", breed: "Beagle" &#125;,
-    &#123; name: "Coco", age: 1, type: "dog", breed: "Poodle" &#125;,
-    &#123; name: "Charlie", age: 2, type: "cat", breed: "Siamese" &#125;,
-    &#123; name: "Luna", age: 3, type: "cat", breed: "Persian" &#125;,
-    &#123; name: "Lucy", age: 1, type: "cat", breed: "Maine Coon" &#125;,
-    &#123; name: "Max", age: 4, type: "dog", breed: "Labrador Retriever" &#125;,
-    &#123; name: "Bella", age: 2, type: "dog", breed: "French Bulldog" &#125;,
-    &#123; name: "Milo", age: 1, type: "dog", breed: "Border Collie" &#125;,
-    &#123; name: "Oliver", age: 3, type: "cat", breed: "Bengal" &#125;,
-    &#123; name: "Tiger", age: 2, type: "cat", breed: "Ragdoll" &#125;,
-    &#123; name: "Zoe", age: 3, type: "cat", breed: "Sphynx" &#125;,
-    &#123; name: "Sophie", age: 5, type: "dog", breed: "Dachshund" &#125;,
-    &#123; name: "Lily", age: 1, type: "cat", breed: "British Shorthair" &#125;,
-    &#123; name: "Oscar", age: 4, type: "dog", breed: "Boxer" &#125;,
-    &#123; name: "Ruby", age: 2, type: "dog", breed: "Siberian Husky" &#125;,
-    &#123; name: "Rosie", age: 2, type: "cat", breed: "Scottish Fold" &#125;,
-    &#123; name: "Jack", age: 3, type: "dog", breed: "Cocker Spaniel" &#125;,
-    &#123; name: "Sadie", age: 2, type: "dog", breed: "Rottweiler" &#125;,
-    &#123; name: "Maggie", age: 1, type: "dog", breed: "Shih Tzu" &#125;
+    { name: "Buddy", age: 2, type: "dog", breed: "Golden Retriever" },
+    { name: "Daisy", age: 3, type: "dog", breed: "Beagle" },
+    { name: "Coco", age: 1, type: "dog", breed: "Poodle" },
+    { name: "Charlie", age: 2, type: "cat", breed: "Siamese" },
+    { name: "Luna", age: 3, type: "cat", breed: "Persian" },
+    { name: "Lucy", age: 1, type: "cat", breed: "Maine Coon" },
+    { name: "Max", age: 4, type: "dog", breed: "Labrador Retriever" },
+    { name: "Bella", age: 2, type: "dog", breed: "French Bulldog" },
+    { name: "Milo", age: 1, type: "dog", breed: "Border Collie" },
+    { name: "Oliver", age: 3, type: "cat", breed: "Bengal" },
+    { name: "Tiger", age: 2, type: "cat", breed: "Ragdoll" },
+    { name: "Zoe", age: 3, type: "cat", breed: "Sphynx" },
+    { name: "Sophie", age: 5, type: "dog", breed: "Dachshund" },
+    { name: "Lily", age: 1, type: "cat", breed: "British Shorthair" },
+    { name: "Oscar", age: 4, type: "dog", breed: "Boxer" },
+    { name: "Ruby", age: 2, type: "dog", breed: "Siberian Husky" },
+    { name: "Rosie", age: 2, type: "cat", breed: "Scottish Fold" },
+    { name: "Jack", age: 3, type: "dog", breed: "Cocker Spaniel" },
+    { name: "Sadie", age: 2, type: "dog", breed: "Rottweiler" },
+    { name: "Maggie", age: 1, type: "dog", breed: "Shih Tzu" }
 ];
 ```
 

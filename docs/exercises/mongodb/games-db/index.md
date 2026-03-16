@@ -8,76 +8,76 @@ Voorbeeld data
 We beginnen met een lijst van Game objecten volgens de volgende interface:
 
 ```typescript
-interface Game &#123;
+interface Game {
     _id?: ObjectId;
     name: string;
     price: number;
     releaseDate: Date;
     rating: number;
     publisher: string;
-&#125;
+}
 ```
 
 en de volgende data:
 
 ```typescript
 [
-    &#123;
+    {
         name: 'The Witcher 3: Wild Hunt',
         price: 39.99,
         releaseDate: new Date('2015-05-19'),
         rating: 9.3,
         publisher: 'CD Projekt',
-    &#125;,
-    &#123;
+    },
+    {
         name: 'Red Dead Redemption 2',
         price: 59.99,
         releaseDate: new Date('2018-10-26'),
         rating: 9.7,
         publisher: 'Rockstar Games',
-    &#125;,
-    &#123;
+    },
+    {
         name: 'The Legend of Zelda: Breath of the Wild',
         price: 59.99,
         releaseDate: new Date('2017-03-03'),
         rating: 9.6,
         publisher: 'Nintendo',
-    &#125;,
-    &#123;
+    },
+    {
         name: 'The Elder Scrolls V: Skyrim',
         price: 39.99,
         releaseDate: new Date('2011-11-11'),
         rating: 9.5,
         publisher: 'Bethesda Softworks',
-    &#125;,
-    &#123;
+    },
+    {
         name: 'The Last of Us Part II',
         price: 59.99,
         releaseDate: new Date('2020-06-19'),
         rating: 9.2,
         publisher: 'Sony Interactive Entertainment',
-    &#125;,
-    &#123;
+    },
+    {
         name: 'God of War',
         price: 39.99,
         releaseDate: new Date('2018-04-20'),
         rating: 9.4,
         publisher: 'Sony Interactive Entertainment',
-    &#125;,
-    &#123;
+    },
+    {
         name: 'Dark Souls III',
         price: 59.99,
         releaseDate: new Date('2016-04-12'),
         rating: 9.1,
         publisher: 'FromSoftware',
-    &#125;,
-    &#123;
+    },
+    {
         name: 'Grand Theft Auto V',
         price: 29.99,
         releaseDate: new Date('2013-09-17'),
         rating: 9.8,
         publisher: 'Rockstar Games',
-    &#125;,
+    },
 ];
 ```
 

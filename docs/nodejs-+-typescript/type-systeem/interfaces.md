@@ -11,73 +11,73 @@ We kunnen een object beschrijven aan de hand van een interface . Deze interface 
 Stel dat je het volgende object in JavaScript hebt:
 
 ```typescript
-let andie = &#123;
+let andie = {
   name: "Andie",
   age: 40
-&#125;
+}
 ```
 
 Dit object heeft twee properties: `name` en `age`. De waarde van `name` is een string en de waarde van `age` is een number. Als we nu een tweede object willen aanmaken en perongeluk een typfout maken, dan zal TypeScript ons niet waarschuwen van deze fout:
 
 ```typescript
-let debbie = &#123;
+let debbie = {
   naem: "Debbie",
   age: 30
-&#125;
+}
 ```
 
 TypeScript zal dit als twee verschillende objecten zien. Dit is niet wat we willen. We willen dat TypeScript ons waarschuwt als we een typfout maken. We willen dus een type declareren dat zegt dat een object een `name` en een `age` property moet hebben. Dit kunnen we doen aan de hand van een interface:
 
 ```typescript
-interface Person &#123;
+interface Person {
   name: string;
   age: number;
-&#125;
+}
 ```
 
 We hebben nu een interface gemaakt die we `Person` noemen. Deze interface beschrijft een object dat een `name` en een `age` property moet hebben. We kunnen nu een variabele declareren van het type `Person`:
 
 ```typescript
-let andie: Person = &#123;
+let andie: Person = {
   name: "Andie",
   age: 40
-&#125;
+}
 ```
 
 Als we nu een typfout maken, dan zal TypeScript ons waarschuwen:
 
 ```typescript
-let debbie: Person = &#123;
+let debbie: Person = {
   naem: "Debbie",
   age: 30
-&#125; // Error: Property 'naem' does not exist on type 'Person'
+} // Error: Property 'naem' does not exist on type 'Person'
 ```
 
 Ook is het niet mogelijk om een property toe te voegen die niet in de interface staat:
 
 ```typescript
-let debbie: Person = &#123;
+let debbie: Person = {
     name: "Debbie",
     age: 30,
     isAdmin: true
-&#125; // Error: Object literal may only specify known properties, and 'isAdmin' does not exist in type 'Person'
+} // Error: Object literal may only specify known properties, and 'isAdmin' does not exist in type 'Person'
 ```
 
 Ook het weglaten van bepaalde properties zal een foutmelding geven:
 
 ```typescript
-let debbie: Person = &#123;
+let debbie: Person = {
     name: "Debbie"
-&#125; // Error: Property 'age' is missing in type '&#123; name: string; &#125;' but required in type 'Person'
+} // Error: Property 'age' is missing in type '{ name: string; }' but required in type 'Person'
 ```
 
 Uiteraard moet je ook de data types van de properties respecteren:
 
 ```typescript
-let debbie: Person = &#123;
+let debbie: Person = {
     name: "Debbie",
     age: "30"
-&#125; // Error: Type 'string' is not assignable to type 'number'
+} // Error: Type 'string' is not assignable to type 'number'
 ```
 
 ## Objecten in objecten
@@ -87,35 +87,35 @@ Het is ook mogelijk om objecten in andere objecten te gaan steken. Bijvoorbeeld 
 We passen dus de User interface hiervoor aan:
 
 ```typescript
-interface User &#123;
+interface User {
     name: string,
     age?: number,
     address: Address
-&#125;
+}
 ```
 
 Het type `Address` moeten we dan ook nog aanmaken aan de hand van een nieuwe interface.
 
 ```typescript
-interface Address &#123;
+interface Address {
     street: string,
     number: number,
     city: string
-&#125;
+}
 ```
 
 Nu kunnen we een User object aanmaken gebruik makende van deze interface.
 
 ```typescript
-let user : User = &#123;
+let user : User = {
   name: "Andie",
   age: 30,
-  address: &#123;
+  address: {
     street: "Fakestreet",
     number: 133,
     city: "Fakegem"
-  &#125;
-&#125;
+  }
+}
 ```
 
 Wil je dan bijvoorbeeld de straat van deze gebruiker op het scherm tonen dan kan je dit doen aan de hand van de dot notatie:
@@ -127,19 +127,19 @@ console.log(user.address.street);
 Als we `address` zouden niet verplicht maken (optioneel):
 
 ```typescript
-interface User &#123;
+interface User {
     name: string,
     age?: number,
     address?: Address
-&#125;
+}
 ```
 
 dan moet je wel eerst nakijken of `address` wel is opgegeven:
 
 ```typescript
-if (user.address) &#123;
+if (user.address) {
     console.log(user.address.street);
-&#125;
+}
 ```
 
 anders krijg je deze error:
@@ -157,24 +157,24 @@ Een record type is een object waarvan we de properties niet kennen. We weten nie
 Stel je voor dat je namen van gebruikers wilt bijhouden en bij elke naam een telefoonnummer wilt opslaan. Je wil dus een object hebben in de vorm van:
 
 ```typescript
-&#123;
+{
   "Andie": "+32 123 45 67 89",
   "Debbie": "+32 987 65 43 21"
-&#125;
+}
 ```
 
 Je zou hier een interface van kunnen maken:
 
 ```typescript
-interface PhoneBook &#123;
+interface PhoneBook {
   "Andie": string,
   "Debbie": string
-&#125;
+}
 
-const phoneBook: PhoneBook = &#123;
+const phoneBook: PhoneBook = {
   "Andie": "+32 123 45 67 89",
   "Debbie": "+32 987 65 43 21"
-&#125;
+}
 ```
 
 wil je nu een toevoegen:
@@ -186,20 +186,20 @@ phoneBook["Charlie"] = "+32 123 45 67 89";
 dan gaat dit niet werken. Je moet de interface aanpassen:
 
 ```typescript
-interface PhoneBook &#123;
+interface PhoneBook {
   "Andie": string,
   "Debbie": string,
   "Charlie": string
-&#125;
+}
 ```
 
 Dit is uiteraard niet handig als je niet op voorhand weet welke namen er in het telefoonboek zullen staan. Je kan dit oplossen aan de hand van de `Record` type:
 
 ```typescript
-let phoneBook: Record&lt;string, string> = &#123;
+let phoneBook: Record<string, string> = {
   "Andie": "+32 123 45 67 89",
   "Debbie": "+32 987 65 43 21"
-&#125;
+}
 ```
 
 ### Occurences tellen
@@ -207,19 +207,19 @@ let phoneBook: Record&lt;string, string> = &#123;
 Stel dat we een object willen gebruiken om bij te houden hoeveel keer een bepaalde waarde voorkomt in een array. We kunnen onmogelijk op voorhand weten welke waarden er in de array zullen zitten dus we kunnen niet op voorhand zeggen welke properties het object zal hebben. We kunnen dit oplossen aan de hand van de `Record` type:
 
 ```typescript
-let count: Record&lt;string, number> = &#123;&#125;;
+let count: Record<string, number> = {};
 
 let values = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
 
-for (let value of values) &#123;
-  if (count[value]) &#123;
+for (let value of values) {
+  if (count[value]) {
     count[value]++;
-  &#125; else &#123;
+  } else {
     count[value] = 1;
-  &#125;
-&#125;
+  }
+}
 
-console.log(count); // &#123; '1': 3, '2': 3, '3': 3, '4': 3, '5': 3 &#125;
+console.log(count); // { '1': 3, '2': 3, '3': 3, '4': 3, '5': 3 }
 ```
 
 ## JSON bestand inlezen
@@ -232,24 +232,24 @@ Stel dat je een JSON bestand `users.json` hebt met de volgende inhoud:
 
 ```json
 [
-  &#123;
+  {
     "name": "Andie",
     "age": 30,
-    "address": &#123;
+    "address": {
       "street": "Fakestreet",
       "number": 133,
       "city": "Fakegem"
-    &#125;
-  &#125;,
-  &#123;
+    }
+  },
+  {
     "name": "Debbie",
     "age": 25,
-    "address": &#123;
+    "address": {
       "street": "Fakestreet",
       "number": 133,
       "city": "Fakegem"
-    &#125;
-  &#125;
+    }
+  }
 ]
 ```
 
@@ -262,13 +262,13 @@ import data from "./users.json";
 Je moet hier wel op letten dat je in je `tsconfig.json` bestand de volgende optie hebt aangezet:
 
 ```json
-&#123;
-  "compilerOptions": &#123;
+{
+  "compilerOptions": {
     ...
     "resolveJsonModule": true
     ...
-  &#125;
-&#125;
+  }
+}
 ```
 
 Je moet dan nog wel de inhoud van `usersJson` in een variabele of constante steken:
@@ -288,16 +288,16 @@ Het is niet altijd mogelijk om een bestand in te lezen aan de hand van het `impo
 De optionele chaining operator is een nieuwe operator die sinds TypeScript 3.7 beschikbaar is. Deze operator is zeer handig als je objecten in objecten hebt. Stel dat je een object hebt met een aantal properties en je wil een property van een property opvragen. Als je niet zeker bent of de property wel bestaat dan kan je de optionele chaining operator gebruiken.
 
 ```typescript
-interface User &#123;
+interface User {
     name: string,
     age: number,
     address?: Address
-&#125;
+}
 
-let user : User = &#123;
+let user : User = {
   name: "Andie",
   age: 30
-&#125;
+}
 
 console.log(user.address.street); // Error: Object is possibly 'undefined'
 ```
@@ -323,17 +323,17 @@ In TypeScript wordt de ! (non-null assertion) operator gebruikt om aan te geven 
 Stel dat je een functie hebt die een default user aanmaakt en returned:
 
 ```typescript
-function getDefaultUser() : User &#123;
-    return &#123;
+function getDefaultUser() : User {
+    return {
         name: "Default",
         age: 0,
-        address: &#123;
+        address: {
             street: "Defaultstreet",
             number: 0,
             city: "Defaultcity"
-        &#125;
-    &#125;
-&#125;
+        }
+    }
+}
 ```
 
 Als we deze functie nu gebruiken en we willen de straat van de default user opvragen dan krijgen we een foutmelding:

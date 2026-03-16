@@ -3,9 +3,9 @@
 Maak een nieuw project aan met een bestand `at-least-two` met de volgende inhoud:
 
 ```typescript
-interface TestFunction &#123;
+interface TestFunction {
     (n: number): boolean
-&#125;
+}
 ```
 
 * Schrijf een arrow functie `isOdd` die deze interface implementeert die teruggeeft of een getal oneven is.

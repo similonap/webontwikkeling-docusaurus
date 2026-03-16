@@ -13,9 +13,9 @@ npm install --save-dev nodemon
 Vervolgens kan je in je `package.json` file een script toevoegen dat nodemon gebruikt. Dit kan gedaan worden door het volgende toe te voegen aan je `package.json` file:
 
 ```json
-"scripts": &#123;
+"scripts": {
     "start": "nodemon index.ts"
-&#125;
+}
 ```
 
 In dit voorbeeld wordt ervan uitgegaan dat de server file `index.js` heet. Vervang dit door de naam van jouw server file. Vervolgens kan je nodemon starten door het volgende commando uit te voeren in de terminal:

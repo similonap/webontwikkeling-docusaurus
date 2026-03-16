@@ -5,10 +5,10 @@ Wanneer een gebruiker naar het domein van onze website surft, stuurt zijn browse
 Die kunnen we bijvoorbeeld zo afhandelen:
 
 ```typescript
-app.get("/",(req,res)=>&#123;
+app.get("/",(req,res)=>{
     res.type("text/html")
     res.send("hello");
-&#125;);
+});
 ```
 
 De gebruiker vraagt bijvoorbeeld naar `localhost:3030` en krijgt zo de tekst "hallo" te zien.
@@ -40,18 +40,18 @@ Veronderstel dat we een array met namen hebben. We willen een naam opzoeken door
 ```typescript
 let people = ["Sven","Andie","George","Geoff"];
 
-app.get("/person",(req,res)=>&#123;
+app.get("/person",(req,res)=>{
     res.type("text/html")
     // TypeScript kan niet garanderen dat deze parameter een geldige waarde heeft gekregen
     // de if staat ons toe binnen dat block te veronderstellen dat string het type is
-    if (typeof req.query.index === "string") &#123;
+    if (typeof req.query.index === "string") {
       let index = parseInt(req.query.index);
       res.send(people[index]);
-    &#125;
-    else &#123;
+    }
+    else {
       res.send("Ongeldige parameterwaarde.");
-    &#125;
-&#125;);
+    }
+});
 ```
 
 `req` is het Request object. De property `query` bevat alle query velden die meegestuurd worden.
@@ -69,42 +69,42 @@ Let op welke characters je gebruikt in een query string. Je kan bv. geen spaties
 Zoals al vermeld hebben gebruikt Google de query string om zoektermen mee te geven. We kunnen dit ook doen in onze eigen applicatie. Stel dat we een zoekfunctie willen maken die de gebruiker toelaat om een naam op te zoeken in een array van namen. We kunnen dit doen met een formulier in ons ejs bestand:
 
 ```html
-&lt;form action="/" method="get">
-    &lt;label for="search">Search for a name:&lt;/label>
-    &lt;input type="text" id="search" name="q" value="&lt;%= q %>">
-    &lt;button type="submit">Search&lt;/button>
-&lt;/form>
-&lt;% for (let person of persons) &#123; %>
-    <p>&lt;%= person.name %> (&lt;%= person.age %>)</p>
-&lt;% &#125; %> 
+<form action="/" method="get">
+    <label for="search">Search for a name:</label>
+    <input type="text" id="search" name="q" value="<%= q %>">
+    <button type="submit">Search</button>
+</form>
+<% for (let person of persons) { %>
+    <p><%= person.name %> (<%= person.age %>)</p>
+<% } %> 
 ```
 
 We gebruiken hier de query string `q` om de zoekterm mee te geven. De gebruiker kan een zoekterm invullen in het input veld en op de knop drukken. De browser zal een `GET` request sturen naar `/search?q=zoekterm`. We kunnen dit request afhandelen in onze Express applicatie:
 
 ```typescript
-interface Person &#123;
+interface Person {
     name: string;
     age: number;
-&#125;
+}
 
 const persons: Person[] = [
-    &#123; name: "Sven", age: 25 &#125;,
-    &#123; name: "Andie", age: 24 &#125;,
-    &#123; name: "George", age: 30 &#125;,
-    &#123; name: "Zeoff", age: 28 &#125;,
+    { name: "Sven", age: 25 },
+    { name: "Andie", age: 24 },
+    { name: "George", age: 30 },
+    { name: "Zeoff", age: 28 },
     ...
 ]
 
-app.get("/", (req, res) => &#123;
+app.get("/", (req, res) => {
     let q : string = typeof req.query.q === "string" ? req.query.q : "";
-    let filteredPersons: Person[] = persons.filter((person) => &#123;
+    let filteredPersons: Person[] = persons.filter((person) => {
         return person.name.toLowerCase().startsWith(q.toLowerCase());
-    &#125;);
-    res.render("index", &#123;
+    });
+    res.render("index", {
         persons: filteredPersons,
         q: q
-    &#125;);
-&#125;);
+    });
+});
 ```
 
 We gebruiken hier de `filter` methode van een array om enkel de namen te tonen die beginnen met de zoekterm. We zetten de zoekterm en de gefilterde namen in een object en sturen dit naar de view.
@@ -127,113 +127,113 @@ const sortDirection = typeof req.query.sortDirection === "string" ? req.query.so
 We kijken hier of de query parameters bestaan. Als ze bestaan, gebruiken we de waarde. Als ze niet bestaan, gebruiken we een default waarde. We gebruiken de `sort` methode van een array om de namen te sorteren. De richting van de sortering bepalen we door de return waarde van de sorteerfunctie om te keren. Als de richting "asc" is, sorteren we de namen in oplopende volgorde. Als de richting "desc" is, sorteren we de namen in aflopende volgorde.
 
 ```typescript
-let sortedPersons = [...persons].sort((a, b) => &#123;
-    if (sortField === "name") &#123;
+let sortedPersons = [...persons].sort((a, b) => {
+    if (sortField === "name") {
         return sortDirection === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
-    &#125; else if (sortField === "age") &#123;
+    } else if (sortField === "age") {
         return sortDirection === "asc" ? a.age - b.age : b.age - a.age;
-    &#125; else &#123;
+    } else {
         return 0;
-    &#125;
-&#125;);
+    }
+});
 ```
 
 We geven nu deze gesorteerde namen mee aan de view:
 
 ```typescript
-res.render("index", &#123;
+res.render("index", {
     persons: sortedPersons
-&#125;);
+});
 ```
 
 Dan kunnen we nu de gesorteerde namen tonen in de view. We voorzien ook al een formulier om de gebruiker toe te laten om de namen te sorteren:
 
 ```html
-&lt;form action="/" method="get">
-    &lt;select name="sortField">
-        &lt;option value="name">Name&lt;/option>
-        &lt;option value="age">Age&lt;/option>
-    &lt;/select>
-    &lt;select name="sortDirection">
-        &lt;option value="asc">Ascending&lt;/option>
-        &lt;option value="desc">Descending&lt;/option>
-    &lt;/select>
-    &lt;button type="submit">Sort&lt;/button>
-&lt;/form>
-&lt;% for (let person of persons) &#123; %>
-    <p>&lt;%= person.name %> (&lt;%= person.age %>)</p>
-&lt;% &#125; %>
+<form action="/" method="get">
+    <select name="sortField">
+        <option value="name">Name</option>
+        <option value="age">Age</option>
+    </select>
+    <select name="sortDirection">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+    </select>
+    <button type="submit">Sort</button>
+</form>
+<% for (let person of persons) { %>
+    <p><%= person.name %> (<%= person.age %>)</p>
+<% } %>
 ```
 
 Als we de sorteerrichting willen bijhouden in de view, kunnen we dit doen door de `selected` property van de optie te gebruiken.
 
 ```html
-&lt;form action="/" method="get">
-    &lt;select name="sortField">
-        &lt;option value="name" &lt;%= sortField === "name" ? "selected" : "" %>>Name&lt;/option>
-        &lt;option value="age" &lt;%= sortField === "age" ? "selected" : "" %>>Age&lt;/option>
-    &lt;/select>
-    &lt;select name="sortDirection">
-        &lt;option value="asc" &lt;%= sortDirection === "asc" ? "selected" : "" %>>Ascending&lt;/option>
-        &lt;option value="desc" &lt;%= sortDirection === "desc" ? "selected" : "" %>>Descending&lt;/option>
-    &lt;/select>
-    &lt;button type="submit">Sort&lt;/button>
-&lt;/form>
+<form action="/" method="get">
+    <select name="sortField">
+        <option value="name" <%= sortField === "name" ? "selected" : "" %>>Name</option>
+        <option value="age" <%= sortField === "age" ? "selected" : "" %>>Age</option>
+    </select>
+    <select name="sortDirection">
+        <option value="asc" <%= sortDirection === "asc" ? "selected" : "" %>>Ascending</option>
+        <option value="desc" <%= sortDirection === "desc" ? "selected" : "" %>>Descending</option>
+    </select>
+    <button type="submit">Sort</button>
+</form>
 ```
 
 We moeten dan wel de `sortField` en `sortDirection` variabelen meegeven aan de view:
 
 ```typescript
-res.render("index", &#123;
+res.render("index", {
     persons: sortedPersons,
     sortField: sortField,
     sortDirection: sortDirection
-&#125;);
+});
 ```
 
 Bij veel velden kan het handig zijn om de opties voor de select elementen te genereren in de route. Dit kan je doen door een array van objecten te maken en deze door te geven aan de view:
 
 ```typescript
 const sortFields = [
-    &#123; value: "name", text: "Name", selected: sortField === "name" ? "selected" : "" &#125;,
-    &#123; value: "age", text: "Age", selected: sortField === "age" ? "selected" : ""&#125;
+    { value: "name", text: "Name", selected: sortField === "name" ? "selected" : "" },
+    { value: "age", text: "Age", selected: sortField === "age" ? "selected" : ""}
 ];
 
 const sortDirections = [
-    &#123; value: "asc", text: "Asc", selected: sortDirection === "asc" ? "selected" : ""&#125;,
-    &#123; value: "desc", text: "Desc", selected: sortDirection === "desc" ? "selected" : ""&#125;
+    { value: "asc", text: "Asc", selected: sortDirection === "asc" ? "selected" : ""},
+    { value: "desc", text: "Desc", selected: sortDirection === "desc" ? "selected" : ""}
 ];
 ```
 
 en kan je deze doorgeven aan de view:
 
 ```typescript
-res.render("index", &#123;
+res.render("index", {
     persons: sortedPersons,
     sortFields: sortFields,
     sortDirections: sortDirections
-&#125;);
+});
 ```
 
 In onze ejs kunnen we dan de select elementen genereren:
 
 ```html
-&lt;form action="/" method="get">
-    &lt;select name="sortField">
-        &lt;% for (let field of sortFields) &#123; %>
-            &lt;option value="&lt;%= field.value %>" &lt;%= field.selected %>>&lt;%= field.text %>&lt;/option> 
-        &lt;% &#125; %>
-    &lt;/select>
-    &lt;select name="sortDirection">
-        &lt;% for (let direction of sortDirections) &#123; %>
-            &lt;option value="&lt;%= direction.value %>" &lt;%= direction.selected %>>&lt;%= direction.text %>&lt;/option> 
-        &lt;% &#125; %>
-    &lt;/select>
-    &lt;button type="submit">Sort&lt;/button>
-&lt;/form>
-&lt;% for (let person of persons) &#123; %>
-    <p>&lt;%= person.name %> (&lt;%= person.age %>)</p>
-&lt;% &#125; %>
+<form action="/" method="get">
+    <select name="sortField">
+        <% for (let field of sortFields) { %>
+            <option value="<%= field.value %>" <%= field.selected %>><%= field.text %></option> 
+        <% } %>
+    </select>
+    <select name="sortDirection">
+        <% for (let direction of sortDirections) { %>
+            <option value="<%= direction.value %>" <%= direction.selected %>><%= direction.text %></option> 
+        <% } %>
+    </select>
+    <button type="submit">Sort</button>
+</form>
+<% for (let person of persons) { %>
+    <p><%= person.name %> (<%= person.age %>)</p>
+<% } %>
 ```
 
 ### **Route Parameters**
@@ -242,11 +242,11 @@ In plaats van query strings te gebruiken, kunnen we ook gestructureerde routes m
 
 ```typescript
 let people = ["Sven","Andie","George","Geoff"];
-app.get("/person/:index",(req,res)=>&#123;
+app.get("/person/:index",(req,res)=>{
     let index = parseInt(req.params.index);
     res.type("text/html")
     res.send(people[index]);
-&#125;)
+})
 ```
 
 Parameters van een route starten met `:`. De gebruiker moet een waarde achter `/person/` plaatsen om de route aan te spreken.
@@ -257,11 +257,11 @@ Je kan ook meerdere parameters meegeven:
 
 ```typescript
 let people = ["Sven","Andie","George","Geoff"];
-app.get("/person/:index/replace/:newname",(req,res)=>&#123;
+app.get("/person/:index/replace/:newname",(req,res)=>{
     let index = parseInt(req.params.index);
     let oldName = people[index];
     people[index] = req.params.newname;
     res.type("text/html")
-    res.send(`Old name was $&#123;oldName&#125;, new name is $&#123;people[index]&#125;`);
-&#125;)
+    res.send(`Old name was ${oldName}, new name is ${people[index]}`);
+})
 ```

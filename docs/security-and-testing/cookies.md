@@ -42,23 +42,23 @@ app.use(cookieParser());
 Stel dat we nu een formulier hebben waarbij de gebruiker zijn naam kan invullen. Als de gebruiker dit doet, willen we dat de gebruiker op de profielpagina terechtkomt en dat de naam van de gebruiker onthouden wordt de volgende keer dat de gebruiker de pagina bezoekt.
 
 ```typescript
-app.get("/", (req, res) => &#123;
+app.get("/", (req, res) => {
   res.render("index");
-&#125;);
+});
 
-app.post("/", (req, res) => &#123;
+app.post("/", (req, res) => {
   res.cookie("username", req.body.username);
   res.redirect("/profile");
-&#125;);
+});
 ```
 
 de `index.ejs` file:
 
 ```html
-&lt;form action="/" method="post">
-  &lt;input type="text" name="username" />
-  &lt;button type="submit">Submit&lt;/button>
-&lt;/form>
+<form action="/" method="post">
+  <input type="text" name="username" />
+  <button type="submit">Submit</button>
+</form>
 ```
 
 #### Cookies uitlezen
@@ -66,16 +66,16 @@ de `index.ejs` file:
 Nu kunnen we de naam van de gebruiker uitlezen in de profielpagina:
 
 ```typescript
-app.get("/profile", (req, res) => &#123;
+app.get("/profile", (req, res) => {
   let name: string = req.cookies.username;
-  res.render("profile", &#123; username: name &#125;);
-&#125;);
+  res.render("profile", { username: name });
+});
 ```
 
 de `profile.ejs` file:
 
 ```html
-<h1>Welcome &lt;%= username %></h1>
+<h1>Welcome <%= username %></h1>
 ```
 
 #### Cookies verwijderen
@@ -83,10 +83,10 @@ de `profile.ejs` file:
 We kunnen ook cookies verwijderen aan de hand van de `clearCookie` methode:
 
 ```typescript
-app.get("/removeName", (req, res) => &#123;
+app.get("/removeName", (req, res) => {
   res.clearCookie("username");
   res.redirect("/");
-&#125;);
+});
 ```
 
 en kunnen we een link toevoegen in de `profile.ejs` file:
@@ -111,7 +111,7 @@ Je kan cookies aanpassen in de browser. Dit kan handig zijn om te testen wat er 
 Je kan ook een cookie instellen met een vervaldatum. Dit doe je door een extra argument mee te geven aan de `cookie` methode:
 
 ```typescript
-res.cookie("username", req.body.username, &#123; expires: new Date(Date.now() + 900000) &#125;);
+res.cookie("username", req.body.username, { expires: new Date(Date.now() + 900000) });
 ```
 
 De vervaldatum is een `Date` object. In dit geval zal de cookie 15 minuten geldig zijn (900000 milliseconden) en daarna automatisch verwijderd worden.
@@ -119,7 +119,7 @@ De vervaldatum is een `Date` object. In dit geval zal de cookie 15 minuten geldi
 Je kan ook de `maxAge` property gebruiken om de vervaldatum in milliseconden mee te geven:
 
 ```typescript
-res.cookie("username", req.body.username, &#123; maxAge: 900000 &#125;);
+res.cookie("username", req.body.username, { maxAge: 900000 });
 ```
 
 #### HttpOnly
@@ -127,7 +127,7 @@ res.cookie("username", req.body.username, &#123; maxAge: 900000 &#125;);
 Een heel belangrijke eigenschap van cookies is `HttpOnly`. Als je een cookie instelt met de `HttpOnly` eigenschap, dan kan de cookie niet aangepast worden door client-side JavaScript. Dit is belangrijk om te voorkomen dat een aan stuk kwaadaardige JavaScript code de cookie aanpast en zo bijvoorbeeld de sessie van een gebruiker overneemt.
 
 ```typescript
-res.cookie("username", req.body.username, &#123; httpOnly: true &#125;);
+res.cookie("username", req.body.username, { httpOnly: true });
 ```
 Als je een cookie instelt zonder httpOnly kan je met JavaScript de cookie aanpassen in de browser console:
 
@@ -150,7 +150,7 @@ Je zal opmerken dat de cookie niet kan uitgelezen worden of aangepast worden als
 Een andere belangrijke eigenschap van cookies is `Secure`. Als je een cookie instelt met de `Secure` eigenschap, dan kan de cookie enkel verstuurd worden over een beveiligde verbinding (HTTPS). 
 
 ```typescript
-res.cookie("username", req.body.username, &#123; secure: true &#125;);
+res.cookie("username", req.body.username, { secure: true });
 ```
 
 #### SameSite
@@ -158,7 +158,7 @@ res.cookie("username", req.body.username, &#123; secure: true &#125;);
 De `SameSite` eigenschap van een cookie bepaalt of een cookie meegestuurd mag worden bij een cross-site request. Dit is een belangrijke eigenschap om CSRF-aanvallen te voorkomen. 
 
 ```typescript
-res.cookie("username", req.body.username, &#123; sameSite: "strict" &#125;);
+res.cookie("username", req.body.username, { sameSite: "strict" });
 ```
 
 De `SameSite` eigenschap kan drie waarden hebben: `strict`, `lax` of `none`.
@@ -184,20 +184,20 @@ let items: string[] = [
     "Watermelon",
 ];
 
-app.get("/cart", (req, res) => &#123;
+app.get("/cart", (req, res) => {
     let add : string = typeof req.query.add === "string" ? req.query.add : "";
     let cart: string[] = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
 
-    if (add) &#123;
+    if (add) {
         cart.push(add);
         res.cookie("cart", JSON.stringify(cart));
-    &#125;
+    }
 
-    res.render("cart", &#123;
+    res.render("cart", {
         items: items,
         cart: cart
-    &#125;)
-&#125;);
+    })
+});
 ```
 
 de `cart.ejs` file:
@@ -205,16 +205,16 @@ de `cart.ejs` file:
 ```html
 <h1>Shop</h1>
 <ul>
-&lt;% for (let item of items) &#123; %>
-    <li><a href="/cart?add=&lt;%= item %>">Add &lt;%= item %></a></li>
-&lt;% &#125; %>
+<% for (let item of items) { %>
+    <li><a href="/cart?add=<%= item %>">Add <%= item %></a></li>
+<% } %>
 </ul>
 
 <h1>Cart</h1>
 <ul>
-&lt;% for (let item of cart) &#123; %>
-    <li>&lt;%= item %></li>
-&lt;% &#125; %>
+<% for (let item of cart) { %>
+    <li><%= item %></li>
+<% } %>
 </ul>
 ```
 
@@ -227,76 +227,76 @@ Een andere toepassing van cookies is het onthouden van gebruikersinstellingen. A
 We maken eerst een interface aan voor de gebruikersinstellingen:
 
 ```typescript
-interface UserSettings &#123;
+interface UserSettings {
     theme: "dark" | "light";
     language: "NL" | "EN" | "FR";
-&#125;
+}
 ```
 
 Vervolgens maken we een GET route aan om het formulier tonen waar de gebruiker zijn instellingen kan aanpassen en een POST route om de instellingen op te slaan in een cookie:
 
 ```typescript
-app.get("/settings", (req, res) => &#123;
-    const settings : UserSettings = req.cookies.settings ? JSON.parse(req.cookies.settings) : &#123; darkMode: false, language: "EN" &#125;;
-    res.render("settings", &#123;
+app.get("/settings", (req, res) => {
+    const settings : UserSettings = req.cookies.settings ? JSON.parse(req.cookies.settings) : { darkMode: false, language: "EN" };
+    res.render("settings", {
         settings
-    &#125;);
-&#125;);
+    });
+});
 
-app.post("/settings", (req, res) => &#123;
-    const settings : UserSettings = &#123;
+app.post("/settings", (req, res) => {
+    const settings : UserSettings = {
         theme: req.body.theme,
         language: req.body.language
-    &#125;;
+    };
     res.cookie("settings", JSON.stringify(settings));
     res.redirect("/settings");
-&#125;);
+});
 ```
 
 We kunnen nu de instellingen uitlezen in de `settings.ejs` file:
 
 ```html
-&lt;html>
-    &lt;head>
-        &lt;meta charset="UTF-8">
-        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
-        &lt;link rel="stylesheet" href="/css/style.css">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/style.css">
 
-        &lt;% if (settings.theme === "dark") &#123; %>
-            &lt;style>
-                body &#123;
+        <% if (settings.theme === "dark") { %>
+            <style>
+                body {
                     background-color: black;
                     color: white;
-                &#125;
-            &lt;/style>
-        &lt;% &#125; else if (settings.theme === "light") &#123; %>
-            &lt;style>
-                body &#123;
+                }
+            </style>
+        <% } else if (settings.theme === "light") { %>
+            <style>
+                body {
                     background-color: white;
                     color: black;
-                &#125;
-            &lt;/style>
-        &lt;% &#125; %>
-    &lt;/head>
-    &lt;body>
-        &lt;% if (settings.language === "NL") &#123; %>
+                }
+            </style>
+        <% } %>
+    </head>
+    <body>
+        <% if (settings.language === "NL") { %>
             <h1>Instellingen</h1>
-        &lt;% &#125; else if (settings.language === "EN") &#123; %>
+        <% } else if (settings.language === "EN") { %>
             <h1>Settings</h1>
-        &lt;% &#125; else if (settings.language === "FR") &#123; %>
+        <% } else if (settings.language === "FR") { %>
             <h1>Paramètres</h1>
-        &lt;% &#125; %>
-        &lt;form action="/settings" method="POST">
-            &lt;select name="language">
-                &lt;option &lt;%= settings.language === 'NL' ? "selected" : ""%>>NL&lt;/option>
-                &lt;option &lt;%= settings.language === 'EN' ? "selected" : ""%>>EN&lt;/option>
-                &lt;option &lt;%= settings.language === 'FR' ? "selected" : ""%>>FR&lt;/option>
-            &lt;/select>
-            &lt;select name="theme">
-                &lt;option value="dark" &lt;%= settings.theme === "dark" ? "selected" : "" %>>Dark&lt;/option>
-                &lt;option value="light" &lt;%= settings.theme === "light" ? "selected" : "" %>>Light&lt;/option>
-            &lt;/select>
-            &lt;button type="submit">Save&lt;/button>
-        &lt;/form>
-&lt;/html>
+        <% } %>
+        <form action="/settings" method="POST">
+            <select name="language">
+                <option <%= settings.language === 'NL' ? "selected" : ""%>>NL</option>
+                <option <%= settings.language === 'EN' ? "selected" : ""%>>EN</option>
+                <option <%= settings.language === 'FR' ? "selected" : ""%>>FR</option>
+            </select>
+            <select name="theme">
+                <option value="dark" <%= settings.theme === "dark" ? "selected" : "" %>>Dark</option>
+                <option value="light" <%= settings.theme === "light" ? "selected" : "" %>>Light</option>
+            </select>
+            <button type="submit">Save</button>
+        </form>
+</html>
 ```

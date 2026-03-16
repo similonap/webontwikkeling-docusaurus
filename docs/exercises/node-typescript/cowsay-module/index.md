@@ -17,7 +17,7 @@ What should the cow say? Meow!
 Cows don't say that!
 What should the cow say? Moo!
  ______
-&lt; Moo! >
+< Moo! >
  ------
         \   ^__^
          \  (oo)\_______

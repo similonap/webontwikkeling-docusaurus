@@ -5,31 +5,31 @@
 Voor het toevoegen van 1 element gebruiken we de functie `insertOne`. Door een object mee te geven als parameter wordt dit object toegevoegd aan de database:
 
 ```typescript
-import &#123; MongoClient, ObjectId &#125; from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
-const uri = "mongodb+srv://&lt;username>:&lt;password>@&lt;your-cluster-url>/test?retryWrites=true&w=majority";
+const uri = "mongodb+srv://<username>:<password>@<your-cluster-url>/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 
-interface Pokemon &#123;
+interface Pokemon {
     _id?: ObjectId,
     name: string,
     age: number
-&#125;
+}
 
-async function main() &#123;
-    try &#123;
+async function main() {
+    try {
         // Connect to the MongoDB cluster
         await client.connect();
  
-        let pikachu: Pokemon = &#123; name:"pikachu", age:12 &#125;;
+        let pikachu: Pokemon = { name:"pikachu", age:12 };
         const result = await client.db("Les").collection("pokemon").insertOne(pikachu);
-        console.log(`New document created with the following id: $&#123;result.insertedId&#125;`);
-    &#125; catch (e) &#123;
+        console.log(`New document created with the following id: ${result.insertedId}`);
+    } catch (e) {
         console.error(e);
-    &#125; finally &#123;
+    } finally {
         await client.close();
-    &#125;
-&#125;
+    }
+}
 main();
 ```
 
@@ -45,8 +45,8 @@ Wanneer we verschillende elementen willen toevoegen, gebruiken we `insertMany`. 
 
 ```typescript
 const pokemon: Pokemon[] = [
-  &#123;name: "pichu", age:7&#125;,
-  &#123;name: "flareon",age:3&#125;
+  {name: "pichu", age:7},
+  {name: "flareon",age:3}
 ];
 ```
 
@@ -54,7 +54,7 @@ dan kunnen we deze allemaal tegelijk toevoegen:
 
 ```typescript
 const result = await client.db("Les").collection("pokemon").insertMany(pokemon);
-console.log(`$&#123;result.insertedCount&#125; new documents(s) created with the following id(s):`);
+console.log(`${result.insertedCount} new documents(s) created with the following id(s):`);
 console.log(result.insertedIds);
 ```
 
@@ -62,8 +62,8 @@ MongoDB laat toe verschillende types in 1 collectie toe te voegen. Stel dat we e
 
 ```typescript
 const pokemon: any[] = [
-    &#123;name: "pichu", age:7&#125;,
-    &#123;trainer: "ash"&#125;
+    {name: "pichu", age:7},
+    {trainer: "ash"}
 ];
 ```
 
@@ -71,7 +71,7 @@ dan kunnen we deze toevoegen in 1 collectie:
 
 ```typescript
 let result = await client.db("Les").collection("pokemon").insertMany(pokemon);
-console.log(`$&#123;result.insertedCount&#125; new documents(s) created with the following id(s):`);
+console.log(`${result.insertedCount} new documents(s) created with the following id(s):`);
 console.log(result.insertedIds);
 ```
 

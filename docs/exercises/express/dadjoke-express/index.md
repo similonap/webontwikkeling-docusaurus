@@ -12,9 +12,9 @@ Deze routes moeten allebij een dadjoke ophalen van `https://icanhazdadjoke.com/`
 Bij het ophalen van de dadjoke moet je de headers aanpassen zodat de server weet dat je een JSON verwacht:
 
 ```typescript
-const response = await fetch('https://icanhazdadjoke.com/', &#123;
-    headers: &#123; Accept: 'application/json' &#125;,
-&#125;);
+const response = await fetch('https://icanhazdadjoke.com/', {
+    headers: { Accept: 'application/json' },
+});
 ```
 
 De applicatie moet op poort 3000 draaien.

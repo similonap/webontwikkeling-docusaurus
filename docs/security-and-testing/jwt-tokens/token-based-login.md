@@ -27,8 +27,8 @@ import * as jwt from 'jsonwebtoken';
 en maken we de volgende aanpassing in de POST `/login` route:
 
 ```typescript
-const token = jwt.sign(user, process.env.JWT_SECRET!, &#123; expiresIn: "7d" &#125;);
-res.cookie("jwt", token, &#123; httpOnly: true, sameSite: "lax", secure: true &#125;);
+const token = jwt.sign(user, process.env.JWT_SECRET!, { expiresIn: "7d" });
+res.cookie("jwt", token, { httpOnly: true, sameSite: "lax", secure: true });
 ```
 
 We geven hier aan dat de cookie enkel via http kan worden uitgelezen, dat de cookie enkel kan worden uitgelezen door de site waar deze is aangemaakt en dat de cookie enkel kan worden uitgelezen als de site via https wordt bezocht. Ook geven we aan dat de token 7 dagen geldig is (zoals in het voorbeeld van de sessie).
@@ -48,27 +48,27 @@ Vergeet ook niet de User uit het `session.ts` bestand te halen want deze gaan we
 We moeten nu ook een aanpassing doen in de `secureMiddleware.ts` file. We gaan de JWT token verifiëren in plaats van de sessie te controleren. We zullen de token uit de cookie halen en deze verifiëren met de `jsonwebtoken` package.
 
 ```typescript
-import &#123; NextFunction, Request, Response &#125; from "express";
+import { NextFunction, Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
 
-export function secureMiddleware(req: Request, res: Response, next: NextFunction) &#123;
+export function secureMiddleware(req: Request, res: Response, next: NextFunction) {
     const token: string | undefined = req.cookies?.jwt;
 
-    if (!token) &#123;
+    if (!token) {
         console.log("No token found, redirecting to login");
         return res.redirect("/login"); // or return a 401 Unauthorized response
-    &#125;
+    }
     
-    jwt.verify(token, process.env.JWT_SECRET!, (err, user) => &#123;
-        if (err) &#123;
+    jwt.verify(token, process.env.JWT_SECRET!, (err, user) => {
+        if (err) {
             res.redirect("/login");
-        &#125; else &#123;
+        } else {
             console.log(user);
             res.locals.user = user;
             next();
-        &#125;
-    &#125;);
-&#125;;
+        }
+    });
+};
 ```
 
 Om de jwt token te kunnen uitlezen moeten we de cookie parser middleware in de `index.ts` file nog instellen.
@@ -82,10 +82,10 @@ app.use(cookieParser());
 We moeten ook de JWT token verwijderen wanneer de user uitlogt. Dit doen we door de cookie te verwijderen.
 
 ```typescript
-router.post("/logout", secureMiddleware, async (req, res) => &#123;
+router.post("/logout", secureMiddleware, async (req, res) => {
     res.clearCookie("jwt");
     res.redirect("/login");
-&#125;);
+});
 ```
 
 Hou er rekening mee dat in principe de JWT token blijft gelden tot de expiry date is bereikt. Het verwijderen van de cookie is enkel om de user uit te loggen. De token blijft geldig tot de expiry date is bereikt. Als de gebruiker deze zou kopieren en plakken in een andere browser dan zou deze nog steeds kunnen inloggen. Het is daarom belangrijk om de expiry date van de token niet te lang te maken.

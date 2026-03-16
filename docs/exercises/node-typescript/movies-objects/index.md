@@ -5,13 +5,13 @@ Maak een nieuw project aan met de naam `movies-objects`.
 Maak een JSON bestand `movie.json` met de volgende inhoud:
 
 ```json
-&#123;
+{
     "title": "The Matrix",
     "year": 1999,
     "actors": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
     "metascore": 73,
     "seen": true
-&#125;
+}
 ```
 
 Maak een interface voor het bovenstaande Movie object en lees het in aan de hand van een `import` statement. Ken deze toe aan een variabele `movie` en print deze af.

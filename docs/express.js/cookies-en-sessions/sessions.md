@@ -30,16 +30,16 @@ import session from 'express-session';
 
 const app = express();
 
-app.use(session(&#123;
+app.use(session({
   secret: 'uw geheime sleutel',
   resave: false, // hangt af van de situatie, hover over de parameter voor details
   saveUninitialized: false, // zelfde opmerking
-  cookie: &#123; secure: false &#125; // zelfde opmerking
-&#125;));
+  cookie: { secure: false } // zelfde opmerking
+}));
 
-app.listen(3000, () => &#123;
+app.listen(3000, () => {
   console.log('Server draait op poort 3000');
-&#125;);
+});
 
 ```
 
@@ -48,32 +48,32 @@ app.listen(3000, () => &#123;
 Eens de sessie geconfigureerd is, kunnen we properties instellen en uitlezen via `req.session`. In TypeScript vereist dit wel dat we extra properties toevoegen aan de interface van een sessie.
 
 ```typescript
-declare module 'express-session' &#123;
-  export interface SessionData &#123;
+declare module 'express-session' {
+  export interface SessionData {
     // ENKEL VOOR DIT VOORBEELD - gebruik naam en datatype naar keuze
     // session properties mogen bv. ook objecten zijn
     userId: string
-  &#125;
-&#125;
+  }
+}
 
-app.post('/login', (req, res) => &#123;
-  const &#123; username, password &#125; = req.body;
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
   // zelf doen: gebruiker verifiëren via database request
-  if (gebruikerIsValid) &#123;
+  if (gebruikerIsValid) {
     req.session.userId = gebruikersId;
     res.send('Succesvol ingelogd');
-  &#125; else &#123;
+  } else {
     res.send('Login mislukt');
-  &#125;
-&#125;);
+  }
+});
 
-app.get('/dashboard', (req, res) => &#123;
-  if (req.session.userId) &#123;
+app.get('/dashboard', (req, res) => {
+  if (req.session.userId) {
     res.send('Welkom op uw dashboard');
-  &#125; else &#123;
+  } else {
     res.redirect('/login');
-  &#125;
-&#125;);
+  }
+});
 ```
 
 ### Sessies manueel opslaan
@@ -85,16 +85,16 @@ Bijvoorbeeld:
 
 
 ```typescript
-app.post('/login', (req, res) => &#123;
-  const &#123; username, password &#125; = req.body;
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
   // zelf doen: gebruiker verifiëren via database request
-  if (gebruikerIsValid) &#123;
+  if (gebruikerIsValid) {
     req.session.userId = gebruikersId;
     req.session.save(() => res.redirect("/"));
-  &#125; else &#123;
+  } else {
     res.send('Login mislukt');
-  &#125;
-&#125;);
+  }
+});
 ```
 
 ### Session stores

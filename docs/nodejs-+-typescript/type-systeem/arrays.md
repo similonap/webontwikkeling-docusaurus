@@ -77,9 +77,9 @@ Ook een loop over een array is zeer gelijkaardig aan JavaScript.
 ```typescript
 let fruits : string[] = ["Banana","Apple","Orange"];
 
-for (let i : number = 0; i &lt; fruits.length; i++) &#123;
+for (let i : number = 0; i < fruits.length; i++) {
     console.log(fruits[i]);
-&#125;
+}
 ```
 
 Door type inference is het ook mogelijk het type van `i` weg te laten. TypeScript zal dit automatisch als een `number` type beschouwen.
@@ -87,9 +87,9 @@ Door type inference is het ook mogelijk het type van `i` weg te laten. TypeScrip
 ```typescript
 let fruits : string[] = ["Banana","Apple","Orange"];
 
-for (let i = 0; i &lt; fruits.length; i++) &#123;
+for (let i = 0; i < fruits.length; i++) {
     console.log(fruits[i]);
-&#125;
+}
 ```
 
 In de `for...of` loop wordt in TypeScript de types van het element automatisch ingevuld. Je moet dus ook het type van `fruit` weglaten.
@@ -97,9 +97,9 @@ In de `for...of` loop wordt in TypeScript de types van het element automatisch i
 ```typescript
 let fruits : string[] = ["Banana","Apple","Orange"];
 
-for (let fruit of fruits) &#123;
+for (let fruit of fruits) {
     console.log(fruit);
-&#125;
+}
 ```
 
 ### Multi-dimensionale arrays
@@ -133,12 +133,12 @@ let starterPokemon : string[][] = [
 Als je hier over wil itereren met een for loop kan je dit op de volgende manier doen:
 
 ```typescript
-for (let i=0;i&lt;starterPokemon.length;i++) &#123;
-    console.log(`Generation $&#123;i+1&#125;:`);
-    for (let j=0;j&lt;starterPokemon[i].length;j++) &#123;
+for (let i=0;i<starterPokemon.length;i++) {
+    console.log(`Generation ${i+1}:`);
+    for (let j=0;j<starterPokemon[i].length;j++) {
         console.log(starterPokemon[i][j])
-    &#125;
-&#125;
+    }
+}
 ```
 
 ### Tuples
@@ -182,8 +182,8 @@ let countries : [string, number, number][] = [
 We kunnen hier ook over loopen met een for...of lus:
 
 ```typescript
-for (let country of countries) &#123;
-    console.log(`$&#123;country[0]&#125; $&#123;country[1]&#125; $&#123;country[2]&#125;`)
-&#125;
+for (let country of countries) {
+    console.log(`${country[0]} ${country[1]} ${country[2]}`)
+}
 ```
 

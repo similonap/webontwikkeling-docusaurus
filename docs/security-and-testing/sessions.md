@@ -17,23 +17,23 @@ Het is aan te raden om alles van de sessie in een aparte file te zetten, zodat j
 import dotenv from "dotenv";
 dotenv.config();
 
-import session, &#123; MemoryStore &#125; from "express-session";
+import session, { MemoryStore } from "express-session";
 
-declare module 'express-session' &#123;
-    export interface SessionData &#123;
+declare module 'express-session' {
+    export interface SessionData {
         // All session properties should be defined here
-    &#125;
-&#125;
+    }
+}
 
-export default session(&#123;
+export default session({
     secret: process.env.SESSION_SECRET ?? "my-super-secret-secret",
     store: new MemoryStore(),
     resave: true,
     saveUninitialized: true,
-    cookie: &#123;
+    cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-    &#125;
-&#125;);
+    }
+});
 ```
 
 * De `secret` optie is een string die wordt gebruikt om de sessie te beveiligen. Het is belangrijk dat deze string geheim blijft, omdat het wordt gebruikt om de sessie te versleutelen. Als iemand deze string weet, kan hij de sessie van een andere gebruiker overnemen. Daarom is het een goed idee om deze string in een environment variabele te zetten, zodat deze niet in de code staat.
@@ -63,11 +63,11 @@ Als je nu je express server opstart en een request doet naar eender welke route,
 Vooraleer we data kunnen opslaan in een sessie moeten we definieren wat we willen opslaan. Als we bijvoorbeeld "username" willen bijhouden in de sessie, moeten we in ons `session.ts` bestand de volgende code aanpassen:
 
 ```typescript
-declare module 'express-session' &#123;
-    export interface SessionData &#123;
+declare module 'express-session' {
+    export interface SessionData {
         username?: string;
-    &#125;
-&#125;
+    }
+}
 ```
 
 Het voordeel van een sessie t.o.v. een cookie is hier dat je ook complexe objecten kan opslaan in de sessie, zoals arrays of objecten. Dus je hoeft deze niet te serialiseren naar een string.
@@ -90,9 +90,9 @@ console.log(username);
 Om data uit de sessie te verwijderen, kan je de property verwijderen uit het `req.session` object:
 
 ```typescript
-req.session.destroy(() => &#123;
+req.session.destroy(() => {
     console.log("Sessie verwijderd");
-&#125;);
+});
 ```
 
 ### Session stores
@@ -118,28 +118,28 @@ import session from "express-session";
 import mongoDbSession from "connect-mongodb-session";
 const MongoDBStore = mongoDbSession(session);
 
-const mongoStore = new MongoDBStore(&#123;
+const mongoStore = new MongoDBStore({
     uri: process.env.MONGODB_URI ?? "mongodb://localhost:27017",
     collection: "sessions",
     databaseName: "webontwikkeling",
-&#125;);
+});
 
-mongoStore.on("error", (error) => &#123;
+mongoStore.on("error", (error) => {
     console.error(error);
-&#125;);
+});
 
-declare module 'express-session' &#123;
-    export interface SessionData &#123;
+declare module 'express-session' {
+    export interface SessionData {
         username?: string;
-    &#125;
-&#125;
+    }
+}
 
-export default session(&#123;
+export default session({
     secret: process.env.SESSION_SECRET ?? "my-super-secret-secret",
     store: mongoStore,
     resave: false,
     saveUninitialized: false,
-&#125;);
+});
 ```
 
 ### Voorbeelden
@@ -151,20 +151,20 @@ Willen we nu het winkelkarretje van een gebruiker bijhouden op de server in plaa
 Het eerste wat we moeten doen is het product definiëren in een interface (bv in `types.ts`):
 
 ```typescript
-interface Product &#123;
+interface Product {
     name: string;
     price: number;
-&#125;
+}
 ```
 
 In het `session.ts` bestand moeten we deze interface importeren en toevoegen aan de `SessionData` interface:
 
 ```typescript
-declare module 'express-session' &#123;
-    export interface SessionData &#123;
+declare module 'express-session' {
+    export interface SessionData {
         cart?: Product[];
-    &#125;
-&#125;
+    }
+}
 ```
 
 De rest van de code in `session.ts` blijft hetzelfde. Vergeet deze niet te importeren en toe te voegen aan de Express applicatie in `index.ts`.
@@ -173,33 +173,33 @@ In het `index.ts` bestand definieren we nu een array van producten die we later 
 
 ```typescript
 let items: Product[] = [
-    &#123;name: "Apple", price: 1&#125;,
-    &#123;name: "Banana", price: 2&#125;,
-    &#123;name: "Cherry", price: 3&#125;,
-    &#123;name: "Orange", price: 2&#125;,
-    &#123;name: "Raspberry", price: 4&#125;,
-    &#123;name: "Strawberry", price: 1&#125;,
-    &#123;name: "Watermelon", price: 5&#125;,
+    {name: "Apple", price: 1},
+    {name: "Banana", price: 2},
+    {name: "Cherry", price: 3},
+    {name: "Orange", price: 2},
+    {name: "Raspberry", price: 4},
+    {name: "Strawberry", price: 1},
+    {name: "Watermelon", price: 5},
 ];
 ```
 
 De code om dan een product toe te voegen aan het winkelkarretje ziet er als volgt uit:
 
 ```typescript
-app.get("/cart", (req, res) => &#123;
+app.get("/cart", (req, res) => {
     let add : string = typeof req.query.add === "string" ? req.query.add : "";
     let cart: Product[] = req.session.cart ? req.session.cart : [];
     let addProduct : Product | undefined = items.find(product => product.name === add);
-    if (addProduct) &#123;
-        if (add) &#123;
+    if (addProduct) {
+        if (add) {
             cart.push(addProduct);
             req.session.cart = cart;
-        &#125;
-    &#125;
+        }
+    }
 
-    res.render("cart", &#123;
+    res.render("cart", {
         items: items,
         cart: cart
-    &#125;)
-&#125;);
+    })
+});
 ```

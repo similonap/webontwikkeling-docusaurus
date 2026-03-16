@@ -26,20 +26,20 @@ app.use(cookieParser());
 Om cookies daadwerkelijk in actie te zien, moet je ze instellen via een response en ophalen uit een request:
 
 ```typescript
-app.get('/set-cookie', (req, res) => &#123;
-  res.cookie('voorbeeld', 'Hallo Wereld', &#123; maxAge: 900000, httpOnly: true &#125;);
+app.get('/set-cookie', (req, res) => {
+  res.cookie('voorbeeld', 'Hallo Wereld', { maxAge: 900000, httpOnly: true });
   res.send('Cookie is ingesteld');
-&#125;);
+});
 
-app.get('/remove-cookie', (req, res) => &#123;
+app.get('/remove-cookie', (req, res) => {
   res.clearCookie('voorbeeld');
   res.send('Cookie is verwijderd.');
-&#125;);
+});
 
-app.get('/get-cookie', (req, res) => &#123;
+app.get('/get-cookie', (req, res) => {
   const cookie = req.cookies.voorbeeld;
-  res.send(`Cookie ontvangen: $&#123;cookie&#125;`);
-&#125;);
+  res.send(`Cookie ontvangen: ${cookie}`);
+});
 
 ```
 
@@ -62,10 +62,10 @@ Het `SameSite` attribuut kan de volgende waarden hebben:
 **Voorbeeld: Instellen van HttpOnly en SameSite Cookies**
 
 ```typescript
-app.get('/set-secure-cookie', (req, res) => &#123;
-  res.cookie('veilig', 'Beveiligde Data', &#123; httpOnly: true, sameSite: 'strict' &#125;);
+app.get('/set-secure-cookie', (req, res) => {
+  res.cookie('veilig', 'Beveiligde Data', { httpOnly: true, sameSite: 'strict' });
   res.send('Veilige cookie is ingesteld');
-&#125;);
+});
 
 ```
 

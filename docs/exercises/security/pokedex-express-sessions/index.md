@@ -1,6 +1,6 @@
 ### Pokedex Express Sessions
 
-We gaan verder op de code van [Pokedex Express](../../mongodb/pokedex-mongo-express/) en voegen sessions toe. In plaats van de player bij te houden in de URL via path parameters gaan we nu een sessie gebruiker om het player object bij te houden (met bijbehorende pokemon). Zo veranderd er wel wat aan de structuur van de applicatie en de routes.
+We gaan verder op de code van [Pokedex Express](../../mongodb/pokedex-mongo-express/index.md) en voegen sessions toe. In plaats van de player bij te houden in de URL via path parameters gaan we nu een sessie gebruiker om het player object bij te houden (met bijbehorende pokemon). Zo veranderd er wel wat aan de structuur van de applicatie en de routes.
 
 De routes zullen er als volgt uitzien:
 - GET `/`: Toont de startpagina met een lijst van alle spelers.

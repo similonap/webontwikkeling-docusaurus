@@ -7,9 +7,9 @@ In dit onderdeel gaan we een volledig werkend login systeem maken. We gaan gebru
 We beginnen deze keer met een volledig nieuwe express app met de volgende code:
 
 ```typescript
-import express, &#123; Express &#125; from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
-import path, &#123; format &#125; from "path";
+import path, { format } from "path";
 
 dotenv.config();
 
@@ -17,19 +17,19 @@ const app : Express = express();
 
 app.set("view engine", "ejs");
 app.use(express.json());
-app.use(express.urlencoded(&#123; extended: true &#125;));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.set('views', path.join(__dirname, "views"));
 
 app.set("port", process.env.PORT || 3000);
 
-app.get("/", async(req, res) => &#123;
+app.get("/", async(req, res) => {
     res.render("index");
-&#125;);
+});
 
-app.listen(app.get("port"), () => &#123;
+app.listen(app.get("port"), () => {
     console.log("Server started on http://localhost:" + app.get('port'));
-&#125;);
+});
 ```
 
 Voor deze applicatie hebben we een aantal extra packages nodig. Voer het volgende commando uit in de terminal:
@@ -51,14 +51,14 @@ npm install mongodb
 Het eerste wat we gaan doen is het aanmaken van een interface voor onze gebruikers. Maak een nieuwe file aan in de root van je project en noem deze `types.ts`. Voeg de volgende code toe aan deze file:
 
 ```typescript
-import &#123; ObjectId &#125; from "mongodb";
+import { ObjectId } from "mongodb";
 
-export interface User &#123;
+export interface User {
     _id?: ObjectId;
     email: string;
     password?: string;
     role: "ADMIN" | "USER";
-&#125;
+}
 ```
 
 We maken hier dus een interface aan voor onze gebruikers. We hebben een email, een wachtwoord en een rol. De rol kan `ADMIN` of `USER` zijn. Een ADMIN kan bijvoorbeeld extra functionaliteiten hebben die een USER niet heeft.
@@ -70,30 +70,30 @@ Maak een nieuwe file aan in de root van je project en noem deze `database.ts`. V
 ```typescript
 import dotenv from "dotenv";
 dotenv.config();
-import &#123; MongoClient &#125; from "mongodb";
-import &#123; User &#125; from "./types";
+import { MongoClient } from "mongodb";
+import { User } from "./types";
 
 export const MONGODB_URI = process.env.MONGODB_URI ?? "mongodb://localhost:27017";
 
 export const client = new MongoClient(MONGODB_URI);
 
-export const userCollection = client.db("login-express").collection&lt;User>("users");
+export const userCollection = client.db("login-express").collection<User>("users");
 
-async function exit() &#123;
-    try &#123;
+async function exit() {
+    try {
         await client.close();
         console.log("Disconnected from database");
-    &#125; catch (error) &#123;
+    } catch (error) {
         console.error(error);
-    &#125;
+    }
     process.exit(0);
-&#125;
+}
 
-export async function connect() &#123;
+export async function connect() {
     await client.connect();
     console.log("Connected to database");
     process.on("SIGINT", exit);
-&#125;
+}
 ```
 
 Dis is een simpel bestand dat de connectie met de database opzet. We hebben een `connect` functie die de connectie opzet en een `exit` functie die de connectie sluit wanneer we de applicatie stoppen. Zorg voor een `.env` bestand in de root van je project met de volgende variabele:
@@ -105,19 +105,19 @@ MONGODB_URI=mongodb://localhost:27017
 en we zorgen dat we de connectie opzetten in onze `index.ts` file:
 
 ```typescript
-import &#123; connect &#125; from "./database";
+import { connect } from "./database";
 ```
 
 ```typescript
-app.listen(app.get("port"), async() => &#123;
-    try &#123;
+app.listen(app.get("port"), async() => {
+    try {
         await connect();
         console.log("Server started on http://localhost:" + app.get('port'));
-    &#125; catch (e) &#123;
+    } catch (e) {
         console.log(e);
         process.exit(1); 
-    &#125;
-&#125;);
+    }
+});
 ```
 
 Merk op dat we hier kiezen voor `process.exit(1)` zodat de applicatie stopt wanneer er een error is. Onze applicatie kan niet zonder database connectie dus we willen niet dat de server blijft draaien wanneer er een error is.
@@ -147,21 +147,21 @@ import bcrypt from "bcrypt";
 en
 
 ```typescript
-async function createInitialUser() &#123;
-    if (await userCollection.countDocuments() > 0) &#123;
+async function createInitialUser() {
+    if (await userCollection.countDocuments() > 0) {
         return;
-    &#125;
+    }
     let email : string | undefined = process.env.ADMIN_EMAIL;
     let password : string | undefined = process.env.ADMIN_PASSWORD;
-    if (email === undefined || password === undefined) &#123;
+    if (email === undefined || password === undefined) {
         throw new Error("ADMIN_EMAIL and ADMIN_PASSWORD must be set in environment");
-    &#125;
-    await userCollection.insertOne(&#123;
+    }
+    await userCollection.insertOne({
         email: email,
         password: await bcrypt.hash(password, saltRounds),
         role: "ADMIN"
-    &#125;);
-&#125;
+    });
+}
 ```
 
 en roep deze functie aan in je `connect` functie:
@@ -181,21 +181,21 @@ const saltRounds : number = 10;
 We gaan nu een login functie maken in de `database.ts` file. Voeg de volgende code toe aan deze file:
 
 ```typescript
-export async function login(email: string, password: string) &#123;
-    if (email === "" || password === "") &#123;
+export async function login(email: string, password: string) {
+    if (email === "" || password === "") {
         throw new Error("Email and password required");
-    &#125;
-    let user : User | null = await userCollection.findOne&lt;User>(&#123;email: email&#125;);
-    if (user) &#123;
-        if (await bcrypt.compare(password, user.password!)) &#123;
+    }
+    let user : User | null = await userCollection.findOne<User>({email: email});
+    if (user) {
+        if (await bcrypt.compare(password, user.password!)) {
             return user;
-        &#125; else &#123;
+        } else {
             throw new Error("Password incorrect");
-        &#125;
-    &#125; else &#123;
+        }
+    } else {
         throw new Error("User not found");
-    &#125;
-&#125;
+    }
+}
 ```
 
 Deze functie zoekt een gebruiker in de database met de gegeven email. Als de gebruiker gevonden is wordt het wachtwoord gecontroleerd met de gegeven wachtwoord. Als het wachtwoord correct is wordt de gebruiker gereturned. Als de gebruiker niet gevonden is of het wachtwoord incorrect is wordt een error gegooid. We gebruiken de `bcrypt.compare` functie om het wachtwoord te controleren.
@@ -205,27 +205,27 @@ Deze functie zoekt een gebruiker in de database met de gegeven email. Als de geb
 Nu is alles langs de database kant klaar. We gaan nu een login pagina maken. Maak een nieuwe file aan in de `views` map en noem deze `login.ejs`. Voeg de volgende code toe aan deze file:
 
 ```html
-&lt;%- include("partials/header") %>
-    &lt;form action="/login" method="post">
+<%- include("partials/header") %>
+    <form action="/login" method="post">
         <div class="form-group">
-            &lt;label for="email">Email:&lt;/label>
-            &lt;input type="email" id="email" name="email"/>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email"/>
         </div>
         <div class="form-group">
-            &lt;label for="password">Password:&lt;/label>
-            &lt;input type="password" id="password" name="password"/>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"/>
         </div>
-        &lt;button type="submit">Login&lt;/button>
-    &lt;/form>
-&lt;%- include("partials/footer") %>
+        <button type="submit">Login</button>
+    </form>
+<%- include("partials/footer") %>
 ```
 
 We hebben hier een simpel formulier met een email en een wachtwoord veld. We gaan nu een route maken in onze `index.ts` file om deze pagina te tonen. Voeg de volgende code toe aan deze file:
 
 ```typescript
-app.get("/login", (req, res) => &#123;
+app.get("/login", (req, res) => {
     res.render("login");
-&#125;);
+});
 ```
 
 ## Session middleware
@@ -247,33 +247,33 @@ npm install --save-dev @types/connect-mongodb-session
 We gaan nu een nieuwe file aanmaken in de root van je project en noem deze `session.ts`. Voeg de volgende code toe aan deze file:
 
 ```typescript
-import &#123; MONGODB_URI &#125; from "./database";
-import session, &#123; MemoryStore &#125; from "express-session";
-import &#123; User &#125; from "./types";
+import { MONGODB_URI } from "./database";
+import session, { MemoryStore } from "express-session";
+import { User } from "./types";
 import mongoDbSession from "connect-mongodb-session";
 const MongoDBStore = mongoDbSession(session);
 
-const mongoStore = new MongoDBStore(&#123;
+const mongoStore = new MongoDBStore({
     uri: MONGODB_URI,
     collection: "sessions",
     databaseName: "login-express",
-&#125;);
+});
 
-declare module 'express-session' &#123;
-    export interface SessionData &#123;
+declare module 'express-session' {
+    export interface SessionData {
         user?: User
-    &#125;
-&#125;
+    }
+}
 
-export default session(&#123;
+export default session({
     secret: process.env.SESSION_SECRET ?? "my-super-secret-secret",
     store: mongoStore,
     resave: true,
     saveUninitialized: true,
-    cookie: &#123;
+    cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-    &#125;
-&#125;);
+    }
+});
 ```
 
 In onze session data gaan we een `User` object bijhouden. We hebben een `user` property in onze `SessionData` interface. We hebben ook een cookie die 1 week geldig is. We gaan nu deze middleware toevoegen aan onze app. Voeg de volgende code toe aan je `index.ts` file:
@@ -289,18 +289,18 @@ app.use(session);
 We gaan nu een POST route maken om de gebruiker in te loggen. Voeg de volgende code toe aan je `index.ts` file:
 
 ```typescript
-app.post("/login", async(req, res) => &#123;
+app.post("/login", async(req, res) => {
     const email : string = req.body.email;
     const password : string = req.body.password;
-    try &#123;
+    try {
         let user : User = await login(email, password);
         delete user.password; 
         req.session.user = user;
         res.redirect("/")
-    &#125; catch (e : any) &#123;
+    } catch (e : any) {
         res.redirect("/login");
-    &#125;
-&#125;);
+    }
+});
 ```
 
 We gaan de gebruiker inloggen en de gebruiker in de sessie data zetten. We verwijderen het wachtwoord van de gebruiker voor we deze in de sessie data zetten. Dit is een extra beveiliging zodat het gehashte wachtwoord niet in de sessie data zit of nooit tot bij de client geraakt. We gaan de gebruiker doorsturen naar de home pagina als de login gelukt is en anders terug naar de login pagina.
@@ -310,29 +310,29 @@ We gaan de gebruiker inloggen en de gebruiker in de sessie data zetten. We verwi
 Nu is het tijd om een home pagina te maken met bijbehorende routes. Maak een nieuwe file aan in de `views` map en noem deze `home.ejs`. Voeg de volgende code toe aan deze file:
 
 ```html
-&lt;%- include("partials/header") %>
-    &lt;%= user.email %> is logged in
-&lt;%- include("partials/footer") %>
+<%- include("partials/header") %>
+    <%= user.email %> is logged in
+<%- include("partials/footer") %>
 ```
 
 en voeg de volgende code toe aan je `index.ts` file:
 
 ```typescript
-app.get("/", async(req, res) => &#123;
+app.get("/", async(req, res) => {
     res.render("index");
-&#125;);
+});
 ```
 
 Op dit moment zal je applicatie crashen als je naar de home pagina gaat en je nog niet ingelogd bent. We zouden dus best een check toevoegen om te kijken of de gebruiker ingelogd is. Voeg de volgende code toe aan je `index.ts` file:
 
 ```typescript
-app.get("/", async(req, res) => &#123;
-    if (req.session.user) &#123;
-        res.render("index", &#123;user: req.session.user&#125;);
-    &#125; else &#123;
+app.get("/", async(req, res) => {
+    if (req.session.user) {
+        res.render("index", {user: req.session.user});
+    } else {
         res.redirect("/login");
-    &#125;
-&#125;);
+    }
+});
 ```
 
 ## Secure Middleware
@@ -340,16 +340,16 @@ app.get("/", async(req, res) => &#123;
 Het probleem bij onze aanpak hierboven is dat we voor elke route gaan moeten controleren of de gebruiker ingelogd is. Dit is veel werk en kan foutgevoelig zijn. We gaan dus een middleware maken die controleert of de gebruiker ingelogd is. Maak een nieuwe file aan en noem deze `secureMiddleware.ts`. Voeg de volgende code toe aan deze file:
 
 ```typescript
-import &#123; NextFunction, Request, Response &#125; from "express";
+import { NextFunction, Request, Response } from "express";
 
-export function secureMiddleware(req: Request, res: Response, next: NextFunction) &#123;
-    if (req.session.user) &#123;
+export function secureMiddleware(req: Request, res: Response, next: NextFunction) {
+    if (req.session.user) {
         res.locals.user = req.session.user;
         next();
-    &#125; else &#123;
+    } else {
         res.redirect("/login");
-    &#125;
-&#125;;
+    }
+};
 ```
 
 Deze middleware controleert of de gebruiker ingelogd is. Als de gebruiker ingelogd is wordt de gebruiker toegevoegd aan de `res.locals` zodat deze beschikbaar is in de views. Als de gebruiker niet ingelogd is wordt de gebruiker doorgestuurd naar de login pagina.
@@ -357,11 +357,11 @@ Deze middleware controleert of de gebruiker ingelogd is. Als de gebruiker ingelo
 Nu moeten we deze middleware toevoegen aan onze app. We gaan deze niet toevoegen aan elke route maar aan de routes die beveiligd moeten worden. We gaan deze middleware toevoegen aan de home route. Voeg de volgende code toe aan je `index.ts` file:
 
 ```typescript
-import &#123; secureMiddleware &#125; from "./secureMiddleware";
+import { secureMiddleware } from "./secureMiddleware";
 
-app.get("/", secureMiddleware, async(req, res) => &#123;
-    res.render("index", &#123; user: req.session.user &#125;);
-&#125;);
+app.get("/", secureMiddleware, async(req, res) => {
+    res.render("index", { user: req.session.user });
+});
 ```
 
 Let op dat je deze niet aan de login route toevoegt. Anders kan je nooit inloggen.
@@ -371,23 +371,23 @@ Let op dat je deze niet aan de login route toevoegt. Anders kan je nooit inlogge
 Voor de volledigheid gaan we ook een logout functie toevoegen. Voeg de volgende code toe aan je `index.ts` file:
 
 ```typescript
-app.post("/logout", async(req, res) => &#123;
-    req.session.destroy(() => &#123;
+app.post("/logout", async(req, res) => {
+    req.session.destroy(() => {
         res.redirect("/login");
-    &#125;);
-&#125;);
+    });
+});
 ```
 
 en voegen we een logout knop toe aan onze home pagina:
 
 ```html
-&lt;%- include("partials/header") %>
-    &lt;%= user.email %> is logged in.
+<%- include("partials/header") %>
+    <%= user.email %> is logged in.
 
-    &lt;form action="/logout" method="post">
-        &lt;button type="submit">Logout&lt;/button>
-    &lt;/form>
-&lt;%- include("partials/footer") %>
+    <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+<%- include("partials/footer") %>
 ```
 
 ## Routers
@@ -397,34 +397,34 @@ Het is ook best om onze routes in aparte files te zetten. We gaan een `routes` m
 ```typescript
 import express from "express";
 
-export function loginRouter() &#123;
+export function loginRouter() {
     const router = express.Router();
 
-    router.get("/login", async (req, res) => &#123;
+    router.get("/login", async (req, res) => {
         res.render("login");
-    &#125;);
+    });
 
-    router.post("/login", async (req, res) => &#123;
+    router.post("/login", async (req, res) => {
         const email: string = req.body.email;
         const password: string = req.body.password;
-        try &#123;
+        try {
             let user: User = await login(email, password);
             delete user.password; // Remove password from user object. Sounds like a good idea.
             req.session.user = user;
             res.redirect("/")
-        &#125; catch (e: any) &#123;
+        } catch (e: any) {
             res.redirect("/login");
-        &#125;
-    &#125;);
+        }
+    });
 
-    router.post("/logout", secureMiddleware, async (req, res) => &#123;
-        req.session.destroy((err) => &#123;
+    router.post("/logout", secureMiddleware, async (req, res) => {
+        req.session.destroy((err) => {
             res.redirect("/login");
-        &#125;);
-    &#125;);
+        });
+    });
 
     return router;
-&#125;
+}
 ```
 
 en maak een nieuwe file aan in de `routes` map en noem deze `homeRouter.ts`. Voeg de volgende code toe aan deze file:
@@ -432,22 +432,22 @@ en maak een nieuwe file aan in de `routes` map en noem deze `homeRouter.ts`. Voe
 ```typescript
 import express from "express";
 
-export function homeRouter() &#123;
+export function homeRouter() {
     const router = express.Router();
 
-    router.get("/", async(req, res) => &#123;
+    router.get("/", async(req, res) => {
         res.render("index");
-    &#125;);
+    });
 
     return router;
-&#125;
+}
 ```
 
 We gaan nu deze routers toevoegen aan onze app. Voeg de volgende code toe aan je `index.ts` file:
 
 ```typescript
-import &#123; loginRouter &#125; from "./routes/loginRouter";
-import &#123; homeRouter &#125; from "./routes/homeRouter";
+import { loginRouter } from "./routes/loginRouter";
+import { homeRouter } from "./routes/homeRouter";
 
 app.use(loginRouter());
 app.use(homeRouter());
@@ -458,41 +458,41 @@ app.use(homeRouter());
 We maken vaak gebruik van `try catch` blokken om errors op te vangen bij het inloggen en gebruiken vervolgens een `redirect` om de gebruiker terug te sturen naar de login pagina. Dit is niet ideaal. We zouden beter een error message tonen op de login pagina. We kunnen jammer genoeg geen error message meegeven met een redirect. Dus we hebben hier voor een andere oplossing nodig. Het is mogelijk om een error message mee te geven in de sessie. Eerst voorzien we een interface voor een `FlashMessage` in onze `types.ts` file:
 
 ```typescript
-export interface FlashMessage &#123;
+export interface FlashMessage {
     type: "error" | "success"
     message: string;
-&#125;
+}
 ```
 
 Voeg een nieuwe property toe aan je `SessionData` interface in je `session.ts` file:
 
 ```typescript
-export interface SessionData &#123;
+export interface SessionData {
     user?: User;
     message?: FlashMessage;
-&#125;
+}
 ```
 
 Een flash message is een bericht dat we maar 1 keer willen tonen, en dan verwijderen. We gaan nu een middleware maken die deze flash messages toevoegt aan de `res.locals`. Maak een nieuwe file aan en noem deze `flashMiddleware.ts`. Voeg de volgende code toe aan deze file:
 
 ```typescript
-import &#123; NextFunction, Request, Response &#125; from "express";
+import { NextFunction, Request, Response } from "express";
 
-export function flashMiddleware(req: Request, res: Response, next: NextFunction) &#123;
-    if (req.session.message) &#123;
+export function flashMiddleware(req: Request, res: Response, next: NextFunction) {
+    if (req.session.message) {
         res.locals.message = req.session.message;
         delete req.session.message;
-    &#125; else &#123;
+    } else {
         res.locals.message = undefined;
-    &#125;
+    }
     next();
-&#125;;
+};
 ```
 
 Hier gaan we dus kijken of er een message in de sessie zit. Als deze er is voegen we deze toe aan de `res.locals` en verwijderen we deze uit de sessie. We gaan deze middleware toevoegen aan onze app. Voeg de volgende code toe aan je `index.ts` file:
 
 ```typescript
-import &#123; flashMiddleware &#125; from "./flashMiddleware";
+import { flashMiddleware } from "./flashMiddleware";
 
 app.use(flashMiddleware);
 ```
@@ -500,23 +500,23 @@ app.use(flashMiddleware);
 Nu kunnen we heel gemakkelijk een error message toevoegen aan de sessie en deze tonen op de login pagina. Zo kunnen we de gebruiker laten weten wat er mis is gegaan. We kunnen de volgende code in de `catch` blok van onze login route toevoegen:
 
 ```typescript
-req.session.message = &#123;type: "error", message: e.message&#125;;
+req.session.message = {type: "error", message: e.message};
 res.redirect("/login");
 ```
 
 Maar ook de volgende code bij een succesvolle login:
 
 ```typescript
-req.session.message = &#123;type: "success", message: "Login successful"&#125;;
+req.session.message = {type: "success", message: "Login successful"};
 res.redirect("/");
 ```
 
 Nu kunnen we de volgende code in onze `login.ejs` file toevoegen (of in een aparte partials file als je dit wil hergebruiken):
 
 ```html
-&lt;% if (message) &#123; %>
-    <p class="&lt;%= message.type %>">&lt;%= message.message %></p>
-&lt;% &#125; %>
+<% if (message) { %>
+    <p class="<%= message.type %>"><%= message.message %></p>
+<% } %>
 ```
 
 Het is mogelijk om met css animaties te werken om de messages te laten verdwijnen na een bepaalde tijd. Dit is echter niet de focus van deze cursus. Het is wel aan te raden om dit te doen in een echte applicatie.

@@ -3,9 +3,9 @@
 In deze opdracht ga je een functie schrijven die twee DNA sequenties met elkaar vergelijkt. De functie moet een percentage teruggeven dat aangeeft hoeveel procent van de sequenties overeenkomen.
 
 ```
-const dnaMatch = (sequence1: string, sequence2: string): number => &#123;
+const dnaMatch = (sequence1: string, sequence2: string): number => {
     
-&#125;
+}
 ```
 
 Vul de functie aan zodat ze werkt zoals beschreven in de opdracht.

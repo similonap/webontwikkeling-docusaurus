@@ -3,14 +3,14 @@
 Maak een nieuw node project `hashing` aan en installeer de `bcrypt` package. In je code maak je eerst een lijst met gebruikers aan:
 
 ```typescript
-interface User &#123;
+interface User {
     username: string;
     password: string;
-&#125;
+}
 
 const users : User[] = [
-    &#123; username: "admin", password: "$2b$10$O.q/SHi69C.gUAPrejyQQOTgGhmcAWgknS.nPxpovli9c.EEOK0e6" &#125;,
-    &#123; username: "user", password: "$2b$10$CXpbsPHPNkf21OLEAUmF2eX0hv9MGoFFqIaitCq2G6II1PiVu1UmO" &#125;
+    { username: "admin", password: "$2b$10$O.q/SHi69C.gUAPrejyQQOTgGhmcAWgknS.nPxpovli9c.EEOK0e6" },
+    { username: "user", password: "$2b$10$CXpbsPHPNkf21OLEAUmF2eX0hv9MGoFFqIaitCq2G6II1PiVu1UmO" }
 ]; 
 ```
 

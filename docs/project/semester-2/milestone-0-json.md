@@ -32,7 +32,7 @@ Zorg vooral voor realistische data. Images kunnen eenvoudig worden gegenereerd v
 
 ```json title="cards.json"
 [
-  &#123;
+  {
     "id": "FTC-001",
     "name": "Aether Knight",
     "description": "A legendary knight who harnesses the ethereal powers of the Aether, wielding them to maintain balance across the realms.",
@@ -43,16 +43,16 @@ Zorg vooral voor realistische data. Images kunnen eenvoudig worden gegenereerd v
     "rarity": "Legendary",
     "abilities": ["Teleportation", "Energy Manipulation", "Dimensional Travel"],
     "element": "Aether",
-    "guildAffiliation": &#123;
+    "guildAffiliation": {
       "id": "GUILD-009",
       "name": "Order of the Cosmic Veil",
       "guildMaster": "Celestial Mage",
       "guildEmblemUrl": "https://example.com/images/guilds/cosmic-veil-emblem.jpg",
       "foundedYear": 1423,
       "motto": "Balance in All, All in Balance"
-    &#125;
-  &#125;,
-<strong>  &#123;
+    }
+  },
+<strong>  {
 </strong>    "id": "FTC-002",
     "name": "Shadow Enchantress",
     "description": "A mysterious sorceress cloaked in darkness, wielding shadow magic to manipulate the fabric of reality and ensnare her foes.",
@@ -63,15 +63,15 @@ Zorg vooral voor realistische data. Images kunnen eenvoudig worden gegenereerd v
     "rarity": "Epic",
     "abilities": ["Shadow Manipulation", "Illusion Casting", "Night Vision"],
     "element": "Shadow",
-    "guildAffiliation": &#123;
+    "guildAffiliation": {
       "id": "GUILD-015",
       "name": "Brotherhood of the Dusk",
       "guildMaster": "Darkness Wielder",
       "guildEmblemUrl": "https://example.com/images/guilds/dusk-brotherhood-emblem.jpg",
       "foundedYear": 1578,
       "motto": "In Shadows, Truth"
-    &#125;
-  &#125;
+    }
+  }
 ]
 
 ```
@@ -79,22 +79,22 @@ Zorg vooral voor realistische data. Images kunnen eenvoudig worden gegenereerd v
 
 ```json
 [
-  &#123;
+  {
     "id": "GUILD-009",
     "name": "Order of the Cosmic Veil",
     "guildMaster": "Celestial Mage",
     "guildEmblemUrl": "https://example.com/images/guilds/cosmic-veil-emblem.jpg",
     "foundedYear": 1423,
     "motto": "Balance in All, All in Balance"
-  &#125;,
-  &#123;
+  },
+  {
     "id": "GUILD-015",
     "name": "Brotherhood of the Dusk",
     "guildMaster": "Darkness Wielder",
     "guildEmblemUrl": "https://example.com/images/guilds/dusk-brotherhood-emblem.jpg",
     "foundedYear": 1578,
     "motto": "In Shadows, Truth"
-  &#125;
+  }
 ]
 ```
 
@@ -104,7 +104,7 @@ Zorg vooral voor realistische data. Images kunnen eenvoudig worden gegenereerd v
 
 ```json
 [
-  &#123;
+  {
     "id": "ART-001",
     "name": "Elena Ray",
     "description": "Elena Ray is a visionary pop artist known for her electrifying performances and innovative soundscapes that blend electronic music with traditional pop.",
@@ -114,16 +114,16 @@ Zorg vooral voor realistische data. Images kunnen eenvoudig worden gegenereerd v
     "imageUrl": "https://example.com/images/artists/elena-ray.jpg",
     "genre": "Pop/Electronic",
     "instruments": ["Vocals", "Keyboard", "Synthesizer"],
-    "recordLabel": &#123;
+    "recordLabel": {
       "id": "LABEL-101",
       "name": "Neon Groove Records",
       "labelLogoUrl": "https://example.com/images/labels/neon-groove-logo.jpg",
       "foundedYear": 2010,
       "founder": "Maxwell Turner",
       "headquarters": "Los Angeles, California"
-    &#125;
-  &#125;,
-  &#123;
+    }
+  },
+  {
     "id": "ART-002",
     "name": "The Midnight Howlers",
     "description": "An indie rock band hailing from Austin, Texas, known for their gritty guitar riffs and raw, emotional lyrics.",
@@ -133,15 +133,15 @@ Zorg vooral voor realistische data. Images kunnen eenvoudig worden gegenereerd v
     "imageUrl": "https://example.com/images/artists/midnight-howlers.jpg",
     "genre": "Indie Rock",
     "instruments": ["Guitar", "Drums", "Bass"],
-    "recordLabel": &#123;
+    "recordLabel": {
       "id": "LABEL-202",
       "name": "Lone Star Records",
       "labelLogoUrl": "https://example.com/images/labels/lone-star-logo.jpg",
       "foundedYear": 2005,
       "founder": "Elijah Reed",
       "headquarters": "Austin, Texas"
-    &#125;
-  &#125;
+    }
+  }
 ]
 ```
 
@@ -149,22 +149,22 @@ Zorg vooral voor realistische data. Images kunnen eenvoudig worden gegenereerd v
 
 ```json
 [
-  &#123;
+  {
     "id": "LABEL-101",
     "name": "Neon Groove Records",
     "labelLogoUrl": "https://example.com/images/labels/neon-groove-logo.jpg",
     "foundedYear": 2010,
     "founder": "Maxwell Turner",
     "headquarters": "Los Angeles, California"
-  &#125;,
-  &#123;
+  },
+  {
     "id": "LABEL-202",
     "name": "Lone Star Records",
     "labelLogoUrl": "https://example.com/images/labels/lone-star-logo.jpg",
     "foundedYear": 2005,
     "founder": "Elijah Reed",
     "headquarters": "Austin, Texas"
-  &#125;
+  }
 ]
 ```
 
