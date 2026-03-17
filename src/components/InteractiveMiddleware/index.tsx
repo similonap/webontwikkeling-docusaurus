@@ -1,5 +1,59 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { useColorMode } from '@docusaurus/theme-common';
+import Editor, { type BeforeMount } from '@monaco-editor/react';
 import styles from './styles.module.css';
+
+const EXPRESS_TYPES = `
+interface Request {
+    /** The HTTP method (GET, POST, PUT, DELETE, etc.) */
+    method: string;
+    /** The URL path of the request */
+    path: string;
+    /** The parsed query string parameters */
+    query: Record<string, string>;
+    /** The request parameters (e.g. /users/:id) */
+    params: Record<string, string>;
+    /** The request headers */
+    headers: Record<string, string>;
+    /** The request body (requires body-parser middleware) */
+    body: any;
+}
+
+interface Response {
+    /** Send a string response */
+    send(body: string): void;
+    /** Send a JSON response */
+    json(body: any): void;
+    /** Set the HTTP status code */
+    status(code: number): Response;
+    /** Set a response header */
+    set(field: string, value: string): Response;
+}
+
+/** Call next() to pass control to the next middleware */
+type NextFunction = () => void;
+
+type RequestHandler = (req: Request, res: Response, next: NextFunction) => void;
+type RouteHandler = (req: Request, res: Response) => void;
+
+interface Application {
+    /** Register a middleware function */
+    use(handler: RequestHandler): void;
+    /** Register a middleware at a specific path */
+    use(path: string, handler: RequestHandler): void;
+    /** Register a GET route handler */
+    get(path: string, handler: RouteHandler): void;
+    /** Register a POST route handler */
+    post(path: string, handler: RouteHandler): void;
+    /** Register a PUT route handler */
+    put(path: string, handler: RouteHandler): void;
+    /** Register a DELETE route handler */
+    delete(path: string, handler: RouteHandler): void;
+}
+
+declare const app: Application;
+declare function console_log(...args: any[]): void;
+`;
 
 const DEFAULT_CODE = `app.use((req, res, next) => {
   console.log(\`\${req.method} \${req.path}\`);
@@ -31,11 +85,18 @@ export default function InteractiveMiddleware() {
     const [pipelineNodes, setPipelineNodes] = useState<PipelineNode[]>([]);
     const [urlPath, setUrlPath] = useState('/');
     const [urlInput, setUrlInput] = useState('/');
+    const consoleRef = useRef<HTMLDivElement>(null);
 
     // Derived UI state
-    const visibleEvents = stepIndex >= 0 ? events.slice(0, stepIndex + 1) : [];
+    const visibleEvents = useMemo(
+        () => stepIndex >= 0 ? events.slice(0, stepIndex + 1) : [],
+        [events, stepIndex]
+    );
 
-    const logs = visibleEvents.filter(e => e.type === 'log' || e.type === 'system') as any[];
+    const logs = useMemo(
+        () => visibleEvents.filter(e => e.type === 'log' || e.type === 'system') as any[],
+        [visibleEvents]
+    );
     const responseEvent = visibleEvents.find(e => e.type === 'response') as Extract<SimulationEvent, { type: 'response' }> | undefined;
     const timeoutEvent = visibleEvents.find(e => e.type === 'timeout');
     const isDone = visibleEvents.some(e => e.type === 'done');
@@ -63,16 +124,33 @@ export default function InteractiveMiddleware() {
         return () => clearTimeout(timer);
     }, [isPlaying, stepIndex, events.length]);
 
-    const handleCodeChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleCodeChange = (e: any) => {
         setCode(e.target.value);
         resetSimulation();
     };
+
+    // Auto-scroll console to bottom
+    useLayoutEffect(() => {
+        if (consoleRef.current) {
+            consoleRef.current.scrollTop = consoleRef.current.scrollHeight;
+        }
+    }, [logs]);
 
     const resetSimulation = () => {
         setEvents([]);
         setStepIndex(-1);
         setIsPlaying(false);
         setPipelineNodes([]);
+    };
+
+    // Strip TypeScript type annotations so code can run in new Function()
+    const stripTypeAnnotations = (src: string): string => {
+        // Remove parameter/variable type annotations like `: Request` or `: Record<string, string>`
+        // Match `: TypeName` optionally with generics, only when followed by , ) or =
+        let result = src.replace(/:\s*[A-Z][A-Za-z0-9_]*(?:<[^>]*>)?\s*(?=[,)=])/g, '');
+        // Remove return type annotations like ): void =>
+        result = result.replace(/\)\s*:\s*[A-Za-z][A-Za-z0-9_]*(?:<[^>]*>)?\s*(?=\s*=>|\s*\{)/g, ')');
+        return result;
     };
 
     const compileAndRecord = (path: string): SimulationEvent[] => {
@@ -121,7 +199,7 @@ export default function InteractiveMiddleware() {
         };
 
         try {
-            const evaluator = new Function('app', 'console', code);
+            const evaluator = new Function('app', 'console', stripTypeAnnotations(code));
             evaluator(mockApp, mockConsole);
             discoveredNodes.push({ id: 'response', label: 'Response', type: 'response' });
             setPipelineNodes(discoveredNodes);
@@ -134,14 +212,22 @@ export default function InteractiveMiddleware() {
         const req = { method: 'GET', path: path };
         const res = {
             send: (body: string) => {
-                if (responseSent) return;
+                if (responseSent) {
+                    newEvents.push({ type: 'log', level: 'error', text: `Error: Cannot set headers after they are sent to the client (res.send() called twice).` });
+                    newEvents.push({ type: 'done' });
+                    return;
+                }
                 responseSent = true;
                 newEvents.push({ type: 'system', text: `res.send() called.`, nodeId: 'response', action: 'send', actionLabel: 'res.send()' });
                 newEvents.push({ type: 'response', body, nodeId: 'response', action: 'send', actionLabel: 'res.send()' });
                 newEvents.push({ type: 'done' });
             },
             json: (body: any) => {
-                if (responseSent) return;
+                if (responseSent) {
+                    newEvents.push({ type: 'log', level: 'error', text: `Error: Cannot set headers after they are sent to the client (res.json() called twice).` });
+                    newEvents.push({ type: 'done' });
+                    return;
+                }
                 responseSent = true;
                 newEvents.push({ type: 'system', text: `res.json() called.`, nodeId: 'response', action: 'json', actionLabel: 'res.json()' });
                 newEvents.push({ type: 'response', body: JSON.stringify(body, null, 2), nodeId: 'response', action: 'json', actionLabel: 'res.json()' });
@@ -233,7 +319,7 @@ export default function InteractiveMiddleware() {
         }
     };
 
-    const lineCount = code.split('\n').length;
+    const { colorMode } = useColorMode();
 
     return (
         <div className={styles.container}>
@@ -290,20 +376,39 @@ export default function InteractiveMiddleware() {
                     <button className={styles.resetBtn} onClick={() => { setCode(DEFAULT_CODE); resetSimulation(); }}>Reset Code</button>
                 </div>
                 <div className={styles.editorContent}>
-                    <div className={styles.lineNumbers}>
-                        {Array.from({ length: lineCount }).map((_, i) => (
-                            <div key={i} className={styles.lineNumber}>{i + 1}</div>
-                        ))}
-                    </div>
-                    <div className={styles.textAreaContainer}>
-                        <textarea
-                            className={styles.codeTextarea}
-                            value={code}
-                            onChange={handleCodeChange}
-                            spellCheck={false}
-                            disabled={isPlaying}
-                        />
-                    </div>
+                    <Editor
+                        height="300px"
+                        path="file:///middleware.ts"
+                        language="typescript"
+                        theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
+                        value={code}
+                        onChange={(value) => handleCodeChange({ target: { value: value || '' } } as any)}
+                        beforeMount={(monaco) => {
+                            monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+                                noSemanticValidation: true,
+                                noSyntaxValidation: false,
+                            });
+                            monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+                                target: monaco.languages.typescript.ScriptTarget.ESNext,
+                                allowNonTsExtensions: true,
+                                moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
+                                noEmit: true,
+                                allowJs: true,
+                            });
+                            monaco.languages.typescript.typescriptDefaults.addExtraLib(
+                                EXPRESS_TYPES,
+                                'file:///express.d.ts'
+                            );
+                        }}
+                        options={{
+                            readOnly: isPlaying,
+                            minimap: { enabled: false },
+                            scrollBeyondLastLine: false,
+                            fontSize: 14,
+                            automaticLayout: true,
+                            padding: { top: 10, bottom: 10 }
+                        }}
+                    />
                 </div>
             </div>
 
@@ -312,13 +417,12 @@ export default function InteractiveMiddleware() {
                     <div className={styles.consoleHeader}>
                         Terminal
                     </div>
-                    <div className={styles.content}>
+                    <div className={styles.content} ref={consoleRef}>
                         {logs.map((log, i) => (
                             <div key={i} className={`${styles.logLine} ${log.level === 'error' ? styles.logError : ''} ${log.type === 'system' ? styles.logSystem : ''}`}>
                                 {log.type === 'system' ? `[sys] ${log.text}` : `> ${log.text}`}
                             </div>
                         ))}
-                        {isPlaying && !isDone && <div className={styles.loadingText}>Executing...</div>}
                     </div>
                 </div>
 
@@ -379,7 +483,7 @@ export default function InteractiveMiddleware() {
                             <div className={styles.loadingText}>
                                 {stepIndex > -1 && !isDone ? (
                                     <div className={styles.spinner}>
-                                        <div className={styles.loadingIcon}>&#8987;</div>
+                                        <div className={styles.loadingIcon}></div>
                                         <div>Waiting for response...</div>
                                     </div>
                                 ) : 'Press Enter in the address bar to send a request'}
