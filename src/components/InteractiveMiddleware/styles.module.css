@@ -1,4 +1,32 @@
 .container {
+    --sim-pipeline-bg: #1e1e1e;
+    --sim-pipeline-node-bg: #333;
+    --sim-pipeline-node-border: #444;
+    --sim-pipeline-node-text: #888;
+    --sim-pipeline-edge: #444;
+
+    --sim-editor-bg: #1e1e1e;
+    --sim-editor-header: #2d2d2d;
+    --sim-editor-border: #444;
+    --sim-editor-text: #d4d4d4;
+    --sim-editor-line-numbers-bg: #1e1e1e;
+    --sim-editor-line-numbers-border: #333;
+    --sim-editor-line-numbers-text: #858585;
+
+    --sim-console-bg: #1e1e1e;
+    --sim-console-header: #333;
+    --sim-console-border: #444;
+    --sim-console-text: #fff;
+
+    --sim-browser-header-bg: #e0e0e0;
+    --sim-browser-header-text: #333;
+    --sim-browser-header-border: #ccc;
+    --sim-browser-address-bg: #fff;
+    --sim-browser-address-border: #ccc;
+    --sim-browser-address-text: #333;
+    --sim-browser-content-bg: #fff;
+    --sim-browser-content-text: #000;
+
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -9,69 +37,184 @@
     border: 1px solid var(--ifm-color-emphasis-200);
 }
 
+:global([data-theme='light']) .container {
+    --sim-pipeline-bg: #f5f5f5;
+    --sim-pipeline-node-bg: #e8e8e8;
+    --sim-pipeline-node-border: #d0d0d0;
+    --sim-pipeline-node-text: #666;
+    --sim-pipeline-edge: #d0d0d0;
+
+    --sim-editor-bg: #f9f9f9;
+    --sim-editor-header: #ececec;
+    --sim-editor-border: #d0d0d0;
+    --sim-editor-text: #24292e;
+    --sim-editor-line-numbers-bg: #f0f0f0;
+    --sim-editor-line-numbers-border: #e0e0e0;
+    --sim-editor-line-numbers-text: #999;
+
+    --sim-console-bg: #f5f5f5;
+    --sim-console-header: #e8e8e8;
+    --sim-console-border: #d0d0d0;
+    --sim-console-text: #24292e;
+
+    /* Browser usually stays similar to macOS light theme */
+    --sim-browser-header-bg: #f0f0f0;
+    --sim-browser-header-border: #ddd;
+}
+
+.pipeline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: var(--sim-pipeline-bg);
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.5rem;
+}
+
+.pipelineNode {
+    background: var(--sim-pipeline-node-bg);
+    color: var(--sim-pipeline-node-text);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 2px solid var(--sim-pipeline-node-border);
+    transition: all 0.3s ease;
+    text-align: center;
+    z-index: 2;
+    min-width: 60px;
+}
+
+.pipelineNodeActive {
+    background: #f8c51c;
+    color: #000;
+    border-color: #f8c51c;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(248, 197, 28, 0.4);
+}
+
+.pipelineNodeTimeout {
+    animation: timeoutShake 2s forwards;
+    color: #fff;
+}
+
+@keyframes timeoutShake {
+    0% {
+        background: #f8c51c;
+        border-color: #f8c51c;
+        box-shadow: 0 0 15px rgba(248, 197, 28, 0.4);
+    }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px) scale(1.05); }
+    20%, 40%, 60%, 80% { transform: translateX(5px) scale(1.05); }
+    30% { background: #ffbd2e; border-color: #ffbd2e; box-shadow: 0 0 15px rgba(255, 189, 46, 0.6); }
+    60% { background: #ff5f56; border-color: #ff5f56; box-shadow: 0 0 20px rgba(255, 95, 86, 0.8); }
+    100% { background: #ff5f56; border-color: #ff5f56; box-shadow: 0 0 20px rgba(255, 95, 86, 0.8); transform: translateX(0) scale(1.05); }
+}
+
+.pipelineEdgeActive {
+    background: #f8c51c;
+}
+
+.pipelineEdge {
+    height: 3px;
+    background: var(--sim-pipeline-edge);
+    flex: 1;
+    margin: 0 -10px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
 .editorContainer {
-    background: #1e1e1e;
+    background: var(--sim-editor-bg);
     border-radius: 6px;
     overflow: hidden;
-    color: #d4d4d4;
+    color: var(--sim-editor-text);
     font-family: var(--ifm-font-family-monospace);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
 }
 
 .editorHeader {
-    background: #2d2d2d;
+    background: var(--sim-editor-header);
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid var(--sim-editor-border);
     display: flex;
+    color: var(--sim-editor-text);
+    justify-content: space-between;
+}
+
+.resetBtn {
+    background: none;
+    border: none;
+    color: var(--sim-editor-line-numbers-text);
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.resetBtn:hover {
     color: #fff;
 }
 
 .editorContent {
-    padding: 1rem 0;
-}
-
-.codeLine {
-    display: flex;
-    padding: 0.15rem 0;
     position: relative;
-    transition: background-color 0.2s;
+    min-height: 200px;
+    display: flex;
 }
 
-.activeLine {
-    background-color: rgba(60, 115, 170, 0.4);
-}
-
-.lineNumber {
+.lineNumbers {
+    padding: 1rem 0;
+    background: var(--sim-editor-line-numbers-bg);
+    border-right: 1px solid var(--sim-editor-line-numbers-border);
     width: 2.5rem;
     min-width: 2.5rem;
     text-align: right;
-    padding-right: 1rem;
-    color: #858585;
+    color: var(--sim-editor-line-numbers-text);
     user-select: none;
+    z-index: 2;
 }
 
-.codeText {
-    flex: 1;
-    white-space: pre;
+.lineNumber {
+    padding: 0 0.5rem;
+    height: 24px;
+    line-height: 24px;
+    position: relative;
 }
 
-.arrowContainer {
-    position: absolute;
-    left: 0.2rem;
+.activeLine {
     color: #f8c51c;
     font-weight: bold;
-    animation: bounceRight 1s infinite alternate;
 }
 
-@keyframes bounceRight {
-    from {
-        transform: translateX(0);
-    }
+.textAreaContainer {
+    flex: 1;
+    position: relative;
+    z-index: 3;
+}
 
-    to {
-        transform: translateX(5px);
-    }
+.codeTextarea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    margin: 0;
+    border: none;
+    background: transparent;
+    color: var(--sim-editor-text);
+    font-family: var(--ifm-font-family-monospace);
+    font-size: 14px;
+    line-height: 24px;
+    resize: vertical;
+    outline: none;
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow-x: auto;
 }
 
 .simulators {
@@ -81,38 +224,97 @@
 }
 
 @media (max-width: 768px) {
-    .simulators {
-        flex-direction: column;
-    }
+    .simulators { flex-direction: column; }
 }
 
 .console,
 .browser {
     flex: 1;
-    background: #1e1e1e;
+    background: var(--sim-console-bg);
     border-radius: 6px;
     overflow: hidden;
-    color: #fff;
+    color: var(--sim-console-text);
     font-family: var(--ifm-font-family-monospace);
     display: flex;
     flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.consoleHeader,
-.browserHeader {
-    background: #333;
+.consoleHeader {
+    background: var(--sim-console-header);
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid var(--sim-console-border);
     display: flex;
     gap: 0.5rem;
     align-items: center;
 }
 
 .browserHeader {
-    background: #e0e0e0;
-    color: #333;
-    border-bottom: 1px solid #ccc;
+    background: var(--sim-browser-header-bg);
+    color: var(--sim-browser-header-text);
+    border-bottom: 1px solid var(--sim-browser-header-border);
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    gap: 1rem;
+}
+
+.browserActions {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.navButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--sim-browser-header-text);
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    opacity: 0.7;
+}
+
+.navButton:hover:not(:disabled) {
+    background: rgba(0, 0, 0, 0.1);
+    opacity: 1;
+}
+
+.navButton:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.addressBar {
+    flex: 1;
+    background: var(--sim-browser-address-bg);
+    border-radius: 20px;
+    padding: 0.25rem 0.75rem;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--sim-browser-address-border);
+    font-size: 0.85rem;
+    gap: 4px;
+}
+
+.protocol {
+    color: #888;
+    user-select: none;
+}
+
+.addressInput {
+    border: none;
+    background: transparent;
+    flex: 1;
+    outline: none;
+    color: var(--sim-browser-address-text);
+    font-family: inherit;
+    font-size: 0.85rem;
 }
 
 .dots {
@@ -126,17 +328,9 @@
     border-radius: 50%;
 }
 
-.dotRed {
-    background: #ff5f56;
-}
-
-.dotYellow {
-    background: #ffbd2e;
-}
-
-.dotGreen {
-    background: #27c93f;
-}
+.dotRed { background: #ff5f56; }
+.dotYellow { background: #ffbd2e; }
+.dotGreen { background: #27c93f; }
 
 .content {
     padding: 1rem;
@@ -145,8 +339,8 @@
 }
 
 .browserContent {
-    background: #fff;
-    color: #000;
+    background: var(--sim-browser-content-bg);
+    color: var(--sim-browser-content-text);
     font-family: var(--ifm-font-family-base);
 }
 
@@ -155,6 +349,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    text-align: center;
 }
 
 .browserPage h1 {
@@ -162,9 +357,26 @@
     font-size: 1.5rem;
 }
 
+.browserPage p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
 .logLine {
     color: #a6e22e;
     margin-bottom: 0.25rem;
+    word-break: break-all;
+}
+
+.logError {
+    color: #ff5f56;
+}
+
+.logSystem {
+    color: var(--sim-pipeline-node-text);
+    font-style: italic;
+    font-size: 0.85rem;
 }
 
 .loadingText {
@@ -174,6 +386,26 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    text-align: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.loadingIcon {
+    font-size: 2.5rem;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .controls {
