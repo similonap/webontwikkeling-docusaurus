@@ -11,9 +11,9 @@ app.get('/', (req, res) => {
 });`;
 
 type SimulationEvent =
-    | { type: 'system', text: string, nodeId?: string }
+    | { type: 'system', text: string, nodeId?: string, action?: 'next' | 'send' | 'json' | 'matched' | 'no-match', actionLabel?: string }
     | { type: 'log', level: 'info' | 'error', text: string }
-    | { type: 'response', body: string, nodeId?: string }
+    | { type: 'response', body: string, nodeId?: string, action?: 'send' | 'json' | 'no-match', actionLabel?: string }
     | { type: 'timeout', nodeId?: string }
     | { type: 'done' };
 
@@ -92,7 +92,11 @@ export default function InteractiveMiddleware() {
                 discoveredNodes.push({ id, label, type: 'middleware' });
                 middlewares.push((req: any, res: any, next: any) => {
                     newEvents.push({ type: 'system', text: `[${label}] executing...`, nodeId: id });
-                    fn(req, res, next);
+                    const wrappedNext = () => {
+                        newEvents.push({ type: 'system', text: `[${label}] calling next()...`, nodeId: id, action: 'next', actionLabel: 'next()' });
+                        next();
+                    };
+                    fn(req, res, wrappedNext);
                 });
             },
             get: (path: string, fn: Function) => {
@@ -104,7 +108,7 @@ export default function InteractiveMiddleware() {
                     path,
                     id,
                     fn: (req: any, res: any) => {
-                        newEvents.push({ type: 'system', text: `[Route Handler] executing for '${path}'...`, nodeId: id });
+                        newEvents.push({ type: 'system', text: `[Route Handler] matched route '${path}'`, nodeId: id, action: 'matched', actionLabel: path });
                         fn(req, res);
                     }
                 });
@@ -132,15 +136,15 @@ export default function InteractiveMiddleware() {
             send: (body: string) => {
                 if (responseSent) return;
                 responseSent = true;
-                newEvents.push({ type: 'system', text: `res.send() called.`, nodeId: 'response' });
-                newEvents.push({ type: 'response', body, nodeId: 'response' });
+                newEvents.push({ type: 'system', text: `res.send() called.`, nodeId: 'response', action: 'send', actionLabel: 'res.send()' });
+                newEvents.push({ type: 'response', body, nodeId: 'response', action: 'send', actionLabel: 'res.send()' });
                 newEvents.push({ type: 'done' });
             },
             json: (body: any) => {
                 if (responseSent) return;
                 responseSent = true;
-                newEvents.push({ type: 'system', text: `res.json() called.`, nodeId: 'response' });
-                newEvents.push({ type: 'response', body: JSON.stringify(body, null, 2), nodeId: 'response' });
+                newEvents.push({ type: 'system', text: `res.json() called.`, nodeId: 'response', action: 'json', actionLabel: 'res.json()' });
+                newEvents.push({ type: 'response', body: JSON.stringify(body, null, 2), nodeId: 'response', action: 'json', actionLabel: 'res.json()' });
                 newEvents.push({ type: 'done' });
             },
             status: () => res
@@ -167,8 +171,8 @@ export default function InteractiveMiddleware() {
                         newEvents.push({ type: 'log', level: 'error', text: `Route Error: ${e.message}` });
                     }
                 } else {
-                    newEvents.push({ type: 'system', text: `No routes matched requested path.`, nodeId: 'response' });
-                    newEvents.push({ type: 'response', body: '404 Not Found', nodeId: 'response' });
+                    newEvents.push({ type: 'system', text: `No routes matched requested path.`, nodeId: 'route-handler', action: 'no-match', actionLabel: '404 No Match' });
+                    newEvents.push({ type: 'response', body: '404 Not Found', nodeId: 'response', action: 'no-match', actionLabel: '404 No Match' });
                     newEvents.push({ type: 'done' });
                     responseSent = true;
                 }
@@ -235,18 +239,38 @@ export default function InteractiveMiddleware() {
         <div className={styles.container}>
             <div className={styles.pipeline}>
                 {pipelineNodes.length > 0 ? (
-                    pipelineNodes.map((node, i) => (
-                        <React.Fragment key={node.id}>
-                            <div
-                                className={`${styles.pipelineNode} ${activeNodeId === node.id ? styles.pipelineNodeActive : ''} ${timeoutEvent && activeNodeId === node.id ? styles.pipelineNodeTimeout : ''}`}
-                            >
-                                {node.label}
-                            </div>
-                            {i < pipelineNodes.length - 1 && (
-                                <div className={`${styles.pipelineEdge} ${activeNodeId === pipelineNodes[i + 1].id || (activeNodeId === node.id && !timeoutEvent) || pipelineNodes.findIndex(n => n.id === activeNodeId) > i ? styles.pipelineEdgeActive : ''}`}></div>
-                            )}
-                        </React.Fragment>
-                    ))
+                    pipelineNodes.map((node, i) => {
+                        const isActive = activeNodeId === node.id;
+                        const isTimeout = timeoutEvent && isActive;
+                        const currentEvent = events[stepIndex];
+                        return (
+                            <React.Fragment key={node.id}>
+                                <div
+                                    className={`${styles.pipelineNode} ${isActive ? styles.pipelineNodeActive : ''} ${isTimeout ? styles.pipelineNodeTimeout : ''}`}
+                                >
+                                    {node.label}
+                                    {isActive && currentEvent && 'action' in currentEvent && 
+                                      (currentEvent.action === 'matched' || 
+                                       currentEvent.action === 'send' || 
+                                       currentEvent.action === 'json' || 
+                                       currentEvent.action === 'next') && (
+                                        <div className={styles.actionBubble}>
+                                            {currentEvent.actionLabel}
+                                        </div>
+                                    )}
+                                    {isActive && currentEvent && 'action' in currentEvent && currentEvent.action === 'no-match' && (
+                                        <div className={`${styles.actionBubble} ${styles.actionBubbleNoMatch}`}>
+                                            {currentEvent.actionLabel}
+                                        </div>
+                                    )}
+                                </div>
+                                {i < pipelineNodes.length - 1 && (
+                                    <div className={`${styles.pipelineEdge} ${activeNodeId === pipelineNodes[i + 1].id || (activeNodeId === node.id && !timeoutEvent) || pipelineNodes.findIndex(n => n.id === activeNodeId) > i ? styles.pipelineEdgeActive : ''}`}>
+                                    </div>
+                                )}
+                            </React.Fragment>
+                        );
+                    })
                 ) : (
                     <>
                         <div className={styles.pipelineNode}>Client Request</div>
