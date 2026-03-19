@@ -19,7 +19,8 @@ De veelzijdigheid is ongekend. Waar het begon met simpele scripts, vormt het nu 
 * **3D & Games**
   * Bv. met Three.js of Babylon.js.
 
-<p align="center"><img src="/assets/nodejs.png" alt="Stack Overflow 2025 Data" /><br /><em>Top web frameworks and technologies (Stack Overflow Survey 2025)</em></p>
+![Stack Overflow 2025 Data](/assets/nodejs.png)
+*Top web frameworks and technologies (Stack Overflow Survey 2025)*
 
 Zonder de introductie van Node.js in 2009 zouden we waarschijnlijk nog steeds vastzitten aan de limieten van de browser. Node.js heeft JavaScript getransformeerd van een eenvoudige scripttaal naar de ruggengraat van moderne softwareontwikkeling.
 

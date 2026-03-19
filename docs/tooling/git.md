@@ -1,3 +1,5 @@
+import InteractiveGit from '@site/src/components/InteractiveGit';
+
 # Git
 
 ## Wat is versiebeheer?
@@ -106,3 +108,9 @@ git push
 ```
 
 Dit commando stuurt alle commits die je lokaal hebt gemaakt naar de remote repository. Het is belangrijk dat je dit commando uitvoert, anders zullen je commits niet zichtbaar zijn voor anderen en ben je ze kwijt als er iets met je computer gebeurt.
+
+## Interactieve simulator
+
+Probeer de commando's hieronder zelf uit. De simulator toont hoe bestanden bewegen tussen de **Working Directory**, **Staging Area**, **Local Repository** en de **Remote**. Klik op een voorbeeld of typ een commando in de terminal.
+
+<InteractiveGit />

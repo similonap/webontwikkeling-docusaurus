@@ -10,11 +10,11 @@ Er zijn ondertussen heel wat nieuwe versies van JavaScript gepasseerd die heel w
 
 De enige toevoeging die niet aanwezig is die JavaScript tot het niveau van een programmeertaal kan krijgen zoals C# of Java is het toevoegen van types. Door de toevoeging van types wordt het mogelijk sneller fouten op te sporen en wordt de code over het algemeen leesbaarder en meer begrijpbaar. Om types te introduceren heeft Microsoft een nieuwe taal ontworpen genaamd TypeScript. Eigenlijk is TypeScript geen nieuwe taal maar een superset van JavaScript (versie ES6). Dit betekent dat alle features die in JavaScript (ES6) zitten ook in TypeScript zitten. Dus alle code die je in JavaScript zou schrijven is ook geldig voor TypeScript, maar niet andersom.&#x20;
 
-<figure><img src="/assets/image (1) (1) (1).png" alt="" /><figcaption></figcaption></figure>
+![](/assets/image%20(1)%20(1)%20(1).png)
 
 Je vraagt je dan misschien af. Kunnen browsers (of node.js) dan ook gewoon TypeScript interpreteren en uitvoeren? Het antwoord hier op is jammer "**Nee"**.  We moeten hiervoor een TypeScript compiler gebruiken om alle TypeScript code om te zetten naar gewone JavaScript code. Deze code zal dan wel uitvoerbaar zijn. We zien later hoe we dit gaan doen.
 
-<figure><img src="/assets/image (14).png" alt="" /><figcaption></figcaption></figure>
+![](/assets/image%20(14).png)
 
 In de bovenstaande tabel lijkt JavaScript nog altijd duidelijk de populairste optie van de twee.  Je vraagt je waarschijnlijk wel af waarom we dan niet gewoon JavaScript zien. Het antwoord is hier heel eenvoudig. Het is beter om eerst de goede gewoontes van TypeScript aan te leren, en dan over te schakelen naar het lossere JavaScript. Andersom is veel lastiger, slechte gewoontes leer je nu eenmaal niet snel af. En vergeet niet, de verschillen zijn in principe minimaal, en alles wat je leert voor TypeScript is zeer eenvoudig over te zetten naar JavaScript. Eigenlijk leer je in deze cursus twee talen in 1 klap!
 

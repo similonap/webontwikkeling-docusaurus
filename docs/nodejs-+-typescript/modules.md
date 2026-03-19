@@ -246,8 +246,8 @@ npm install --save-dev @types/ejs
 
 Je kan op de npmjs website heel eenvoudig zien of een bepaalde package TypeScript support heeft:
 
-* Bevat deze een <img src="/assets/dt.png" alt="" data-size="line" /> tag? Dan kan je deze installeren aan de hand van de bovenstaande commando's
-* Bevat deze een <img src="/assets/image (1).png" alt="" data-size="line" /> tag, dan zitten de types al in de npm package en dan hoef je niets te doen.
+* Bevat deze een ![](/assets/dt.png) tag? Dan kan je deze installeren aan de hand van de bovenstaande commando's
+* Bevat deze een ![](/assets/image%20(1).png) tag, dan zitten de types al in de npm package en dan hoef je niets te doen.
 
 Bevat deze geen van beide? Dan heb je helemaal geen types en heb je geen voordelen van TypeScript. Je moet dan ook nog een extra aanpassing doen aan je project om deze library toch nog te gebruiken.
 
@@ -259,7 +259,7 @@ declare module 'rainbow-colors-array';
 
 Dit is ook wat je vscode je aanraad als je over de error hovered als hij de types niet vindt:
 
-<figure><img src="/assets/Screenshot 2023-03-17 at 16.16.10.png" alt="" /><figcaption></figcaption></figure>
+![](/assets/Screenshot%202023-03-17%20at%2016.16.10.png)
 
 ## Voorbeeld: Lodash
 

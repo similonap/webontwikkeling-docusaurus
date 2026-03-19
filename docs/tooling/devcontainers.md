@@ -1,6 +1,12 @@
+import React from 'react'
+import ReactPlayer from 'react-player'
+
 # Devcontainers
 
-[https://www.youtube.com/watch?v=Z7bCqFxC5cM](https://www.youtube.com/watch?v=Z7bCqFxC5cM)
+<ReactPlayer 
+    src='https://www.youtube.com/watch?v=Z7bCqFxC5cM' 
+    style={{ marginBottom: '20px', width: '100%', height: 'auto', aspectRatio: '16/9' }}
+/>
 
 :::danger
 In het filmpje wordt er gebruik gemaakt van `wsl --install` om wsl te installeren. Gebruik in de plaats `wsl --install --no-distribution` want anders zal deze ook Ubuntu installeren.
