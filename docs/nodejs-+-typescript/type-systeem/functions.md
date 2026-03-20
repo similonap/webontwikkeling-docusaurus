@@ -324,7 +324,9 @@ let sum : number = numbers.reduce((accumulator, element) => accumulator + elemen
 console.log(sum); // 15
 ```
 
-[https://reduce.surge.sh/](https://reduce.surge.sh/) (visualizatie van bovenstaande code)
+import InteractiveReduce from '@site/src/components/InteractiveReduce';
+
+<InteractiveReduce />
 
 Het type dat de callback functie teruggeeft is hetzelfde als het type van de accumulator. In dit geval is dat `number`. Je kan dit ook expliciet aangeven.
 
