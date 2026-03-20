@@ -20,13 +20,16 @@ type ReduceStep =
 
 interface VisualState {
     codeDimmed: boolean;
-    highlightedToken: 'initial' | 'acc-param' | 'item-param' | 'return-expr' | null;
+    highlightedToken: 'initial' | 'acc-param' | 'item-param' | 'return-line' | null;
     highlightedArrayIndex: number | null;
     acc: number | null;
-    accArriveKey: number;    // increments each time acc is set, triggers animation
+    accArriveKey: number;
     item: number | null;
-    itemArriveKey: number;   // increments each time item is set
-    calculation: { acc: number; item: number; result: number } | null;
+    itemArriveKey: number;
+    // Inline substitution in the return expression
+    returnAccValue: number | null;
+    returnItemValue: number | null;
+    returnResult: number | null;
     isDone: boolean;
     finalResult: number | null;
 }
@@ -105,7 +108,9 @@ function deriveVisualState(stepIndex: number): VisualState {
         accArriveKey: 0,
         item: null,
         itemArriveKey: 0,
-        calculation: null,
+        returnAccValue: null,
+        returnItemValue: null,
+        returnResult: null,
         isDone: false,
         finalResult: null,
     };
@@ -136,28 +141,35 @@ function deriveVisualState(stepIndex: number): VisualState {
                 state.highlightedToken = 'item-param';
                 break;
             case 'highlight-return':
-                state.highlightedToken = 'return-expr';
+                state.highlightedToken = 'return-line';
+                state.returnAccValue = null;
+                state.returnItemValue = null;
+                state.returnResult = null;
                 break;
             case 'move-acc-to-result':
-                state.highlightedToken = 'return-expr';
+                state.highlightedToken = 'return-line';
+                state.returnAccValue = step.acc;
                 break;
             case 'move-item-to-result':
-                state.highlightedToken = 'return-expr';
+                state.highlightedToken = 'return-line';
+                state.returnItemValue = step.item;
                 break;
             case 'show-calculation':
-                state.calculation = { acc: step.acc, item: step.item, result: step.result };
+                state.highlightedToken = 'return-line';
+                state.returnResult = step.result;
                 break;
             case 'move-result-to-acc':
                 state.acc = step.result;
                 state.accArriveKey = i;
-                state.calculation = null;
+                state.returnAccValue = null;
+                state.returnItemValue = null;
+                state.returnResult = null;
                 state.highlightedToken = 'acc-param';
                 break;
             case 'done':
                 state.isDone = true;
                 state.finalResult = step.result;
                 state.highlightedToken = null;
-                state.calculation = null;
                 break;
         }
     }
@@ -177,13 +189,14 @@ export default function InteractiveReduce() {
     const initialValueRef = useRef<HTMLSpanElement>(null);
     const accParamRef = useRef<HTMLSpanElement>(null);
     const itemParamRef = useRef<HTMLSpanElement>(null);
-    const returnExprRef = useRef<HTMLSpanElement>(null);
+    // Refs for the three parts of the return expression
+    const accInReturnRef = useRef<HTMLSpanElement>(null);
+    const itemInReturnRef = useRef<HTMLSpanElement>(null);
+    const returnResultRef = useRef<HTMLSpanElement>(null);
     const arrayElementRefs = useRef<(HTMLDivElement | null)[]>([]);
     const accBoxRef = useRef<HTMLDivElement>(null);
     const itemBoxRef = useRef<HTMLDivElement>(null);
-    const resultBoxRef = useRef<HTMLDivElement>(null);
 
-    // Keep cleanup fns for in-flight animations
     const cleanupRef = useRef<(() => void) | null>(null);
 
     const vis = deriveVisualState(stepIndex);
@@ -237,13 +250,6 @@ export default function InteractiveReduce() {
     // Step advancement
     // ------------------------------------------------------------------
 
-    const isMoveStep = (step: ReduceStep) =>
-        step.type === 'move-to-acc' ||
-        step.type === 'move-to-item' ||
-        step.type === 'move-acc-to-result' ||
-        step.type === 'move-item-to-result' ||
-        step.type === 'move-result-to-acc';
-
     const advanceStep = useCallback((currentIndex: number) => {
         const nextIndex = currentIndex + 1;
         if (nextIndex >= STEPS.length) {
@@ -253,29 +259,27 @@ export default function InteractiveReduce() {
 
         const nextStep = STEPS[nextIndex];
 
-        const doAdvance = () => {
-            setStepIndex(nextIndex);
-        };
-
-        // For move steps, launch badge first, advance after landing
         if (nextStep.type === 'move-to-acc') {
-            setStepIndex(nextIndex); // dim before badge
+            setStepIndex(nextIndex);
             launchBadge(initialValueRef, accBoxRef, nextStep.value, () => { });
         } else if (nextStep.type === 'move-to-item') {
             setStepIndex(nextIndex);
             const elRef = { current: arrayElementRefs.current[nextStep.index] };
             launchBadge(elRef as any, itemBoxRef, nextStep.value, () => { });
         } else if (nextStep.type === 'move-acc-to-result') {
+            // Badge flies from acc box → 'acc' token inside the return expression
             setStepIndex(nextIndex);
-            launchBadge(accBoxRef, resultBoxRef, nextStep.acc, () => { });
+            launchBadge(accBoxRef, accInReturnRef, nextStep.acc, () => { });
         } else if (nextStep.type === 'move-item-to-result') {
+            // Badge flies from item box → 'item' token inside the return expression
             setStepIndex(nextIndex);
-            launchBadge(itemBoxRef, resultBoxRef, nextStep.item, () => { });
+            launchBadge(itemBoxRef, itemInReturnRef, nextStep.item, () => { });
         } else if (nextStep.type === 'move-result-to-acc') {
+            // Badge flies from the inline '= result' back to the acc box
             setStepIndex(nextIndex);
-            launchBadge(resultBoxRef, accBoxRef, nextStep.result, () => { });
+            launchBadge(returnResultRef, accBoxRef, nextStep.result, () => { });
         } else {
-            doAdvance();
+            setStepIndex(nextIndex);
         }
     }, [launchBadge]);
 
@@ -299,10 +303,7 @@ export default function InteractiveReduce() {
     // ------------------------------------------------------------------
 
     const handleStart = () => {
-        if (isDone) {
-            reset();
-            return;
-        }
+        if (isDone) { reset(); return; }
         if (stepIndex < 0) {
             setStepIndex(0);
             setIsPlaying(true);
@@ -332,6 +333,8 @@ export default function InteractiveReduce() {
     // ------------------------------------------------------------------
     // Render
     // ------------------------------------------------------------------
+
+    const returnLineHighlighted = vis.highlightedToken === 'return-line';
 
     return (
         <div className={styles.container} ref={containerRef}>
@@ -375,13 +378,36 @@ export default function InteractiveReduce() {
                         <span className={styles.typeName}>number</span>
                         <span className={styles.punct}>{') => {'}</span>
                     </div>
-                    <div className={styles.codeLine}>
+                    {/* Return line — highlighted as a whole, values substituted inline */}
+                    <div className={`${styles.codeLine} ${returnLineHighlighted ? styles.codeLineHighlight : ''}`}>
                         <span className={styles.kwReturn}>&nbsp;&nbsp;&nbsp;&nbsp;return</span>
                         {' '}
                         <span
-                            ref={returnExprRef}
-                            className={`${styles.returnExpr} ${vis.highlightedToken === 'return-expr' ? styles.tokenHighlight : ''}`}
-                        >acc + item</span>
+                            ref={accInReturnRef}
+                            className={`${vis.returnAccValue !== null ? styles.returnSubstituted : styles.returnPart}`}
+                        >
+                            {vis.returnAccValue !== null
+                                ? <span key={`ra-${vis.returnAccValue}`} className={styles.substitutedValue}>{vis.returnAccValue}</span>
+                                : 'acc'}
+                        </span>
+                        <span className={`${styles.punct} ${returnLineHighlighted ? styles.returnOpHighlight : ''}`}>{' + '}</span>
+                        <span
+                            ref={itemInReturnRef}
+                            className={`${vis.returnItemValue !== null ? styles.returnSubstituted : styles.returnPart}`}
+                        >
+                            {vis.returnItemValue !== null
+                                ? <span key={`ri-${vis.returnItemValue}`} className={styles.substitutedValue}>{vis.returnItemValue}</span>
+                                : 'item'}
+                        </span>
+                        {vis.returnResult !== null && (
+                            <span
+                                ref={returnResultRef}
+                                className={styles.returnResultInline}
+                            >
+                                {' = '}
+                                <span key={`rr-${vis.returnResult}`} className={styles.returnResultValue}>{vis.returnResult}</span>
+                            </span>
+                        )}
                         <span className={styles.punct}>;</span>
                     </div>
                     <div className={styles.codeLine}>
@@ -426,12 +452,7 @@ export default function InteractiveReduce() {
                         className={`${styles.stateValue} ${vis.acc !== null ? styles.stateValueFilled : ''}`}
                     >
                         {vis.acc !== null ? (
-                            <span
-                                key={vis.accArriveKey}
-                                className={styles.valueArrive}
-                            >
-                                {vis.acc}
-                            </span>
+                            <span key={vis.accArriveKey} className={styles.valueArrive}>{vis.acc}</span>
                         ) : (
                             <span className={styles.statePlaceholder}>–</span>
                         )}
@@ -445,12 +466,7 @@ export default function InteractiveReduce() {
                         className={`${styles.stateValue} ${vis.item !== null ? styles.stateValueFilled : ''}`}
                     >
                         {vis.item !== null ? (
-                            <span
-                                key={vis.itemArriveKey}
-                                className={styles.valueArrive}
-                            >
-                                {vis.item}
-                            </span>
+                            <span key={vis.itemArriveKey} className={styles.valueArrive}>{vis.item}</span>
                         ) : (
                             <span className={styles.statePlaceholder}>–</span>
                         )}
@@ -458,27 +474,14 @@ export default function InteractiveReduce() {
                 </div>
             </div>
 
-            {/* ---- Result Panel ---- */}
-            <div
-                ref={resultBoxRef}
-                className={`${styles.resultPanel} ${vis.calculation ? styles.resultPanelActive : ''} ${vis.isDone ? styles.resultPanelDone : ''}`}
-            >
-                {vis.isDone ? (
+            {/* ---- Done result ---- */}
+            {vis.isDone && (
+                <div className={`${styles.resultPanel} ${styles.resultPanelDone}`}>
                     <span className={styles.resultDone}>
                         sum = <strong>{vis.finalResult}</strong>
                     </span>
-                ) : vis.calculation ? (
-                    <span key={`${vis.calculation.acc}-${vis.calculation.item}`} className={styles.resultCalc}>
-                        <span className={styles.calcAcc}>{vis.calculation.acc}</span>
-                        <span className={styles.calcOp}> + </span>
-                        <span className={styles.calcItem}>{vis.calculation.item}</span>
-                        <span className={styles.calcEquals}> = </span>
-                        <span className={styles.calcResult}>{vis.calculation.result}</span>
-                    </span>
-                ) : (
-                    <span className={styles.resultPlaceholder}>return acc + item</span>
-                )}
-            </div>
+                </div>
+            )}
 
             {/* ---- Controls ---- */}
             <div className={styles.controls}>
