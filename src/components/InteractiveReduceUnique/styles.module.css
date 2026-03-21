@@ -1,36 +1,39 @@
 /* ============================================================
-   InteractiveReduceFreq — CSS Module
+   InteractiveReduceUnique — CSS Module
    ============================================================ */
 
 .container {
-    --irf-bg: #1e1e1e;
-    --irf-border: #333;
-    --irf-code-bg: #1e1e1e;
-    --irf-code-header: #2d2d2d;
-    --irf-code-text: #d4d4d4;
-    --irf-kw: #569cd6;
-    --irf-type: #4ec9b0;
-    --irf-var: #9cdcfe;
-    --irf-param: #9cdcfe;
-    --irf-num: #b5cea8;
-    --irf-punct: #d4d4d4;
-    --irf-return-kw: #c586c0;
-    --irf-array-bg: #252526;
-    --irf-array-border: #444;
-    --irf-array-text: #d4d4d4;
-    --irf-state-bg: #252526;
-    --irf-state-border: #444;
-    --irf-state-text: #d4d4d4;
-    --irf-accent: #f8c51c;
-    --irf-accent-dim: rgba(248, 197, 28, 0.15);
-    --irf-used: #3a3a3a;
-    --irf-used-text: #555;
-    --irf-placeholder: #555;
-    --irf-btn-primary-bg: #f8c51c;
-    --irf-btn-primary-text: #000;
-    --irf-btn-secondary-bg: #333;
-    --irf-btn-secondary-text: #ccc;
-    --irf-btn-secondary-border: #555;
+    --iru-bg: #1e1e1e;
+    --iru-border: #333;
+    --iru-code-bg: #1e1e1e;
+    --iru-code-header: #2d2d2d;
+    --iru-code-text: #d4d4d4;
+    --iru-kw: #569cd6;
+    --iru-type: #4ec9b0;
+    --iru-var: #9cdcfe;
+    --iru-param: #9cdcfe;
+    --iru-num: #b5cea8;
+    --iru-punct: #d4d4d4;
+    --iru-array-bg: #252526;
+    --iru-array-border: #444;
+    --iru-array-text: #d4d4d4;
+    --iru-state-bg: #252526;
+    --iru-state-border: #444;
+    --iru-state-text: #d4d4d4;
+    --iru-accent: #f8c51c;
+    --iru-accent-dim: rgba(248, 197, 28, 0.15);
+    --iru-true: #27c93f;
+    --iru-true-dim: rgba(39, 201, 63, 0.15);
+    --iru-false: #ff5f57;
+    --iru-false-dim: rgba(255, 95, 87, 0.15);
+    --iru-used: #3a3a3a;
+    --iru-used-text: #555;
+    --iru-placeholder: #555;
+    --iru-btn-primary-bg: #f8c51c;
+    --iru-btn-primary-text: #000;
+    --iru-btn-secondary-bg: #333;
+    --iru-btn-secondary-text: #ccc;
+    --iru-btn-secondary-border: #555;
 
     position: relative;
     display: flex;
@@ -47,30 +50,29 @@
 }
 
 :global([data-theme='light']) .container {
-    --irf-bg: #f5f5f5;
-    --irf-border: #ddd;
-    --irf-code-bg: #f8f8f8;
-    --irf-code-header: #ebebeb;
-    --irf-code-text: #24292e;
-    --irf-kw: #0000ff;
-    --irf-type: #267f99;
-    --irf-var: #001080;
-    --irf-param: #001080;
-    --irf-num: #098658;
-    --irf-punct: #24292e;
-    --irf-return-kw: #af00db;
-    --irf-array-bg: #f0f0f0;
-    --irf-array-border: #ddd;
-    --irf-array-text: #24292e;
-    --irf-state-bg: #f0f0f0;
-    --irf-state-border: #ddd;
-    --irf-state-text: #24292e;
-    --irf-used: #e8e8e8;
-    --irf-used-text: #aaa;
-    --irf-placeholder: #aaa;
-    --irf-btn-secondary-bg: #e8e8e8;
-    --irf-btn-secondary-text: #444;
-    --irf-btn-secondary-border: #ccc;
+    --iru-bg: #f5f5f5;
+    --iru-border: #ddd;
+    --iru-code-bg: #f8f8f8;
+    --iru-code-header: #ebebeb;
+    --iru-code-text: #24292e;
+    --iru-kw: #0000ff;
+    --iru-type: #267f99;
+    --iru-var: #001080;
+    --iru-param: #001080;
+    --iru-num: #098658;
+    --iru-punct: #24292e;
+    --iru-array-bg: #f0f0f0;
+    --iru-array-border: #ddd;
+    --iru-array-text: #24292e;
+    --iru-state-bg: #f0f0f0;
+    --iru-state-border: #ddd;
+    --iru-state-text: #24292e;
+    --iru-used: #e8e8e8;
+    --iru-used-text: #aaa;
+    --iru-placeholder: #aaa;
+    --iru-btn-secondary-bg: #e8e8e8;
+    --iru-btn-secondary-text: #444;
+    --iru-btn-secondary-border: #ccc;
 }
 
 /* ============================================================
@@ -78,8 +80,8 @@
    ============================================================ */
 
 .codePanel {
-    background: var(--irf-code-bg);
-    border: 1px solid var(--irf-border);
+    background: var(--iru-code-bg);
+    border: 1px solid var(--iru-border);
     border-radius: 6px;
     overflow: hidden;
     position: relative;
@@ -100,16 +102,14 @@
     background: rgba(248, 248, 248, 0.76);
 }
 
-.codeDimmed::after {
-    opacity: 1;
-}
+.codeDimmed::after { opacity: 1; }
 
 .codeHeader {
-    background: var(--irf-code-header);
+    background: var(--iru-code-header);
     padding: 0.4rem 1rem;
     font-size: 0.65rem;
-    color: var(--irf-placeholder);
-    border-bottom: 1px solid var(--irf-border);
+    color: var(--iru-placeholder);
+    border-bottom: 1px solid var(--iru-border);
 }
 
 .codeBody {
@@ -127,19 +127,17 @@
     font-size: 0.85rem;
 }
 
-/* Syntax token colours */
-.kwConst   { color: var(--irf-kw); }
-.kwReturn  { color: var(--irf-return-kw); }
-.varName   { color: var(--irf-var); }
-.typeName  { color: var(--irf-type); }
-.paramName { color: var(--irf-param); }
-.numLit    { color: var(--irf-num); }
-.strLit    { color: #ce9178; }
-.punct     { color: var(--irf-punct); }
+/* Syntax colours */
+.kwConst   { color: var(--iru-kw); }
+.varName   { color: var(--iru-var); }
+.typeName  { color: var(--iru-type); }
+.paramName { color: var(--iru-param); }
+.numLit    { color: var(--iru-num); }
+.punct     { color: var(--iru-punct); }
 
-/* Substituted values (word and lookup count) */
+/* Substituted values */
 .substituted {
-    color: var(--irf-accent);
+    color: var(--iru-accent);
     font-weight: bold;
     position: relative;
     z-index: 1;
@@ -156,12 +154,15 @@
     animation: substitutePop 0.35s ease-out;
 }
 
-/* Inline calculation result */
-.calcResult {
-    color: var(--irf-accent);
+/* includes() result — green for true, red for false */
+.resultTrue {
+    color: var(--iru-true);
     font-weight: bold;
-    position: relative;
-    z-index: 1;
+}
+
+.resultFalse {
+    color: var(--iru-false);
+    font-weight: bold;
 }
 
 @keyframes resultFadeIn {
@@ -174,10 +175,20 @@
     animation: resultFadeIn 0.3s ease-out;
 }
 
-/* Whole-line highlight for the body lines */
+/* Line highlights — neutral / true (green) / false (red) */
 @keyframes lineGlow {
     0%, 100% { background: rgba(248, 197, 28, 0.12); }
     50%       { background: rgba(248, 197, 28, 0.28); }
+}
+
+@keyframes lineGlowTrue {
+    0%, 100% { background: rgba(39, 201, 63, 0.10); }
+    50%       { background: rgba(39, 201, 63, 0.25); }
+}
+
+@keyframes lineGlowFalse {
+    0%, 100% { background: rgba(255, 95, 87, 0.10); }
+    50%       { background: rgba(255, 95, 87, 0.25); }
 }
 
 .codeLineHighlight {
@@ -189,7 +200,25 @@
     padding: 0 0.5rem;
 }
 
-/* Token highlight (pulsing yellow glow) */
+.codeLineHighlightTrue {
+    animation: lineGlowTrue 1s ease-in-out infinite;
+    border-radius: 3px;
+    position: relative;
+    z-index: 1;
+    margin: 0 -0.5rem;
+    padding: 0 0.5rem;
+}
+
+.codeLineHighlightFalse {
+    animation: lineGlowFalse 1s ease-in-out infinite;
+    border-radius: 3px;
+    position: relative;
+    z-index: 1;
+    margin: 0 -0.5rem;
+    padding: 0 0.5rem;
+}
+
+/* Token highlight */
 @keyframes tokenGlow {
     0%, 100% { background: rgba(248, 197, 28, 0.25); box-shadow: 0 0 0 2px rgba(248, 197, 28, 0.2); }
     50%       { background: rgba(248, 197, 28, 0.55); box-shadow: 0 0 0 3px rgba(248, 197, 28, 0.5); }
@@ -212,15 +241,15 @@
     align-items: flex-start;
     gap: 1rem;
     padding: 0.75rem 1rem;
-    background: var(--irf-array-bg);
-    border: 1px solid var(--irf-array-border);
+    background: var(--iru-array-bg);
+    border: 1px solid var(--iru-array-border);
     border-radius: 6px;
 }
 
 .arrayLabel {
     font-size: 0.72rem;
-    color: var(--irf-var);
-    min-width: 3rem;
+    color: var(--iru-var);
+    min-width: 2.5rem;
     flex-shrink: 0;
     padding-top: 0.5rem;
 }
@@ -232,18 +261,17 @@
 }
 
 .arrayElement {
-    min-width: 3.8rem;
+    width: 2.4rem;
     height: 2.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 0.5rem;
-    background: var(--irf-state-bg);
-    border: 2px solid var(--irf-array-border);
+    background: var(--iru-state-bg);
+    border: 2px solid var(--iru-array-border);
     border-radius: 6px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: bold;
-    color: var(--irf-array-text);
+    color: var(--iru-array-text);
     transition: all 0.3s ease;
 }
 
@@ -254,16 +282,16 @@
 
 .arrayElementHighlighted {
     animation: elementPulse 0.75s ease-in-out infinite;
-    background: var(--irf-accent-dim);
-    border-color: var(--irf-accent);
-    color: var(--irf-accent);
+    background: var(--iru-accent-dim);
+    border-color: var(--iru-accent);
+    color: var(--iru-accent);
 }
 
 .arrayElementUsed {
     opacity: 0.35;
-    background: var(--irf-used);
-    color: var(--irf-used-text);
-    border-color: var(--irf-used);
+    background: var(--iru-used);
+    color: var(--iru-used-text);
+    border-color: var(--iru-used);
 }
 
 /* ============================================================
@@ -280,21 +308,21 @@
     .statePanel { flex-direction: column; }
 }
 
-/* acc box — grows with entries */
+/* acc box */
 .accBox {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
     padding: 0.75rem 1rem;
-    background: var(--irf-state-bg);
-    border: 1px solid var(--irf-state-border);
+    background: var(--iru-state-bg);
+    border: 1px solid var(--iru-state-border);
     border-radius: 6px;
 }
 
 .stateLabel {
     font-size: 0.65rem;
-    color: var(--irf-placeholder);
+    color: var(--iru-placeholder);
     text-transform: uppercase;
     letter-spacing: 0.07em;
 }
@@ -304,85 +332,68 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--irf-bg);
-    border: 2px solid var(--irf-state-border);
+    background: var(--iru-bg);
+    border: 2px solid var(--iru-state-border);
     border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: var(--irf-state-text);
-    transition: border-color 0.3s;
     padding: 0.4rem 0.75rem;
+    transition: border-color 0.3s;
 }
 
 .accValueFilled {
-    border-color: var(--irf-accent);
+    border-color: var(--iru-accent);
     justify-content: flex-start;
-    align-items: flex-start;
 }
 
-.emptyObj {
-    width: 100%;
+.emptyArr {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-/* Growing list of key: count rows */
-.accList {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-}
-
-.accRow {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.15rem 0.25rem;
-    border-radius: 4px;
-    transition: background 0.2s;
-}
-
-@keyframes rowPulse {
-    0%   { background: rgba(248, 197, 28, 0.4); }
-    100% { background: transparent; }
-}
-
-.accRowUpdated {
-    animation: rowPulse 0.5s ease-out forwards;
-}
-
-.accKey {
-    color: var(--irf-var);
-    min-width: 3.8rem;
-}
-
-.accColon {
-    color: var(--irf-punct);
-}
-
-.accCount {
-    color: var(--irf-accent);
+    font-size: 0.9rem;
     font-weight: bold;
+    color: var(--iru-state-text);
 }
 
-@keyframes countPop {
-    0%   { transform: scale(1.6); color: var(--irf-accent); }
-    60%  { transform: scale(0.95); }
-    100% { transform: scale(1); }
+.accChips {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
 }
 
-/* word box — fixed width */
-.wordBox {
-    width: 7rem;
+@keyframes chipPop {
+    0%   { transform: scale(0); opacity: 0; }
+    60%  { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.accChip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: var(--iru-accent-dim);
+    border: 2px solid var(--iru-accent);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--iru-accent);
+}
+
+.accChipNew {
+    animation: chipPop 0.4s ease-out;
+}
+
+/* cur box */
+.curBox {
+    width: 4rem;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
     padding: 0.75rem 1rem;
-    background: var(--irf-state-bg);
-    border: 1px solid var(--irf-state-border);
+    background: var(--iru-state-bg);
+    border: 1px solid var(--iru-state-border);
     border-radius: 6px;
 }
 
@@ -391,26 +402,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--irf-bg);
-    border: 2px solid var(--irf-state-border);
+    background: var(--iru-bg);
+    border: 2px solid var(--iru-state-border);
     border-radius: 6px;
     font-size: 0.9rem;
     font-weight: bold;
-    color: var(--irf-state-text);
+    color: var(--iru-state-text);
     transition: border-color 0.3s;
 }
 
 .stateValueFilled {
-    border-color: var(--irf-accent);
+    border-color: var(--iru-accent);
 }
 
 .statePlaceholder {
-    color: var(--irf-placeholder);
+    color: var(--iru-placeholder);
     font-weight: normal;
 }
 
 @keyframes valuePop {
-    0%   { transform: scale(1.5); color: var(--irf-accent); }
+    0%   { transform: scale(1.5); color: var(--iru-accent); }
     60%  { transform: scale(0.95); }
     100% { transform: scale(1); }
 }
@@ -431,8 +442,6 @@
     padding: 0.6rem 1rem;
     border-radius: 6px;
     text-align: center;
-    flex-wrap: wrap;
-    gap: 0.25rem;
 }
 
 .resultPanelDone {
@@ -449,7 +458,6 @@
     color: #27c93f;
     font-size: 0.9rem;
     animation: resultDoneAppear 0.4s ease-out;
-    word-break: break-all;
 }
 
 /* ============================================================
@@ -465,8 +473,8 @@
 }
 
 .btnPrimary {
-    background: var(--irf-btn-primary-bg);
-    color: var(--irf-btn-primary-text);
+    background: var(--iru-btn-primary-bg);
+    color: var(--iru-btn-primary-text);
     border: none;
     padding: 0.45rem 1.25rem;
     border-radius: 6px;
@@ -481,9 +489,9 @@
 .btnPrimary:active { transform: translateY(0); }
 
 .btnSecondary {
-    background: var(--irf-btn-secondary-bg);
-    color: var(--irf-btn-secondary-text);
-    border: 1px solid var(--irf-btn-secondary-border);
+    background: var(--iru-btn-secondary-bg);
+    color: var(--iru-btn-secondary-text);
+    border: 1px solid var(--iru-btn-secondary-border);
     padding: 0.45rem 1.1rem;
     border-radius: 6px;
     font-size: 0.85rem;
@@ -503,7 +511,7 @@
 .flyingBadge {
     position: absolute;
     transform: translate(-50%, -50%);
-    background: var(--irf-accent);
+    background: var(--iru-accent);
     color: #000;
     font-weight: bold;
     font-size: 0.85rem;

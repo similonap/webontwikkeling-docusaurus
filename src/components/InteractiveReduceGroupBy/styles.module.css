@@ -1,36 +1,36 @@
 /* ============================================================
-   InteractiveReduceFreq — CSS Module
+   InteractiveReduceGroupBy — CSS Module
    ============================================================ */
 
 .container {
-    --irf-bg: #1e1e1e;
-    --irf-border: #333;
-    --irf-code-bg: #1e1e1e;
-    --irf-code-header: #2d2d2d;
-    --irf-code-text: #d4d4d4;
-    --irf-kw: #569cd6;
-    --irf-type: #4ec9b0;
-    --irf-var: #9cdcfe;
-    --irf-param: #9cdcfe;
-    --irf-num: #b5cea8;
-    --irf-punct: #d4d4d4;
-    --irf-return-kw: #c586c0;
-    --irf-array-bg: #252526;
-    --irf-array-border: #444;
-    --irf-array-text: #d4d4d4;
-    --irf-state-bg: #252526;
-    --irf-state-border: #444;
-    --irf-state-text: #d4d4d4;
-    --irf-accent: #f8c51c;
-    --irf-accent-dim: rgba(248, 197, 28, 0.15);
-    --irf-used: #3a3a3a;
-    --irf-used-text: #555;
-    --irf-placeholder: #555;
-    --irf-btn-primary-bg: #f8c51c;
-    --irf-btn-primary-text: #000;
-    --irf-btn-secondary-bg: #333;
-    --irf-btn-secondary-text: #ccc;
-    --irf-btn-secondary-border: #555;
+    --irg-bg: #1e1e1e;
+    --irg-border: #333;
+    --irg-code-bg: #1e1e1e;
+    --irg-code-header: #2d2d2d;
+    --irg-code-text: #d4d4d4;
+    --irg-kw: #569cd6;
+    --irg-type: #4ec9b0;
+    --irg-var: #9cdcfe;
+    --irg-param: #9cdcfe;
+    --irg-num: #b5cea8;
+    --irg-punct: #d4d4d4;
+    --irg-return-kw: #c586c0;
+    --irg-array-bg: #252526;
+    --irg-array-border: #444;
+    --irg-array-text: #d4d4d4;
+    --irg-state-bg: #252526;
+    --irg-state-border: #444;
+    --irg-state-text: #d4d4d4;
+    --irg-accent: #f8c51c;
+    --irg-accent-dim: rgba(248, 197, 28, 0.15);
+    --irg-used: #3a3a3a;
+    --irg-used-text: #555;
+    --irg-placeholder: #555;
+    --irg-btn-primary-bg: #f8c51c;
+    --irg-btn-primary-text: #000;
+    --irg-btn-secondary-bg: #333;
+    --irg-btn-secondary-text: #ccc;
+    --irg-btn-secondary-border: #555;
 
     position: relative;
     display: flex;
@@ -47,30 +47,30 @@
 }
 
 :global([data-theme='light']) .container {
-    --irf-bg: #f5f5f5;
-    --irf-border: #ddd;
-    --irf-code-bg: #f8f8f8;
-    --irf-code-header: #ebebeb;
-    --irf-code-text: #24292e;
-    --irf-kw: #0000ff;
-    --irf-type: #267f99;
-    --irf-var: #001080;
-    --irf-param: #001080;
-    --irf-num: #098658;
-    --irf-punct: #24292e;
-    --irf-return-kw: #af00db;
-    --irf-array-bg: #f0f0f0;
-    --irf-array-border: #ddd;
-    --irf-array-text: #24292e;
-    --irf-state-bg: #f0f0f0;
-    --irf-state-border: #ddd;
-    --irf-state-text: #24292e;
-    --irf-used: #e8e8e8;
-    --irf-used-text: #aaa;
-    --irf-placeholder: #aaa;
-    --irf-btn-secondary-bg: #e8e8e8;
-    --irf-btn-secondary-text: #444;
-    --irf-btn-secondary-border: #ccc;
+    --irg-bg: #f5f5f5;
+    --irg-border: #ddd;
+    --irg-code-bg: #f8f8f8;
+    --irg-code-header: #ebebeb;
+    --irg-code-text: #24292e;
+    --irg-kw: #0000ff;
+    --irg-type: #267f99;
+    --irg-var: #001080;
+    --irg-param: #001080;
+    --irg-num: #098658;
+    --irg-punct: #24292e;
+    --irg-return-kw: #af00db;
+    --irg-array-bg: #f0f0f0;
+    --irg-array-border: #ddd;
+    --irg-array-text: #24292e;
+    --irg-state-bg: #f0f0f0;
+    --irg-state-border: #ddd;
+    --irg-state-text: #24292e;
+    --irg-used: #e8e8e8;
+    --irg-used-text: #aaa;
+    --irg-placeholder: #aaa;
+    --irg-btn-secondary-bg: #e8e8e8;
+    --irg-btn-secondary-text: #444;
+    --irg-btn-secondary-border: #ccc;
 }
 
 /* ============================================================
@@ -78,8 +78,8 @@
    ============================================================ */
 
 .codePanel {
-    background: var(--irf-code-bg);
-    border: 1px solid var(--irf-border);
+    background: var(--irg-code-bg);
+    border: 1px solid var(--irg-border);
     border-radius: 6px;
     overflow: hidden;
     position: relative;
@@ -105,11 +105,11 @@
 }
 
 .codeHeader {
-    background: var(--irf-code-header);
+    background: var(--irg-code-header);
     padding: 0.4rem 1rem;
     font-size: 0.65rem;
-    color: var(--irf-placeholder);
-    border-bottom: 1px solid var(--irf-border);
+    color: var(--irg-placeholder);
+    border-bottom: 1px solid var(--irg-border);
 }
 
 .codeBody {
@@ -128,18 +128,19 @@
 }
 
 /* Syntax token colours */
-.kwConst   { color: var(--irf-kw); }
-.kwReturn  { color: var(--irf-return-kw); }
-.varName   { color: var(--irf-var); }
-.typeName  { color: var(--irf-type); }
-.paramName { color: var(--irf-param); }
-.numLit    { color: var(--irf-num); }
-.strLit    { color: #ce9178; }
-.punct     { color: var(--irf-punct); }
+.kwConst  { color: var(--irg-kw); }
+.kwReturn { color: var(--irg-return-kw); }
+.kwIf     { color: var(--irg-kw); }
+.varName  { color: var(--irg-var); }
+.typeName { color: var(--irg-type); }
+.paramName { color: var(--irg-param); }
+.numLit   { color: var(--irg-num); }
+.strLit   { color: #ce9178; }
+.punct    { color: var(--irg-punct); }
 
-/* Substituted values (word and lookup count) */
+/* Substituted values */
 .substituted {
-    color: var(--irf-accent);
+    color: var(--irg-accent);
     font-weight: bold;
     position: relative;
     z-index: 1;
@@ -158,7 +159,7 @@
 
 /* Inline calculation result */
 .calcResult {
-    color: var(--irf-accent);
+    color: var(--irg-accent);
     font-weight: bold;
     position: relative;
     z-index: 1;
@@ -174,7 +175,7 @@
     animation: resultFadeIn 0.3s ease-out;
 }
 
-/* Whole-line highlight for the body lines */
+/* Whole-line highlight */
 @keyframes lineGlow {
     0%, 100% { background: rgba(248, 197, 28, 0.12); }
     50%       { background: rgba(248, 197, 28, 0.28); }
@@ -189,7 +190,7 @@
     padding: 0 0.5rem;
 }
 
-/* Token highlight (pulsing yellow glow) */
+/* Token highlight */
 @keyframes tokenGlow {
     0%, 100% { background: rgba(248, 197, 28, 0.25); box-shadow: 0 0 0 2px rgba(248, 197, 28, 0.2); }
     50%       { background: rgba(248, 197, 28, 0.55); box-shadow: 0 0 0 3px rgba(248, 197, 28, 0.5); }
@@ -212,14 +213,14 @@
     align-items: flex-start;
     gap: 1rem;
     padding: 0.75rem 1rem;
-    background: var(--irf-array-bg);
-    border: 1px solid var(--irf-array-border);
+    background: var(--irg-array-bg);
+    border: 1px solid var(--irg-array-border);
     border-radius: 6px;
 }
 
 .arrayLabel {
     font-size: 0.72rem;
-    color: var(--irf-var);
+    color: var(--irg-var);
     min-width: 3rem;
     flex-shrink: 0;
     padding-top: 0.5rem;
@@ -232,18 +233,15 @@
 }
 
 .arrayElement {
-    min-width: 3.8rem;
-    height: 2.2rem;
+    min-width: 4.5rem;
+    padding: 0.3rem 0.6rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 0 0.5rem;
-    background: var(--irf-state-bg);
-    border: 2px solid var(--irf-array-border);
+    gap: 0.1rem;
+    background: var(--irg-state-bg);
+    border: 2px solid var(--irg-array-border);
     border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: var(--irf-array-text);
     transition: all 0.3s ease;
 }
 
@@ -254,16 +252,16 @@
 
 .arrayElementHighlighted {
     animation: elementPulse 0.75s ease-in-out infinite;
-    background: var(--irf-accent-dim);
-    border-color: var(--irf-accent);
-    color: var(--irf-accent);
+    background: var(--irg-accent-dim);
+    border-color: var(--irg-accent);
+    color: var(--irg-accent);
 }
 
 .arrayElementUsed {
     opacity: 0.35;
-    background: var(--irf-used);
-    color: var(--irf-used-text);
-    border-color: var(--irf-used);
+    background: var(--irg-used);
+    color: var(--irg-used-text);
+    border-color: var(--irg-used);
 }
 
 /* ============================================================
@@ -280,21 +278,21 @@
     .statePanel { flex-direction: column; }
 }
 
-/* acc box — grows with entries */
+/* acc box */
 .accBox {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
     padding: 0.75rem 1rem;
-    background: var(--irf-state-bg);
-    border: 1px solid var(--irf-state-border);
+    background: var(--irg-state-bg);
+    border: 1px solid var(--irg-state-border);
     border-radius: 6px;
 }
 
 .stateLabel {
     font-size: 0.65rem;
-    color: var(--irf-placeholder);
+    color: var(--irg-placeholder);
     text-transform: uppercase;
     letter-spacing: 0.07em;
 }
@@ -304,18 +302,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--irf-bg);
-    border: 2px solid var(--irf-state-border);
+    background: var(--irg-bg);
+    border: 2px solid var(--irg-state-border);
     border-radius: 6px;
     font-size: 0.9rem;
     font-weight: bold;
-    color: var(--irf-state-text);
+    color: var(--irg-state-text);
     transition: border-color 0.3s;
     padding: 0.4rem 0.75rem;
 }
 
 .accValueFilled {
-    border-color: var(--irf-accent);
+    border-color: var(--irg-accent);
     justify-content: flex-start;
     align-items: flex-start;
 }
@@ -327,7 +325,6 @@
     justify-content: center;
 }
 
-/* Growing list of key: count rows */
 .accList {
     width: 100%;
     display: flex;
@@ -354,63 +351,77 @@
 }
 
 .accKey {
-    color: var(--irf-var);
-    min-width: 3.8rem;
+    color: var(--irg-var);
+    min-width: 2.5rem;
 }
 
 .accColon {
-    color: var(--irf-punct);
+    color: var(--irg-punct);
 }
 
 .accCount {
-    color: var(--irf-accent);
+    color: var(--irg-accent);
     font-weight: bold;
 }
 
-@keyframes countPop {
-    0%   { transform: scale(1.6); color: var(--irf-accent); }
-    60%  { transform: scale(0.95); }
-    100% { transform: scale(1); }
-}
-
-/* word box — fixed width */
-.wordBox {
+/* cur box */
+.curBox {
     width: 7rem;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
     padding: 0.75rem 1rem;
-    background: var(--irf-state-bg);
-    border: 1px solid var(--irf-state-border);
+    background: var(--irg-state-bg);
+    border: 1px solid var(--irg-state-border);
     border-radius: 6px;
 }
 
+/* Employee card in array panel and cur box */
+.empName {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--irg-var);
+}
+
+.empDept {
+    font-size: 0.68rem;
+    color: var(--irg-placeholder);
+}
+
+.curValue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    animation: valuePop 0.4s ease-out;
+}
+
 .stateValue {
-    height: 2.4rem;
+    min-height: 2.4rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--irf-bg);
-    border: 2px solid var(--irf-state-border);
+    background: var(--irg-bg);
+    border: 2px solid var(--irg-state-border);
     border-radius: 6px;
     font-size: 0.9rem;
     font-weight: bold;
-    color: var(--irf-state-text);
+    color: var(--irg-state-text);
     transition: border-color 0.3s;
 }
 
 .stateValueFilled {
-    border-color: var(--irf-accent);
+    border-color: var(--irg-accent);
 }
 
 .statePlaceholder {
-    color: var(--irf-placeholder);
+    color: var(--irg-placeholder);
     font-weight: normal;
 }
 
 @keyframes valuePop {
-    0%   { transform: scale(1.5); color: var(--irf-accent); }
+    0%   { transform: scale(1.5); color: var(--irg-accent); }
     60%  { transform: scale(0.95); }
     100% { transform: scale(1); }
 }
@@ -465,8 +476,8 @@
 }
 
 .btnPrimary {
-    background: var(--irf-btn-primary-bg);
-    color: var(--irf-btn-primary-text);
+    background: var(--irg-btn-primary-bg);
+    color: var(--irg-btn-primary-text);
     border: none;
     padding: 0.45rem 1.25rem;
     border-radius: 6px;
@@ -481,9 +492,9 @@
 .btnPrimary:active { transform: translateY(0); }
 
 .btnSecondary {
-    background: var(--irf-btn-secondary-bg);
-    color: var(--irf-btn-secondary-text);
-    border: 1px solid var(--irf-btn-secondary-border);
+    background: var(--irg-btn-secondary-bg);
+    color: var(--irg-btn-secondary-text);
+    border: 1px solid var(--irg-btn-secondary-border);
     padding: 0.45rem 1.1rem;
     border-radius: 6px;
     font-size: 0.85rem;
@@ -503,7 +514,7 @@
 .flyingBadge {
     position: absolute;
     transform: translate(-50%, -50%);
-    background: var(--irf-accent);
+    background: var(--irg-accent);
     color: #000;
     font-weight: bold;
     font-size: 0.85rem;

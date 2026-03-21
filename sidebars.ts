@@ -83,6 +83,36 @@ const sidebars: SidebarsConfig = {
         ]
       },
       {
+        "type": "category",
+        "label": "Array Functions",
+        "link": {
+          "type": "doc",
+          "id": "nodejs-+-typescript/array-functions/index"
+        },
+        "items": [
+          {
+            "type": "doc",
+            "id": "nodejs-+-typescript/array-functions/map",
+            "label": "map"
+          },
+          {
+            "type": "doc",
+            "id": "nodejs-+-typescript/array-functions/filter",
+            "label": "filter"
+          },
+          {
+            "type": "doc",
+            "id": "nodejs-+-typescript/array-functions/reduce",
+            "label": "reduce"
+          },
+          {
+            "type": "doc",
+            "id": "nodejs-+-typescript/array-functions/find",
+            "label": "find"
+          }
+        ]
+      },
+      {
         "type": "doc",
         "id": "nodejs-+-typescript/exceptions",
         "label": "Exceptions"

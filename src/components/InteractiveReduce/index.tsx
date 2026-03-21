@@ -10,25 +10,25 @@ type ReduceStep =
     | { type: 'highlight-initial'; value: number }
     | { type: 'move-to-acc'; value: number }
     | { type: 'highlight-element'; index: number }
-    | { type: 'move-to-item'; index: number; value: number }
+    | { type: 'move-to-cur'; index: number; value: number }
     | { type: 'highlight-return' }
     | { type: 'move-acc-to-result'; acc: number }
-    | { type: 'move-item-to-result'; item: number }
-    | { type: 'show-calculation'; acc: number; item: number; result: number }
+    | { type: 'move-cur-to-result'; cur: number }
+    | { type: 'show-calculation'; acc: number; cur: number; result: number }
     | { type: 'move-result-to-acc'; result: number }
     | { type: 'done'; result: number };
 
 interface VisualState {
     codeDimmed: boolean;
-    highlightedToken: 'initial' | 'acc-param' | 'item-param' | 'return-line' | null;
+    highlightedToken: 'initial' | 'acc-param' | 'cur-param' | 'return-line' | null;
     highlightedArrayIndex: number | null;
     acc: number | null;
     accArriveKey: number;
-    item: number | null;
-    itemArriveKey: number;
+    cur: number | null;
+    curArriveKey: number;
     // Inline substitution in the return expression
     returnAccValue: number | null;
-    returnItemValue: number | null;
+    returnCurValue: number | null;
     returnResult: number | null;
     isDone: boolean;
     finalResult: number | null;
@@ -50,17 +50,17 @@ interface FlyingBadge {
 
 const ARRAY = [1, 2, 3, 4, 5];
 const INITIAL_VALUE = 0;
-const REDUCER = (acc: number, item: number) => acc + item;
+const REDUCER = (acc: number, cur: number) => acc + cur;
 
 const STEP_DURATION: Record<ReduceStep['type'], number> = {
     'code-dim': 500,
     'highlight-initial': 700,
     'move-to-acc': 800,
     'highlight-element': 700,
-    'move-to-item': 800,
+    'move-to-cur': 800,
     'highlight-return': 600,
     'move-acc-to-result': 800,
-    'move-item-to-result': 800,
+    'move-cur-to-result': 800,
     'show-calculation': 1000,
     'move-result-to-acc': 800,
     'done': 0,
@@ -78,14 +78,14 @@ function generateSteps(): ReduceStep[] {
 
     let acc = INITIAL_VALUE;
     for (let i = 0; i < ARRAY.length; i++) {
-        const item = ARRAY[i];
+        const cur = ARRAY[i];
         steps.push({ type: 'highlight-element', index: i });
-        steps.push({ type: 'move-to-item', index: i, value: item });
+        steps.push({ type: 'move-to-cur', index: i, value: cur });
         steps.push({ type: 'highlight-return' });
         steps.push({ type: 'move-acc-to-result', acc });
-        steps.push({ type: 'move-item-to-result', item });
-        const result = REDUCER(acc, item);
-        steps.push({ type: 'show-calculation', acc, item, result });
+        steps.push({ type: 'move-cur-to-result', cur });
+        const result = REDUCER(acc, cur);
+        steps.push({ type: 'show-calculation', acc, cur, result });
         steps.push({ type: 'move-result-to-acc', result });
         acc = result;
     }
@@ -107,9 +107,9 @@ function deriveVisualState(stepIndex: number): VisualState {
         acc: null,
         accArriveKey: 0,
         item: null,
-        itemArriveKey: 0,
+        curArriveKey: 0,
         returnAccValue: null,
-        returnItemValue: null,
+        returnCurValue: null,
         returnResult: null,
         isDone: false,
         finalResult: null,
@@ -135,24 +135,24 @@ function deriveVisualState(stepIndex: number): VisualState {
                 state.highlightedArrayIndex = step.index;
                 state.highlightedToken = null;
                 break;
-            case 'move-to-item':
-                state.item = step.value;
-                state.itemArriveKey = i;
-                state.highlightedToken = 'item-param';
+            case 'move-to-cur':
+                state.cur = step.value;
+                state.curArriveKey = i;
+                state.highlightedToken = 'cur-param';
                 break;
             case 'highlight-return':
                 state.highlightedToken = 'return-line';
                 state.returnAccValue = null;
-                state.returnItemValue = null;
+                state.returnCurValue = null;
                 state.returnResult = null;
                 break;
             case 'move-acc-to-result':
                 state.highlightedToken = 'return-line';
                 state.returnAccValue = step.acc;
                 break;
-            case 'move-item-to-result':
+            case 'move-cur-to-result':
                 state.highlightedToken = 'return-line';
-                state.returnItemValue = step.item;
+                state.returnCurValue = step.cur;
                 break;
             case 'show-calculation':
                 state.highlightedToken = 'return-line';
@@ -162,7 +162,7 @@ function deriveVisualState(stepIndex: number): VisualState {
                 state.acc = step.result;
                 state.accArriveKey = i;
                 state.returnAccValue = null;
-                state.returnItemValue = null;
+                state.returnCurValue = null;
                 state.returnResult = null;
                 state.highlightedToken = 'acc-param';
                 break;
@@ -188,14 +188,14 @@ export default function InteractiveReduce() {
     const containerRef = useRef<HTMLDivElement>(null);
     const initialValueRef = useRef<HTMLSpanElement>(null);
     const accParamRef = useRef<HTMLSpanElement>(null);
-    const itemParamRef = useRef<HTMLSpanElement>(null);
+    const curParamRef = useRef<HTMLSpanElement>(null);
     // Refs for the three parts of the return expression
     const accInReturnRef = useRef<HTMLSpanElement>(null);
-    const itemInReturnRef = useRef<HTMLSpanElement>(null);
+    const curInReturnRef = useRef<HTMLSpanElement>(null);
     const returnResultRef = useRef<HTMLSpanElement>(null);
     const arrayElementRefs = useRef<(HTMLDivElement | null)[]>([]);
     const accBoxRef = useRef<HTMLDivElement>(null);
-    const itemBoxRef = useRef<HTMLDivElement>(null);
+    const curBoxRef = useRef<HTMLDivElement>(null);
 
     const cleanupRef = useRef<(() => void) | null>(null);
 
@@ -262,18 +262,18 @@ export default function InteractiveReduce() {
         if (nextStep.type === 'move-to-acc') {
             setStepIndex(nextIndex);
             launchBadge(initialValueRef, accBoxRef, nextStep.value, () => { });
-        } else if (nextStep.type === 'move-to-item') {
+        } else if (nextStep.type === 'move-to-cur') {
             setStepIndex(nextIndex);
             const elRef = { current: arrayElementRefs.current[nextStep.index] };
-            launchBadge(elRef as any, itemBoxRef, nextStep.value, () => { });
+            launchBadge(elRef as any, curBoxRef, nextStep.value, () => { });
         } else if (nextStep.type === 'move-acc-to-result') {
             // Badge flies from acc box → 'acc' token inside the return expression
             setStepIndex(nextIndex);
             launchBadge(accBoxRef, accInReturnRef, nextStep.acc, () => { });
-        } else if (nextStep.type === 'move-item-to-result') {
-            // Badge flies from item box → 'item' token inside the return expression
+        } else if (nextStep.type === 'move-cur-to-result') {
+            // Badge flies from cur box → 'cur' token inside the return expression
             setStepIndex(nextIndex);
-            launchBadge(itemBoxRef, itemInReturnRef, nextStep.item, () => { });
+            launchBadge(curBoxRef, curInReturnRef, nextStep.cur, () => { });
         } else if (nextStep.type === 'move-result-to-acc') {
             // Badge flies from the inline '= result' back to the acc box
             setStepIndex(nextIndex);
@@ -371,9 +371,9 @@ export default function InteractiveReduce() {
                         <span className={styles.typeName}>number</span>
                         <span className={styles.punct}>{', '}</span>
                         <span
-                            ref={itemParamRef}
-                            className={`${styles.paramName} ${vis.highlightedToken === 'item-param' ? styles.tokenHighlight : ''}`}
-                        >item</span>
+                            ref={curParamRef}
+                            className={`${styles.paramName} ${vis.highlightedToken === 'cur-param' ? styles.tokenHighlight : ''}`}
+                        >cur</span>
                         <span className={styles.punct}>: </span>
                         <span className={styles.typeName}>number</span>
                         <span className={styles.punct}>{') => {'}</span>
@@ -392,12 +392,12 @@ export default function InteractiveReduce() {
                         </span>
                         <span className={`${styles.punct} ${returnLineHighlighted ? styles.returnOpHighlight : ''}`}>{' + '}</span>
                         <span
-                            ref={itemInReturnRef}
-                            className={`${vis.returnItemValue !== null ? styles.returnSubstituted : styles.returnPart}`}
+                            ref={curInReturnRef}
+                            className={`${vis.returnCurValue !== null ? styles.returnSubstituted : styles.returnPart}`}
                         >
-                            {vis.returnItemValue !== null
-                                ? <span key={`ri-${vis.returnItemValue}`} className={styles.substitutedValue}>{vis.returnItemValue}</span>
-                                : 'item'}
+                            {vis.returnCurValue !== null
+                                ? <span key={`ri-${vis.returnCurValue}`} className={styles.substitutedValue}>{vis.returnCurValue}</span>
+                                : 'cur'}
                         </span>
                         {vis.returnResult !== null && (
                             <span
@@ -460,13 +460,13 @@ export default function InteractiveReduce() {
                 </div>
 
                 <div className={styles.stateBox}>
-                    <div className={styles.stateLabel}>item</div>
+                    <div className={styles.stateLabel}>cur</div>
                     <div
-                        ref={itemBoxRef}
-                        className={`${styles.stateValue} ${vis.item !== null ? styles.stateValueFilled : ''}`}
+                        ref={curBoxRef}
+                        className={`${styles.stateValue} ${vis.cur !== null ? styles.stateValueFilled : ''}`}
                     >
-                        {vis.item !== null ? (
-                            <span key={vis.itemArriveKey} className={styles.valueArrive}>{vis.item}</span>
+                        {vis.cur !== null ? (
+                            <span key={vis.curArriveKey} className={styles.valueArrive}>{vis.cur}</span>
                         ) : (
                             <span className={styles.statePlaceholder}>–</span>
                         )}

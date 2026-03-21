@@ -5,34 +5,31 @@ import styles from './styles.module.css';
 // Types
 // ---------------------------------------------------------------------------
 
-type FreqStep =
+type UniqueStep =
     | { type: 'code-dim' }
     | { type: 'highlight-initial' }
     | { type: 'move-to-acc' }
     | { type: 'highlight-element'; index: number }
-    | { type: 'move-to-cur'; index: number; cur: string }
-    | { type: 'highlight-body' }
-    | { type: 'show-lookup'; word: string; count: number }
-    | { type: 'show-calc'; word: string; oldCount: number; newCount: number }
-    | { type: 'update-acc'; word: string; newCount: number; acc: Record<string, number> }
-    | { type: 'done'; result: Record<string, number> };
+    | { type: 'move-to-cur'; index: number; value: number }
+    | { type: 'show-includes'; cur: number; result: boolean }
+    | { type: 'show-skip' }
+    | { type: 'show-add'; cur: number }
+    | { type: 'update-acc'; acc: number[] }
+    | { type: 'done'; result: number[] };
 
 interface VisualState {
     codeDimmed: boolean;
     highlightedToken: 'initial' | 'acc-param' | 'cur-param' | null;
     highlightedArrayIndex: number | null;
-    acc: Record<string, number>;
+    acc: number[];
     accArriveKey: number;
-    cur: string | null;
+    cur: number | null;
     curArriveKey: number;
-    bodyHighlighted: boolean;
-    lookupWord: string | null;
-    lookupCount: number | null;
-    calcNewCount: number | null;
-    lastUpdatedKey: string | null;
-    lastUpdatedKeyId: number;
+    bodyPhase: 'includes' | 'skip' | 'add' | null;
+    includesResult: boolean | null;
+    lastAddedId: number;
     isDone: boolean;
-    finalResult: Record<string, number> | null;
+    finalResult: number[] | null;
 }
 
 interface FlyingBadge {
@@ -49,17 +46,17 @@ interface FlyingBadge {
 // Constants
 // ---------------------------------------------------------------------------
 
-const LETTERS = ['a', 'b', 'a', 'c', 'b', 'a', 'd', 'c', 'b', 'd'];
+const DATA = [1, 2, 2, 3, 1, 4, 3];
 
-const STEP_DURATION: Record<FreqStep['type'], number> = {
+const STEP_DURATION: Record<UniqueStep['type'], number> = {
     'code-dim': 500,
     'highlight-initial': 700,
     'move-to-acc': 800,
     'highlight-element': 700,
     'move-to-cur': 800,
-    'highlight-body': 600,
-    'show-lookup': 900,
-    'show-calc': 900,
+    'show-includes': 1000,
+    'show-skip': 800,
+    'show-add': 800,
     'update-acc': 700,
     'done': 0,
 };
@@ -68,26 +65,28 @@ const STEP_DURATION: Record<FreqStep['type'], number> = {
 // Step generation
 // ---------------------------------------------------------------------------
 
-function generateSteps(): FreqStep[] {
-    const steps: FreqStep[] = [];
+function generateSteps(): UniqueStep[] {
+    const steps: UniqueStep[] = [];
     steps.push({ type: 'code-dim' });
     steps.push({ type: 'highlight-initial' });
     steps.push({ type: 'move-to-acc' });
 
-    const acc: Record<string, number> = {};
-    for (let i = 0; i < LETTERS.length; i++) {
-        const cur = LETTERS[i];
+    const acc: number[] = [];
+    for (let i = 0; i < DATA.length; i++) {
+        const cur = DATA[i];
         steps.push({ type: 'highlight-element', index: i });
-        steps.push({ type: 'move-to-cur', index: i, cur });
-        steps.push({ type: 'highlight-body' });
-        const currentCount = acc[cur] ?? 0;
-        steps.push({ type: 'show-lookup', word: cur, count: currentCount });
-        const newCount = currentCount + 1;
-        steps.push({ type: 'show-calc', word: cur, oldCount: currentCount, newCount });
-        acc[cur] = newCount;
-        steps.push({ type: 'update-acc', word: cur, newCount, acc: { ...acc } });
+        steps.push({ type: 'move-to-cur', index: i, value: cur });
+        const result = acc.includes(cur);
+        steps.push({ type: 'show-includes', cur, result });
+        if (result) {
+            steps.push({ type: 'show-skip' });
+        } else {
+            steps.push({ type: 'show-add', cur });
+            acc.push(cur);
+        }
+        steps.push({ type: 'update-acc', acc: [...acc] });
     }
-    steps.push({ type: 'done', result: { ...acc } });
+    steps.push({ type: 'done', result: [...acc] });
     return steps;
 }
 
@@ -102,16 +101,13 @@ function deriveVisualState(stepIndex: number): VisualState {
         codeDimmed: false,
         highlightedToken: null,
         highlightedArrayIndex: null,
-        acc: {},
+        acc: [],
         accArriveKey: 0,
-        word: null,
+        cur: null,
         curArriveKey: 0,
-        bodyHighlighted: false,
-        lookupWord: null,
-        lookupCount: null,
-        calcNewCount: null,
-        lastUpdatedKey: null,
-        lastUpdatedKeyId: 0,
+        bodyPhase: null,
+        includesResult: null,
+        lastAddedId: 0,
         isDone: false,
         finalResult: null,
     };
@@ -128,55 +124,44 @@ function deriveVisualState(stepIndex: number): VisualState {
                 state.highlightedToken = 'initial';
                 break;
             case 'move-to-acc':
-                state.acc = {};
+                state.acc = [];
                 state.accArriveKey = i;
                 state.highlightedToken = 'acc-param';
                 break;
             case 'highlight-element':
                 state.highlightedArrayIndex = step.index;
                 state.highlightedToken = null;
-                state.bodyHighlighted = false;
-                state.lookupWord = null;
-                state.lookupCount = null;
-                state.calcNewCount = null;
+                state.bodyPhase = null;
+                state.includesResult = null;
                 break;
             case 'move-to-cur':
-                state.cur = step.cur;
+                state.cur = step.value;
                 state.curArriveKey = i;
                 state.highlightedToken = 'cur-param';
                 break;
-            case 'highlight-body':
-                state.bodyHighlighted = true;
+            case 'show-includes':
+                state.bodyPhase = 'includes';
+                state.includesResult = step.result;
                 state.highlightedToken = null;
-                state.lookupWord = null;
-                state.lookupCount = null;
-                state.calcNewCount = null;
                 break;
-            case 'show-lookup':
-                state.lookupWord = step.word;
-                state.lookupCount = step.count;
-                state.calcNewCount = null;
+            case 'show-skip':
+                state.bodyPhase = 'skip';
                 break;
-            case 'show-calc':
-                state.lookupWord = step.word;
-                state.lookupCount = step.oldCount;
-                state.calcNewCount = step.newCount;
+            case 'show-add':
+                state.bodyPhase = 'add';
                 break;
             case 'update-acc':
-                state.acc = { ...step.acc };
+                state.acc = [...step.acc];
                 state.accArriveKey = i;
-                state.lastUpdatedKey = step.word;
-                state.lastUpdatedKeyId = i;
-                state.bodyHighlighted = false;
-                state.lookupWord = null;
-                state.lookupCount = null;
-                state.calcNewCount = null;
+                state.lastAddedId = i;
+                state.bodyPhase = null;
+                state.includesResult = null;
                 break;
             case 'done':
                 state.isDone = true;
                 state.finalResult = step.result;
                 state.highlightedToken = null;
-                state.bodyHighlighted = false;
+                state.bodyPhase = null;
                 break;
         }
     }
@@ -187,7 +172,7 @@ function deriveVisualState(stepIndex: number): VisualState {
 // Component
 // ---------------------------------------------------------------------------
 
-export default function InteractiveReduceFreq() {
+export default function InteractiveReduceUnique() {
     const [stepIndex, setStepIndex] = useState(-1);
     const [isPlaying, setIsPlaying] = useState(false);
     const [badge, setBadge] = useState<FlyingBadge | null>(null);
@@ -264,11 +249,11 @@ export default function InteractiveReduceFreq() {
 
         if (nextStep.type === 'move-to-acc') {
             setStepIndex(nextIndex);
-            launchBadge(initialValueRef, accBoxRef, '{}', () => { });
+            launchBadge(initialValueRef, accBoxRef, '[]', () => { });
         } else if (nextStep.type === 'move-to-cur') {
             setStepIndex(nextIndex);
             const elRef = { current: arrayElementRefs.current[nextStep.index] };
-            launchBadge(elRef as React.RefObject<HTMLDivElement>, curBoxRef, nextStep.cur, () => { });
+            launchBadge(elRef as React.RefObject<HTMLDivElement>, curBoxRef, String(nextStep.value), () => { });
         } else {
             setStepIndex(nextIndex);
         }
@@ -322,57 +307,61 @@ export default function InteractiveReduceFreq() {
     };
 
     // ------------------------------------------------------------------
-    // Helpers
+    // Body line rendering
     // ------------------------------------------------------------------
 
-    const accEntries = Object.entries(vis.acc);
-
-    const formatResult = (result: Record<string, number>) =>
-        '{ ' + Object.entries(result).map(([k, v]) => `${k}: ${v}`).join(', ') + ' }';
-
-    // ------------------------------------------------------------------
-    // Body line substitution rendering
-    // ------------------------------------------------------------------
-
-    function renderBodyLine() {
-        // acc[cur] = (acc[cur] ?? 0) + 1;
-        if (vis.lookupWord === null) {
-            // Plain text
+    // acc.includes(cur)
+    function renderIncludesLine() {
+        if (vis.bodyPhase !== 'includes' || vis.cur === null) {
             return (
                 <>
                     <span className={styles.paramName}>acc</span>
-                    <span className={styles.punct}>[</span>
+                    <span className={styles.punct}>.includes(</span>
                     <span className={styles.paramName}>cur</span>
-                    <span className={styles.punct}>] = (</span>
-                    <span className={styles.paramName}>acc</span>
-                    <span className={styles.punct}>[</span>
-                    <span className={styles.paramName}>cur</span>
-                    <span className={styles.punct}>] ?? 0) + 1;</span>
+                    <span className={styles.punct}>)</span>
                 </>
             );
         }
-        // Substituted form: acc["apple"] = (0 ?? 0) + 1;
-        const wordStr = `"${vis.lookupWord}"`;
-        const countStr = String(vis.lookupCount ?? 0);
         return (
             <>
                 <span className={styles.paramName}>acc</span>
-                <span className={styles.punct}>[</span>
+                <span className={styles.punct}>.includes(</span>
                 <span className={styles.substituted}>
-                    <span key={`wk-${vis.curArriveKey}`} className={styles.substitutedValue}>{wordStr}</span>
+                    <span key={`inc-${vis.curArriveKey}`} className={styles.substitutedValue}>{vis.cur}</span>
                 </span>
-                <span className={styles.punct}>] = (</span>
-                <span className={styles.substituted}>
-                    <span key={`lk-${vis.lookupCount}-${vis.lookupWord}`} className={styles.substitutedValue}>{countStr}</span>
-                </span>
-                <span className={styles.punct}> ?? 0) + 1</span>
-                {vis.calcNewCount !== null && (
-                    <span className={styles.calcResult}>
-                        {' = '}
-                        <span key={`ck-${vis.calcNewCount}`} className={styles.calcResultValue}>{vis.calcNewCount}</span>
+                <span className={styles.punct}>)</span>
+                <span className={vis.includesResult ? styles.resultTrue : styles.resultFalse}>
+                    {' = '}
+                    <span key={`incr-${vis.curArriveKey}`} className={styles.calcResultValue}>
+                        {String(vis.includesResult)}
                     </span>
-                )}
-                <span className={styles.punct}>;</span>
+                </span>
+            </>
+        );
+    }
+
+    // : [...acc, cur]
+    function renderAddLine() {
+        if (vis.bodyPhase !== 'add' || vis.cur === null) {
+            return (
+                <>
+                    <span className={styles.punct}>{': [...'}</span>
+                    <span className={styles.paramName}>acc</span>
+                    <span className={styles.punct}>{', '}</span>
+                    <span className={styles.paramName}>cur</span>
+                    <span className={styles.punct}>]</span>
+                </>
+            );
+        }
+        return (
+            <>
+                <span className={styles.punct}>{': [...'}</span>
+                <span className={styles.paramName}>acc</span>
+                <span className={styles.punct}>{', '}</span>
+                <span className={styles.substituted}>
+                    <span key={`add-${vis.curArriveKey}`} className={styles.substitutedValue}>{vis.cur}</span>
+                </span>
+                <span className={styles.punct}>]</span>
             </>
         );
     }
@@ -385,31 +374,26 @@ export default function InteractiveReduceFreq() {
         <div className={styles.container} ref={containerRef}>
             {/* ---- Code Panel ---- */}
             <div className={`${styles.codePanel} ${vis.codeDimmed ? styles.codeDimmed : ''}`}>
-                <div className={styles.codeHeader}>reduce-freq.ts</div>
+                <div className={styles.codeHeader}>reduce-unique.ts</div>
                 <div className={styles.codeBody}>
                     <div className={styles.codeLine}>
                         <span className={styles.kwConst}>const</span>
                         {' '}
-                        <span className={styles.varName}>letters</span>
+                        <span className={styles.varName}>data</span>
                         <span className={styles.punct}>: </span>
-                        <span className={styles.typeName}>string</span>
+                        <span className={styles.typeName}>number</span>
                         <span className={styles.punct}>[] = [</span>
-                        <span className={styles.strLit}>{'\'a\', \'b\', \'a\', \'c\', \'b\', \'a\', \'d\', \'c\', \'b\', \'d\''}</span>
+                        <span className={styles.numLit}>1, 2, 2, 3, 1, 4, 3</span>
                         <span className={styles.punct}>];</span>
                     </div>
                     <div className={styles.codeBlankLine}>&nbsp;</div>
                     <div className={styles.codeLine}>
                         <span className={styles.kwConst}>const</span>
                         {' '}
-                        <span className={styles.varName}>freq</span>
-                        <span className={styles.punct}>{' = letters.reduce<'}</span>
-                        <span className={styles.typeName}>Record</span>
-                        <span className={styles.punct}>{'<'}</span>
-                        <span className={styles.typeName}>string</span>
-                        <span className={styles.punct}>{', '}</span>
+                        <span className={styles.varName}>unique</span>
+                        <span className={styles.punct}>{' = data.reduce<'}</span>
                         <span className={styles.typeName}>number</span>
-                        <span className={styles.punct}>{'>>('}
-                        </span>
+                        <span className={styles.punct}>{'[]>('}</span>
                     </div>
                     <div className={styles.codeLine}>
                         <span className={styles.punct}>&nbsp;&nbsp;{'('}</span>
@@ -422,30 +406,30 @@ export default function InteractiveReduceFreq() {
                             ref={curParamRef}
                             className={`${styles.paramName} ${vis.highlightedToken === 'cur-param' ? styles.tokenHighlight : ''}`}
                         >cur</span>
-                        <span className={styles.punct}>{') => {'}</span>
+                        <span className={styles.punct}>{') =>'}</span>
                     </div>
-                    {/* Body line 1 */}
-                    <div className={`${styles.codeLine} ${vis.bodyHighlighted ? styles.codeLineHighlight : ''}`}>
+                    {/* includes line */}
+                    <div className={`${styles.codeLine} ${vis.bodyPhase === 'includes' ? styles.codeLineHighlight : ''}`}>
                         <span className={styles.punct}>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        {renderBodyLine()}
+                        {renderIncludesLine()}
                     </div>
-                    {/* Body line 2 */}
-                    <div className={`${styles.codeLine} ${vis.bodyHighlighted ? styles.codeLineHighlight : ''}`}>
-                        <span className={styles.kwReturn}>&nbsp;&nbsp;&nbsp;&nbsp;return</span>
-                        {' '}
+                    {/* ? acc (skip) */}
+                    <div className={`${styles.codeLine} ${vis.bodyPhase === 'skip' ? styles.codeLineHighlightTrue : ''}`}>
+                        <span className={styles.punct}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span className={styles.punct}>{'? '}</span>
                         <span className={styles.paramName}>acc</span>
-                        <span className={styles.punct}>;</span>
+                    </div>
+                    {/* : [...acc, cur] (add) */}
+                    <div className={`${styles.codeLine} ${vis.bodyPhase === 'add' ? styles.codeLineHighlightFalse : ''}`}>
+                        <span className={styles.punct}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        {renderAddLine()}
                     </div>
                     <div className={styles.codeLine}>
-                        <span className={styles.punct}>&nbsp;&nbsp;{'}'}</span>
-                        <span className={styles.punct}>{','}</span>
-                    </div>
-                    <div className={styles.codeLine}>
-                        <span className={styles.punct}>&nbsp;&nbsp;</span>
+                        <span className={styles.punct}>{', '}</span>
                         <span
                             ref={initialValueRef}
                             className={`${styles.punct} ${vis.highlightedToken === 'initial' ? styles.tokenHighlight : ''}`}
-                        >{'{}'}</span>
+                        >[]</span>
                     </div>
                     <div className={styles.codeLine}>
                         <span className={styles.punct}>{');'}</span>
@@ -455,15 +439,15 @@ export default function InteractiveReduceFreq() {
 
             {/* ---- Array Panel ---- */}
             <div className={styles.arrayPanel}>
-                <span className={styles.arrayLabel}>letters</span>
+                <span className={styles.arrayLabel}>data</span>
                 <div className={styles.arrayElements}>
-                    {LETTERS.map((w, i) => (
+                    {DATA.map((val, i) => (
                         <div
                             key={i}
                             ref={el => { arrayElementRefs.current[i] = el; }}
                             className={`${styles.arrayElement} ${vis.highlightedArrayIndex === i ? styles.arrayElementHighlighted : ''} ${vis.isDone || (isRunning && vis.highlightedArrayIndex !== null && i < vis.highlightedArrayIndex) ? styles.arrayElementUsed : ''}`}
                         >
-                            {w}
+                            {val}
                         </div>
                     ))}
                 </div>
@@ -476,33 +460,26 @@ export default function InteractiveReduceFreq() {
                     <div className={styles.stateLabel}>acc</div>
                     <div
                         ref={accBoxRef}
-                        className={`${styles.accValue} ${accEntries.length > 0 ? styles.accValueFilled : ''}`}
+                        className={`${styles.accValue} ${vis.acc.length > 0 ? styles.accValueFilled : ''}`}
                     >
-                        {accEntries.length === 0 ? (
-                            <span className={styles.emptyObj}>
+                        {vis.acc.length === 0 ? (
+                            <span className={styles.emptyArr}>
                                 {stepIndex < 0 ? (
                                     <span className={styles.statePlaceholder}>–</span>
                                 ) : (
-                                    <span key={vis.accArriveKey} className={styles.valueArrive}>{'{}'}</span>
+                                    <span key={vis.accArriveKey} className={styles.valueArrive}>[]</span>
                                 )}
                             </span>
                         ) : (
-                            <div className={styles.accList}>
-                                {accEntries.map(([key, count]) => (
-                                    <div
-                                        key={key}
-                                        className={`${styles.accRow} ${vis.lastUpdatedKey === key ? styles.accRowUpdated : ''}`}
-                                        style={vis.lastUpdatedKey === key ? { animationName: `rowPulse`, animationDuration: '0.5s' } as React.CSSProperties : undefined}
+                            <div className={styles.accChips}>
+                                {vis.acc.map((n, i) => (
+                                    <span
+                                        key={`${n}-${i}`}
+                                        className={`${styles.accChip} ${i === vis.acc.length - 1 ? styles.accChipNew : ''}`}
+                                        style={i === vis.acc.length - 1 ? { animationName: 'chipPop', animationDuration: '0.4s' } as React.CSSProperties : undefined}
                                     >
-                                        <span className={styles.accKey}>{key}</span>
-                                        <span className={styles.accColon}>:</span>
-                                        <span
-                                            className={styles.accCount}
-                                            key={`${key}-${count}-${vis.lastUpdatedKeyId}`}
-                                        >
-                                            {count}
-                                        </span>
-                                    </div>
+                                        {n}
+                                    </span>
                                 ))}
                             </div>
                         )}
@@ -510,7 +487,7 @@ export default function InteractiveReduceFreq() {
                 </div>
 
                 {/* cur box */}
-                <div className={styles.wordBox}>
+                <div className={styles.curBox}>
                     <div className={styles.stateLabel}>cur</div>
                     <div
                         ref={curBoxRef}
@@ -529,7 +506,7 @@ export default function InteractiveReduceFreq() {
             {vis.isDone && (
                 <div className={`${styles.resultPanel} ${styles.resultPanelDone}`}>
                     <span className={styles.resultDone}>
-                        freq = <strong>{formatResult(vis.finalResult!)}</strong>
+                        unique = <strong>[{vis.finalResult!.join(', ')}]</strong>
                     </span>
                 </div>
             )}
