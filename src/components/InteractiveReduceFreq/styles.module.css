@@ -1,0 +1,511 @@
+/* ============================================================
+   InteractiveReduceFreq — CSS Module
+   ============================================================ */
+
+.container {
+    --irf-bg: #1e1e1e;
+    --irf-border: #333;
+    --irf-code-bg: #1e1e1e;
+    --irf-code-header: #2d2d2d;
+    --irf-code-text: #d4d4d4;
+    --irf-kw: #569cd6;
+    --irf-type: #4ec9b0;
+    --irf-var: #9cdcfe;
+    --irf-param: #9cdcfe;
+    --irf-num: #b5cea8;
+    --irf-punct: #d4d4d4;
+    --irf-return-kw: #c586c0;
+    --irf-array-bg: #252526;
+    --irf-array-border: #444;
+    --irf-array-text: #d4d4d4;
+    --irf-state-bg: #252526;
+    --irf-state-border: #444;
+    --irf-state-text: #d4d4d4;
+    --irf-accent: #f8c51c;
+    --irf-accent-dim: rgba(248, 197, 28, 0.15);
+    --irf-used: #3a3a3a;
+    --irf-used-text: #555;
+    --irf-placeholder: #555;
+    --irf-btn-primary-bg: #f8c51c;
+    --irf-btn-primary-text: #000;
+    --irf-btn-secondary-bg: #333;
+    --irf-btn-secondary-text: #ccc;
+    --irf-btn-secondary-border: #555;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--ifm-color-emphasis-100);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: var(--ifm-global-radius);
+    font-family: var(--ifm-font-family-monospace);
+    overflow: visible;
+    isolation: isolate;
+}
+
+:global([data-theme='light']) .container {
+    --irf-bg: #f5f5f5;
+    --irf-border: #ddd;
+    --irf-code-bg: #f8f8f8;
+    --irf-code-header: #ebebeb;
+    --irf-code-text: #24292e;
+    --irf-kw: #0000ff;
+    --irf-type: #267f99;
+    --irf-var: #001080;
+    --irf-param: #001080;
+    --irf-num: #098658;
+    --irf-punct: #24292e;
+    --irf-return-kw: #af00db;
+    --irf-array-bg: #f0f0f0;
+    --irf-array-border: #ddd;
+    --irf-array-text: #24292e;
+    --irf-state-bg: #f0f0f0;
+    --irf-state-border: #ddd;
+    --irf-state-text: #24292e;
+    --irf-used: #e8e8e8;
+    --irf-used-text: #aaa;
+    --irf-placeholder: #aaa;
+    --irf-btn-secondary-bg: #e8e8e8;
+    --irf-btn-secondary-text: #444;
+    --irf-btn-secondary-border: #ccc;
+}
+
+/* ============================================================
+   Code Panel
+   ============================================================ */
+
+.codePanel {
+    background: var(--irf-code-bg);
+    border: 1px solid var(--irf-border);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+
+.codePanel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 30, 30, 0.76);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+:global([data-theme='light']) .codePanel::after {
+    background: rgba(248, 248, 248, 0.76);
+}
+
+.codeDimmed::after {
+    opacity: 1;
+}
+
+.codeHeader {
+    background: var(--irf-code-header);
+    padding: 0.4rem 1rem;
+    font-size: 0.65rem;
+    color: var(--irf-placeholder);
+    border-bottom: 1px solid var(--irf-border);
+}
+
+.codeBody {
+    padding: 0.75rem 1rem;
+}
+
+.codeLine {
+    line-height: 1.7;
+    font-size: 0.85rem;
+    white-space: pre;
+}
+
+/* Syntax token colours */
+.kwConst   { color: var(--irf-kw); }
+.kwReturn  { color: var(--irf-return-kw); }
+.varName   { color: var(--irf-var); }
+.typeName  { color: var(--irf-type); }
+.paramName { color: var(--irf-param); }
+.numLit    { color: var(--irf-num); }
+.punct     { color: var(--irf-punct); }
+
+/* Substituted values (word and lookup count) */
+.substituted {
+    color: var(--irf-accent);
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes substitutePop {
+    0%   { transform: scale(1.5); opacity: 0.4; }
+    60%  { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.substitutedValue {
+    display: inline-block;
+    animation: substitutePop 0.35s ease-out;
+}
+
+/* Inline calculation result */
+.calcResult {
+    color: var(--irf-accent);
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes resultFadeIn {
+    from { opacity: 0; transform: translateX(6px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+.calcResultValue {
+    display: inline-block;
+    animation: resultFadeIn 0.3s ease-out;
+}
+
+/* Whole-line highlight for the body lines */
+@keyframes lineGlow {
+    0%, 100% { background: rgba(248, 197, 28, 0.12); }
+    50%       { background: rgba(248, 197, 28, 0.28); }
+}
+
+.codeLineHighlight {
+    animation: lineGlow 1s ease-in-out infinite;
+    border-radius: 3px;
+    position: relative;
+    z-index: 1;
+    margin: 0 -0.5rem;
+    padding: 0 0.5rem;
+}
+
+/* Token highlight (pulsing yellow glow) */
+@keyframes tokenGlow {
+    0%, 100% { background: rgba(248, 197, 28, 0.25); box-shadow: 0 0 0 2px rgba(248, 197, 28, 0.2); }
+    50%       { background: rgba(248, 197, 28, 0.55); box-shadow: 0 0 0 3px rgba(248, 197, 28, 0.5); }
+}
+
+.tokenHighlight {
+    animation: tokenGlow 0.9s ease-in-out infinite;
+    border-radius: 3px;
+    padding: 1px 2px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================================
+   Array Panel
+   ============================================================ */
+
+.arrayPanel {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--irf-array-bg);
+    border: 1px solid var(--irf-array-border);
+    border-radius: 6px;
+}
+
+.arrayLabel {
+    font-size: 0.72rem;
+    color: var(--irf-var);
+    min-width: 3rem;
+    flex-shrink: 0;
+    padding-top: 0.5rem;
+}
+
+.arrayElements {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.arrayElement {
+    min-width: 3.8rem;
+    height: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.5rem;
+    background: var(--irf-state-bg);
+    border: 2px solid var(--irf-array-border);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--irf-array-text);
+    transition: all 0.3s ease;
+}
+
+@keyframes elementPulse {
+    0%, 100% { transform: scale(1);    box-shadow: 0 0 0 2px rgba(248, 197, 28, 0.3); }
+    50%       { transform: scale(1.1); box-shadow: 0 0 10px rgba(248, 197, 28, 0.8); }
+}
+
+.arrayElementHighlighted {
+    animation: elementPulse 0.75s ease-in-out infinite;
+    background: var(--irf-accent-dim);
+    border-color: var(--irf-accent);
+    color: var(--irf-accent);
+}
+
+.arrayElementUsed {
+    opacity: 0.35;
+    background: var(--irf-used);
+    color: var(--irf-used-text);
+    border-color: var(--irf-used);
+}
+
+/* ============================================================
+   State Panel
+   ============================================================ */
+
+.statePanel {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+@media (max-width: 560px) {
+    .statePanel { flex-direction: column; }
+}
+
+/* acc box — grows with entries */
+.accBox {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.75rem 1rem;
+    background: var(--irf-state-bg);
+    border: 1px solid var(--irf-state-border);
+    border-radius: 6px;
+}
+
+.stateLabel {
+    font-size: 0.65rem;
+    color: var(--irf-placeholder);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+
+.accValue {
+    min-height: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--irf-bg);
+    border: 2px solid var(--irf-state-border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--irf-state-text);
+    transition: border-color 0.3s;
+    padding: 0.4rem 0.75rem;
+}
+
+.accValueFilled {
+    border-color: var(--irf-accent);
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.emptyObj {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Growing list of key: count rows */
+.accList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.accRow {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.15rem 0.25rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+@keyframes rowPulse {
+    0%   { background: rgba(248, 197, 28, 0.4); }
+    100% { background: transparent; }
+}
+
+.accRowUpdated {
+    animation: rowPulse 0.5s ease-out forwards;
+}
+
+.accKey {
+    color: var(--irf-var);
+    min-width: 3.8rem;
+}
+
+.accColon {
+    color: var(--irf-punct);
+}
+
+.accCount {
+    color: var(--irf-accent);
+    font-weight: bold;
+}
+
+@keyframes countPop {
+    0%   { transform: scale(1.6); color: var(--irf-accent); }
+    60%  { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+/* word box — fixed width */
+.wordBox {
+    width: 7rem;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.75rem 1rem;
+    background: var(--irf-state-bg);
+    border: 1px solid var(--irf-state-border);
+    border-radius: 6px;
+}
+
+.stateValue {
+    height: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--irf-bg);
+    border: 2px solid var(--irf-state-border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--irf-state-text);
+    transition: border-color 0.3s;
+}
+
+.stateValueFilled {
+    border-color: var(--irf-accent);
+}
+
+.statePlaceholder {
+    color: var(--irf-placeholder);
+    font-weight: normal;
+}
+
+@keyframes valuePop {
+    0%   { transform: scale(1.5); color: var(--irf-accent); }
+    60%  { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+.valueArrive {
+    display: inline-block;
+    animation: valuePop 0.4s ease-out;
+}
+
+/* ============================================================
+   Result Panel
+   ============================================================ */
+
+.resultPanel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.resultPanelDone {
+    border: 2px solid #27c93f;
+    background: rgba(39, 201, 63, 0.1);
+}
+
+@keyframes resultDoneAppear {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.resultDone {
+    color: #27c93f;
+    font-size: 0.9rem;
+    animation: resultDoneAppear 0.4s ease-out;
+    word-break: break-all;
+}
+
+/* ============================================================
+   Controls
+   ============================================================ */
+
+.controls {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+}
+
+.btnPrimary {
+    background: var(--irf-btn-primary-bg);
+    color: var(--irf-btn-primary-text);
+    border: none;
+    padding: 0.45rem 1.25rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: var(--ifm-font-family-monospace);
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.btnPrimary:hover { opacity: 0.85; transform: translateY(-1px); }
+.btnPrimary:active { transform: translateY(0); }
+
+.btnSecondary {
+    background: var(--irf-btn-secondary-bg);
+    color: var(--irf-btn-secondary-text);
+    border: 1px solid var(--irf-btn-secondary-border);
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: var(--ifm-font-family-monospace);
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.btnSecondary:hover:not(:disabled) { opacity: 0.8; transform: translateY(-1px); }
+.btnSecondary:active:not(:disabled) { transform: translateY(0); }
+.btnSecondary:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* ============================================================
+   Flying Badge
+   ============================================================ */
+
+.flyingBadge {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: var(--irf-accent);
+    color: #000;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(248, 197, 28, 0.6);
+    transition: left 0.4s ease-in-out, top 0.4s ease-in-out;
+    white-space: nowrap;
+}
