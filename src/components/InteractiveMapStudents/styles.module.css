@@ -98,6 +98,7 @@
 
 .codeBody {
     padding: 0.75rem 1rem;
+    overflow-x: auto;
 }
 
 .codeLine {
@@ -162,6 +163,23 @@
     animation: bodyGlow 1s ease-in-out infinite;
     border-radius: 3px;
     padding: 1px 3px;
+}
+
+/* Substituted values */
+.substituted {
+    color: var(--im-accent);
+    font-weight: bold;
+}
+
+@keyframes substitutePop {
+    0%   { transform: scale(1.5); opacity: 0.4; }
+    60%  { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.substitutedValue {
+    display: inline-block;
+    animation: substitutePop 0.35s ease-out;
 }
 
 /* Inline calculation result */

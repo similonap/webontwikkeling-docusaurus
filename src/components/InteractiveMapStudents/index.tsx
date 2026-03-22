@@ -9,10 +9,12 @@ import FlyingBadgeDisplay from '../shared/FlyingBadgeDisplay';
 // Types
 // ---------------------------------------------------------------------------
 
+type Student = { id: number; name: string };
+
 type MapStep =
     | { type: 'highlight-element'; index: number }
     | { type: 'move-to-param'; index: number }
-    | { type: 'highlight-body' }
+    | { type: 'highlight-body'; index: number }
     | { type: 'show-result'; name: string }
     | { type: 'push-to-dest'; index: number; name: string }
     | { type: 'add-to-dest'; index: number; name: string }
@@ -21,6 +23,8 @@ type MapStep =
 interface VisualState {
     highlightedSourceIndex: number | null;
     paramHighlighted: boolean;
+    paramStudent: Student | null;
+    valueArriveKey: number;
     bodyHighlighted: boolean;
     resultName: string | null;
     destResults: (string | null)[];
@@ -32,7 +36,7 @@ interface VisualState {
 // Constants
 // ---------------------------------------------------------------------------
 
-const STUDENTS = [
+const STUDENTS: Student[] = [
     { id: 0, name: 'Andie' },
     { id: 1, name: 'John' },
     { id: 2, name: 'Jessie' },
@@ -58,7 +62,8 @@ function generateSteps(): MapStep[] {
         const { name } = STUDENTS[i];
         steps.push({ type: 'highlight-element', index: i });
         steps.push({ type: 'move-to-param', index: i });
-        steps.push({ type: 'highlight-body' });
+        // highlight-body fires after badge has landed — object replaces "student" here
+        steps.push({ type: 'highlight-body', index: i });
         steps.push({ type: 'show-result', name });
         steps.push({ type: 'push-to-dest', index: i, name });
         steps.push({ type: 'add-to-dest', index: i, name });
@@ -77,6 +82,8 @@ function deriveVisualState(stepIndex: number): VisualState {
     const state: VisualState = {
         highlightedSourceIndex: null,
         paramHighlighted: false,
+        paramStudent: null,
+        valueArriveKey: 0,
         bodyHighlighted: false,
         resultName: null,
         destResults: Array(STUDENTS.length).fill(null),
@@ -91,14 +98,19 @@ function deriveVisualState(stepIndex: number): VisualState {
             case 'highlight-element':
                 state.highlightedSourceIndex = step.index;
                 state.paramHighlighted = false;
+                state.paramStudent = null;
                 state.bodyHighlighted = false;
                 state.resultName = null;
                 break;
             case 'move-to-param':
+                // badge is flying — keep showing "(student)" with glow, no substitution yet
                 state.paramHighlighted = true;
+                state.valueArriveKey = i;
                 break;
             case 'highlight-body':
+                // badge has landed — now replace "student" with the actual object
                 state.paramHighlighted = false;
+                state.paramStudent = STUDENTS[step.index];
                 state.bodyHighlighted = true;
                 break;
             case 'show-result':
@@ -110,6 +122,7 @@ function deriveVisualState(stepIndex: number): VisualState {
                 const newResults = [...state.destResults];
                 newResults[step.index] = step.name;
                 state.destResults = newResults;
+                state.paramStudent = null;
                 state.bodyHighlighted = false;
                 state.resultName = null;
                 break;
@@ -158,7 +171,7 @@ export default function InteractiveMapStudents() {
 
     const vis = deriveVisualState(stepIndex);
 
-    function renderSourceRow(student: typeof STUDENTS[0]) {
+    function renderSourceRow(student: Student) {
         return (
             <>
                 <span className={styles.punct}>{'{ '}</span>
@@ -171,6 +184,20 @@ export default function InteractiveMapStudents() {
                 <span className={styles.strLit}>"{student.name}"</span>
                 <span className={styles.punct}>{' }'}</span>
             </>
+        );
+    }
+
+    function renderParam() {
+        if (vis.paramStudent === null) {
+            return <span className={styles.paramName}>student</span>;
+        }
+        // Object arrived — show the full object in accent color with pop animation
+        return (
+            <span className={styles.substituted}>
+                <span key={`param-${vis.valueArriveKey}`} className={styles.substitutedValue}>
+                    {'{ id: '}{vis.paramStudent.id}{', name: "'}{vis.paramStudent.name}{'" }'}
+                </span>
+            </span>
         );
     }
 
@@ -219,12 +246,14 @@ export default function InteractiveMapStudents() {
                         <span className={styles.punct}>: </span>
                         <span className={styles.typeName}>string</span>
                         <span className={styles.punct}>{'[] = students.map('}</span>
-                        {/* accBoxRef on this div — badge lands here */}
+                        {/* accBoxRef on this div — badge lands here; shows object after landing */}
                         <div
                             ref={accBoxRef}
                             className={`${styles.paramArea} ${vis.paramHighlighted ? styles.tokenHighlight : ''}`}
                         >
-                            <span className={styles.paramName}>student</span>
+                            <span className={styles.punct}>(</span>
+                            {renderParam()}
+                            <span className={styles.punct}>)</span>
                         </div>
                         <span className={styles.punct}>{' => '}</span>
                         <span className={vis.bodyHighlighted ? styles.bodyHighlight : ''}>
