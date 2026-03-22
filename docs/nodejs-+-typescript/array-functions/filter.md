@@ -2,6 +2,14 @@
 
 De `filter` methode zal een nieuwe array teruggeven waarbij alleen de elementen van de originele array worden behouden waarvoor de callback functie `true` teruggeeft.
 
+
+import InteractiveFilter from '@site/src/components/InteractiveFilter';
+
+<InteractiveFilter />
+
+
+
+
 ```typescript
 let numbers : number[] = [1,2,3,4,5];
 

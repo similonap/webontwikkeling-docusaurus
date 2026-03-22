@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Webontwikkeling 2',
+  title: 'Webontwikkeling',
   tagline: 'A long time ago in a browser far, far away...',
   favicon: 'img/favicon.ico',
 
@@ -119,7 +119,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Webontwikkeling 2.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Webontwikkeling.`,
     },
     prism: {
       theme: prismThemes.github,
