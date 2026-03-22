@@ -236,7 +236,23 @@ export default function InteractiveMapStudents() {
                         <span className={styles.propKey}>name</span>
                         <span className={styles.punct}>: </span>
                         <span className={styles.typeName}>string</span>
-                        <span className={styles.punct}>{' }[] = [...]'}</span>
+                        <span className={styles.punct}>{' }[] = ['}</span>
+                    </div>
+                    {STUDENTS.map(student => (
+                        <div key={student.id} className={styles.codeLine}>
+                            <span className={styles.punct}>{'    { '}</span>
+                            <span className={styles.propKey}>id</span>
+                            <span className={styles.punct}>: </span>
+                            <span className={styles.numLit}>{student.id}</span>
+                            <span className={styles.punct}>{', '}</span>
+                            <span className={styles.propKey}>name</span>
+                            <span className={styles.punct}>: </span>
+                            <span className={styles.strLit}>"{student.name}"</span>
+                            <span className={styles.punct}>{' },'}</span>
+                        </div>
+                    ))}
+                    <div className={styles.codeLine}>
+                        <span className={styles.punct}>{'];'}</span>
                     </div>
                     <div className={styles.codeBlankLine}>&nbsp;</div>
                     <div className={styles.codeLine}>
