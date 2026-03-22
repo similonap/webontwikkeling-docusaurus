@@ -127,6 +127,22 @@ import InteractiveReduceGroupBy from '@site/src/components/InteractiveReduceGrou
 
 <InteractiveReduceGroupBy />
 
+## Maximale waarde vinden
+
+In TypeScript heb je een `Math.max` functie waar je het maximum van een rij getallen kan bepalen.
+
+```typescript
+let numbers: number[] = [1,5,3,2,5,6];
+
+Math.max(...numbers); // 6
+```
+
+Maar als voorbeeld zullen we deze functie ook eens uitwerken met een reduce. In dit geval is het interessant om geen `initialValue` mee te geven, want die weten we niet op voorhand. Hij neemt dan het eerste element als startpunt van de accumulator.
+
+import InteractiveReduceMax from '@site/src/components/InteractiveReduceMax';
+
+<InteractiveReduceMax />
+
 ## Duplicaten verwijderen
 
 import InteractiveReduceUnique from '@site/src/components/InteractiveReduceUnique';

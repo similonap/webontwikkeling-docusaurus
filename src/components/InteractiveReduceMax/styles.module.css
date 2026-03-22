@@ -1,0 +1,476 @@
+/* ============================================================
+   InteractiveReduceMax — CSS Module
+   ============================================================ */
+
+.container {
+    --irm-bg: #1e1e1e;
+    --irm-border: #333;
+    --irm-code-bg: #1e1e1e;
+    --irm-code-header: #2d2d2d;
+    --irm-code-text: #d4d4d4;
+    --irm-kw: #569cd6;
+    --irm-type: #4ec9b0;
+    --irm-var: #9cdcfe;
+    --irm-param: #9cdcfe;
+    --irm-num: #b5cea8;
+    --irm-punct: #d4d4d4;
+    --irm-array-bg: #252526;
+    --irm-array-border: #444;
+    --irm-array-text: #d4d4d4;
+    --irm-state-bg: #252526;
+    --irm-state-border: #444;
+    --irm-state-text: #d4d4d4;
+    --irm-accent: #f8c51c;
+    --irm-accent-dim: rgba(248, 197, 28, 0.15);
+    --irm-win: #27c93f;
+    --irm-win-dim: rgba(39, 201, 63, 0.15);
+    --irm-keep: #4a9eff;
+    --irm-keep-dim: rgba(74, 158, 255, 0.12);
+    --irm-true: #27c93f;
+    --irm-false: #ff5f57;
+    --irm-used: #3a3a3a;
+    --irm-used-text: #555;
+    --irm-placeholder: #555;
+    --irm-btn-primary-bg: #f8c51c;
+    --irm-btn-primary-text: #000;
+    --irm-btn-secondary-bg: #333;
+    --irm-btn-secondary-text: #ccc;
+    --irm-btn-secondary-border: #555;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--ifm-color-emphasis-100);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: var(--ifm-global-radius);
+    font-family: var(--ifm-font-family-monospace);
+    overflow: visible;
+    isolation: isolate;
+}
+
+:global([data-theme='light']) .container {
+    --irm-bg: #f5f5f5;
+    --irm-border: #ddd;
+    --irm-code-bg: #f8f8f8;
+    --irm-code-header: #ebebeb;
+    --irm-code-text: #24292e;
+    --irm-kw: #0000ff;
+    --irm-type: #267f99;
+    --irm-var: #001080;
+    --irm-param: #001080;
+    --irm-num: #098658;
+    --irm-punct: #24292e;
+    --irm-array-bg: #f0f0f0;
+    --irm-array-border: #ddd;
+    --irm-array-text: #24292e;
+    --irm-state-bg: #f0f0f0;
+    --irm-state-border: #ddd;
+    --irm-state-text: #24292e;
+    --irm-used: #e8e8e8;
+    --irm-used-text: #aaa;
+    --irm-placeholder: #aaa;
+    --irm-btn-secondary-bg: #e8e8e8;
+    --irm-btn-secondary-text: #444;
+    --irm-btn-secondary-border: #ccc;
+}
+
+/* ============================================================
+   Code Panel
+   ============================================================ */
+
+.codePanel {
+    background: var(--irm-code-bg);
+    border: 1px solid var(--irm-border);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+
+.codePanel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 30, 30, 0.76);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+:global([data-theme='light']) .codePanel::after {
+    background: rgba(248, 248, 248, 0.76);
+}
+
+.codeDimmed::after { opacity: 1; }
+
+.codeHeader {
+    background: var(--irm-code-header);
+    padding: 0.4rem 1rem;
+    font-size: 0.65rem;
+    color: var(--irm-placeholder);
+    border-bottom: 1px solid var(--irm-border);
+}
+
+.codeBody {
+    padding: 0.75rem 1rem;
+}
+
+.codeLine {
+    line-height: 1.7;
+    font-size: 0.85rem;
+    white-space: pre;
+}
+
+.codeBlankLine {
+    line-height: 1.7;
+    font-size: 0.85rem;
+}
+
+/* Syntax colours */
+.kwLet     { color: var(--irm-kw); }
+.varName   { color: var(--irm-var); }
+.typeName  { color: var(--irm-type); }
+.paramName { color: var(--irm-param); }
+.numLit    { color: var(--irm-num); }
+.punct     { color: var(--irm-punct); }
+
+/* Substituted values */
+.substituted {
+    color: var(--irm-accent);
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes substitutePop {
+    0%   { transform: scale(1.5); opacity: 0.4; }
+    60%  { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.substitutedValue {
+    display: inline-block;
+    animation: substitutePop 0.35s ease-out;
+}
+
+/* Comparison result */
+.resultTrue {
+    color: var(--irm-true);
+    font-weight: bold;
+}
+
+.resultFalse {
+    color: var(--irm-false);
+    font-weight: bold;
+}
+
+@keyframes resultFadeIn {
+    from { opacity: 0; transform: translateX(6px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+.calcResultValue {
+    display: inline-block;
+    animation: resultFadeIn 0.3s ease-out;
+}
+
+/* Line highlights */
+@keyframes lineGlow {
+    0%, 100% { background: rgba(248, 197, 28, 0.12); }
+    50%       { background: rgba(248, 197, 28, 0.28); }
+}
+
+@keyframes lineGlowWin {
+    0%, 100% { background: rgba(39, 201, 63, 0.10); }
+    50%       { background: rgba(39, 201, 63, 0.25); }
+}
+
+@keyframes lineGlowKeep {
+    0%, 100% { background: rgba(74, 158, 255, 0.08); }
+    50%       { background: rgba(74, 158, 255, 0.20); }
+}
+
+.codeLineHighlight {
+    animation: lineGlow 1s ease-in-out infinite;
+    border-radius: 3px;
+    position: relative;
+    z-index: 1;
+    margin: 0 -0.5rem;
+    padding: 0 0.5rem;
+}
+
+.codeLineHighlightWin {
+    animation: lineGlowWin 1s ease-in-out infinite;
+    border-radius: 3px;
+    position: relative;
+    z-index: 1;
+    margin: 0 -0.5rem;
+    padding: 0 0.5rem;
+}
+
+.codeLineHighlightKeep {
+    animation: lineGlowKeep 1s ease-in-out infinite;
+    border-radius: 3px;
+    position: relative;
+    z-index: 1;
+    margin: 0 -0.5rem;
+    padding: 0 0.5rem;
+}
+
+/* Token highlight */
+@keyframes tokenGlow {
+    0%, 100% { background: rgba(248, 197, 28, 0.25); box-shadow: 0 0 0 2px rgba(248, 197, 28, 0.2); }
+    50%       { background: rgba(248, 197, 28, 0.55); box-shadow: 0 0 0 3px rgba(248, 197, 28, 0.5); }
+}
+
+.tokenHighlight {
+    animation: tokenGlow 0.9s ease-in-out infinite;
+    border-radius: 3px;
+    padding: 1px 2px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================================
+   Array Panel
+   ============================================================ */
+
+.arrayPanel {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--irm-array-bg);
+    border: 1px solid var(--irm-array-border);
+    border-radius: 6px;
+}
+
+.arrayLabel {
+    font-size: 0.72rem;
+    color: var(--irm-var);
+    min-width: 3.5rem;
+    flex-shrink: 0;
+    padding-top: 0.5rem;
+}
+
+.arrayElements {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.arrayElement {
+    width: 2.4rem;
+    height: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--irm-state-bg);
+    border: 2px solid var(--irm-array-border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--irm-array-text);
+    transition: all 0.3s ease;
+}
+
+/* First element — becomes initial acc */
+@keyframes initialPulse {
+    0%, 100% { box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.4); }
+    50%       { box-shadow: 0 0 10px rgba(74, 158, 255, 0.9); }
+}
+
+.arrayElementInitial {
+    animation: initialPulse 0.75s ease-in-out infinite;
+    background: var(--irm-keep-dim);
+    border-color: var(--irm-keep);
+    color: var(--irm-keep);
+}
+
+@keyframes elementPulse {
+    0%, 100% { transform: scale(1);    box-shadow: 0 0 0 2px rgba(248, 197, 28, 0.3); }
+    50%       { transform: scale(1.1); box-shadow: 0 0 10px rgba(248, 197, 28, 0.8); }
+}
+
+.arrayElementHighlighted {
+    animation: elementPulse 0.75s ease-in-out infinite;
+    background: var(--irm-accent-dim);
+    border-color: var(--irm-accent);
+    color: var(--irm-accent);
+}
+
+.arrayElementUsed {
+    opacity: 0.35;
+    background: var(--irm-used);
+    color: var(--irm-used-text);
+    border-color: var(--irm-used);
+}
+
+/* ============================================================
+   State Panel
+   ============================================================ */
+
+.statePanel {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.stateBox {
+    width: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.75rem 1rem;
+    background: var(--irm-state-bg);
+    border: 1px solid var(--irm-state-border);
+    border-radius: 6px;
+}
+
+.stateLabel {
+    font-size: 0.65rem;
+    color: var(--irm-placeholder);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+
+.stateValue {
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--irm-bg);
+    border: 2px solid var(--irm-state-border);
+    border-radius: 6px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--irm-state-text);
+    transition: border-color 0.3s, background 0.3s;
+}
+
+.stateValueFilled {
+    border-color: var(--irm-accent);
+}
+
+@keyframes winFlash {
+    0%   { background: rgba(39, 201, 63, 0.4); border-color: var(--irm-win); }
+    100% { background: var(--irm-bg); border-color: var(--irm-accent); }
+}
+
+.stateValueWin {
+    animation: winFlash 0.6s ease-out forwards;
+    border-color: var(--irm-win);
+}
+
+.statePlaceholder {
+    color: var(--irm-placeholder);
+    font-weight: normal;
+    font-size: 0.9rem;
+}
+
+@keyframes valuePop {
+    0%   { transform: scale(1.6); color: var(--irm-accent); }
+    60%  { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+.valueArrive {
+    display: inline-block;
+    animation: valuePop 0.4s ease-out;
+}
+
+/* ============================================================
+   Result Panel
+   ============================================================ */
+
+.resultPanel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.resultPanelDone {
+    border: 2px solid #27c93f;
+    background: rgba(39, 201, 63, 0.1);
+}
+
+@keyframes resultDoneAppear {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.resultDone {
+    color: #27c93f;
+    font-size: 0.9rem;
+    animation: resultDoneAppear 0.4s ease-out;
+}
+
+/* ============================================================
+   Controls
+   ============================================================ */
+
+.controls {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+}
+
+.btnPrimary {
+    background: var(--irm-btn-primary-bg);
+    color: var(--irm-btn-primary-text);
+    border: none;
+    padding: 0.45rem 1.25rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: var(--ifm-font-family-monospace);
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.btnPrimary:hover { opacity: 0.85; transform: translateY(-1px); }
+.btnPrimary:active { transform: translateY(0); }
+
+.btnSecondary {
+    background: var(--irm-btn-secondary-bg);
+    color: var(--irm-btn-secondary-text);
+    border: 1px solid var(--irm-btn-secondary-border);
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: var(--ifm-font-family-monospace);
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.btnSecondary:hover:not(:disabled) { opacity: 0.8; transform: translateY(-1px); }
+.btnSecondary:active:not(:disabled) { transform: translateY(0); }
+.btnSecondary:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* ============================================================
+   Flying Badge
+   ============================================================ */
+
+.flyingBadge {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: var(--irm-accent);
+    color: #000;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(248, 197, 28, 0.6);
+    transition: left 0.4s ease-in-out, top 0.4s ease-in-out;
+    white-space: nowrap;
+}
