@@ -7,17 +7,6 @@ import InteractiveFilter from '@site/src/components/InteractiveFilter';
 
 <InteractiveFilter />
 
-
-
-
-```typescript
-let numbers : number[] = [1,2,3,4,5];
-
-let even : number[] = numbers.filter(element => element % 2 === 0);
-
-console.log(even); // [2,4]
-```
-
 Ook hier kan je het type van `element` expliciet aangeven.
 
 ```typescript
