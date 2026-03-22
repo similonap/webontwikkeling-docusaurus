@@ -1,7 +1,7 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 const sidebars: SidebarsConfig = {
-  tutorialSidebar: [
+  theorieSidebar: [
   {
     "type": "doc",
     "id": "index",
@@ -362,10 +362,8 @@ const sidebars: SidebarsConfig = {
       }
     ]
   },
-  {
-    "type": "category",
-    "label": "Labos",
-    "items": [
+],
+  labosSidebar: [
       {
         "type": "doc",
         "id": "labos/labo1/index",
@@ -1040,9 +1038,7 @@ const sidebars: SidebarsConfig = {
         "type": "doc",
         "id": "labos/circuit-crawler",
         "label": "Circuit Crawler"
-      }
-    ]
-  },
+      },
   {
     "type": "category",
     "label": "Project",

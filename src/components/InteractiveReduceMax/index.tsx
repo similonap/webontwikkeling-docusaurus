@@ -1,5 +1,9 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import styles from './styles.module.css';
+import { useReduceAnimation } from '../shared/useReduceAnimation';
+import type { AnimationRefs, BadgeAnimation } from '../shared/useReduceAnimation';
+import ReduceControls from '../shared/ReduceControls';
+import FlyingBadgeDisplay from '../shared/FlyingBadgeDisplay';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -30,16 +34,6 @@ interface VisualState {
     compareResult: boolean | null;
     isDone: boolean;
     finalResult: number | null;
-}
-
-interface FlyingBadge {
-    value: string;
-    startX: number;
-    startY: number;
-    endX: number;
-    endY: number;
-    moving: boolean;
-    id: number;
 }
 
 // ---------------------------------------------------------------------------
@@ -174,144 +168,28 @@ function deriveVisualState(stepIndex: number): VisualState {
 // ---------------------------------------------------------------------------
 
 export default function InteractiveReduceMax() {
-    const [stepIndex, setStepIndex] = useState(-1);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [badge, setBadge] = useState<FlyingBadge | null>(null);
-
-    const containerRef = useRef<HTMLDivElement>(null);
     const accParamRef = useRef<HTMLSpanElement>(null);
     const curParamRef = useRef<HTMLSpanElement>(null);
-    const arrayElementRefs = useRef<(HTMLDivElement | null)[]>([]);
-    const accBoxRef = useRef<HTMLDivElement>(null);
-    const curBoxRef = useRef<HTMLDivElement>(null);
 
-    const cleanupRef = useRef<(() => void) | null>(null);
-
-    const vis = deriveVisualState(stepIndex);
-    const isDone = vis.isDone;
-    const isRunning = stepIndex >= 0 && !isDone;
-
-    // ------------------------------------------------------------------
-    // Flying badge
-    // ------------------------------------------------------------------
-
-    const launchBadge = useCallback((
-        sourceRef: React.RefObject<HTMLElement | HTMLDivElement | null>,
-        destRef: React.RefObject<HTMLElement | HTMLDivElement | null>,
-        value: string,
-        onLand: () => void,
-    ) => {
-        const container = containerRef.current;
-        const source = sourceRef.current;
-        const dest = destRef.current;
-        if (!container || !source || !dest) { onLand(); return; }
-
-        const cRect = container.getBoundingClientRect();
-        const sRect = source.getBoundingClientRect();
-        const dRect = dest.getBoundingClientRect();
-
-        const startX = sRect.left - cRect.left + sRect.width / 2;
-        const startY = sRect.top - cRect.top + sRect.height / 2;
-        const endX = dRect.left - cRect.left + dRect.width / 2;
-        const endY = dRect.top - cRect.top + dRect.height / 2;
-
-        const newBadge: FlyingBadge = {
-            value, startX, startY, endX, endY, moving: false, id: Date.now(),
-        };
-        setBadge(newBadge);
-
-        const raf1 = requestAnimationFrame(() => {
-            const raf2 = requestAnimationFrame(() => {
-                setBadge(prev => prev?.id === newBadge.id ? { ...prev, moving: true } : prev);
-                const timer = setTimeout(() => {
-                    setBadge(prev => prev?.id === newBadge.id ? null : prev);
-                    onLand();
-                }, 450);
-                cleanupRef.current = () => { clearTimeout(timer); setBadge(null); };
-            });
-            cleanupRef.current = () => { cancelAnimationFrame(raf2); setBadge(null); };
-        });
-        cleanupRef.current = () => { cancelAnimationFrame(raf1); setBadge(null); };
+    const getBadgeAnimation = useCallback((
+        step: MaxStep,
+        { arrayElementRefs, accBoxRef, curBoxRef }: AnimationRefs,
+    ): BadgeAnimation | null => {
+        if (step.type === 'move-first-to-acc')
+            return { source: { current: arrayElementRefs.current[0] }, dest: accBoxRef, value: String(step.value) };
+        if (step.type === 'move-to-cur')
+            return { source: { current: arrayElementRefs.current[step.index] }, dest: curBoxRef, value: String(step.value) };
+        return null;
     }, []);
 
-    // ------------------------------------------------------------------
-    // Step advancement
-    // ------------------------------------------------------------------
+    const {
+        stepIndex, isPlaying, badge, isDone, isRunning,
+        containerRef, accBoxRef, curBoxRef, arrayElementRefs,
+        handleStart, handleStep, reset,
+    } = useReduceAnimation({ steps: STEPS, stepDuration: STEP_DURATION, getBadgeAnimation });
 
-    const advanceStep = useCallback((currentIndex: number) => {
-        const nextIndex = currentIndex + 1;
-        if (nextIndex >= STEPS.length) {
-            setIsPlaying(false);
-            return;
-        }
+    const vis = deriveVisualState(stepIndex);
 
-        const nextStep = STEPS[nextIndex];
-
-        if (nextStep.type === 'move-first-to-acc') {
-            setStepIndex(nextIndex);
-            const elRef = { current: arrayElementRefs.current[0] };
-            launchBadge(elRef as React.RefObject<HTMLDivElement>, accBoxRef, String(nextStep.value), () => { });
-        } else if (nextStep.type === 'move-to-cur') {
-            setStepIndex(nextIndex);
-            const elRef = { current: arrayElementRefs.current[nextStep.index] };
-            launchBadge(elRef as React.RefObject<HTMLDivElement>, curBoxRef, String(nextStep.value), () => { });
-        } else {
-            setStepIndex(nextIndex);
-        }
-    }, [launchBadge]);
-
-    // Auto-play
-    useEffect(() => {
-        if (!isPlaying) return;
-        if (isDone) { setIsPlaying(false); return; }
-
-        const currentStep = stepIndex >= 0 ? STEPS[stepIndex] : null;
-        const delay = currentStep ? STEP_DURATION[currentStep.type] : 200;
-
-        const timer = setTimeout(() => {
-            advanceStep(stepIndex);
-        }, delay);
-
-        return () => clearTimeout(timer);
-    }, [isPlaying, stepIndex, isDone, advanceStep]);
-
-    // ------------------------------------------------------------------
-    // Handlers
-    // ------------------------------------------------------------------
-
-    const handleStart = () => {
-        if (isDone) { reset(); return; }
-        if (stepIndex < 0) {
-            setStepIndex(0);
-            setIsPlaying(true);
-        } else {
-            setIsPlaying(prev => !prev);
-        }
-    };
-
-    const handleStep = () => {
-        if (isDone) return;
-        if (stepIndex < 0) {
-            setStepIndex(0);
-        } else {
-            advanceStep(stepIndex);
-        }
-        setIsPlaying(false);
-    };
-
-    const reset = () => {
-        cleanupRef.current?.();
-        cleanupRef.current = null;
-        setBadge(null);
-        setStepIndex(-1);
-        setIsPlaying(false);
-    };
-
-    // ------------------------------------------------------------------
-    // Body line rendering
-    // ------------------------------------------------------------------
-
-    // cur > acc
     function renderCompareLine() {
         if (vis.bodyPhase !== 'compare' || vis.cur === null || vis.acc === null) {
             return (
@@ -340,10 +218,6 @@ export default function InteractiveReduceMax() {
             </>
         );
     }
-
-    // ------------------------------------------------------------------
-    // Render
-    // ------------------------------------------------------------------
 
     return (
         <div className={styles.container} ref={containerRef}>
@@ -379,18 +253,15 @@ export default function InteractiveReduceMax() {
                         >cur</span>
                         <span className={styles.punct}>{') =>'}</span>
                     </div>
-                    {/* comparison line */}
                     <div className={`${styles.codeLine} ${vis.bodyPhase === 'compare' ? styles.codeLineHighlight : ''}`}>
                         <span className={styles.punct}>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         {renderCompareLine()}
                     </div>
-                    {/* ? cur */}
                     <div className={`${styles.codeLine} ${vis.bodyPhase === 'cur-wins' ? styles.codeLineHighlightWin : ''}`}>
                         <span className={styles.punct}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <span className={styles.punct}>{'? '}</span>
                         <span className={styles.paramName}>cur</span>
                     </div>
-                    {/* : acc */}
                     <div className={`${styles.codeLine} ${vis.bodyPhase === 'acc-wins' ? styles.codeLineHighlightKeep : ''}`}>
                         <span className={styles.punct}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <span className={styles.punct}>{'  : '}</span>
@@ -425,7 +296,6 @@ export default function InteractiveReduceMax() {
 
             {/* ---- State Panel ---- */}
             <div className={styles.statePanel}>
-                {/* acc box */}
                 <div className={styles.stateBox}>
                     <div className={styles.stateLabel}>acc</div>
                     <div
@@ -439,8 +309,6 @@ export default function InteractiveReduceMax() {
                         )}
                     </div>
                 </div>
-
-                {/* cur box */}
                 <div className={styles.stateBox}>
                     <div className={styles.stateLabel}>cur</div>
                     <div
@@ -465,40 +333,16 @@ export default function InteractiveReduceMax() {
                 </div>
             )}
 
-            {/* ---- Controls ---- */}
-            <div className={styles.controls}>
-                <button className={styles.btnPrimary} onClick={handleStart}>
-                    {isDone ? '↺ Opnieuw' : stepIndex < 0 ? '▶ Start' : isPlaying ? '⏸ Pauze' : '▶ Verder'}
-                </button>
-                <button
-                    className={styles.btnSecondary}
-                    onClick={handleStep}
-                    disabled={isPlaying || isDone}
-                >
-                    Stap →
-                </button>
-                <button
-                    className={styles.btnSecondary}
-                    onClick={reset}
-                    disabled={stepIndex < 0 && !isDone}
-                >
-                    ↺ Reset
-                </button>
-            </div>
-
-            {/* ---- Flying Badge ---- */}
-            {badge && (
-                <div
-                    key={badge.id}
-                    className={styles.flyingBadge}
-                    style={{
-                        left: badge.moving ? badge.endX : badge.startX,
-                        top: badge.moving ? badge.endY : badge.startY,
-                    }}
-                >
-                    {badge.value}
-                </div>
-            )}
+            <ReduceControls
+                isDone={isDone}
+                stepIndex={stepIndex}
+                isPlaying={isPlaying}
+                onStart={handleStart}
+                onStep={handleStep}
+                onReset={reset}
+                styles={styles}
+            />
+            <FlyingBadgeDisplay badge={badge} styles={styles} />
         </div>
     );
 }

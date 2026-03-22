@@ -82,17 +82,23 @@ const config: Config = {
       disableSwitch: false,
     },
     navbar: {
-      title: 'Webontwikkeling 2',
+      title: 'Webontwikkeling',
       logo: {
-        alt: 'Course Logo',
-        src: 'img/logo.svg',
+        alt: 'TypeScript Logo',
+        src: 'img/typescript.png',
       },
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'theorieSidebar',
           position: 'left',
-          label: 'De Cursus',
+          label: 'Theorie',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'labosSidebar',
+          position: 'left',
+          label: 'Labos',
         },
         {
           href: 'https://github.com/similon',
