@@ -1,17 +1,10 @@
 # map
 
-De `map` methode zal een nieuwe array teruggeven waarbij elk element van de originele array is vervangen door het resultaat van de callback functie.
+De `map` functie stelt je in staat om elk item in een lijst (array) te pakken, er iets mee te doen, en de resultaten in een nieuwe lijst te stoppen. In plaats van een ouderwetse for-loop te schrijven waarbij je handmatig een nieuwe lijst moet bijhouden, doet `map()` al het zware werk voor je. Het houdt je code kort, leesbaar en "clean".
 
-```typescript
-let numbers : number[] = [1,2,3,4,5];
+import InteractiveMap from '@site/src/components/InteractiveMap';
 
-let doubled : number[] = numbers.map(element => element * 2);
+<InteractiveMap />
 
-console.log(doubled); // [2,4,6,8,10]
-```
 
-Het type van `element` is hetzelfde als het type van een element in de array. In dit geval is `element` van het type `number`. Je kan dit ook expliciet aangeven.
 
-```typescript
-let doubled : number[] = numbers.map((element: number) => element * 2);
-```
