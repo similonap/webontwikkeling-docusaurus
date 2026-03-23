@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import styles from './styles.module.css';
 import { useReduceAnimation } from '../shared/useReduceAnimation';
 import type { AnimationRefs, BadgeAnimation } from '../shared/useReduceAnimation';
@@ -168,6 +168,9 @@ function deriveVisualState(stepIndex: number): VisualState {
 // ---------------------------------------------------------------------------
 
 export default function InteractiveReduceMax() {
+    const [typeInference, setTypeInference] = useState(false);
+    const [returnStatement, setReturnStatement] = useState(false);
+
     const accParamRef = useRef<HTMLSpanElement>(null);
     const curParamRef = useRef<HTMLSpanElement>(null);
 
@@ -219,8 +222,33 @@ export default function InteractiveReduceMax() {
         );
     }
 
+    const bodyHighlightClass =
+        vis.bodyPhase === 'compare' ? styles.codeLineHighlight :
+        vis.bodyPhase === 'cur-wins' ? styles.codeLineHighlightWin :
+        vis.bodyPhase === 'acc-wins' ? styles.codeLineHighlightKeep : '';
+
     return (
         <div className={styles.container} ref={containerRef}>
+            {/* ---- Checkboxes ---- */}
+            <div className={styles.checkboxRow}>
+                <label className={styles.checkboxLabel}>
+                    <input
+                        type="checkbox"
+                        checked={typeInference}
+                        onChange={e => setTypeInference(e.target.checked)}
+                    />
+                    gebruik type inference
+                </label>
+                <label className={styles.checkboxLabel}>
+                    <input
+                        type="checkbox"
+                        checked={returnStatement}
+                        onChange={e => setReturnStatement(e.target.checked)}
+                    />
+                    gebruik return statement
+                </label>
+            </div>
+
             {/* ---- Code Panel ---- */}
             <div className={`${styles.codePanel} ${vis.codeDimmed ? styles.codeDimmed : ''}`}>
                 <div className={styles.codeHeader}>reduce-max.ts</div>
@@ -238,34 +266,46 @@ export default function InteractiveReduceMax() {
                     <div className={styles.codeBlankLine}>&nbsp;</div>
                     <div className={styles.codeLine}>
                         <span className={styles.varName}>numbers</span>
-                        <span className={styles.punct}>.reduce(</span>
+                        <span className={styles.punct}>{'.reduce('}</span>
                     </div>
-                    <div className={styles.codeLine}>
-                        <span className={styles.punct}>&nbsp;&nbsp;{'('}</span>
+                    <div className={`${styles.codeLine} ${bodyHighlightClass}`}>
+                        <span className={styles.punct}>&nbsp;&nbsp;(</span>
                         <span
                             ref={accParamRef}
                             className={`${styles.paramName} ${vis.highlightedToken === 'acc-param' ? styles.tokenHighlight : ''}`}
                         >acc</span>
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>number</span>
+                            </>
+                        )}
                         <span className={styles.punct}>{', '}</span>
                         <span
                             ref={curParamRef}
                             className={`${styles.paramName} ${vis.highlightedToken === 'cur-param' ? styles.tokenHighlight : ''}`}
                         >cur</span>
-                        <span className={styles.punct}>{') =>'}</span>
-                    </div>
-                    <div className={`${styles.codeLine} ${vis.bodyPhase === 'compare' ? styles.codeLineHighlight : ''}`}>
-                        <span className={styles.punct}>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>number</span>
+                            </>
+                        )}
+                        <span className={styles.punct}>)</span>
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>number</span>
+                            </>
+                        )}
+                        <span className={styles.punct}>{returnStatement ? ' => { ' : ' => '}</span>
+                        {returnStatement && <span className={styles.kwReturn}>return </span>}
                         {renderCompareLine()}
-                    </div>
-                    <div className={`${styles.codeLine} ${vis.bodyPhase === 'cur-wins' ? styles.codeLineHighlightWin : ''}`}>
-                        <span className={styles.punct}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <span className={styles.punct}>{'? '}</span>
-                        <span className={styles.paramName}>cur</span>
-                    </div>
-                    <div className={`${styles.codeLine} ${vis.bodyPhase === 'acc-wins' ? styles.codeLineHighlightKeep : ''}`}>
-                        <span className={styles.punct}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <span className={styles.punct}>{'  : '}</span>
-                        <span className={styles.paramName}>acc</span>
+                        <span className={styles.punct}>{' ? '}</span>
+                        <span className={`${styles.paramName} ${vis.bodyPhase === 'cur-wins' ? styles.tokenHighlightWin : ''}`}>cur</span>
+                        <span className={styles.punct}>{' : '}</span>
+                        <span className={`${styles.paramName} ${vis.bodyPhase === 'acc-wins' ? styles.tokenHighlightKeep : ''}`}>acc</span>
+                        {returnStatement && <span className={styles.punct}>{'; }'}</span>}
                     </div>
                     <div className={styles.codeLine}>
                         <span className={styles.punct}>{');'}</span>

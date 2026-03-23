@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import styles from './styles.module.css';
 import { useReduceAnimation } from '../shared/useReduceAnimation';
 import type { AnimationRefs, BadgeAnimation } from '../shared/useReduceAnimation';
@@ -141,6 +141,9 @@ function deriveVisualState(stepIndex: number): VisualState {
 // ---------------------------------------------------------------------------
 
 export default function InteractiveMapStudents() {
+    const [typeInference, setTypeInference] = useState(false);
+    const [returnStatement, setReturnStatement] = useState(false);
+
     const calcResultRef = useRef<HTMLSpanElement>(null);
     const destElementRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -189,7 +192,17 @@ export default function InteractiveMapStudents() {
 
     function renderParam() {
         if (vis.paramStudent === null) {
-            return <span className={styles.paramName}>student</span>;
+            return (
+                <>
+                    <span className={styles.paramName}>student</span>
+                    {!typeInference && (
+                        <>
+                            <span className={styles.punct}>: </span>
+                            <span className={styles.typeName}>Student</span>
+                        </>
+                    )}
+                </>
+            );
         }
         // Object arrived — show the full object in accent color with pop animation
         return (
@@ -220,6 +233,26 @@ export default function InteractiveMapStudents() {
 
     return (
         <div className={styles.container} ref={containerRef}>
+            {/* ---- Checkboxes ---- */}
+            <div className={styles.checkboxRow}>
+                <label className={styles.checkboxLabel}>
+                    <input
+                        type="checkbox"
+                        checked={typeInference}
+                        onChange={e => setTypeInference(e.target.checked)}
+                    />
+                    gebruik type inference
+                </label>
+                <label className={styles.checkboxLabel}>
+                    <input
+                        type="checkbox"
+                        checked={returnStatement}
+                        onChange={e => setReturnStatement(e.target.checked)}
+                    />
+                    gebruik return statement
+                </label>
+            </div>
+
             {/* ---- Code Panel ---- */}
             <div className={styles.codePanel}>
                 <div className={styles.codeHeader}>map-students.ts</div>
@@ -228,15 +261,10 @@ export default function InteractiveMapStudents() {
                         <span className={styles.kwConst}>const</span>
                         {' '}
                         <span className={styles.varName}>students</span>
-                        <span className={styles.punct}>: {'{ '}</span>
-                        <span className={styles.propKey}>id</span>
                         <span className={styles.punct}>: </span>
-                        <span className={styles.typeName}>number</span>
-                        <span className={styles.punct}>{', '}</span>
-                        <span className={styles.propKey}>name</span>
-                        <span className={styles.punct}>: </span>
-                        <span className={styles.typeName}>string</span>
-                        <span className={styles.punct}>{' }[] = ['}</span>
+                        <span className={styles.typeName}>Student</span>
+                        <span className={styles.punct}>[]</span>
+                        <span className={styles.punct}>{' = ['}</span>
                     </div>
                     {STUDENTS.map(student => (
                         <div key={student.id} className={styles.codeLine}>
@@ -261,7 +289,8 @@ export default function InteractiveMapStudents() {
                         <span className={styles.varName}>studentNames</span>
                         <span className={styles.punct}>: </span>
                         <span className={styles.typeName}>string</span>
-                        <span className={styles.punct}>{'[] = students.map('}</span>
+                        <span className={styles.punct}>[]</span>
+                        <span className={styles.punct}>{' = students.map('}</span>
                         {/* accBoxRef on this div — badge lands here; shows object after landing */}
                         <div
                             ref={accBoxRef}
@@ -271,10 +300,18 @@ export default function InteractiveMapStudents() {
                             {renderParam()}
                             <span className={styles.punct}>)</span>
                         </div>
-                        <span className={styles.punct}>{' => '}</span>
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>string</span>
+                            </>
+                        )}
+                        <span className={styles.punct}>{returnStatement ? ' => {' : ' => '}</span>
+                        {returnStatement && <span className={styles.kwLet}>{' return '}</span>}
                         <span className={vis.bodyHighlighted ? styles.bodyHighlight : ''}>
                             {renderBody()}
                         </span>
+                        {returnStatement && <span className={styles.punct}>{'; }'}</span>}
                         <span className={styles.punct}>{');'}</span>
                     </div>
                 </div>

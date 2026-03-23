@@ -230,13 +230,9 @@ export default function InteractiveMap() {
                         <span className={styles.kwLet}>let</span>
                         {' '}
                         <span className={styles.varName}>numbers</span>
-                        {!typeInference && (
-                            <>
-                                <span className={styles.punct}>: </span>
-                                <span className={styles.typeName}>number</span>
-                                <span className={styles.punct}>[]</span>
-                            </>
-                        )}
+                        <span className={styles.punct}>: </span>
+                        <span className={styles.typeName}>number</span>
+                        <span className={styles.punct}>[]</span>
                         <span className={styles.punct}>{' = ['}</span>
                         <span className={styles.numLit}>1, 2, 3, 4, 5</span>
                         <span className={styles.punct}>];</span>
@@ -246,13 +242,9 @@ export default function InteractiveMap() {
                         <span className={styles.kwLet}>let</span>
                         {' '}
                         <span className={styles.varName}>doubled</span>
-                        {!typeInference && (
-                            <>
-                                <span className={styles.punct}>: </span>
-                                <span className={styles.typeName}>number</span>
-                                <span className={styles.punct}>[]</span>
-                            </>
-                        )}
+                        <span className={styles.punct}>: </span>
+                        <span className={styles.typeName}>number</span>
+                        <span className={styles.punct}>[]</span>
                         <span className={styles.punct}>{' = numbers.map('}</span>
                         {/* accBoxRef on this div — badge lands here when value flies to param */}
                         <div

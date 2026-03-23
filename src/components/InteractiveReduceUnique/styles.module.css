@@ -76,6 +76,32 @@
 }
 
 /* ============================================================
+   Checkboxes
+   ============================================================ */
+
+.checkboxRow {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-family: var(--ifm-font-family-base);
+    font-size: 0.8rem;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    color: var(--iru-code-text);
+    user-select: none;
+}
+
+.checkboxLabel input[type='checkbox'] {
+    cursor: pointer;
+    accent-color: var(--iru-accent);
+}
+
+/* ============================================================
    Code Panel
    ============================================================ */
 
@@ -129,6 +155,7 @@
 
 /* Syntax colours */
 .kwConst   { color: var(--iru-kw); }
+.kwReturn  { color: var(--iru-kw); }
 .varName   { color: var(--iru-var); }
 .typeName  { color: var(--iru-type); }
 .paramName { color: var(--iru-param); }
@@ -224,8 +251,34 @@
     50%       { background: rgba(248, 197, 28, 0.55); box-shadow: 0 0 0 3px rgba(248, 197, 28, 0.5); }
 }
 
+@keyframes tokenGlowTrue {
+    0%, 100% { background: rgba(39, 201, 63, 0.20); box-shadow: 0 0 0 2px rgba(39, 201, 63, 0.15); }
+    50%       { background: rgba(39, 201, 63, 0.45); box-shadow: 0 0 0 3px rgba(39, 201, 63, 0.40); }
+}
+
+@keyframes tokenGlowFalse {
+    0%, 100% { background: rgba(255, 95, 87, 0.20); box-shadow: 0 0 0 2px rgba(255, 95, 87, 0.15); }
+    50%       { background: rgba(255, 95, 87, 0.45); box-shadow: 0 0 0 3px rgba(255, 95, 87, 0.40); }
+}
+
 .tokenHighlight {
     animation: tokenGlow 0.9s ease-in-out infinite;
+    border-radius: 3px;
+    padding: 1px 2px;
+    position: relative;
+    z-index: 1;
+}
+
+.tokenHighlightTrue {
+    animation: tokenGlowTrue 0.9s ease-in-out infinite;
+    border-radius: 3px;
+    padding: 1px 2px;
+    position: relative;
+    z-index: 1;
+}
+
+.tokenHighlightFalse {
+    animation: tokenGlowFalse 0.9s ease-in-out infinite;
     border-radius: 3px;
     padding: 1px 2px;
     position: relative;

@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import styles from './styles.module.css';
 import { useReduceAnimation } from '../shared/useReduceAnimation';
 import type { AnimationRefs, BadgeAnimation } from '../shared/useReduceAnimation';
@@ -147,6 +147,9 @@ function deriveVisualState(stepIndex: number): VisualState {
 // ---------------------------------------------------------------------------
 
 export default function InteractiveFilter() {
+    const [typeInference, setTypeInference] = useState(false);
+    const [returnStatement, setReturnStatement] = useState(false);
+
     const calcResultRef = useRef<HTMLSpanElement>(null);
 
     const getBadgeAnimation = useCallback((
@@ -224,6 +227,26 @@ export default function InteractiveFilter() {
 
     return (
         <div className={styles.container} ref={containerRef}>
+            {/* ---- Checkboxes ---- */}
+            <div className={styles.checkboxRow}>
+                <label className={styles.checkboxLabel}>
+                    <input
+                        type="checkbox"
+                        checked={typeInference}
+                        onChange={e => setTypeInference(e.target.checked)}
+                    />
+                    gebruik type inference
+                </label>
+                <label className={styles.checkboxLabel}>
+                    <input
+                        type="checkbox"
+                        checked={returnStatement}
+                        onChange={e => setReturnStatement(e.target.checked)}
+                    />
+                    gebruik return statement
+                </label>
+            </div>
+
             {/* ---- Code Panel ---- */}
             <div className={styles.codePanel}>
                 <div className={styles.codeHeader}>filter-even.ts</div>
@@ -258,14 +281,30 @@ export default function InteractiveFilter() {
                                     </span>
                                 </span>
                             ) : (
-                                <span className={styles.paramName}>element</span>
+                                <>
+                                    <span className={styles.paramName}>element</span>
+                                    {!typeInference && (
+                                        <>
+                                            <span className={styles.punct}>: </span>
+                                            <span className={styles.typeName}>number</span>
+                                        </>
+                                    )}
+                                </>
                             )}
                             <span className={styles.punct}>)</span>
                         </div>
-                        <span className={styles.punct}>{' => '}</span>
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>boolean</span>
+                            </>
+                        )}
+                        <span className={styles.punct}>{returnStatement ? ' => {' : ' => '}</span>
+                        {returnStatement && <span className={styles.kwLet}>{' return '}</span>}
                         <span className={vis.bodyValue !== null ? styles.bodyHighlight : ''}>
                             {renderBody()}
                         </span>
+                        {returnStatement && <span className={styles.punct}>{'; }'}</span>}
                         <span className={styles.punct}>{');'}</span>
                     </div>
                 </div>

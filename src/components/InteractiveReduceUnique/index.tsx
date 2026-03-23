@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import styles from './styles.module.css';
 import { useReduceAnimation } from '../shared/useReduceAnimation';
 import type { AnimationRefs, BadgeAnimation } from '../shared/useReduceAnimation';
@@ -167,6 +167,9 @@ function deriveVisualState(stepIndex: number): VisualState {
 // ---------------------------------------------------------------------------
 
 export default function InteractiveReduceUnique() {
+    const [typeInference, setTypeInference] = useState(false);
+    const [returnStatement, setReturnStatement] = useState(false);
+
     const initialValueRef = useRef<HTMLSpanElement>(null);
     const accParamRef = useRef<HTMLSpanElement>(null);
     const curParamRef = useRef<HTMLSpanElement>(null);
@@ -219,6 +222,25 @@ export default function InteractiveReduceUnique() {
         );
     }
 
+    function renderAddValue() {
+        if (vis.bodyPhase !== 'add' || vis.cur === null) {
+            return (
+                <>
+                    <span className={styles.punct}>{', '}</span>
+                    <span className={styles.paramName}>cur</span>
+                </>
+            );
+        }
+        return (
+            <>
+                <span className={styles.punct}>{', '}</span>
+                <span className={styles.substituted}>
+                    <span key={`add-${vis.curArriveKey}`} className={styles.substitutedValue}>{vis.cur}</span>
+                </span>
+            </>
+        );
+    }
+
     function renderAddLine() {
         if (vis.bodyPhase !== 'add' || vis.cur === null) {
             return (
@@ -244,8 +266,33 @@ export default function InteractiveReduceUnique() {
         );
     }
 
+    const bodyHighlightClass =
+        vis.bodyPhase === 'includes' ? styles.codeLineHighlight :
+        vis.bodyPhase === 'skip' ? styles.codeLineHighlightTrue :
+        vis.bodyPhase === 'add' ? styles.codeLineHighlightFalse : '';
+
     return (
         <div className={styles.container} ref={containerRef}>
+            {/* ---- Checkboxes ---- */}
+            <div className={styles.checkboxRow}>
+                <label className={styles.checkboxLabel}>
+                    <input
+                        type="checkbox"
+                        checked={typeInference}
+                        onChange={e => setTypeInference(e.target.checked)}
+                    />
+                    gebruik type inference
+                </label>
+                <label className={styles.checkboxLabel}>
+                    <input
+                        type="checkbox"
+                        checked={returnStatement}
+                        onChange={e => setReturnStatement(e.target.checked)}
+                    />
+                    gebruik return statement
+                </label>
+            </div>
+
             {/* ---- Code Panel ---- */}
             <div className={`${styles.codePanel} ${vis.codeDimmed ? styles.codeDimmed : ''}`}>
                 <div className={styles.codeHeader}>reduce-unique.ts</div>
@@ -269,34 +316,48 @@ export default function InteractiveReduceUnique() {
                         <span className={styles.typeName}>number</span>
                         <span className={styles.punct}>{'[]>('}</span>
                     </div>
-                    <div className={styles.codeLine}>
-                        <span className={styles.punct}>&nbsp;&nbsp;{'('}</span>
+                    <div className={`${styles.codeLine} ${bodyHighlightClass}`}>
+                        <span className={styles.punct}>&nbsp;&nbsp;(</span>
                         <span
                             ref={accParamRef}
                             className={`${styles.paramName} ${vis.highlightedToken === 'acc-param' ? styles.tokenHighlight : ''}`}
                         >acc</span>
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>number</span>
+                                <span className={styles.punct}>[]</span>
+                            </>
+                        )}
                         <span className={styles.punct}>{', '}</span>
                         <span
                             ref={curParamRef}
                             className={`${styles.paramName} ${vis.highlightedToken === 'cur-param' ? styles.tokenHighlight : ''}`}
                         >cur</span>
-                        <span className={styles.punct}>{') =>'}</span>
-                    </div>
-                    <div className={`${styles.codeLine} ${vis.bodyPhase === 'includes' ? styles.codeLineHighlight : ''}`}>
-                        <span className={styles.punct}>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>number</span>
+                            </>
+                        )}
+                        <span className={styles.punct}>)</span>
+                        <span className={styles.punct}>{returnStatement ? ' => { ' : ' => '}</span>
+                        {returnStatement && <span className={styles.kwReturn}>return </span>}
                         {renderIncludesLine()}
-                    </div>
-                    <div className={`${styles.codeLine} ${vis.bodyPhase === 'skip' ? styles.codeLineHighlightTrue : ''}`}>
-                        <span className={styles.punct}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <span className={styles.punct}>{'? '}</span>
-                        <span className={styles.paramName}>acc</span>
-                    </div>
-                    <div className={`${styles.codeLine} ${vis.bodyPhase === 'add' ? styles.codeLineHighlightFalse : ''}`}>
-                        <span className={styles.punct}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        {renderAddLine()}
+                        <span className={styles.punct}>{' ? '}</span>
+                        <span className={`${styles.paramName} ${vis.bodyPhase === 'skip' ? styles.tokenHighlightTrue : ''}`}>acc</span>
+                        <span className={styles.punct}>{' : ['}</span>
+                        <span className={`${vis.bodyPhase === 'add' ? styles.tokenHighlightFalse : ''}`}>
+                            <span className={styles.punct}>{'...'}</span>
+                            <span className={styles.paramName}>acc</span>
+                            {renderAddValue()}
+                        </span>
+                        <span className={styles.punct}>]</span>
+                        {returnStatement && <span className={styles.punct}>{'; }'}</span>}
+                        <span className={styles.punct}>{','}</span>
                     </div>
                     <div className={styles.codeLine}>
-                        <span className={styles.punct}>{', '}</span>
+                        <span className={styles.punct}>&nbsp;&nbsp;</span>
                         <span
                             ref={initialValueRef}
                             className={`${styles.punct} ${vis.highlightedToken === 'initial' ? styles.tokenHighlight : ''}`}

@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import styles from './styles.module.css';
 import { useReduceAnimation } from '../shared/useReduceAnimation';
 import type { AnimationRefs, BadgeAnimation } from '../shared/useReduceAnimation';
@@ -174,6 +174,9 @@ function deriveVisualState(stepIndex: number): VisualState {
 // ---------------------------------------------------------------------------
 
 export default function InteractiveReduce() {
+    const [typeInference, setTypeInference] = useState(false);
+    const [returnStatement, setReturnStatement] = useState(false);
+
     const initialValueRef = useRef<HTMLSpanElement>(null);
     const accParamRef = useRef<HTMLSpanElement>(null);
     const curParamRef = useRef<HTMLSpanElement>(null);
@@ -209,6 +212,26 @@ export default function InteractiveReduce() {
 
     return (
         <div className={styles.container} ref={containerRef}>
+            {/* ---- Checkboxes ---- */}
+            <div className={styles.checkboxRow}>
+                <label className={styles.checkboxLabel}>
+                    <input
+                        type="checkbox"
+                        checked={typeInference}
+                        onChange={e => setTypeInference(e.target.checked)}
+                    />
+                    gebruik type inference
+                </label>
+                <label className={styles.checkboxLabel}>
+                    <input
+                        type="checkbox"
+                        checked={returnStatement}
+                        onChange={e => setReturnStatement(e.target.checked)}
+                    />
+                    gebruik return statement
+                </label>
+            </div>
+
             {/* ---- Code Panel ---- */}
             <div className={`${styles.codePanel} ${vis.codeDimmed ? styles.codeDimmed : ''}`}>
                 <div className={styles.codeHeader}>reduce.ts</div>
@@ -232,26 +255,38 @@ export default function InteractiveReduce() {
                         <span className={styles.typeName}>number</span>
                         <span className={styles.punct}>{' = numbers.reduce('}</span>
                     </div>
-                    <div className={styles.codeLine}>
+                    <div className={`${styles.codeLine} ${returnLineHighlighted ? styles.codeLineHighlight : ''}`}>
                         <span className={styles.punct}>&nbsp;&nbsp;{'('}</span>
                         <span
                             ref={accParamRef}
                             className={`${styles.paramName} ${vis.highlightedToken === 'acc-param' ? styles.tokenHighlight : ''}`}
                         >acc</span>
-                        <span className={styles.punct}>: </span>
-                        <span className={styles.typeName}>number</span>
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>number</span>
+                            </>
+                        )}
                         <span className={styles.punct}>{', '}</span>
                         <span
                             ref={curParamRef}
                             className={`${styles.paramName} ${vis.highlightedToken === 'cur-param' ? styles.tokenHighlight : ''}`}
                         >cur</span>
-                        <span className={styles.punct}>: </span>
-                        <span className={styles.typeName}>number</span>
-                        <span className={styles.punct}>{') => {'}</span>
-                    </div>
-                    <div className={`${styles.codeLine} ${returnLineHighlighted ? styles.codeLineHighlight : ''}`}>
-                        <span className={styles.kwReturn}>&nbsp;&nbsp;&nbsp;&nbsp;return</span>
-                        {' '}
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>number</span>
+                            </>
+                        )}
+                        <span className={styles.punct}>)</span>
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>number</span>
+                            </>
+                        )}
+                        <span className={styles.punct}>{returnStatement ? ' => { ' : ' => '}</span>
+                        {returnStatement && <span className={styles.kwReturn}>return </span>}
                         <span
                             ref={accInReturnRef}
                             className={`${vis.returnAccValue !== null ? styles.returnSubstituted : styles.returnPart}`}
@@ -275,10 +310,7 @@ export default function InteractiveReduce() {
                                 <span key={`rr-${vis.returnResult}`} className={styles.returnResultValue}>{vis.returnResult}</span>
                             </span>
                         )}
-                        <span className={styles.punct}>;</span>
-                    </div>
-                    <div className={styles.codeLine}>
-                        <span className={styles.punct}>&nbsp;&nbsp;{'}'}</span>
+                        {returnStatement && <span className={styles.punct}>{' }'}</span>}
                         <span className={styles.punct}>{','}</span>
                     </div>
                     <div className={styles.codeLine}>

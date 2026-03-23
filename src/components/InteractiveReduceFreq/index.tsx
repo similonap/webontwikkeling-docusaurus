@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import styles from './styles.module.css';
 import { useReduceAnimation } from '../shared/useReduceAnimation';
 import type { AnimationRefs, BadgeAnimation } from '../shared/useReduceAnimation';
@@ -182,6 +182,8 @@ function deriveVisualState(stepIndex: number): VisualState {
 // ---------------------------------------------------------------------------
 
 export default function InteractiveReduceFreq() {
+    const [typeInference, setTypeInference] = useState(false);
+
     const initialValueRef = useRef<HTMLSpanElement>(null);
     const accParamRef = useRef<HTMLSpanElement>(null);
     const curParamRef = useRef<HTMLSpanElement>(null);
@@ -251,6 +253,22 @@ export default function InteractiveReduceFreq() {
 
     return (
         <div className={styles.container} ref={containerRef}>
+            {/* ---- Checkboxes ---- */}
+            <div className={styles.checkboxRow}>
+                <label className={styles.checkboxLabel}>
+                    <input
+                        type="checkbox"
+                        checked={typeInference}
+                        onChange={e => setTypeInference(e.target.checked)}
+                    />
+                    gebruik type inference
+                </label>
+                <label className={`${styles.checkboxLabel} ${styles.checkboxLabelDisabled}`}>
+                    <input type="checkbox" disabled />
+                    gebruik return statement
+                </label>
+            </div>
+
             {/* ---- Code Panel ---- */}
             <div className={`${styles.codePanel} ${vis.codeDimmed ? styles.codeDimmed : ''}`}>
                 <div className={styles.codeHeader}>reduce-freq.ts</div>
@@ -285,11 +303,28 @@ export default function InteractiveReduceFreq() {
                             ref={accParamRef}
                             className={`${styles.paramName} ${vis.highlightedToken === 'acc-param' ? styles.tokenHighlight : ''}`}
                         >acc</span>
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>Record</span>
+                                <span className={styles.punct}>{'<'}</span>
+                                <span className={styles.typeName}>string</span>
+                                <span className={styles.punct}>{', '}</span>
+                                <span className={styles.typeName}>number</span>
+                                <span className={styles.punct}>{'>'}</span>
+                            </>
+                        )}
                         <span className={styles.punct}>{', '}</span>
                         <span
                             ref={curParamRef}
                             className={`${styles.paramName} ${vis.highlightedToken === 'cur-param' ? styles.tokenHighlight : ''}`}
                         >cur</span>
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>string</span>
+                            </>
+                        )}
                         <span className={styles.punct}>{') => {'}</span>
                     </div>
                     <div className={`${styles.codeLine} ${vis.bodyHighlighted ? styles.codeLineHighlight : ''}`}>

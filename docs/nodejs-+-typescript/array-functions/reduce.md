@@ -1,3 +1,7 @@
+---
+hide_table_of_contents: true
+---
+
 # Reduce
 
 De reduce-functie is waarschijnlijk de meest krachtige, maar ook de meest intimiderende array-methode in TypeScript. Zie het als het Zwitserse zakmes: je kunt er bijna alles mee bouwen (van een simpele optelsom tot een compleet geavanceerd object), mits je weet hoe je het gereedschap moet vasthouden.

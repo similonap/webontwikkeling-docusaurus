@@ -1,3 +1,7 @@
+---
+hide_table_of_contents: true
+---
+
 # find
 
 De `find` methode zal het eerste element van de array teruggeven waarvoor de callback functie `true` teruggeeft.

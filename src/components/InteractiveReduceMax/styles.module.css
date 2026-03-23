@@ -78,6 +78,32 @@
 }
 
 /* ============================================================
+   Checkboxes
+   ============================================================ */
+
+.checkboxRow {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-family: var(--ifm-font-family-base);
+    font-size: 0.8rem;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    color: var(--irm-code-text);
+    user-select: none;
+}
+
+.checkboxLabel input[type='checkbox'] {
+    cursor: pointer;
+    accent-color: var(--irm-accent);
+}
+
+/* ============================================================
    Code Panel
    ============================================================ */
 
@@ -226,8 +252,34 @@
     50%       { background: rgba(248, 197, 28, 0.55); box-shadow: 0 0 0 3px rgba(248, 197, 28, 0.5); }
 }
 
+@keyframes tokenGlowWin {
+    0%, 100% { background: rgba(39, 201, 63, 0.20); box-shadow: 0 0 0 2px rgba(39, 201, 63, 0.15); }
+    50%       { background: rgba(39, 201, 63, 0.45); box-shadow: 0 0 0 3px rgba(39, 201, 63, 0.40); }
+}
+
+@keyframes tokenGlowKeep {
+    0%, 100% { background: rgba(74, 158, 255, 0.20); box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.15); }
+    50%       { background: rgba(74, 158, 255, 0.45); box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.40); }
+}
+
 .tokenHighlight {
     animation: tokenGlow 0.9s ease-in-out infinite;
+    border-radius: 3px;
+    padding: 1px 2px;
+    position: relative;
+    z-index: 1;
+}
+
+.tokenHighlightWin {
+    animation: tokenGlowWin 0.9s ease-in-out infinite;
+    border-radius: 3px;
+    padding: 1px 2px;
+    position: relative;
+    z-index: 1;
+}
+
+.tokenHighlightKeep {
+    animation: tokenGlowKeep 0.9s ease-in-out infinite;
     border-radius: 3px;
     padding: 1px 2px;
     position: relative;
