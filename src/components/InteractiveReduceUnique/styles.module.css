@@ -20,8 +20,8 @@
     --iru-state-bg: #252526;
     --iru-state-border: #444;
     --iru-state-text: #d4d4d4;
-    --iru-accent: #f8c51c;
-    --iru-accent-dim: rgba(248, 197, 28, 0.15);
+    --iru-accent: #4fc3f7;
+    --iru-accent-dim: rgba(79, 195, 247, 0.15);
     --iru-true: #27c93f;
     --iru-true-dim: rgba(39, 201, 63, 0.15);
     --iru-false: #ff5f57;
@@ -29,7 +29,7 @@
     --iru-used: #3a3a3a;
     --iru-used-text: #555;
     --iru-placeholder: #555;
-    --iru-btn-primary-bg: #f8c51c;
+    --iru-btn-primary-bg: #4fc3f7;
     --iru-btn-primary-text: #000;
     --iru-btn-secondary-bg: #333;
     --iru-btn-secondary-text: #ccc;
@@ -70,6 +70,10 @@
     --iru-used: #e8e8e8;
     --iru-used-text: #aaa;
     --iru-placeholder: #aaa;
+    --iru-accent: #0288d1;
+    --iru-accent-dim: rgba(2, 136, 209, 0.12);
+    --iru-btn-primary-bg: #0288d1;
+    --iru-btn-primary-text: #fff;
     --iru-btn-secondary-bg: #e8e8e8;
     --iru-btn-secondary-text: #444;
     --iru-btn-secondary-border: #ccc;
@@ -204,8 +208,8 @@
 
 /* Line highlights — neutral / true (green) / false (red) */
 @keyframes lineGlow {
-    0%, 100% { background: rgba(248, 197, 28, 0.12); }
-    50%       { background: rgba(248, 197, 28, 0.28); }
+    0%, 100% { background: rgba(79, 195, 247, 0.12); }
+    50%       { background: rgba(79, 195, 247, 0.28); }
 }
 
 @keyframes lineGlowTrue {
@@ -247,8 +251,8 @@
 
 /* Token highlight */
 @keyframes tokenGlow {
-    0%, 100% { background: rgba(248, 197, 28, 0.25); box-shadow: 0 0 0 2px rgba(248, 197, 28, 0.2); }
-    50%       { background: rgba(248, 197, 28, 0.55); box-shadow: 0 0 0 3px rgba(248, 197, 28, 0.5); }
+    0%, 100% { background: rgba(79, 195, 247, 0.25); box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.2); }
+    50%       { background: rgba(79, 195, 247, 0.55); box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.5); }
 }
 
 @keyframes tokenGlowTrue {
@@ -329,8 +333,8 @@
 }
 
 @keyframes elementPulse {
-    0%, 100% { transform: scale(1);    box-shadow: 0 0 0 2px rgba(248, 197, 28, 0.3); }
-    50%       { transform: scale(1.1); box-shadow: 0 0 10px rgba(248, 197, 28, 0.8); }
+    0%, 100% { transform: scale(1);    box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.3); }
+    50%       { transform: scale(1.1); box-shadow: 0 0 10px rgba(79, 195, 247, 0.8); }
 }
 
 .arrayElementHighlighted {
@@ -572,7 +576,7 @@
     border-radius: 20px;
     pointer-events: none;
     z-index: 100;
-    box-shadow: 0 2px 8px rgba(248, 197, 28, 0.6);
+    box-shadow: 0 2px 8px rgba(79, 195, 247, 0.6);
     transition: left 0.4s ease-in-out, top 0.4s ease-in-out;
     white-space: nowrap;
 }
