@@ -93,22 +93,22 @@ const sidebars: SidebarsConfig = {
           {
             "type": "doc",
             "id": "nodejs-+-typescript/array-functions/map",
-            "label": "map"
+            "label": "Array.map()"
           },
           {
             "type": "doc",
             "id": "nodejs-+-typescript/array-functions/filter",
-            "label": "filter"
+            "label": "Array.filter()"
           },
           {
             "type": "doc",
             "id": "nodejs-+-typescript/array-functions/reduce",
-            "label": "reduce"
+            "label": "Array.reduce()"
           },
           {
             "type": "doc",
             "id": "nodejs-+-typescript/array-functions/find",
-            "label": "find"
+            "label": "Array.find()"
           }
         ]
       },
