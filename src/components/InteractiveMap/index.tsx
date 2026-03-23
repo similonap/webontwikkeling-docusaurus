@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import styles from './styles.module.css';
 import { useReduceAnimation } from '../shared/useReduceAnimation';
 import type { AnimationRefs, BadgeAnimation } from '../shared/useReduceAnimation';
@@ -139,6 +139,9 @@ function deriveVisualState(stepIndex: number): VisualState {
 // ---------------------------------------------------------------------------
 
 export default function InteractiveMap() {
+    const [typeInference, setTypeInference] = useState(false);
+    const [returnStatement, setReturnStatement] = useState(false);
+
     const calcResultRef = useRef<HTMLSpanElement>(null);
     // One ref per dest slot so the badge can fly to the exact target block
     const destElementRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -199,6 +202,26 @@ export default function InteractiveMap() {
 
     return (
         <div className={styles.container} ref={containerRef}>
+            {/* ---- Checkboxes ---- */}
+            <div className={styles.checkboxRow}>
+                <label className={styles.checkboxLabel}>
+                    <input
+                        type="checkbox"
+                        checked={typeInference}
+                        onChange={e => setTypeInference(e.target.checked)}
+                    />
+                    gebruik type inference
+                </label>
+                <label className={styles.checkboxLabel}>
+                    <input
+                        type="checkbox"
+                        checked={returnStatement}
+                        onChange={e => setReturnStatement(e.target.checked)}
+                    />
+                    gebruik return statement
+                </label>
+            </div>
+
             {/* ---- Code Panel ---- */}
             <div className={styles.codePanel}>
                 <div className={styles.codeHeader}>map-doubled.ts</div>
@@ -207,9 +230,14 @@ export default function InteractiveMap() {
                         <span className={styles.kwLet}>let</span>
                         {' '}
                         <span className={styles.varName}>numbers</span>
-                        <span className={styles.punct}>: </span>
-                        <span className={styles.typeName}>number</span>
-                        <span className={styles.punct}>[] = [</span>
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>number</span>
+                                <span className={styles.punct}>[]</span>
+                            </>
+                        )}
+                        <span className={styles.punct}>{' = ['}</span>
                         <span className={styles.numLit}>1, 2, 3, 4, 5</span>
                         <span className={styles.punct}>];</span>
                     </div>
@@ -218,9 +246,14 @@ export default function InteractiveMap() {
                         <span className={styles.kwLet}>let</span>
                         {' '}
                         <span className={styles.varName}>doubled</span>
-                        <span className={styles.punct}>: </span>
-                        <span className={styles.typeName}>number</span>
-                        <span className={styles.punct}>{'[] = numbers.map('}</span>
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>number</span>
+                                <span className={styles.punct}>[]</span>
+                            </>
+                        )}
+                        <span className={styles.punct}>{' = numbers.map('}</span>
                         {/* accBoxRef on this div — badge lands here when value flies to param */}
                         <div
                             ref={accBoxRef}
@@ -234,14 +267,30 @@ export default function InteractiveMap() {
                                     </span>
                                 </span>
                             ) : (
-                                <span className={styles.paramName}>element</span>
+                                <>
+                                    <span className={styles.paramName}>element</span>
+                                    {!typeInference && (
+                                        <>
+                                            <span className={styles.punct}>: </span>
+                                            <span className={styles.typeName}>number</span>
+                                        </>
+                                    )}
+                                </>
                             )}
                             <span className={styles.punct}>)</span>
                         </div>
-                        <span className={styles.punct}>{' => '}</span>
+                        {!typeInference && (
+                            <>
+                                <span className={styles.punct}>: </span>
+                                <span className={styles.typeName}>number</span>
+                            </>
+                        )}
+                        <span className={styles.punct}>{returnStatement ? ' => {' : ' => '}</span>
+                        {returnStatement && <span className={styles.kwLet}>{' return '}</span>}
                         <span className={vis.bodyValue !== null ? styles.bodyHighlight : ''}>
                             {renderBody()}
                         </span>
+                        {returnStatement && <span className={styles.punct}>{'; }'}</span>}
                         <span className={styles.punct}>{');'}</span>
                     </div>
                 </div>

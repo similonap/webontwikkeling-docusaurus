@@ -76,6 +76,32 @@
 }
 
 /* ============================================================
+   Checkboxes
+   ============================================================ */
+
+.checkboxRow {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-family: var(--ifm-font-family-base);
+    font-size: 0.8rem;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    color: var(--im-code-text);
+    user-select: none;
+}
+
+.checkboxLabel input[type='checkbox'] {
+    cursor: pointer;
+    accent-color: var(--im-accent);
+}
+
+/* ============================================================
    Code Panel
    ============================================================ */
 
