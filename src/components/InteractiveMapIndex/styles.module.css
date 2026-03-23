@@ -1,0 +1,425 @@
+/* ============================================================
+   InteractiveMapIndex — CSS Module
+   ============================================================ */
+
+.container {
+    --im-bg: #1e1e1e;
+    --im-border: #333;
+    --im-code-bg: #1e1e1e;
+    --im-code-header: #2d2d2d;
+    --im-code-text: #d4d4d4;
+    --im-kw: #569cd6;
+    --im-type: #4ec9b0;
+    --im-var: #9cdcfe;
+    --im-param: #9cdcfe;
+    --im-str: #ce9178;
+    --im-num: #b5cea8;
+    --im-punct: #d4d4d4;
+    --im-array-bg: #252526;
+    --im-array-border: #444;
+    --im-array-text: #d4d4d4;
+    --im-state-bg: #252526;
+    --im-accent: #4fc3f7;
+    --im-accent-dim: rgba(79, 195, 247, 0.15);
+    --im-used: #3a3a3a;
+    --im-used-text: #555;
+    --im-placeholder: #555;
+    --im-btn-primary-bg: #4fc3f7;
+    --im-btn-primary-text: #000;
+    --im-btn-secondary-bg: #333;
+    --im-btn-secondary-text: #ccc;
+    --im-btn-secondary-border: #555;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--ifm-color-emphasis-100);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: var(--ifm-global-radius);
+    font-family: var(--ifm-font-family-monospace);
+    overflow: visible;
+    isolation: isolate;
+}
+
+:global([data-theme='light']) .container {
+    --im-bg: #f5f5f5;
+    --im-border: #ddd;
+    --im-code-bg: #f8f8f8;
+    --im-code-header: #ebebeb;
+    --im-code-text: #24292e;
+    --im-kw: #0000ff;
+    --im-type: #267f99;
+    --im-var: #001080;
+    --im-param: #001080;
+    --im-str: #a31515;
+    --im-num: #098658;
+    --im-punct: #24292e;
+    --im-array-bg: #f0f0f0;
+    --im-array-border: #ddd;
+    --im-array-text: #24292e;
+    --im-state-bg: #f0f0f0;
+    --im-accent: #0288d1;
+    --im-accent-dim: rgba(2, 136, 209, 0.12);
+    --im-used: #e8e8e8;
+    --im-used-text: #aaa;
+    --im-placeholder: #aaa;
+    --im-btn-primary-bg: #0288d1;
+    --im-btn-primary-text: #fff;
+    --im-btn-secondary-bg: #e8e8e8;
+    --im-btn-secondary-text: #444;
+    --im-btn-secondary-border: #ccc;
+}
+
+/* ============================================================
+   Checkboxes
+   ============================================================ */
+
+.checkboxRow {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-family: var(--ifm-font-family-base);
+    font-size: 0.8rem;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    color: var(--im-code-text);
+    user-select: none;
+}
+
+.checkboxLabel input[type='checkbox'] {
+    cursor: pointer;
+    accent-color: var(--im-accent);
+}
+
+/* ============================================================
+   Code Panel
+   ============================================================ */
+
+.codePanel {
+    background: var(--im-code-bg);
+    border: 1px solid var(--im-border);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.codeHeader {
+    background: var(--im-code-header);
+    padding: 0.4rem 1rem;
+    font-size: 0.65rem;
+    color: var(--im-placeholder);
+    border-bottom: 1px solid var(--im-border);
+}
+
+.codeBody {
+    padding: 0.75rem 1rem;
+    overflow-x: auto;
+}
+
+.codeLine {
+    line-height: 1.7;
+    font-size: 0.82rem;
+    white-space: pre;
+}
+
+.codeBlankLine {
+    line-height: 1.7;
+    font-size: 0.82rem;
+}
+
+/* Syntax colours */
+.kwConst   { color: var(--im-kw); }
+.kwLet     { color: var(--im-kw); }
+.varName   { color: var(--im-var); }
+.typeName  { color: var(--im-type); }
+.paramName { color: var(--im-param); }
+.strLit    { color: var(--im-str); }
+.numLit    { color: var(--im-num); }
+.punct     { color: var(--im-punct); }
+
+/* Param area */
+.paramArea {
+    display: inline-block;
+    border-radius: 3px;
+}
+
+/* Token highlight */
+@keyframes tokenGlow {
+    0%, 100% { background: rgba(79, 195, 247, 0.20); box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.15); }
+    50%       { background: rgba(79, 195, 247, 0.45); box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.40); }
+}
+
+.tokenHighlight {
+    animation: tokenGlow 0.9s ease-in-out infinite;
+    border-radius: 3px;
+    padding: 1px 2px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Body highlight */
+@keyframes bodyGlow {
+    0%, 100% { background: rgba(79, 195, 247, 0.10); }
+    50%       { background: rgba(79, 195, 247, 0.26); }
+}
+
+@keyframes bodyGlowLight {
+    0%, 100% { background: rgba(2, 136, 209, 0.08); }
+    50%       { background: rgba(2, 136, 209, 0.20); }
+}
+
+.bodyHighlight {
+    animation: bodyGlow 1s ease-in-out infinite;
+    border-radius: 3px;
+    padding: 1px 3px;
+    position: relative;
+    z-index: 1;
+}
+
+:global([data-theme='light']) .bodyHighlight {
+    animation: bodyGlowLight 1s ease-in-out infinite;
+}
+
+/* Substituted values */
+.substituted {
+    color: var(--im-accent);
+    font-weight: bold;
+}
+
+@keyframes substitutePop {
+    0%   { transform: scale(1.5); opacity: 0.4; }
+    60%  { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.substitutedValue {
+    display: inline-block;
+    animation: substitutePop 0.35s ease-out;
+}
+
+/* Inline calculation result */
+.calcResultInline {
+    color: var(--im-accent);
+    font-weight: bold;
+}
+
+@keyframes resultFadeIn {
+    from { opacity: 0; transform: translateX(6px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+.calcResultValue {
+    display: inline-block;
+    animation: resultFadeIn 0.3s ease-out;
+}
+
+/* ============================================================
+   Two-column Array Panel
+   ============================================================ */
+
+.columnsPanel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--im-border);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.columnSection {
+    padding: 0.75rem 1rem;
+    background: var(--im-array-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.columnSection:first-child {
+    border-right: 1px solid var(--im-border);
+}
+
+.columnHeader {
+    font-size: 0.72rem;
+    color: var(--im-var);
+    margin-bottom: 0.15rem;
+}
+
+.columnElements {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+/* Source rows */
+.sourceRow {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.45rem 0.65rem;
+    background: var(--im-state-bg);
+    border: 2px solid var(--im-array-border);
+    border-radius: 6px;
+    font-size: 0.82rem;
+    color: var(--im-array-text);
+    white-space: nowrap;
+    transition: border-color 0.3s, background 0.3s;
+}
+
+.indexLabel {
+    font-size: 0.72rem;
+    color: var(--im-num);
+    min-width: 1rem;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+@keyframes rowPulse {
+    0%, 100% { box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.3); }
+    50%       { box-shadow: 0 0 10px rgba(79, 195, 247, 0.7); }
+}
+
+.sourceRowHighlighted {
+    animation: rowPulse 0.75s ease-in-out infinite;
+    background: var(--im-accent-dim);
+    border-color: var(--im-accent);
+}
+
+.sourceRowUsed {
+    opacity: 0.35;
+    background: var(--im-used);
+    border-color: var(--im-used);
+}
+
+/* Destination rows */
+.destRow {
+    display: flex;
+    align-items: center;
+    padding: 0.45rem 0.65rem;
+    background: var(--im-accent-dim);
+    border: 2px solid var(--im-accent);
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: bold;
+    color: var(--im-accent);
+    white-space: nowrap;
+}
+
+.destRowEmpty {
+    display: flex;
+    align-items: center;
+    padding: 0.45rem 0.65rem;
+    background: var(--im-state-bg);
+    border: 2px dashed var(--im-array-border);
+    border-radius: 6px;
+    min-height: 2.1rem;
+    opacity: 0.45;
+}
+
+@keyframes destRowAppear {
+    0%   { transform: scale(0.7); opacity: 0; }
+    60%  { transform: scale(1.04); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.destRowNew {
+    animation: destRowAppear 0.4s ease-out;
+}
+
+/* ============================================================
+   Done Result Panel
+   ============================================================ */
+
+.resultPanel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.resultPanelDone {
+    border: 2px solid #27c93f;
+    background: rgba(39, 201, 63, 0.1);
+}
+
+@keyframes resultDoneAppear {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.resultDone {
+    color: #27c93f;
+    font-size: 0.9rem;
+    animation: resultDoneAppear 0.4s ease-out;
+}
+
+/* ============================================================
+   Controls
+   ============================================================ */
+
+.controls {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+}
+
+.btnPrimary {
+    background: var(--im-btn-primary-bg);
+    color: var(--im-btn-primary-text);
+    border: none;
+    padding: 0.45rem 1.25rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: var(--ifm-font-family-monospace);
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.btnPrimary:hover { opacity: 0.85; transform: translateY(-1px); }
+.btnPrimary:active { transform: translateY(0); }
+
+.btnSecondary {
+    background: var(--im-btn-secondary-bg);
+    color: var(--im-btn-secondary-text);
+    border: 1px solid var(--im-btn-secondary-border);
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: var(--ifm-font-family-monospace);
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.btnSecondary:hover:not(:disabled) { opacity: 0.8; transform: translateY(-1px); }
+.btnSecondary:active:not(:disabled) { transform: translateY(0); }
+.btnSecondary:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* ============================================================
+   Flying Badge
+   ============================================================ */
+
+.flyingBadge {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: var(--im-accent);
+    color: #000;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(79, 195, 247, 0.5);
+    transition: left 0.4s ease-in-out, top 0.4s ease-in-out;
+    white-space: nowrap;
+}
