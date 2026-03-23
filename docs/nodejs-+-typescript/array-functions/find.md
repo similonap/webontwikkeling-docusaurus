@@ -19,3 +19,7 @@ let firstD : string | undefined = names.find(name => name.startsWith("D"));
 
 console.log(firstD); // undefined
 ```
+
+import InteractiveFindNames from '@site/src/components/InteractiveFindNames';
+
+<InteractiveFindNames />
