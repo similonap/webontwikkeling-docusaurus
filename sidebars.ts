@@ -312,8 +312,8 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "doc",
-        "id": "security-and-testing/hashing-encryption",
-        "label": "Hashing & Encryptie"
+        "id": "security-and-testing/hashing",
+        "label": "Hashing"
       },
       {
         "type": "category",
