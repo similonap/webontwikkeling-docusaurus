@@ -22,11 +22,11 @@ find "$DOCS_DIR" -mindepth 2 -maxdepth 2 -type d | sort | while read -r exercise
     echo "  [solution] $category/$exercise/solution.zip"
   fi
 
-  # Zip starter if present, named after the exercise
+  # Zip starter if present
   if [ -d "$exercise_dir/starter" ]; then
     mkdir -p "$out_dir"
-    (cd "$exercise_dir" && zip -rq "$out_dir/${exercise}.zip" starter)
-    echo "  [starter]  $category/$exercise/${exercise}.zip"
+    (cd "$exercise_dir" && zip -rq "$out_dir/starter.zip" starter)
+    echo "  [starter]  $category/$exercise/starter.zip"
   fi
 done
 

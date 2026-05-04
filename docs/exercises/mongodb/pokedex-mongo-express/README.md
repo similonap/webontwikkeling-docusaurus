@@ -10,7 +10,7 @@ Een groot deel van de applicatie routes en views zijn al op voorhand klaargemaak
 
 Er zitten hier een aantal voorgeprogrammeerde vaste waarden in om alles te doen werken. Je moet uiteraard deze wegwerken zodat de applicatie volledig werkt met mongoDB.
 
-[Start Project](./starter.zip)
+<a href="/webontwikkeling-docusaurus/exercises/mongodb/pokedex-mongo-express/starter.zip">Start Project</a>
 
 #### Header/Footer
 

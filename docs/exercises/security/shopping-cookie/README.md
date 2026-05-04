@@ -1,10 +1,10 @@
 ### Shopping Cookie
 
-Voor deze oefening beginnen we met een [starter project](./starter.zip). Download dit project en pak het uit in een nieuwe folder.
+Voor deze oefening beginnen we met een <a href="/webontwikkeling-docusaurus/exercises/security/shopping-cookie/starter.zip">starter project</a>. Download dit project en pak het uit in een nieuwe folder.
 
 Als we het starter project opstart krijg je de volgende situatie te zien:
 
-![Starter](image.png)
+![Starter](starter.png)
 
 Geen van de functionaliteiten werkt momenteel. Het is aan jou om de applicatie te voorzien van de nodige functionaliteiten.
 
