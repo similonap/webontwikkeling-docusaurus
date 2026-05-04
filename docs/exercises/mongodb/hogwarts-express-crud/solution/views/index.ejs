@@ -1,0 +1,49 @@
+<%- include("partials/header") %>
+
+<form method="get" action="/">
+    <input type="search" name="q" value="<%= q %>"/>
+    <button type="submit">Search</button>
+</form>
+
+<button onclick="window.location.href='/spells/create'">Create spell</button>
+
+
+<table>
+    <div class="sparkle" style="top: 80%; left: 20%; animation-delay: 0s;"></div>
+    <div class="sparkle" style="top: 90%; left: 60%; animation-delay: 2s;"></div>
+    <div class="sparkle" style="top: 85%; left: 40%; animation-delay: 4s;"></div>
+    <div class="sparkle" style="top: 70%; left: 75%; animation-delay: 1s;"></div>
+
+    <thead>
+        <tr>
+            <% for (const field of FIELDS) { %>
+                <th><a href="/?q=<%= q %>&sortField=<%= field.name %>&sortDirection=<%= sortDirection === 1 ? 'desc' : 'asc' %>"><%= field.name %></a></th>
+            <% } %>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for (const spell of spells) { %>
+            <tr onclick="window.location.href='/spells/<%= spell.id %>'">
+                <td><%= spell.id %></td>
+                <td><%= spell.name %></td>
+                <td><%= spell.type %></td>
+                <td><%= spell.mana %></td>
+                <td><%= spell.description %></td>
+                <td>
+                    <form method="post" action="/spells/<%= spell.id %>/delete">
+                        <button type="submit">Delete</button>
+                    </form>
+
+                    <button onclick="event.stopPropagation(); window.location.href='/spells/<%= spell.id %>/update'" type="button">Update</button>
+
+                    
+                </td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+
+
+<%- include("partials/footer") %>

@@ -32,9 +32,9 @@ We gebruiken een `try catch finally` blok om ervoor te zorgen dat de connectie m
 
 ## Database module
 
-Het is een goed idee om een aparte module (in een apart bestand) aan te maken waarin je al je database gerelateerde code plaatst. Dit zorgt ervoor dat je code beter georganiseerd is en dat je je database code makkelijker kan hergebruiken. 
+Het is een goed idee om een aparte module (in een apart bestand) aan te maken waarin je al je database gerelateerde code plaatst. Dit zorgt ervoor dat je code beter georganiseerd is en dat je je database code makkelijker kan hergebruiken.
 
-We zullen afspreken dat we deze module `database.ts` noemen. In deze module plaatsen we alle code die gerelateerd is aan de database. 
+We zullen afspreken dat we deze module `database.ts` noemen. In deze module plaatsen we alle code die gerelateerd is aan de database.
 
 ```typescript
 import { MongoClient } from "mongodb";
@@ -64,6 +64,10 @@ export async function connect() {
 
 In dit voorbeeld maken we een connectie met de MongoDB database. We maken ook een functie `exit` die we gebruiken om de connectie met de database te sluiten. We gebruiken de `process.on` methode om een event listener toe te voegen voor het `SIGINT` event. Dit event wordt getriggerd als je `CTRL+C` drukt in de terminal. Zo zorgen we ervoor dat de connectie met de database netjes wordt afgesloten als je de applicatie stopt.
 
+:::warning
+Wanneer je Nodemon gebruikt, kan je best ook `SIGUSR2` afhandelen zodat je connectie ook wordt afgesloten tijdens het developen.
+:::
+
 Vervolgens kunnen we deze module gebruiken in onze Express.js applicatie.
 
 ```typescript
@@ -81,7 +85,7 @@ app.listen(3000, async () => {
 
 ## Collections exporteren
 
-Het is een goed idee om de collections die je gebruikt in je applicatie te exporteren vanuit je `database.ts` module. Dit zorgt ervoor dat je de collections makkelijk kan hergebruiken in andere modules. 
+Het is een goed idee om de collections die je gebruikt in je applicatie te exporteren vanuit je `database.ts` module. Dit zorgt ervoor dat je de collections makkelijk kan hergebruiken in andere modules.
 
 ```typescript
 export const studentsCollection: Collection<Student> = client.db("example").collection<Student>("student");
@@ -256,7 +260,7 @@ app.listen(app.get("port"), async() => {
 });
 ```
 
-Dit is een voorbeeld van hoe je de code kan structureren in je Express.js applicatie. Je kan deze structuur aanpassen naar eigen inzicht. Het belangrijkste is dat je de code goed organiseert en dat je de code herbruikbaar maakt. Zo kan je makkelijk nieuwe functionaliteit toevoegen en blijft je code overzichtelijk en leesbaar. 
+Dit is een voorbeeld van hoe je de code kan structureren in je Express.js applicatie. Je kan deze structuur aanpassen naar eigen inzicht. Het belangrijkste is dat je de code goed organiseert en dat je de code herbruikbaar maakt. Zo kan je makkelijk nieuwe functionaliteit toevoegen en blijft je code overzichtelijk en leesbaar.
 
 ## Environment variabelen
 

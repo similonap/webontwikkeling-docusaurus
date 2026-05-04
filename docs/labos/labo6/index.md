@@ -9,29 +9,29 @@ Bekijk voor het labo aan te vangen eerst de volgende topics:
 ### Math Module
 
 
-[math-module](../../exercises/node-typescript/math-module/index.md)
+[math-module](../../exercises/node-typescript/math-module/README.md)
 
 
 ### Export interfaces
 
 
-[export-interfaces](../../exercises/node-typescript/export-interfaces/index.md)
+[export-interfaces](../../exercises/node-typescript/export-interfaces/README.md)
 
 
 ### Cowsay Module
 
 
-[cowsay-module](../../exercises/node-typescript/cowsay-module/index.md)
+[cowsay-module](../../exercises/node-typescript/cowsay-module/README.md)
 
 
 ### Cat GPT
 
 
-[cat-gpt](../../exercises/node-typescript/cat-gpt/index.md)
+[cat-gpt](../../exercises/node-typescript/cat-gpt/README.md)
 
 
 ### Rainbow Chalk
 
 
-[rainbow-chalk](../../exercises/node-typescript/rainbow-chalk/index.md)
+[rainbow-chalk](../../exercises/node-typescript/rainbow-chalk/README.md)
 

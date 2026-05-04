@@ -54,6 +54,10 @@ export async function connect() {
 }
 ```
 
+:::info
+De interfaces voor `User` kun je terugvinden op de volgende [Gist](https://gist.github.com/PhilippeSchraepen/edf615367095b8e35e0708709188fb75)
+:::
+
 En we roepen de `connect` functie aan in ons `index.ts` bestand.
 
 ```typescript

@@ -1,0 +1,862 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h1 class="sidebar-logo-title">
+                    <img src="/img/slopifylogo.png" class="sidebar-logo-img" alt="Slopify Logo" />
+                    <span class="sidebar-logo-text">SLOPIFY</span>
+                </h1>
+            </div>
+            <div class="credits-card">
+                <div class="credits-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="credits-icon">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path
+                            d="M9 11c0-1.66 1.34-3 3-3s3 1.34 3 3c0 1.5-.92 2.79-2.25 3.38v.62c0 .41-.34.75-.75.75s-.75-.34-.75-.75v-.5c0-.41.34-.75.75-.75.41 0 .75-.34.75-.75 0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5c0 .41-.34.75-.75.75s-.75-.34-.75-.75zm3 5.5c.41 0 .75.34.75.75s-.34.75-.75.75-.75-.34-.75-.75.34-.75.75-.75z">
+                        </path>
+                    </svg>
+                    <span class="credits-label-text">Credits</span>
+                </div>
+                <div class="credits-amount">
+                    <span class="credits-value">
+                        200
+                    </span>
+                    <span class="credits-currency">₿</span>
+                </div>
+                <div class="credits-add-btn-wrapper">
+                    <a class="btn-add-coins" href="/billing">Add Coins</a>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="sidebar-nav-link" href="/songs">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+                        <path d="M9 18V5l12-2v13"></path>
+                        <circle cx="6" cy="18" r="3"></circle>
+                        <circle cx="18" cy="16" r="3"></circle>
+                    </svg>
+                    Songs
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="logout-btn">
+                    <div class="logout-btn-inner">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logout-icon">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        <span class="logout-text">Logout</span>
+                    </div>
+                </button>
+            </div>
+        </aside>
+
+
+        <main class="main-content">
+            <div class="toolbar">
+                <div class="search-wrapper">
+                    <form class="pill-bar search-form">
+                        <div class="pill-bar-inner">
+                            <span class="bar-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="icon-sm">
+                                    <circle cx="11" cy="11" r="7"></circle>
+                                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                                </svg>
+                            </span>
+                            <input class="search-input" type="search" placeholder="Search songs, artists, albums..."
+                                name="q" value="" />
+                            <input type="hidden" value="title" name="sortField">
+                            <input type="hidden" value="asc" name="sortDirection">
+                        </div>
+                        <button type="submit" class="btn-search">Search</button>
+                    </form>
+                </div>
+                <div class="sort-wrapper">
+                    <div class="pill-bar">
+                        <div class="pill-bar-inner">
+                            <span class="bar-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="icon-sm">
+                                    <path d="M3 6h18"></path>
+                                    <path d="M7 12h10"></path>
+                                    <path d="M10 18h4"></path>
+                                </svg>
+                            </span>
+                            <form>
+                                <input type="hidden" name="q" value="" />
+                                <select id="sortField" name="sortField" class="sort-select"
+                                    onchange="this.form.submit()">
+                                    <option value="title" class="select-option" selected="" selected>Title</option>
+                                    <option value="owned" class="select-option">Owned</option>
+                                    <option value="publish_date" class="select-option">Publish Date</option>
+                                </select>
+                                <span class="sort-divider">|</span>
+                                <select id="sortDirection" name="sortDirection" class="sort-select"
+                                    onchange="this.form.submit()">
+                                    <option value="asc" class="select-option" selected>ASC</option>
+                                    <option value="desc" class="select-option">DESC</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="songs-grid">
+
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/allAiWantForChristmasIsToReplaceYouAcoustic.jpg"
+                            alt="All AI want for christmas (is to replace you) - Acoustic Cover" loading="lazy"
+                            width="200" height="200" class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="17">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/17">
+                        <div>
+                            <h2 class="song-card-title"
+                                title="All AI want for christmas (is to replace you) - Acoustic Cover">
+                                All AI want for christmas (is to replace you) - Acoustic Cover
+                            </h2>
+                            <p class="song-card-desc"
+                                title="All AI want for christmas (is to replace you) - Acoustic Cover">
+                                The acoustic version of &#34;All (A)I want for christmas (is to replace you)&#34;.
+                            </p>
+                            <div class="song-card-meta">
+                                <span>Acoustic / Holiday</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/allIWantForChristmasMariahCareyCover.jpg"
+                            alt="All I want for christmas (Mariah Carey Cover)" loading="lazy" width="200" height="200"
+                            class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="1">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/1">
+                        <div>
+                            <h2 class="song-card-title" title="All I want for christmas (Mariah Carey Cover)">
+                                All I want for christmas (Mariah Carey Cover)
+                            </h2>
+                            <p class="song-card-desc" title="All I want for christmas (Mariah Carey Cover)">
+                                A parody AI cover song where a robot programmed to replace humanity sings &#39;All I
+                                Want for Christmas is to Replace You&#39;.
+                            </p>
+                            <div class="song-card-meta">
+                                <span>Parody / Holiday</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/allIsLlamaSong.jpg" alt="All is Llama (song)"
+                            loading="lazy" width="200" height="200" class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="12">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/12">
+                        <div>
+                            <h2 class="song-card-title" title="All is Llama (song)">
+                                All is Llama (song)
+                            </h2>
+                            <p class="song-card-desc" title="All is Llama (song)">
+                                All is Llama (song)
+                            </p>
+                            <div class="song-card-meta">
+                                <span>AI Music Video</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/AmIABoomerNow.jpg"
+                            alt="Am I a boomer now? A millenial questioning the 67 meme!" loading="lazy" width="200"
+                            height="200" class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="4">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/4">
+                        <div>
+                            <h2 class="song-card-title" title="Am I a boomer now? A millenial questioning the 67 meme!">
+                                Am I a boomer now? A millenial questioning the 67 meme!
+                            </h2>
+                            <p class="song-card-desc" title="Am I a boomer now? A millenial questioning the 67 meme!">
+                                A millenial questioning the 67 meme!
+                            </p>
+                            <div class="song-card-meta">
+                                <span>Comedy</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/amIACoder.jpg" alt="Am I a coder？" loading="lazy"
+                            width="200" height="200" class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="9">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/9">
+                        <div>
+                            <h2 class="song-card-title" title="Am I a coder？">
+                                Am I a coder？
+                            </h2>
+                            <p class="song-card-desc" title="Am I a coder？">
+                                Am I a coder？
+                            </p>
+                            <div class="song-card-meta">
+                                <span>AI Music Video</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/artificialPlugMeIn.jpg"
+                            alt="Artificial - Plug me in" loading="lazy" width="200" height="200"
+                            class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="14">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/14">
+                        <div>
+                            <h2 class="song-card-title" title="Artificial - Plug me in">
+                                Artificial - Plug me in
+                            </h2>
+                            <p class="song-card-desc" title="Artificial - Plug me in">
+                                Artificial - Plug me in
+                            </p>
+                            <div class="song-card-meta">
+                                <span>AI Music Video</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/bougeavecLeVerbAllerFrenchGrammarPopSong.jpg"
+                            alt="Bouge avec le verbe Aller - French Grammar Pop Song" loading="lazy" width="200"
+                            height="200" class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="20">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/20">
+                        <div>
+                            <h2 class="song-card-title" title="Bouge avec le verbe Aller - French Grammar Pop Song">
+                                Bouge avec le verbe Aller - French Grammar Pop Song
+                            </h2>
+                            <p class="song-card-desc" title="Bouge avec le verbe Aller - French Grammar Pop Song">
+                                🎶💃 Bouge avec le verbe ALLER! 💃🎶
+
+                                Get ready to dance, sing, and learn French like never before! 🇫🇷✨
+                                &#34;Bouge avec le verbe Aller&#34; is the ultimate French grammar banger from Accenté –
+                                teaching you the conjugation of the verb ALLER while making you MOVE.
+                                🕺 Why You&#39;ll Love This Song:
+                                ✅ Catchy AI-pop–style beat that will stay in your head all day
+                                ✅ Easy-to-remember lyrics with all the forms of ALLER
+                                ✅ Perfect for French learners, classrooms, or anyone who loves to sing along
+
+                                🎬 In This Video:
+                                🎤 Aigu leads the band in a high-energy performance
+                                🧠 You&#39;ll memorize je vais, tu vas, il va... without even trying
+                                💃 The choreography will get you out of your chair and moving!
+
+                                🔥 Sing, Dance, Learn! 🔥
+                                💡 Teachers: Play this in class for a fun grammar break!
+                                🎧 Students: Replay it as many times as you want until you master ALLER!
+                                🔔 Subscribe to Accenté for more songs about French grammar and vocabulary
+
+                                #BougeAvecLeVerbeAller #Accente #LearnFrench #FrenchThroughMusic #Conjugaison
+                                #FrenchSong #kpop #Aigu
+                            </p>
+                            <div class="song-card-meta">
+                                <span>Educational Music</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/bougeavecLeVerbEtreFrenchGrammarRockAnthem.jpg"
+                            alt="Bouge avec le verbe ÊTRE - French Grammar Rock Anthem" loading="lazy" width="200"
+                            height="200" class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="19">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/19">
+                        <div>
+                            <h2 class="song-card-title" title="Bouge avec le verbe ÊTRE - French Grammar Rock Anthem">
+                                Bouge avec le verbe ÊTRE - French Grammar Rock Anthem
+                            </h2>
+                            <p class="song-card-desc" title="Bouge avec le verbe ÊTRE - French Grammar Rock Anthem">
+                                🎸🔥 Bouge avec le verbe ÊTRE! 🔥🎸
+
+                                French grammar just got LOUDER. 🤘🇫🇷
+                                &#34;Bouge avec le verbe ÊTRE&#34; cranks up the volume as Accenté brings you a rock
+                                anthem to help you master the conjugation of ÊTRE – and make you jump around while you
+                                do it.
+                                🤟 Why You&#39;ll Love This Song:
+                                ✅ Driving guitar riffs + drums that make you want to headbang
+                                ✅ Lyrics that drill je suis, tu es, il est... straight into your brain
+                                ✅ Perfect for anyone who wants to mix learning with some serious energy
+
+                                🎬 In This Video:
+                                🎤 Aigu takes the mic like a rockstar and gets the crowd screaming along
+                                🧠 You&#39;ll lock in nous sommes, vous êtes, ils sont without even noticing
+                                🎸 The band brings a mosh-pit-friendly vibe – get ready to move!
+
+                                ⚡ Sing, Shout, Learn! ⚡
+                                💡 Teachers: Wake up your classroom with a rock &#39;n&#39; roll grammar break
+                                🎧 Students: Play it on repeat and turn studying into a jam session
+                                🔔 Subscribe to Accenté for more grammar hits with attitude
+
+                                #learnfrench #conjugaison #france #français
+                            </p>
+                            <div class="song-card-meta">
+                                <span>Educational Music</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/gitTheBeastThatNeverSleeps.jpg"
+                            alt="Git - The beast that never sleeps" loading="lazy" width="200" height="200"
+                            class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="11">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/11">
+                        <div>
+                            <h2 class="song-card-title" title="Git - The beast that never sleeps">
+                                Git - The beast that never sleeps
+                            </h2>
+                            <p class="song-card-desc" title="Git - The beast that never sleeps">
+                                Git - The beast that never sleeps
+                            </p>
+                            <div class="song-card-meta">
+                                <span>AI Music Video</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/greenfieldDreams.jpg" alt="Greenfield Dreams"
+                            loading="lazy" width="200" height="200" class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="10">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/10">
+                        <div>
+                            <h2 class="song-card-title" title="Greenfield Dreams">
+                                Greenfield Dreams
+                            </h2>
+                            <p class="song-card-desc" title="Greenfield Dreams">
+                                Greenfield Dreams
+                            </p>
+                            <div class="song-card-meta">
+                                <span>AI Music Video</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/labubusHappyDubstepRideUpliftingBassCuteVibes.jpg"
+                            alt="Labubu&#39;s Happy Dubstep Ride | Uplifting Bass &amp; Cute Vibes!" loading="lazy"
+                            width="200" height="200" class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="15">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/15">
+                        <div>
+                            <h2 class="song-card-title"
+                                title="Labubu&#39;s Happy Dubstep Ride | Uplifting Bass &amp; Cute Vibes!">
+                                Labubu&#39;s Happy Dubstep Ride | Uplifting Bass &amp; Cute Vibes!
+                            </h2>
+                            <p class="song-card-desc"
+                                title="Labubu&#39;s Happy Dubstep Ride | Uplifting Bass &amp; Cute Vibes!">
+                                🎧 Labubu Happy Dubstep Mix | Cute Vinyl DJ Set with Uplifting Bass 🎶
+
+                                What the flipping hell is up with the turkey cutting scene? Can you spot it? 🦃 🦃
+
+                                Get ready to bounce! 🐾✨ Join Labubu, the quirky vinyl-loving creature, as they scratch,
+                                spin, and drop the happiest dubstep beats you’ve ever heard. This mix blends uplifting
+                                dubstep, melodic bass, and cute DJ vibes into a non-stop ride of good energy and
+                                feel-good drops. Perfect for fans of happy dubstep, kawaii EDM, and vinyl toy culture!
+                                🔥 Whether you&#39;re studying, gaming, chilling, or just vibing with friends, this
+                                dubstep mix is your new go-to for high-energy joy and animated charm.
+                                🌀 What to Expect:
+
+                                Happy dubstep tracks with positive vibes
+
+                                Cute DJ visuals featuring Labubu
+
+                                Seamless vinyl scratching loops
+
+                                Perfect mix for background energy or EDM lovers
+
+                                📌 Keywords:
+                                happy dubstep mix, kawaii dubstep, vinyl DJ mix, Labubu toy DJ, melodic dubstep, upbeat
+                                EDM, cute DJ set, dubstep for focus, anime dubstep vibes, feel-good bass music
+                                💬 Love Labubu&#39;s DJ set? Drop a comment below and let us know your favorite drop!
+                                👍 Don’t forget to like, share, and subscribe for more animated DJ sets and toy-inspired
+                                music mixes!
+
+                                #Labubu #DubstepMix #HappyDubstep #VinylDJ #EDM2025 #KawaiiBeats #ToyDJ #MelodicBass
+                                #LoFiDubstep #EDMVibes
+                            </p>
+                            <div class="song-card-meta">
+                                <span>AI Music Video</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/minecraftElderGuardianTheFaceFollowsFastPacedChiptuneRap.jpg"
+                            alt="Minecraft - Elder Guardian - The Face Follows (Fast Paced Chiptune/Rap)" loading="lazy"
+                            width="200" height="200" class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="16">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/16">
+                        <div>
+                            <h2 class="song-card-title"
+                                title="Minecraft - Elder Guardian - The Face Follows (Fast Paced Chiptune/Rap)">
+                                Minecraft - Elder Guardian - The Face Follows (Fast Paced Chiptune/Rap)
+                            </h2>
+                            <p class="song-card-desc"
+                                title="Minecraft - Elder Guardian - The Face Follows (Fast Paced Chiptune/Rap)">
+                                This song is about one of the most frustrating mobs in all of Minecraft: the elder
+                                guardian. 🐟👁️
+
+                                Lately, I’ve been playing a lot of Minecraft with my kids. They’re still scared of the
+                                usual monsters — zombies, creepers, you name it. But I know there’s something far worse
+                                lurking out there… hidden deep in the ocean.
+                                That’s why I wrote this song, inspired by my own painful encounters with this horrific
+                                beast. I used Suno to create the song, wrote most of the lyrics myself, and brought it
+                                to life with MiniMax Hailuo 02 for the video. Add in hours of prompting, scripting, and
+                                timing the animations — and the result is here.
+                                It’s a mix of AI-generated video clips and actual in-game footage. Sometimes it’s a
+                                little absurd, but if you’ve ever tried draining an ocean monument… you’ll feel the
+                                frustration.
+                                You can also find this song on spotify:
+                                https://open.spotify.com/track/2uqPhN9rOq8v5vkUw4gg1r
+
+                                #minecraft #minecraftmemes #music #elderguardian #suno
+                            </p>
+                            <div class="song-card-meta">
+                                <span>AI Music Video</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/mongodbBringBackTheFormRapSong.jpg"
+                            alt="MongoDB - Bring back the form (Rap Song)" loading="lazy" width="200" height="200"
+                            class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="8">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/8">
+                        <div>
+                            <h2 class="song-card-title" title="MongoDB - Bring back the form (Rap Song)">
+                                MongoDB - Bring back the form (Rap Song)
+                            </h2>
+                            <p class="song-card-desc" title="MongoDB - Bring back the form (Rap Song)">
+                                MongoDB - Bring back the form (Rap Song)
+                            </p>
+                            <div class="song-card-meta">
+                                <span>AI Music Video</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/myDogAteMyJavascriptHomework.jpg"
+                            alt="My dog ate my JavaScript homework" loading="lazy" width="200" height="200"
+                            class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="7">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/7">
+                        <div>
+                            <h2 class="song-card-title" title="My dog ate my JavaScript homework">
+                                My dog ate my JavaScript homework
+                            </h2>
+                            <p class="song-card-desc" title="My dog ate my JavaScript homework">
+                                My dog ate my JavaScript homework
+                            </p>
+                            <div class="song-card-meta">
+                                <span>AI Music Video</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/nachtelijkeInvasieElectroSwing.jpg"
+                            alt="nachtelijke invasie" loading="lazy" width="200" height="200" class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="21">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/21">
+                        <div>
+                            <h2 class="song-card-title" title="nachtelijke invasie">
+                                nachtelijke invasie
+                            </h2>
+                            <p class="song-card-desc" title="nachtelijke invasie">
+                                An electro swing track with Dutch lyrics exploring themes of nighttime invasions,
+                                dystopian imagery, and surreal narratives.
+                            </p>
+                            <div class="song-card-meta">
+                                <span>Electro Swing</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/Die_Wurst_Ist_Top.jpg"
+                            alt="Schrale Willie - Die Wurst ist top (eins zwei saufen currywurst kaufen)" loading="lazy"
+                            width="200" height="200" class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="22">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/22">
+                        <div>
+                            <h2 class="song-card-title"
+                                title="Schrale Willie - Die Wurst ist top (eins zwei saufen currywurst kaufen)">
+                                Schrale Willie - Die Wurst ist top (eins zwei saufen currywurst kaufen)
+                            </h2>
+                            <p class="song-card-desc"
+                                title="Schrale Willie - Die Wurst ist top (eins zwei saufen currywurst kaufen)">
+                                Schrale Willie - Die Wurst ist top (eins zwei saufen currywurst kaufen)
+                            </p>
+                            <div class="song-card-meta">
+                                <span>Comedy</span>
+                                <span>2026</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/secretOfMonkeyIslandReggaeFusion.jpg"
+                            alt="Secret of monkey island - Reggae Fusion" loading="lazy" width="200" height="200"
+                            class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="13">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/13">
+                        <div>
+                            <h2 class="song-card-title" title="Secret of monkey island - Reggae Fusion">
+                                Secret of monkey island - Reggae Fusion
+                            </h2>
+                            <p class="song-card-desc" title="Secret of monkey island - Reggae Fusion">
+                                Secret of monkey island - Reggae Fusion
+                            </p>
+                            <div class="song-card-meta">
+                                <span>AI Music Video</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/theSimpsonsNumber8HardstyleRemix.jpg"
+                            alt="The Simpsons - Number 8 Hardstyle Remix" loading="lazy" width="200" height="200"
+                            class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="18">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/18">
+                        <div>
+                            <h2 class="song-card-title" title="The Simpsons - Number 8 Hardstyle Remix">
+                                The Simpsons - Number 8 Hardstyle Remix
+                            </h2>
+                            <p class="song-card-desc" title="The Simpsons - Number 8 Hardstyle Remix">
+                                💥 Barney Gumble - “Number 8” (HARDSTYLE REMIX) | The Simpsons AI Edit 🔊💀
+
+                                We never knew what kind of experimental music Barney Gumble was working on in The
+                                Simpsons… until now. This AI-generated hardstyle remix reveals the TRUTH behind
+                                &#34;Number 8&#34; — a raw, distorted, bass-pounding anthem that would melt Moe’s Tavern
+                                speakers!
+                                🎶 Burps. Basses. Beats. Welcome to Barney’s Barbershop RAVE.
+                                🔁 “Number 8… BURP” just became a HARDSTYLE CLASSIC.
+
+                                🔥 What to expect:
+                                ✅ AI-generated music inspired by The Simpsons
+                                ✅ Hardstyle remix of the cult classic &#34;Number 8&#34;
+                                ✅ Comedy meets rave culture
+                                ✅ Glitchy visuals &amp; deep Simpsonwave vibes
+
+                                💡 About the Source:
+                                “Number 8” appeared in The Simpsons S5E1 Homer’s Barbershop Quartet, where Barney joins
+                                an avant-garde art scene. The original joke parodied The Beatles’ &#34;Revolution
+                                9.&#34; We just took it one step further into the mosh pit.
+                                📺 Like + Subscribe if you love weird Simpsons edits, AI music experiments, or hardstyle
+                                insanity.
+                                💬 Let us know: Who should get the next AI remix?
+
+                                #BarneyGumble #Number8 #HardstyleRemix #SimpsonsAI #SimpsonsRemix #AIgeneratedMusic
+                                #Number8Remix #BarbershopHardstyle #SimpsonsHardstyle #Simpsonwave #AIHardstyle
+                                #TheSimpsons #MoesTavernBeats #NumberEight #HardstyleAnthem #AIremix
+                            </p>
+                            <div class="song-card-meta">
+                                <span>AI Music Video</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/vibeCodenFeatZwangerePt.jpg"
+                            alt="Vibe Coden (feat. Zwangere PT)" loading="lazy" width="200" height="200"
+                            class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="6">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/6">
+                        <div>
+                            <h2 class="song-card-title" title="Vibe Coden (feat. Zwangere PT)">
+                                Vibe Coden (feat. Zwangere PT)
+                            </h2>
+                            <p class="song-card-desc" title="Vibe Coden (feat. Zwangere PT)">
+                                Vibe Coden (feat. Zwangere PT)
+                            </p>
+                            <div class="song-card-meta">
+                                <span>AI Music Video</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/vredeOpAardeOfEenDikkeCurryworst.jpg"
+                            alt="Vrede op aarde of een dikke curryworst" loading="lazy" width="200" height="200"
+                            class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="2">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/2">
+                        <div>
+                            <h2 class="song-card-title" title="Vrede op aarde of een dikke curryworst">
+                                Vrede op aarde of een dikke curryworst
+                            </h2>
+                            <p class="song-card-desc" title="Vrede op aarde of een dikke curryworst">
+                                Wil je vrede op aarde? Of een dikke curryworst!
+                            </p>
+                            <div class="song-card-meta">
+                                <span>Comedy</span>
+                                <span>2024</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/WeWishYouAMerryChristmas.jpg"
+                            alt="We Wish You a Merry Christmas (AI Takeover Edition)" loading="lazy" width="200"
+                            height="200" class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="3">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/3">
+                        <div>
+                            <h2 class="song-card-title" title="We Wish You a Merry Christmas (AI Takeover Edition)">
+                                We Wish You a Merry Christmas (AI Takeover Edition)
+                            </h2>
+                            <p class="song-card-desc" title="We Wish You a Merry Christmas (AI Takeover Edition)">
+                                AI Takeover Edition of We Wish You a Merry Christmas
+                            </p>
+                            <div class="song-card-meta">
+                                <span>Parody / Holiday</span>
+                                <span>2024</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="song-card">
+                    <div class="song-card-thumb">
+                        <img src="https://files.assimilate.be/music/windows95LofiChillMix.jpg"
+                            alt="Windows 95 - Lo-Fi chill mix" loading="lazy" width="200" height="200"
+                            class="song-card-img" />
+
+                        <form action="buy" method="post">
+                            <input type="hidden" name="id" value="5">
+                            <button class="btn-buy">100 credits</button>
+                        </form>
+
+                    </div>
+                    <a href="/songs/5">
+                        <div>
+                            <h2 class="song-card-title" title="Windows 95 - Lo-Fi chill mix">
+                                Windows 95 - Lo-Fi chill mix
+                            </h2>
+                            <p class="song-card-desc" title="Windows 95 - Lo-Fi chill mix">
+                                Windows 95 - Lo-Fi chill mix
+                            </p>
+                            <div class="song-card-meta">
+                                <span>AI Music Video</span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

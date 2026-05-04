@@ -13,35 +13,35 @@ Bekijk voor het labo aan te vangen eerst de volgende topics:
 ### Oefening: Som van getallen
 
 
-[som-van-getallen](../../exercises/node-typescript/som-van-getallen/index.md)
+[som-van-getallen](../../exercises/node-typescript/som-van-getallen/README.md)
 
 
 ### Oefening: Puntenboek
 
 
-[puntenboek](../../exercises/node-typescript/puntenboek/index.md)
+[puntenboek](../../exercises/node-typescript/puntenboek/README.md)
 
 
 ### Oefening: Rot13
 
 
-[rot13](../../exercises/node-typescript/rot13/index.md)
+[rot13](../../exercises/node-typescript/rot13/README.md)
 
 
 ### Oefening: Pokemon team
 
 
-[pokemon-team](../../exercises/node-typescript/pokemon-team/index.md)
+[pokemon-team](../../exercises/node-typescript/pokemon-team/README.md)
 
 
 ### Oefening: Todo list
 
 
-[todo-list-string](../../exercises/node-typescript/todo-list-string/index.md)
+[todo-list-string](../../exercises/node-typescript/todo-list-string/README.md)
 
 
 ### Oefening: Tic Tac Toe
 
 
-[tic-tac-toe](../../exercises/node-typescript/tic-tac-toe/index.md)
+[tic-tac-toe](../../exercises/node-typescript/tic-tac-toe/README.md)
 

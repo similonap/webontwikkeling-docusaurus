@@ -1,0 +1,280 @@
+/* /css/style.css */
+
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=UnifrakturCook:wght@700&display=swap');
+
+body {
+    background: url('https://www.transparenttextures.com/patterns/old-map.png') repeat;
+    background-color: #f5f0e1;
+    font-family: 'MedievalSharp', 'UnifrakturCook', cursive, serif;
+    color: #4b2e0d;
+    padding: 2rem;
+    overflow-x: hidden;
+}
+
+table {
+    position: relative;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border: 3px double #6b4226;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 1rem;
+    border: 2px solid #6b4226;
+    text-align: center;
+}
+
+thead {
+    background: linear-gradient(to right, #7b3e19, #5a2c0a);
+    color: #f8e8c1;
+    font-family: 'UnifrakturCook', cursive;
+    font-size: 1.5rem;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f7f3e9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #ede6d1;
+}
+
+tbody tr:hover {
+    background-color: #c7b693;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+td:first-child {
+    font-weight: bold;
+}
+
+td:nth-child(2) {
+    font-family: 'UnifrakturCook', cursive;
+    font-size: 1.2rem;
+    color: #5a1d0d;
+}
+
+h1 {
+    font-family: 'UnifrakturCook', cursive;
+    text-align: center;
+    font-size: 3rem;
+    color: #5a1d0d;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px #d4b483;
+}
+
+/* Magic sparkle hover effect for names */
+td:nth-child(2):hover {
+    color: gold;
+    text-shadow: 0 0 5px gold, 0 0 10px goldenrod;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+/* Magical Sparkles */
+.sparkle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: radial-gradient(circle, gold, transparent);
+    border-radius: 50%;
+    animation: sparkleMove 6s linear infinite;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+@keyframes sparkleMove {
+    0% {
+        transform: translateY(0) translateX(0) scale(0.8);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(-200px) translateX(100px) scale(1.2);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-400px) translateX(200px) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Magic Spell Card Layout */
+.spell-card {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 3px double #6b4226;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 600px;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.spell-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+}
+
+.spell-card .id {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #4b2e0d;
+  margin-bottom: 0.5rem;
+}
+
+.spell-card .name {
+  font-family: 'UnifrakturCook', cursive;
+  font-size: 2rem;
+  color: #5a1d0d;
+  text-align: center;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.spell-card .name:hover {
+  color: gold;
+  text-shadow: 0 0 5px gold, 0 0 10px goldenrod;
+  transform: scale(1.1);
+}
+
+.spell-card .type {
+  font-style: italic;
+  color: #7b3e19;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.spell-card .mana {
+  font-weight: bold;
+  color: #6b4226;
+  background: linear-gradient(to right, #ede6d1, #f7f3e9);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.spell-card .description {
+  font-size: 1rem;
+  color: #4b2e0d;
+  background-color: #f5f0e1;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+th a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+th a:hover {
+  text-decoration: underline;
+  color: gold;
+  text-shadow: 0 0 5px gold;
+}
+
+form {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+input[type="search"] {
+  font-family: 'MedievalSharp', 'UnifrakturCook', cursive;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border: 3px double #6b4226;
+  background-color: #fdfaf3;
+  color: #4b2e0d;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: inset 0 0 5px #c0a97e;
+  transition: all 0.3s ease;
+}
+
+input[type="search"]:focus {
+  outline: none;
+  background-color: #fff8dc;
+  box-shadow: 0 0 10px gold;
+}
+
+button {
+  font-family: 'MedievalSharp', 'UnifrakturCook', cursive;
+  font-size: 1.1rem;
+  padding: 0.5rem 1.2rem;
+  margin-left: 1rem;
+  background: linear-gradient(to right, #7b3e19, #5a2c0a);
+  color: #f8e8c1;
+  border: 3px double #6b4226;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  background: linear-gradient(to right, #a25d2a, #7b3e19);
+  transform: scale(1.05);
+  box-shadow: 0 0 15px gold;
+}
+
+.spell-card label {
+  display: block;
+  font-family: 'MedievalSharp', 'UnifrakturCook', cursive;
+  font-size: 1.1rem;
+  color: #5a1d0d;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  text-align: left;
+}
+
+.spell-card input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-family: 'MedievalSharp', 'UnifrakturCook', cursive;
+  border: 3px double #6b4226;
+  background-color: #fdfaf3;
+  color: #4b2e0d;
+  border-radius: 8px;
+  box-shadow: inset 0 0 5px #c0a97e;
+  transition: all 0.3s ease;
+}
+
+.spell-card input:focus {
+  outline: none;
+  background-color: #fff8dc;
+  box-shadow: 0 0 10px gold;
+}
+
+form button {
+  margin-top: 2rem;
+}
+
+.spell-card select {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-family: 'MedievalSharp', 'UnifrakturCook', cursive;
+  border: 3px double #6b4226;
+  background-color: #fdfaf3;
+  color: #4b2e0d;
+  border-radius: 8px;
+  box-shadow: inset 0 0 5px #c0a97e;
+  transition: all 0.3s ease;
+  appearance: none; /* optional: removes default browser arrow for custom styling */
+}
+
+.spell-card select:focus {
+  outline: none;
+  background-color: #fff8dc;
+  box-shadow: 0 0 10px gold;
+}

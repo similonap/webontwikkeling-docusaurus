@@ -1,0 +1,27 @@
+<div class="mt-8">
+    <% if (checkins.length > 0) { %>
+        <h2 class="text-xl font-semibold mb-4">Recent Check-ins</h2>
+    <% } %>
+    <% for (let checkin of checkins) { %>
+        <div>
+            <div class="bg-white rounded-lg shadow-md mt-4">
+                <% if (showImage) { %>
+                <img alt="Bar image"
+                    class="w-full h-64 object-cover rounded-t-lg"
+                    src="<%= checkin.image %>">
+                <% } %>
+                <div class="flex p-4"><img alt="Beer image" class="w-20 h-20 rounded-full resize-fit"
+                        src="<%= checkin.beer.logo %>">
+                    <div class="ml-4">
+                        <p class="text-gray-600"><b><%= checkin.name %></b> checked in at <span
+                                class="font-semibold"><%= checkin.bar.name %></span></p>
+                        <p class="text-gray-600">Drinking: <span class="font-semibold"><%= checkin.beer.name %></span>
+                        </p>
+                        <p class="text-gray-700">Comment: <%= checkin.comment %></p>
+                        <p class="text-gray-600">Date: <%= formatDateTime(checkin.date) %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>

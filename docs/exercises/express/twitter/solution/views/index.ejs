@@ -1,0 +1,25 @@
+<%- include("partials/header") %>
+    <%- include("partials/nav") %> 
+  
+    <main>
+        <div class="header">
+            <h2>Home</h2>
+        </div>
+
+        <div class="tweet_box">
+            <form method="post" action="/">
+                <div class="tweet_box-input">
+                    <img src="/images/avatars/JonDoe.png" alt="profile image">
+                    <input type="hidden" name="handle" value="JonDoe">
+                    <input type="hidden" name="name" value="Jon Doe">
+                    <textarea rows="4" cols="40" placeholder="What's happening?" name="text"></textarea>
+                    <button>Tweet</button>
+                </div>
+            </form>
+
+        </div>
+        <%- include("partials/tweets") %>
+    </main>
+
+    <%- include("partials/aside") %>
+<%- include("partials/footer") %>

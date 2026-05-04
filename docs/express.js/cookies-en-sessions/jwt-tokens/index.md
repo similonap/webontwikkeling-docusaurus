@@ -39,11 +39,11 @@ Een JWT er meestal als volgt uit.
 header.payload.signature
 ```
 
-<figure><img src="/assets/wat-is-jwt.png" alt="" /><figcaption><p>Bron: SuperTokens</p></figcaption></figure>
+<figure><img src={require("/assets/wat-is-jwt.png").default} alt="" /><figcaption><p>Bron: SuperTokens</p></figcaption></figure>
 
 
 
-<figure><img src="/assets/wat-is-jwt-2.png" alt="" /><figcaption><p>Analyse van een JWT token via jwt.io</p></figcaption></figure>
+<figure><img src={require("/assets/wat-is-jwt-2.png").default} alt="" /><figcaption><p>Analyse van een JWT token via jwt.io</p></figcaption></figure>
 
 Laten we de verschillende onderdelen opsplitsen.
 
@@ -108,7 +108,7 @@ Het volgende toont een JWT met de vorige header en payload gecodeerd en is onder
 
 
 
-<figure><img src="/assets/wat-is-jwt-3.png" alt="" /><figcaption><p>De drie (geëncodeerde) onderdelen.</p></figcaption></figure>
+<figure><img src={require("/assets/wat-is-jwt-3.png").default} alt="" /><figcaption><p>De drie (geëncodeerde) onderdelen.</p></figcaption></figure>
 
 :::info
 Als je met JWT wilt spelen en deze concepten in de praktijk wilt brengen, kan je [jwt.io Debugger](https://jwt.io/#debugger-io) gebruiken om JWT's te decoderen, verifiëren en genereren.
@@ -125,7 +125,7 @@ Wanneer een gebruiker zich succesvol aanmeldt met zijn inloggegevens, genereert 
 
 
 
-<figure><img src="/assets/wat-is-jwt-4.png" alt="" /><figcaption></figcaption></figure>
+<figure><img src={require("/assets/wat-is-jwt-4.png").default} alt="" /><figcaption></figcaption></figure>
 
 :::info
 Houd er ook mee rekening dat de informatie opgeslagen in JSON Web Tokens, hoewel beschermd tegen manipulatie, voor iedereen leesbaar is. **Plaats geen geheime informatie in de payload of header-elementen van een JWT, tenzij deze versleuteld zijn.**

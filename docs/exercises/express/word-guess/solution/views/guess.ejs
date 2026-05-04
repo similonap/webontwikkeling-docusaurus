@@ -1,0 +1,21 @@
+<%- include("partials/header") %>
+    <p>Guess the word!</p>
+
+    <% if (error) { %>
+        <p style="color: red"><%= error %></p>
+    <% } %>
+    <% if (success) { %>
+        <p style="color: green"><%= success %> <a href="/restart">Click to play again!</a></p>
+    <% } %>
+
+    <div class="letter-container">
+        <% for (let i in guess) { %>
+            <span class="<%= colors[i] %>"><%= guess[i] %></span>    
+        <% } %>
+    </div>
+
+    <form action="/guess" method="POST">
+        <input type="text" name="guess" placeholder="Enter your guess">
+        <button type="submit">Submit</button>
+    </form>
+<%- include("partials/footer") %>

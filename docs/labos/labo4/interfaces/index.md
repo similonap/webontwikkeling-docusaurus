@@ -3,17 +3,17 @@
 ### Oefening: Recepten
 
 
-[recepten](../../../exercises/node-typescript/recepten/index.md)
+[recepten](../../../exercises/node-typescript/recepten/README.md)
 
 
 ### Oefening: Movies
 
 
-[movies-objects](../../../exercises/node-typescript/movies-objects/index.md)
+[movies-objects](../../../exercises/node-typescript/movies-objects/README.md)
 
 
 ### Oefening: Todo list
 
 
-[todo-list-objects](../../../exercises/node-typescript/todo-list-objects/index.md)
+[todo-list-objects](../../../exercises/node-typescript/todo-list-objects/README.md)
 

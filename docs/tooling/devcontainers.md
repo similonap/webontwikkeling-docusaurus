@@ -136,7 +136,7 @@ Tenslotte installeer je nog de "Github Pull Request" extention: [https://marketp
 
 Klik in Visual Studio Code in de linkeronderhoek op het "avatar" icoontje.&#x20;
 
-<figure><img src="/assets/Screenshot 2025-02-05 at 12.41.46.png" alt="" /><figcaption><p>De positie van het Accounts menu</p></figcaption></figure>
+<figure><img src={require("/assets/Screenshot 2025-02-05 at 12.41.46.png").default} alt="" /><figcaption><p>De positie van het Accounts menu</p></figcaption></figure>
 
 Kies vervolgens " Sign in to GitHub to use GitHub Pull Requests".  Vervolgens zou er een browser venster moeten openen die je vraagt om te authenticeren via Github. Doe dit met je Github AP account.
 
@@ -192,6 +192,6 @@ wsl --update
 
 Krijg je deze error tijdens het accepteren van een github classroom
 
-<figure><img src="/assets/image.png" alt="" /><figcaption></figcaption></figure>
+<figure><img src={require("/assets/image.png").default} alt="" /><figcaption></figcaption></figure>
 
 Kijk je mail na voor een invite link. Deze link wordt pas verstuurd als je deze error hebt gekregen.

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <form action="/" method="POST">
+        <input type="text" name="name" placeholder="Name">
+        <textarea name="message" placeholder="Message"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+
+
+    <ul>
+        <% for (let entry of guestbookEntries) { %>
+            <li>
+                <h2><%= entry.name %></h2>
+                <p><%= entry.message %></p>
+                <p>Posted on <%= formatDate(entry.date) %></p>
+            </li>
+        <% } %>
+    </ul>
+</body>
+</html>

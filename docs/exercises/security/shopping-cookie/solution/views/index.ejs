@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <ul>
+        <% for (let product of products) { %>
+           <li>
+                <form method="post">
+                    <label><%= product %></label><br/>
+                    <input type="hidden" name="product" value="<%= product %>"/>
+                    <button type="submit" formaction="/add">+</button>
+                    <input type="number" readonly value="<%= cart[product] ? cart[product] : 0 %>"/>
+                    <button type="submit" formaction="/remove">-</button>
+                </form>
+           </li>
+        <% } %>
+    </ul>
+    <form method="post" action="/clear">
+        <button type="submit" class="clear-cart-button">Clear cart</button>
+    </form>
+</body>
+</html>

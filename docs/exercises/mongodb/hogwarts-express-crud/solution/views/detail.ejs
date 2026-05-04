@@ -1,0 +1,11 @@
+<%- include("partials/header") %>
+
+<div class="spell-card">
+
+    <% for (const field of FIELDS) { %>
+        <div class="<%= field.name %>"><%= spell[field.name] %></div>
+    <% } %>
+
+</div>
+
+<%- include("partials/footer") %>

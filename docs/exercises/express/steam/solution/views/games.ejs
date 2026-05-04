@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Steam Games</title>
+</head>
+<body>
+    <form action="/" method="get">
+        <select name="sortField">
+            <% for (let field of sortFields) { %>
+                <option value="<%= field.value %>" <%= field.selected %>><%= field.text %></option> 
+            <% } %>
+        </select>
+        <select name="sortDirection">
+            <% for (let direction of sortDirections) { %>
+                <option value="<%= direction.value %>" <%= direction.selected %>><%= direction.text %></option> 
+            <% } %>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <% for (let field of sortFields) { %>
+                    <th>
+                        <a href="?sortField=<%= field.value %>&sortDirection=<%= field.value === sortField ? sortDirection === 'asc' ? 'desc' : 'asc' : 'asc' %>">
+                            <%= field.text %>
+                            <% if (field.value === sortField) { %>
+                                <%- sortDirection === 'asc' ? '▲' : '▼' %>
+                            <% } %>
+                        </a>
+                    </th>
+                <% } %>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let game of games) { %>
+                <tr>
+                    <td><%- game.name %></td>
+                    <td><%- game.minimumAge %></td>
+                    <td><%- game.releaseYear %></td>
+                    <td><%- game.developer %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>

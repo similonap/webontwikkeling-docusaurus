@@ -1,0 +1,32 @@
+<%- include("partials/header") %>
+
+<form method="post">
+    <div class="spell-card">
+        <label for="id">id</label>
+        <input type="number" name="id" id="id" readonly />
+
+        <label for="name">name</label>
+        <input type="text" name="name" id="name"/>
+
+        <label for="type">type</label>
+        <select name="type" id="type">
+            <option>Charm</option>
+            <option>Curse</option>
+            <option>Jinx</option>
+            <option>Hex</option>
+            <option>Transfiguration</option>
+            <option>Healing</option>
+            <option>Conjuration</option>
+        </select>
+
+        <label for="mana">mana</label>
+        <input type="number" name="mana" id="mana" />
+
+        <label for="description">description</label>
+        <input type="text" name="description" id="description"/>
+    </div>
+
+    <button type="submit">Create</button>
+</form>
+
+<%- include("partials/footer") %>

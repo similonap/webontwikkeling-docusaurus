@@ -9,60 +9,60 @@ Bekijk voor het labo aan te vangen eerst de volgende topics:
 ### Todo List Fetch
 
 
-[todo-list-fetch](../../exercises/node-typescript/todo-list-fetch/index.md)
+[todo-list-fetch](../../exercises/node-typescript/todo-list-fetch/README.md)
 
 
 ### Bitcoin-API
 
 
-[bitcoin-api](../../exercises/node-typescript/bitcoin-api/index.md)
+[bitcoin-api](../../exercises/node-typescript/bitcoin-api/README.md)
 
 
 ### slowSum
 
 
-[slow-sum](../../exercises/node-typescript/slow-sum/index.md)
+[slow-sum](../../exercises/node-typescript/slow-sum/README.md)
 
 
 ### fakeFetch
 
 
-[fake-fetch](../../exercises/node-typescript/fake-fetch/index.md)
+[fake-fetch](../../exercises/node-typescript/fake-fetch/README.md)
 
 
 ### **Promise All**
 
 
-[promise-all](../../exercises/node-typescript/promise-all/index.md)
+[promise-all](../../exercises/node-typescript/promise-all/README.md)
 
 
 ### Unix Timestamp API
 
 
-[unix-timestamp-api](../../exercises/node-typescript/unix-timestamp-api/index.md)
+[unix-timestamp-api](../../exercises/node-typescript/unix-timestamp-api/README.md)
 
 
 ### **Cocktails Promise All**
 
 
-[cocktails-promise-all](../../exercises/node-typescript/cocktails-promise-all/index.md)
+[cocktails-promise-all](../../exercises/node-typescript/cocktails-promise-all/README.md)
 
 
 ### **Cocktails-API**
 
 
-[cocktails-api](../../exercises/node-typescript/cocktails-api/index.md)
+[cocktails-api](../../exercises/node-typescript/cocktails-api/README.md)
 
 
 ### Joke API
 
 
-[joke-api](../../exercises/node-typescript/joke-api/index.md)
+[joke-api](../../exercises/node-typescript/joke-api/README.md)
 
 
 ### School API
 
 
-[school-api](../../exercises/node-typescript/school-api/index.md)
+[school-api](../../exercises/node-typescript/school-api/README.md)
 
 

@@ -40,7 +40,7 @@ Ga dan verder door op **Choose a connection method** (of connect) te klikken. Je
 
 Deze zijn iets verschillend van elkaar. Let op dat je hier uiteraard je eigen username en paswoord in geeft.
 
-<figure><img src="/assets/mongoconnect.gif" alt="" /><figcaption></figcaption></figure>
+<figure><img src={require("/assets/mongoconnect.gif").default} alt="" /><figcaption></figcaption></figure>
 
 #### 5. Verbinding uitproberen
 

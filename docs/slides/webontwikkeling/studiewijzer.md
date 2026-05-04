@@ -56,7 +56,7 @@ Gedaan met statische pagina's. We gaan voor **interactief** en **dynamisch**.
 * **Digitap:** Je startpunt voor alles. (https://learning.ap.be/course/view.php?id=75382)
 * **GitBook:** Hier staat al je theorie en oefeningen. (https://apwt.gitbook.io/webontwikkeling-2025/)
 
-<img src="image.png" width="1000"/>
+<img src={require("./image.png").default} width="1000"/>
 
 ---
 

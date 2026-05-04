@@ -1,0 +1,26 @@
+<%- include("partials/header") %>
+
+<form method="post" action="/spells/create %>">
+    <div class="spell-card">
+
+        <% for (const field of FIELDS) { %>
+            <% if (!field.readonly) { %>
+                <label for="<%= field.name %>"><%= field.name %></label>
+                <% if (field.type === "spelltype") { %>
+                    <select name="<%= field.name %>" id="<%= field.name %>">
+                        <% for (let spellType of SPELL_TYPES) { %>
+                            <option><%= spellType %></option>
+                        <% } %>
+                    </select>
+                <% } else { %>
+                    <input type="<%= field.type %>" name="<%= field.name %>" id="<%= field.name %>"/>
+                <% } %>
+            <% } %>
+        <% } %>
+
+    </div>
+
+    <button type="submit">Create</button>
+</form>
+
+<%- include("partials/footer") %>

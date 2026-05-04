@@ -1,0 +1,11 @@
+<%- include("partials/header") %>
+
+<% for (let article of articles) { %>
+    <article class="article">
+        <h2><%= article.title %></h2>
+        <p><%= article.content %></p>
+    </article>
+<% } %>
+
+
+<%- include("partials/footer") %>

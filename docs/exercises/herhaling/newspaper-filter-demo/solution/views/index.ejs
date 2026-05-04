@@ -1,0 +1,47 @@
+<%- include("partials/header") %>
+
+<form action="/" method="get">
+    <label for="search">Search:</label>
+    <input type="search" placeholder="search" id="search" name="q" value="<%= q %>"/>
+
+
+    <select name="sortField">
+        <% for (const sortField of SORT_FIELDS) { %>
+            <option value="<%= sortField %>" <%= sortField === activeSortField ? "selected": ""%>><%= sortField %></option>
+        <% } %>
+    </select>
+
+    <select name="sortDirection">
+        <% for (const sortDirection of SORT_DIRECTIONS) { %>
+            <option value="<%= sortDirection %>" <%= sortDirection === activeSortDirection ? "selected": ""%>><%= sortDirection %></option>
+        <% } %>
+    </select>
+
+    <button type="submit">Search</button>
+
+
+    
+</form>
+
+<table>
+    <thead>
+        <% for (const field of SORT_FIELDS) { %>
+            <th>
+                <a href="/?q=<%= q %>&sortField=<%= field %>&sortDirection=<%= activeSortDirection === "asc" ? "desc" : "asc"%>"><%= field %></a>
+                <% if (activeSortField === field) { %>
+                    <%= activeSortDirection === "asc" ? "↓" : "↑" %>
+                <% } %>
+            </th>
+        <% } %>
+    </thead>
+    <tbody>
+        <% for (const article of articles) { %>
+            <tr>
+                <td><%= article.id %></td>
+                <td><a href="/article/<%= article.id %>"><%= article.title %></a></td>
+                <td><%= article.topic %></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+<%- include("partials/footer") %>

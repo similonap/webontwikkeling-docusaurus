@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>Newspaper</title>
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <nav class="navbar">
+            <a href="/">Home</a>
+            <% for (let topic of topics) { %>
+                <a href="/<%= topic %>"><%= topic %></a>
+            <% } %>
+            <a href="/search">Search</a>
+        </nav>

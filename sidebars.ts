@@ -379,42 +379,42 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/node-typescript/hello-name/index",
+            "id": "exercises/node-typescript/hello-name/README",
             "label": "Hello Name"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/bmi-calculator/index",
+            "id": "exercises/node-typescript/bmi-calculator/README",
             "label": "BMI Calculator"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/bmi-calculator-multi/index",
+            "id": "exercises/node-typescript/bmi-calculator-multi/README",
             "label": "BMI Calculator Multi"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/interest-calculator/index",
+            "id": "exercises/node-typescript/interest-calculator/README",
             "label": "Interest Calculator"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/uren-en-minuten/index",
+            "id": "exercises/node-typescript/uren-en-minuten/README",
             "label": "Uren en Minuten"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/wisselgeld/index",
+            "id": "exercises/node-typescript/wisselgeld/README",
             "label": "Wisselgeld"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/name-from-email/index",
+            "id": "exercises/node-typescript/name-from-email/README",
             "label": "Name from Email"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/text-box/index",
+            "id": "exercises/node-typescript/text-box/README",
             "label": "Text Box"
           },
           {
@@ -434,32 +434,32 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/node-typescript/som-van-getallen/index",
+            "id": "exercises/node-typescript/som-van-getallen/README",
             "label": "Som van getallen"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/puntenboek/index",
+            "id": "exercises/node-typescript/puntenboek/README",
             "label": "Puntenboek"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/rot13/index",
+            "id": "exercises/node-typescript/rot13/README",
             "label": "Rot13"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/pokemon-team/index",
+            "id": "exercises/node-typescript/pokemon-team/README",
             "label": "Pokemon Team"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/todo-list-string/index",
+            "id": "exercises/node-typescript/todo-list-string/README",
             "label": "Todo List String"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/tic-tac-toe/index",
+            "id": "exercises/node-typescript/tic-tac-toe/README",
             "label": "Tick Tac Toe"
           },
           {
@@ -487,17 +487,17 @@ const sidebars: SidebarsConfig = {
             "items": [
               {
                 "type": "doc",
-                "id": "exercises/node-typescript/recepten/index",
+                "id": "exercises/node-typescript/recepten/README",
                 "label": "Recepten"
               },
               {
                 "type": "doc",
-                "id": "exercises/node-typescript/movies-objects/index",
+                "id": "exercises/node-typescript/movies-objects/README",
                 "label": "Movies Objects"
               },
               {
                 "type": "doc",
-                "id": "exercises/node-typescript/todo-list-objects/index",
+                "id": "exercises/node-typescript/todo-list-objects/README",
                 "label": "Todo List Objects"
               }
             ]
@@ -512,32 +512,32 @@ const sidebars: SidebarsConfig = {
             "items": [
               {
                 "type": "doc",
-                "id": "exercises/node-typescript/math-fun/index",
+                "id": "exercises/node-typescript/math-fun/README",
                 "label": "Math Fun"
               },
               {
                 "type": "doc",
-                "id": "exercises/node-typescript/short-notation/index",
+                "id": "exercises/node-typescript/short-notation/README",
                 "label": "Short Notation"
               },
               {
                 "type": "doc",
-                "id": "exercises/node-typescript/array-sum/index",
+                "id": "exercises/node-typescript/array-sum/README",
                 "label": "Array Sum"
               },
               {
                 "type": "doc",
-                "id": "exercises/node-typescript/movies-functions/index",
+                "id": "exercises/node-typescript/movies-functions/README",
                 "label": "Movies Functions"
               },
               {
                 "type": "doc",
-                "id": "exercises/node-typescript/filter-numbers/index",
+                "id": "exercises/node-typescript/filter-numbers/README",
                 "label": "Filter Numbers"
               },
               {
                 "type": "doc",
-                "id": "exercises/node-typescript/at-least-two/index",
+                "id": "exercises/node-typescript/at-least-two/README",
                 "label": "At Least Two"
               }
             ]
@@ -554,52 +554,52 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/node-typescript/fake-fetch/index",
+            "id": "exercises/node-typescript/fake-fetch/README",
             "label": "Fake Fetch"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/promise-all/index",
+            "id": "exercises/node-typescript/promise-all/README",
             "label": "Promise All"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/slow-sum/index",
+            "id": "exercises/node-typescript/slow-sum/README",
             "label": "Slow Sum"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/todo-list-fetch/index",
+            "id": "exercises/node-typescript/todo-list-fetch/README",
             "label": "Todo List Fetch"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/cocktails-promise-all/index",
+            "id": "exercises/node-typescript/cocktails-promise-all/README",
             "label": "Cocktails Promise All"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/bitcoin-api/index",
+            "id": "exercises/node-typescript/bitcoin-api/README",
             "label": "Bitcoin API"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/joke-api/index",
+            "id": "exercises/node-typescript/joke-api/README",
             "label": "Joke API"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/school-api/index",
+            "id": "exercises/node-typescript/school-api/README",
             "label": "School API"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/cocktails-api/index",
+            "id": "exercises/node-typescript/cocktails-api/README",
             "label": "Cocktails API"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/unix-timestamp-api/index",
+            "id": "exercises/node-typescript/unix-timestamp-api/README",
             "label": "Unix Timestamp API"
           }
         ]
@@ -614,27 +614,27 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/node-typescript/math-module/index",
+            "id": "exercises/node-typescript/math-module/README",
             "label": "Math Module"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/export-interfaces/index",
+            "id": "exercises/node-typescript/export-interfaces/README",
             "label": "Export Interfaces"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/cowsay-module/index",
+            "id": "exercises/node-typescript/cowsay-module/README",
             "label": "Cowsay Module"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/cat-gpt/index",
+            "id": "exercises/node-typescript/cat-gpt/README",
             "label": "Cat GPT"
           },
           {
             "type": "doc",
-            "id": "exercises/node-typescript/rainbow-chalk/index",
+            "id": "exercises/node-typescript/rainbow-chalk/README",
             "label": "Rainbow Chalk"
           }
         ]
@@ -649,17 +649,17 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/express/hello-express/index",
+            "id": "exercises/express/hello-express/README",
             "label": "Hello Express"
           },
           {
             "type": "doc",
-            "id": "exercises/express/dadjoke-express/index",
+            "id": "exercises/express/dadjoke-express/README",
             "label": "DadJoke Express"
           },
           {
             "type": "doc",
-            "id": "exercises/express/bitcoin-current/index",
+            "id": "exercises/express/bitcoin-current/README",
             "label": "Bitcoin current"
           }
         ]
@@ -674,22 +674,22 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/express/hello-express-ejs/index",
+            "id": "exercises/express/hello-express-ejs/README",
             "label": "Hello Express EJS"
           },
           {
             "type": "doc",
-            "id": "exercises/express/catstatic/index",
+            "id": "exercises/express/catstatic/README",
             "label": "Cat Static"
           },
           {
             "type": "doc",
-            "id": "exercises/express/maaltafels-ejs/index",
+            "id": "exercises/express/maaltafels-ejs/README",
             "label": "Maaltafels"
           },
           {
             "type": "doc",
-            "id": "exercises/express/newspaper/index",
+            "id": "exercises/express/newspaper/README",
             "label": "Newspaper"
           }
         ]
@@ -704,27 +704,27 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/express/hello-query/index",
+            "id": "exercises/express/hello-query/README",
             "label": "Hello Query"
           },
           {
             "type": "doc",
-            "id": "exercises/express/math-service-express/index",
+            "id": "exercises/express/math-service-express/README",
             "label": "Math Service"
           },
           {
             "type": "doc",
-            "id": "exercises/express/newspaper-route/index",
+            "id": "exercises/express/newspaper-route/README",
             "label": "Newspaper Route"
           },
           {
             "type": "doc",
-            "id": "exercises/express/newspaper-search/index",
+            "id": "exercises/express/newspaper-search/README",
             "label": "Newspaper Search"
           },
           {
             "type": "doc",
-            "id": "exercises/express/steam/index",
+            "id": "exercises/express/steam/README",
             "label": "Steam"
           }
         ]
@@ -739,17 +739,17 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/express/petshelter-form/index",
+            "id": "exercises/express/petshelter-form/README",
             "label": "Pet Shelter"
           },
           {
             "type": "doc",
-            "id": "exercises/express/redirect-form/index",
+            "id": "exercises/express/redirect-form/README",
             "label": "Redirect Form"
           },
           {
             "type": "doc",
-            "id": "exercises/express/contact-form/index",
+            "id": "exercises/express/contact-form/README",
             "label": "Contact Form"
           }
         ]
@@ -764,17 +764,17 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/express/router-combi/index",
+            "id": "exercises/express/router-combi/README",
             "label": "Router Combi"
           },
           {
             "type": "doc",
-            "id": "exercises/express/utility-middleware/index",
+            "id": "exercises/express/utility-middleware/README",
             "label": "Utility Middleware"
           },
           {
             "type": "doc",
-            "id": "exercises/express/rate-limiter-middleware/index",
+            "id": "exercises/express/rate-limiter-middleware/README",
             "label": "Rate Limiter"
           }
         ]
@@ -789,12 +789,12 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/express/twitter/index",
+            "id": "exercises/express/twitter/README",
             "label": "Twitter"
           },
           {
             "type": "doc",
-            "id": "exercises/express/word-guess/index",
+            "id": "exercises/express/word-guess/README",
             "label": "Word Guess"
           }
         ]
@@ -809,17 +809,17 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/mongodb/guestbook/index",
+            "id": "exercises/mongodb/guestbook/README",
             "label": "Guestbook"
           },
           {
             "type": "doc",
-            "id": "exercises/mongodb/movies-db/index",
+            "id": "exercises/mongodb/movies-db/README",
             "label": "MoviesDB"
           },
           {
             "type": "doc",
-            "id": "exercises/mongodb/pokemon-team/index",
+            "id": "exercises/mongodb/pokemon-team/README",
             "label": "Pokemon Team"
           }
         ]
@@ -834,12 +834,12 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/mongodb/pet-shelter/index",
+            "id": "exercises/mongodb/pet-shelter/README",
             "label": "Pet Shelter"
           },
           {
             "type": "doc",
-            "id": "exercises/mongodb/games-db/index",
+            "id": "exercises/mongodb/games-db/README",
             "label": "Games DB"
           }
         ]
@@ -854,17 +854,17 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/mongodb/pet-shelter-express/index",
+            "id": "exercises/mongodb/pet-shelter-express/README",
             "label": "Pet Shelter Express"
           },
           {
             "type": "doc",
-            "id": "exercises/mongodb/guestbook-express/index",
+            "id": "exercises/mongodb/guestbook-express/README",
             "label": "Guestbook Express"
           },
           {
             "type": "doc",
-            "id": "exercises/mongodb/pokemon-team-express/index",
+            "id": "exercises/mongodb/pokemon-team-express/README",
             "label": "Pokemon Team Express"
           }
         ]
@@ -879,12 +879,12 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/mongodb/users-crud-express/index",
+            "id": "exercises/mongodb/users-crud-express/README",
             "label": "Users CRUD"
           },
           {
             "type": "doc",
-            "id": "exercises/mongodb/pokedex-mongo-express/index",
+            "id": "exercises/mongodb/pokedex-mongo-express/README",
             "label": "Pokedex"
           }
         ]
@@ -899,17 +899,17 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/security/shopping-cookie/index",
+            "id": "exercises/security/shopping-cookie/README",
             "label": "Shopping Cookie"
           },
           {
             "type": "doc",
-            "id": "exercises/security/view-counter-cookies/index",
+            "id": "exercises/security/view-counter-cookies/README",
             "label": "View Counter Cookies"
           },
           {
             "type": "doc",
-            "id": "exercises/security/view-counter-sessions/index",
+            "id": "exercises/security/view-counter-sessions/README",
             "label": "View Counter Sessions"
           }
         ]
@@ -924,12 +924,12 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/security/login-express/index",
+            "id": "exercises/security/login-express/README",
             "label": "Login Express"
           },
           {
             "type": "doc",
-            "id": "exercises/security/pokedex-express-sessions/index",
+            "id": "exercises/security/pokedex-express-sessions/README",
             "label": "Pokedex Express Sessions"
           }
         ]
@@ -944,12 +944,12 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/security/jwt-sign/index",
+            "id": "exercises/security/jwt-sign/README",
             "label": "JWT Sign"
           },
           {
             "type": "doc",
-            "id": "exercises/security/login-express-jwt/index",
+            "id": "exercises/security/login-express-jwt/README",
             "label": "Login Express JWT"
           }
         ]
@@ -964,27 +964,27 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/testing/math-test/index",
+            "id": "exercises/testing/math-test/README",
             "label": "Math Test"
           },
           {
             "type": "doc",
-            "id": "exercises/testing/string-test/index",
+            "id": "exercises/testing/string-test/README",
             "label": "String Test"
           },
           {
             "type": "doc",
-            "id": "exercises/testing/math-express-test/index",
+            "id": "exercises/testing/math-express-test/README",
             "label": "Math Express Test"
           },
           {
             "type": "doc",
-            "id": "exercises/testing/form-express-test/index",
+            "id": "exercises/testing/form-express-test/README",
             "label": "Form Express Test"
           },
           {
             "type": "doc",
-            "id": "exercises/testing/pet-shelter-express-test/index",
+            "id": "exercises/testing/pet-shelter-express-test/README",
             "label": "Pet Shelter Express Test"
           }
         ]
@@ -999,12 +999,12 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/herhaling/youtube-playlists/index",
+            "id": "exercises/herhaling/youtube-playlists/README",
             "label": "Youtube Favorites"
           },
           {
             "type": "doc",
-            "id": "exercises/herhaling/beerster/index",
+            "id": "exercises/herhaling/beerster/README",
             "label": "Beerster"
           }
         ]
@@ -1019,17 +1019,17 @@ const sidebars: SidebarsConfig = {
         "items": [
           {
             "type": "doc",
-            "id": "exercises/node-typescript/dna-match/index",
+            "id": "exercises/node-typescript/dna-match/README",
             "label": "DNA Match"
           },
           {
             "type": "doc",
-            "id": "exercises/express/viewcounter/index",
+            "id": "exercises/express/viewcounter/README",
             "label": "View Counter"
           },
           {
             "type": "doc",
-            "id": "exercises/mongodb/hogwarts-express-crud/index",
+            "id": "exercises/mongodb/hogwarts-express-crud/README",
             "label": "Hogwarts Express CRUD"
           }
         ]

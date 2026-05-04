@@ -3,35 +3,35 @@
 ### Short Notation
 
 
-[short-notation](../../../exercises/node-typescript/short-notation/index.md)
+[short-notation](../../../exercises/node-typescript/short-notation/README.md)
 
 
 ### Wiskundige functies
 
 
-[math-fun](../../../exercises/node-typescript/math-fun/index.md)
+[math-fun](../../../exercises/node-typescript/math-fun/README.md)
 
 
 ### Array sum
 
 
-[array-sum](../../../exercises/node-typescript/array-sum/index.md)
+[array-sum](../../../exercises/node-typescript/array-sum/README.md)
 
 
 ### Movies (vervolg)
 
 
-[movies-functions](../../../exercises/node-typescript/movies-functions/index.md)
+[movies-functions](../../../exercises/node-typescript/movies-functions/README.md)
 
 
 ### Filter
 
 
-[filter-numbers](../../../exercises/node-typescript/filter-numbers/index.md)
+[filter-numbers](../../../exercises/node-typescript/filter-numbers/README.md)
 
 
 ### atLeastTwo
 
 
-[at-least-two](../../../exercises/node-typescript/at-least-two/index.md)
+[at-least-two](../../../exercises/node-typescript/at-least-two/README.md)
 

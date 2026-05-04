@@ -1,0 +1,24 @@
+<%- include("partials/header") %>
+    <div id="container">
+        <%- include("partials/navbar") %>
+
+            <div>
+
+                <div class="container mx-auto p-4 flex flex-1 w-full">
+                    <div class="w-full mr-4">
+                        <div class="mt-8">
+                            <div class="mt-8">
+                                <% for (let bar of bars) { %>
+                                    <a href="/bars/<%= bar.id %>">
+                                        <div
+                                            class="hover:shadow-lg transform hover:scale-105 transition-transform duration-300">
+                                            <%- include("partials/bar", {bar : bar, hideImages: true}) %>
+                                        </div>
+                                    </a>
+                                    <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include("partials/header") %>

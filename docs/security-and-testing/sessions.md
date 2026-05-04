@@ -101,27 +101,25 @@ De inhoud van de sessie wordt langs de serverzijde opgeslagen. Dit impliceert da
 
 Het defaultmechanisme van express-session is een "in-memory store", dus tijdelijke opslag. Voor ontwikkeling en debugging kan dit handig zijn. In productie gebruik je een "session store". Dit is een externe database die de sessiegegevens opslaat. Er zijn verschillende session stores beschikbaar, zoals `connect-redis`, `connect-mongo`, `connect-mysql`, enz. Deze moet je zelf installeren en configureren.
 
-Wil je bijvoorbeeld mongodb gebruiken als session store, dan installeer je de package `connect-mongodb-session`:
+Wil je bijvoorbeeld mongodb gebruiken als session store, dan installeer je de package `connect-mongo`:
 
 ```bash
-npm install connect-mongodb-session
-npm install --save-dev @types/connect-mongodb-session
+npm install connect-mongo
 ```
 
-Wil je deze gebruiken, dan moet je de `MemoryStore` vervangen door de `MongoDBStore`:
+Wil je deze gebruiken, dan moet je de `MemoryStore` vervangen door de `MongoStore`:
 
 ```typescript
 import dotenv from "dotenv";
 dotenv.config();
 
 import session from "express-session";
-import mongoDbSession from "connect-mongodb-session";
-const MongoDBStore = mongoDbSession(session);
+import MongoStore from 'connect-mongo'
 
-const mongoStore = new MongoDBStore({
-    uri: process.env.MONGODB_URI ?? "mongodb://localhost:27017",
-    collection: "sessions",
-    databaseName: "webontwikkeling",
+const mongoStore = MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI ?? "mongodb://localhost:27017",
+    dbName: "sessions",
+    collectionName: "webontwikkeling"
 });
 
 mongoStore.on("error", (error) => {

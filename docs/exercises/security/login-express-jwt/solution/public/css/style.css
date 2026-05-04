@@ -1,0 +1,107 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 300px;
+  margin: 20px auto;
+
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="email"], input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #004494;
+}
+
+@keyframes fadeOutAndHide {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  99% {
+    opacity: 0;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes fadeOutAndDisappear {
+  0% {
+    opacity: 1;
+    display: block; /* Assuming the element is a block-level element */
+  }
+  90% {
+    opacity: 1;
+    display: block;
+  }
+  99% {
+    opacity: 0;
+    display: block;
+  }
+  100% {
+    opacity: 0;
+    display: none; /* The element completely disappears from the flow */
+  }
+}
+
+.error, .success {
+  /* Initial visibility should be visible to ensure the fade-out is seen */
+  display: block;
+  /* Apply the animation */
+  animation: fadeOutAndDisappear 5s forwards;
+}
+
+.error {
+  color: #FF0000; /* Red color for error messages */
+  background-color: #FFECEC; /* Light red background */
+  border: 1px solid #FFD6D6; /* Light red border */
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+}
+
+.success {
+  color: #008000; /* Green color for success messages */
+  background-color: #ECFFEC; /* Light green background */
+  border: 1px solid #D6FFD6; /* Light green border */
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+}

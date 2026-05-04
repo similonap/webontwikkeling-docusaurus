@@ -1,0 +1,21 @@
+<%- include("partials/header") %>
+    
+    <form action="/words" method="GET">
+        <input type="text" name="q" value="<%= q %>">
+        <select name="sortDirection">
+            <option <%= sortDirection === "asc" ? "selected" : "" %>>asc</option>
+            <option <%= sortDirection === "desc" ? "selected" : "" %>>desc</option>
+        </select>
+        <button type="submit">GO</button>
+    </form>
+
+    <ul>
+        <% for (let word of words) { %>
+            <% if (word.length !== 5) { %>
+                <li style="color: red"><%= word %></li>
+            <% } else { %>
+                <li><%= word %></li>
+            <% } %>
+        <% } %>
+    </ul>
+<%- include("partials/footer") %>

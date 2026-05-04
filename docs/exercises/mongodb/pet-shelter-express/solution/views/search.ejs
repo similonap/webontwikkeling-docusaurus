@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <form method="get" action="/pets/search">
+        <input type="text" name="q" value="<%= q %>"/>
+        <button type="submit">Search</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Type</th>
+                <th>Breed</th>
+            </tr>
+        </thead>
+    
+        <% for (let pet of pets) { %> 
+            <tr>
+                <td><%= pet.name %></td>
+                <td><%= pet.age %></td>
+                <td><%= pet.type %></td>
+                <td><%= pet.breed %></td>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>

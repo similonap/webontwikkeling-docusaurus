@@ -44,20 +44,20 @@ Bij dit voorbeeldproject zijn screenshots inbegrepen om een visuele indruk te ge
 
 Deze screenshots dienen als voorbeeld en zijn niet bedoeld om exact gekopieerd te worden. Gebruik ze als inspiratiebron en pas de ideeën toe binnen de context van je eigen project.
 
-<figure><img src="/assets/image (6).png" alt="" /><figcaption><p>Navigatiebalk</p></figcaption></figure>
+<figure><img src={require("/assets/image (6).png").default} alt="" /><figcaption><p>Navigatiebalk</p></figcaption></figure>
 
-<figure><img src="/assets/image (12).png" alt="" /><figcaption><p>Overzichtspagina met navigatiebalk</p></figcaption></figure>
+<figure><img src={require("/assets/image (12).png").default} alt="" /><figcaption><p>Overzichtspagina met navigatiebalk</p></figcaption></figure>
 
-<figure><img src="/assets/image (3).png" alt="" /><figcaption><p>Overzichtpagina van de trading cards</p></figcaption></figure>
+<figure><img src={require("/assets/image (3).png").default} alt="" /><figcaption><p>Overzichtpagina van de trading cards</p></figcaption></figure>
 
-<figure><img src="/assets/image (4).png" alt="" /><figcaption><p>Sortering van velden</p></figcaption></figure>
+<figure><img src={require("/assets/image (4).png").default} alt="" /><figcaption><p>Sortering van velden</p></figcaption></figure>
 
-<figure><img src="/assets/image (5).png" alt="" /><figcaption><p>Search functionaliteit</p></figcaption></figure>
+<figure><img src={require("/assets/image (5).png").default} alt="" /><figcaption><p>Search functionaliteit</p></figcaption></figure>
 
-<figure><img src="/assets/image (9).png" alt="" /><figcaption><p>Overzicht van de guilds (De gerelateerde objecten)</p></figcaption></figure>
+<figure><img src={require("/assets/image (9).png").default} alt="" /><figcaption><p>Overzicht van de guilds (De gerelateerde objecten)</p></figcaption></figure>
 
-<figure><img src="/assets/image (10).png" alt="" /><figcaption><p>Detail pagina van de trading cards (hoofdobjecten)</p></figcaption></figure>
+<figure><img src={require("/assets/image (10).png").default} alt="" /><figcaption><p>Detail pagina van de trading cards (hoofdobjecten)</p></figcaption></figure>
 
-<figure><img src="/assets/image (11).png" alt="" /><figcaption><p>Detail pagina van de gerelateerde guilds (geralateerde objecten)</p></figcaption></figure>
+<figure><img src={require("/assets/image (11).png").default} alt="" /><figcaption><p>Detail pagina van de gerelateerde guilds (geralateerde objecten)</p></figcaption></figure>
 
-<figure><img src="/assets/milestone2.gif" alt="" /><figcaption></figcaption></figure>
+<figure><img src={require("/assets/milestone2.gif").default} alt="" /><figcaption></figcaption></figure>

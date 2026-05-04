@@ -1,0 +1,33 @@
+<section class="posts">
+    <% for (let tweet of tweets) { %>
+        <article class="post">
+            <div class="post_profile-image">
+                <img src="/images/avatars/<%= tweet.handle %>.png" alt="java-logo">
+            </div>
+            <div class="post_body">
+                <div class="post_header">
+                    <div class="post_header-text">
+                        <h3><%= tweet.name %>
+                            <span class="header-icon-section">
+                                <a href="/<%= tweet.handle %>">@<%= tweet.handle %></a>
+                            </span>
+                        </h3>
+                    </div>
+
+                    <div class="post_header-description">
+                        <%= tweet.text %>
+                    </div>
+                    
+                </div>
+                <div class="post_footer">
+                    <span class="material-icons">chat</span>
+                    <span class="material-icons">repeat</span>
+                    <span class="material-icons">favorite_border</span>
+                    <span class="material-icons">file_upload</span>
+                </div>
+
+            </div>
+
+        </article>
+    <% } %>
+</section>

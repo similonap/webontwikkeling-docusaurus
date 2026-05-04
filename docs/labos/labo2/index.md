@@ -21,49 +21,49 @@ Maak een nieuwe directory `labo2` aan in de root van je project.
 ### Hello, Name!
 
 
-[hello-name](../../exercises/node-typescript/hello-name/index.md)
+[hello-name](../../exercises/node-typescript/hello-name/README.md)
 
 
 ### BMI Calculator
 
 
-[bmi-calculator](../../exercises/node-typescript/bmi-calculator/index.md)
+[bmi-calculator](../../exercises/node-typescript/bmi-calculator/README.md)
 
 
 ### BMI Calculator voor meerdere personen
 
 
-[bmi-calculator-multi](../../exercises/node-typescript/bmi-calculator-multi/index.md)
+[bmi-calculator-multi](../../exercises/node-typescript/bmi-calculator-multi/README.md)
 
 
 ### Interest Calculator
 
 
-[interest-calculator](../../exercises/node-typescript/interest-calculator/index.md)
+[interest-calculator](../../exercises/node-typescript/interest-calculator/README.md)
 
 
 ### Uren en minuten
 
 
-[uren-en-minuten](../../exercises/node-typescript/uren-en-minuten/index.md)
+[uren-en-minuten](../../exercises/node-typescript/uren-en-minuten/README.md)
 
 
 ### Wisselgeld
 
 
-[wisselgeld](../../exercises/node-typescript/wisselgeld/index.md)
+[wisselgeld](../../exercises/node-typescript/wisselgeld/README.md)
 
 
 ### Name from email
 
 
-[name-from-email](../../exercises/node-typescript/name-from-email/index.md)
+[name-from-email](../../exercises/node-typescript/name-from-email/README.md)
 
 
 ### Text-box
 
 
-[text-box](../../exercises/node-typescript/text-box/index.md)
+[text-box](../../exercises/node-typescript/text-box/README.md)
 
 
 ### Robot Readline

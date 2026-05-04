@@ -1,0 +1,38 @@
+<div class="bg-white rounded-lg shadow-md p-4 mb-4">
+    <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-2">
+            <h2 class="text-xl font-semibold"><%= bar.name %></h2>
+        </div>
+        <div class="col-span-2">
+            <div class="flex">
+                <% for (let i=0;i<5;i++) { %>
+                    <% if (i < bar.rating) { %>
+                        <i class="fa fa-star text-yellow-400"></i>
+                    <% } else { %>
+                        <i class="fa fa-star text-gray-300"></i>
+                    <% } %>
+                <% } %>
+            </div>
+        </div>
+        <div class="col-span-2">
+            <p class="text-gray-500 mb-2">Location: <%= bar.location %></p>
+            <p class="text-gray-500 mb-4">Description: <%= bar.description %></p>
+        </div>
+        <% if (!hideImages) { %>
+            <div class="col-span-2 grid grid-cols-2 gap-2">
+                <div>
+                    <img src="<%= bar.images[0] %>" class="w-full h-auto rounded-lg shadow-md">
+                </div>
+                <div>
+                    <img src="<%= bar.images[1] %>" class="w-full h-auto rounded-lg shadow-md">
+                </div>
+                <div>
+                    <img src="<%= bar.images[2] %>" class="w-full h-auto rounded-lg shadow-md">
+                </div>
+                <div>
+                    <img src="<%= bar.images[3] %>" class="w-full h-auto rounded-lg shadow-md">
+                </div>
+            </div>
+        <% } %>
+    </div>
+</div>

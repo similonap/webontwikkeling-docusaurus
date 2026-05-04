@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars Bar Reviews</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+
+
+    <div id="container">
+        <nav class="bg-blue-500 p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <ul class="flex gap-10">
+                    <li><a class="text-white hover:text-blue-200 font-semibold" href="/">Home</a></li>
+                    <li><a class="text-white hover:text-blue-200 font-semibold" href="/beers">Beers</a></li>
+                    <li><a class="text-white hover:text-blue-200 font-semibold" href="/bars">Bars</a></li>
+                </ul>
+                <div class="relative">
+                    <button class="cursor-pointer w-10 h-10 rounded-full bg-white flex items-center justify-center"
+                        popovertarget="profile-popover" popovertargetaction="toggle">
+                        <span class="text-blue-500 font-bold">S</span>
+                    </button>
+                    <div id="profile-popover"
+                        class="popover hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50">
+                        <ul>
+                            <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+                                    href="/profile">Han Solo</a></li>
+                            <li><a class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+                                    href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <script>
+            document.addEventListener('click', (event) => {
+                const targetButton = event.target.closest('[popovertarget]');
+                const popoverId = targetButton?.getAttribute('popovertarget');
+                if (popoverId) {
+                    const popover = document.getElementById(popoverId);
+                    if (popover) {
+                        popover.classList.toggle('hidden');
+                    }
+                } else {
+                    document.querySelectorAll('.popover').forEach(popover => popover.classList.add('hidden'));
+                }
+            });
+        </script>
+
+        <div>
+
+            <div class="container mx-auto p-4 flex flex-1 w-full">
+                <div class="w-full mr-4">
+                    <div class="mt-8">
+                        <div class="mt-8">
+
+                            <a href="/bars/8">
+                                <div
+                                    class="hover:shadow-lg transform hover:scale-105 transition-transform duration-300">
+                                    <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div class="col-span-2">
+                                                <h2 class="text-xl font-semibold">Alderaan Wine Bar</h2>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="flex">
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <p class="text-gray-500 mb-2">Location: Alderaan</p>
+                                                <p class="text-gray-500 mb-4">Description: A wine bar known for its
+                                                    exquisite selection, tragically destroyed with the planet.</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </a>
+
+                            <a href="/bars/2">
+                                <div
+                                    class="hover:shadow-lg transform hover:scale-105 transition-transform duration-300">
+                                    <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div class="col-span-2">
+                                                <h2 class="text-xl font-semibold">Cloud City Lounge</h2>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="flex">
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <p class="text-gray-500 mb-2">Location: Bespin</p>
+                                                <p class="text-gray-500 mb-4">Description: A luxurious floating lounge
+                                                    with stunning views of the gas giant Bespin.</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </a>
+
+                            <a href="/bars/5">
+                                <div
+                                    class="hover:shadow-lg transform hover:scale-105 transition-transform duration-300">
+                                    <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div class="col-span-2">
+                                                <h2 class="text-xl font-semibold">Coruscant Club 1313</h2>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="flex">
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-gray-300"></i>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <p class="text-gray-500 mb-2">Location: Coruscant</p>
+                                                <p class="text-gray-500 mb-4">Description: An exclusive club in the
+                                                    lower levels of Coruscant, known for its underworld clientele.</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </a>
+
+                            <a href="/bars/10">
+                                <div
+                                    class="hover:shadow-lg transform hover:scale-105 transition-transform duration-300">
+                                    <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div class="col-span-2">
+                                                <h2 class="text-xl font-semibold">Dagobah Swamp Pub</h2>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="flex">
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <p class="text-gray-500 mb-2">Location: Dagobah</p>
+                                                <p class="text-gray-500 mb-4">Description: A mysterious pub in the
+                                                    swamps of Dagobah, offering unique brews and strange stories.</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </a>
+
+                            <a href="/bars/4">
+                                <div
+                                    class="hover:shadow-lg transform hover:scale-105 transition-transform duration-300">
+                                    <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div class="col-span-2">
+                                                <h2 class="text-xl font-semibold">Endor Ewok Pub</h2>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="flex">
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <p class="text-gray-500 mb-2">Location: Endor</p>
+                                                <p class="text-gray-500 mb-4">Description: A cozy pub run by the
+                                                    friendly Ewoks of the forest moon of Endor.</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </a>
+
+                            <a href="/bars/3">
+                                <div
+                                    class="hover:shadow-lg transform hover:scale-105 transition-transform duration-300">
+                                    <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div class="col-span-2">
+                                                <h2 class="text-xl font-semibold">Jabba&#39;s Palace Bar</h2>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="flex">
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-gray-300"></i>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <p class="text-gray-500 mb-2">Location: Tatooine</p>
+                                                <p class="text-gray-500 mb-4">Description: Located within the palace of
+                                                    the notorious gangster Jabba the Hutt.</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </a>
+
+                            <a href="/bars/7">
+                                <div
+                                    class="hover:shadow-lg transform hover:scale-105 transition-transform duration-300">
+                                    <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div class="col-span-2">
+                                                <h2 class="text-xl font-semibold">Kashyyyk Treetop Tavern</h2>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="flex">
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <p class="text-gray-500 mb-2">Location: Kashyyyk</p>
+                                                <p class="text-gray-500 mb-4">Description: A treetop tavern among the
+                                                    Wookiees&#39; home planet, serving strong Wookiee brews.</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </a>
+
+                            <a href="/bars/1">
+                                <div
+                                    class="hover:shadow-lg transform hover:scale-105 transition-transform duration-300">
+                                    <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div class="col-span-2">
+                                                <h2 class="text-xl font-semibold">Mos Eisley Cantina</h2>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="flex">
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <p class="text-gray-500 mb-2">Location: Tatooine</p>
+                                                <p class="text-gray-500 mb-4">Description: A wretched hive of scum and
+                                                    villainy. Home to all kinds of species.</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </a>
+
+                            <a href="/bars/6">
+                                <div
+                                    class="hover:shadow-lg transform hover:scale-105 transition-transform duration-300">
+                                    <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div class="col-span-2">
+                                                <h2 class="text-xl font-semibold">Naboo Waterfront Bistro</h2>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="flex">
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <p class="text-gray-500 mb-2">Location: Naboo</p>
+                                                <p class="text-gray-500 mb-4">Description: A waterfront bistro offering
+                                                    elegant dining with a view of Naboo&#39;s serene lakes.</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </a>
+
+                            <a href="/bars/9">
+                                <div
+                                    class="hover:shadow-lg transform hover:scale-105 transition-transform duration-300">
+                                    <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div class="col-span-2">
+                                                <h2 class="text-xl font-semibold">Tusken Raider Saloon</h2>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <div class="flex">
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-yellow-400"></i>
+
+
+
+                                                    <i class="fa fa-star text-gray-300"></i>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <p class="text-gray-500 mb-2">Location: Tatooine</p>
+                                                <p class="text-gray-500 mb-4">Description: A saloon known for its rough
+                                                    and tumble clientele, frequented by Tusken Raiders.</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

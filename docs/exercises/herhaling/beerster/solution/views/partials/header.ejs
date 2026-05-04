@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars Bar Reviews</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+</head>
+<body>
+<% if (message && message.type === "error") { %>
+  <div id="error-message" class=" bg-red-500 text-white p-4">
+    <span id="error-text"></span>
+    <button onclick="document.getElementById('error-message').classList.add('hidden');" class="ml-4">
+        <i class="fa fa-times"></i>
+        <%= message.message %>
+    </button>
+  </div>
+<% } %>
+<% if (message && message.type === "success") { %>
+  <div id="success-message" class=" bg-green-500 text-white p-4">
+    <span id="success-text"></span>
+    <button onclick="document.getElementById('success-message').classList.add('hidden');" class="ml-4">
+        <i class="fa fa-times"></i>
+        <%= message.message %>
+    </button>
+  </div>
+<% } %>

@@ -1,0 +1,18 @@
+<%- include("partials/header") %>
+
+<div class="searchBar">
+    <form action="/newspaper/search" method="GET">
+        <input type="text" name="q" placeholder="Search..." value="<%= query %>">
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<% for (let article of articles) { %>
+    <article class="article">
+        <h2><%= article.title %></h2>
+        <p><%= article.content %></p>
+    </article>
+<% } %>
+
+
+<%- include("partials/footer") %>

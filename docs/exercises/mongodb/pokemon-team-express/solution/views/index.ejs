@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <% if (error) { %>
+        <p class="error"><%= error %></p>
+    <% } %>
+    <form action="/" method="POST">
+        <select name="pokemon">
+            <% for (let i = 0; i < pokemon.length; i++) { %>
+                <option value="<%= i %>"><%= pokemon[i] %></option>
+            <% } %>
+        </select>
+        <button type="submit">Add To Team</button>
+    </form>
+
+    <ul>
+        <% for (let teamMember of team) { %>
+            <li><%= teamMember.pokemon %></li>
+        <% } %>
+    </ul>
+</body>
+</html>
