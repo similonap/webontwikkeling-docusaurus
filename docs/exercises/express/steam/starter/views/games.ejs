@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Steam Games</title>
+</head>
+<body>
+    <form action="/" method="get">
+        <select name="sortField">
+            <option value="name">Name</option> 
+            <option value="releaseYear">Release Year</option>
+            <option value="minimumAge">Minimum Age</option>
+            <option value="developer">Developer</option>
+        </select>
+        <select name="sortDirection">
+            <option value="asc">Asc</option> 
+            <option value="desc">Desc</option> 
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Release Year</th>
+                <th>Minimum Age</th>
+                <th>Developer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let game of games) { %>
+                <tr>
+                    <td><%- game.name %></td>
+                    <td><%- game.releaseYear %></td>
+                    <td><%- game.minimumAge %></td>
+                    <td><%- game.developer %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>

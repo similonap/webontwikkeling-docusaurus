@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <main>
+        <h1>Word Guess</h1>
+        <p>Guess the word!</p>
+
+        <p style="color: red">You must enter a 5-letter word.</p>
+        <p style="color: green">Congratulations! You guessed the word. <a href="/restart">Click to play again!</a></p>
+
+        <div class="letter-container">
+            <span class="gray">A</span>
+            <span class="green">U</span>
+            <span class="gray">D</span>
+            <span class="yellow">I</span>
+            <span class="gray">O</span>
+        </div>
+
+        <form action="/guess" method="POST">
+            <input type="text" name="guess" placeholder="Enter your guess">
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+</body>
+
+</html>
