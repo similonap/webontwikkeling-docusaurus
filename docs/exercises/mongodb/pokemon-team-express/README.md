@@ -1,4 +1,4 @@
-### Pokemon Team Express
+# Pokemon Team Express
 
 Maak een nieuw project aan met de naam `pokemon-team-express` en installeer de `express` en `mongodb` package. 
 

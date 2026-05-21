@@ -1,4 +1,4 @@
-### Youtube Favorites
+# Youtube Favorites
 
 In deze opdracht ga je een applicatie bouwen die het toelaat om youtube videos aan te duiden als favoriet. De applicatie zal een lijst van favoriete videos tonen en het zal mogelijk zijn om videos toe te voegen en te verwijderen.
 

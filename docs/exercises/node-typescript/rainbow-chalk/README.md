@@ -1,4 +1,4 @@
-### Rainbow Chalk
+# Rainbow Chalk
 
 Maak een nieuw project aan met de naam `rainbow-chalk`.
 
@@ -18,6 +18,6 @@ Volg het volgende stappenplan om de oefening te maken:
 5. Loop over de array van kleuren en print een regel met een achtergrondkleur voor elke kleur. Gebruik hiervoor de `bgRgb` functie van de chalk module. Gebruik de breedte van de terminal om te bepalen hoeveel karakters je moet printen. 
 6. Sit back and enjoy the rainbow!
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ![alt text](rainbow.png)

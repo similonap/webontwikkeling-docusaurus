@@ -1,4 +1,4 @@
-### Steam 
+# Steam 
 
 In deze oefening bouwen we verder op het volgende starter project: <a href="/webontwikkeling-docusaurus/exercises/express/steam/starter.zip">starter.zip</a>. Deze applicatie is een eenvoudige express applicatie die een route heeft die een lijst van games toont. Bovenaan staat er al formulier om te kunnen sorteren. De sorteer functionaliteit is echter nog niet geïmplementeerd.
 
@@ -14,7 +14,7 @@ http://localhost:3000/?sortField=name&sortDirection=desc
 
 Dit zou de games sorteren op naam in dalende volgorde.
 
-### Uitbreiding
+# Uitbreiding
 
 Zorg ervoor dat de gebruiker ook kan sorteren aan de hand van de headers van de tabel. Als de gebruiker op de header klikt, moet de tabel gesorteerd worden op basis van de kolom waarop geklikt is. Als de gebruiker nogmaals klikt op dezelfde header, moet de sorteer volgorde omgekeerd worden.
 

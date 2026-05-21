@@ -1,4 +1,4 @@
-### Newspaper Route
+# Newspaper Route
 
 Bouw verder aan de [newspaper](../newspaper/README.md) opdracht.
 

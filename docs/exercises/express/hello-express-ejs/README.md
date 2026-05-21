@@ -1,4 +1,4 @@
-### Hello Express EJS
+# Hello Express EJS
 
 In deze oefening gaan we de `hello-express` applicatie uit het vorige labo uitbreiden met EJS. Neem de broncode over zodat je de vrijheid hebt om de code aan te passen zonder dat je de oorspronkelijke code verliest. De routes die json terugsturen gebruiken uiteraard nog steeds json en geen ejs.
 

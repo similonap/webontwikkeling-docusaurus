@@ -1,4 +1,4 @@
-### Shopping Cookie
+# Shopping Cookie
 
 Voor deze oefening beginnen we met een <a href="/webontwikkeling-docusaurus/exercises/security/shopping-cookie/starter.zip">starter project</a>. Download dit project en pak het uit in een nieuwe folder.
 

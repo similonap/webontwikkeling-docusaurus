@@ -1,4 +1,4 @@
-### Wisselgeld
+# Wisselgeld
 
 Maak een nieuw project aan met de naam `wisselgeld`.
 
@@ -6,7 +6,7 @@ We gaan in deze oefening een programma maken dat een bedrag moet omzetten naar h
 
 Je kan dit doen door gebruik te maken van de modulo operator. Deze operator geeft de rest van een deling terug.
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ```bash
 Geef het bedrag in: 123

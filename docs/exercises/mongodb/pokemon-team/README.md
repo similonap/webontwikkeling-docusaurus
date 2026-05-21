@@ -1,4 +1,4 @@
-### Pokemon Team 
+# Pokemon Team 
 
 Maak een nieuw project aan met de naam `pokemon-team` en installeer de `mongodb` package. Je kan hiervoor starten vanuit het project [pokemon-team](../../node-typescript/pokemon-team/README.md) dat je al eerder hebt gemaakt.
 

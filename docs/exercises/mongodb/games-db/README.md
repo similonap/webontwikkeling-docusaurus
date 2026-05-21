@@ -1,4 +1,4 @@
-### Games-DB
+# Games-DB
 
 Maak een nieuw project aan met de naam `games-db` en installeer de `mongodb` package.
 
@@ -81,46 +81,46 @@ en de volgende data:
 ];
 ```
 
-#### Opdracht 1
+## Opdracht 1
 
 Zorg ervoor dat de data van de games in een MongoDB database terecht komt. Je kan deze data toevoegen in de collection games. De databasenaam mag je zelf kiezen. Kijk eerst na of er al games in de collection staan. Als dat zo is, dan voeg je de games niet toe.
 
-#### Opdracht 2
+## Opdracht 2
 
 Maak een functie `showAllGames` die alle games uit de database ophaalt en in de console toont. Toon alleen de naam, de prijs, de release date en de rating van de games. Je kan console.table gebruiken om de data in een tabel te tonen.
 
-#### Opdracht 3
+## Opdracht 3
 
 Maak een functie `showGamesByPublisher` die alle games uit de database ophaalt die gepubliceerd zijn door een bepaalde uitgever. De functie heeft als parameter een uitgever. De functie toont de games in de console. Toon alleen de naam, de prijs, de release date en de rating van de games. Je kan console.table gebruiken om de data in een tabel te tonen.
 
 Gebruik deze functie met de parameter "Sony Interactive Entertainment" om te testen of de functie werkt.
 
-#### Opdracht 4
+## Opdracht 4
 
 Maak een functie `showGamesCheaperThan` die alle games uit de database ophaalt die goedkoper zijn dan een bepaald bedrag. De functie heeft als parameter een bedrag. De functie toont de games in de console. Toon alleen de naam, de prijs, de release date en de rating van de games. Je kan console.table gebruiken om de data in een tabel te tonen.
 
 Gebruik deze functie met de parameter 40 om te testen of de functie werkt.
 
-#### Opdracht 5
+## Opdracht 5
 Pas de `showAllGames` functie aan zodat een parameter sort kan meegegeven worden. De parameter sort kan de volgende waarden hebben: name, price, releaseDate en rating. De functie sorteert de games op basis van de parameter sort.
 
-#### Opdracht 6
+## Opdracht 6
 
 Maak een functie `showHighestRatedGame` die de game met de hoogste rating uit de database ophaalt en in de console toont. Toon alleen de naam, de prijs, de release date en de rating van de game. Je kan console.table gebruiken om de data in een tabel te tonen (zelfs al is er maar 1 game).
 
 Gebruik deze functie om te testen of de functie werkt.
 
-#### Opdracht 7
+## Opdracht 7
 Maak een functie `showGamesWithPriceBetween` die alle games uit de database ophaalt die tussen een bepaald bedrag liggen. De functie heeft als parameters een minimum en een maximum bedrag. De functie toont de games in de console. Toon alleen de naam, de prijs, de release date en de rating van de games. Je kan console.table gebruiken om de data in een tabel te tonen.
 
 Gebruik deze functie met de parameters 40 en 50 om te testen of de functie werkt.
 
-#### Opdracht 8
+## Opdracht 8
 Maak een functie `discountAllGames` die een parameter discount heeft. De parameter discount is een percentage. De functie verlaagt de prijs van alle games met het percentage dat meegegeven is. De functie toont de games in de console. Toon alleen de naam, de prijs, de release date en de rating van de games. Je kan console.table gebruiken om de data in een tabel te tonen.
 
 Toon de games voor en na de korting om te testen of de functie werkt.
 
-#### Opdracht 9
+## Opdracht 9
 
 Maak een functie `deleteAllGames` die alle games uit de database verwijdert.
 

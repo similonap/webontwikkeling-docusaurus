@@ -1,4 +1,4 @@
-### Uren en minuten
+# Uren en minuten
 
 Maak een nieuw project aan met de naam `uren-en-minuten`.
 
@@ -6,7 +6,7 @@ We gaan in deze oefening een programma maken dat een aantal minuten moet omzette
 
 Je kan dit doen door gebruik te maken van de modulo operator. Deze operator geeft de rest van een deling terug.
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ```bash
 Geef het aantal minuten in: 150

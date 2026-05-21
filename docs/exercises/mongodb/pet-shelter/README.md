@@ -1,4 +1,4 @@
-### Pet Shelter
+# Pet Shelter
 
 Maak een nieuw project aan met de naam `movies-db` en installeer de `mongodb` package. 
 
@@ -29,7 +29,7 @@ const pets : Pet[] = [
 ];
 ```
 
-#### Functionaliteit
+## Functionaliteit
 
 Zorg ervoor dat de applicatie de volgende queries uitvoert:
 - Verwijder alle documenten uit de collection `pets`
@@ -44,7 +44,7 @@ Zorg ervoor dat de applicatie de volgende queries uitvoert:
 - Sorteer alle pets op leeftijd in aflopende volgorde en toon enkel de oudste pet in de console.
 - Sorteer alle pets op leeftijd in oplopende volgorde, sla de eerste 5 pets over en toon enkel de 6de tot 10de jongste pets in de console.
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ```bash
 All pets in the collection of the type 'dog': 

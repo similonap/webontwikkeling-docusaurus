@@ -1,4 +1,4 @@
-### DNA match
+# DNA match
 
 In deze opdracht ga je een functie schrijven die twee DNA sequenties met elkaar vergelijkt. De functie moet een percentage teruggeven dat aangeeft hoeveel procent van de sequenties overeenkomen.
 
@@ -27,6 +27,6 @@ dnaMatch("ATCG", "ATCCG") // Exception: Sequences must be of equal length
 
 Zorg voor een console applicatie die de gebruiker vraagt om twee DNA sequenties in te voeren. De error messages moeten worden opgevangen en de gebruiker moet opnieuw gevraagd worden om de sequenties in te voeren. Als de sequenties geldig zijn moet het percentage worden weergegeven.
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ![DNA match](dna.gif)

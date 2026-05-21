@@ -1,4 +1,4 @@
-### Movies DB
+# Movies DB
 
 Maak een nieuw project aan met de naam `movies-db` en installeer de `mongodb` package. 
 
@@ -16,20 +16,20 @@ let movies = [
 ];
 ```
 
-#### Stap 1: Toevoegen van de films aan de database
+## Stap 1: Toevoegen van de films aan de database
 
 - Maak een interface aan die overeenkomt met de objecten in movies. 
 - Geef movies het juiste type
 - Zorg dat deze films in jouw collection Movies in MongoDB terechtkomen. Je kan hiervoor gebruik maken van een lokale MongoDB database of een MongoDB Atlas database. Gebruik als db "exercises" en als collection "movies".
 - Kijk na via de mongoDB vscode extension of de films in de database zitten.
 
-#### Stap 2: Films tonen
+## Stap 2: Films tonen
 
 - Zet de de code die de insert doet in de database in commentaar anders worden de films telkens opnieuw toegevoegd. We zien later nog hoe we dit kunnen oplossen.
 - Doe een query op de database en toon de eerste film via de console.
 - Doe een query op de database en toon alle films via de console.
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ```
 First movie:

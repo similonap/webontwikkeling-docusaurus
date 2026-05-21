@@ -1,4 +1,4 @@
-#### Math Test
+# Math Test
 
 Download het <a href="/webontwikkeling-docusaurus/exercises/testing/math-test/starter.zip">starter</a> project. Dit project bevat een `math.ts` module. Schrijf de volgende testen:
 

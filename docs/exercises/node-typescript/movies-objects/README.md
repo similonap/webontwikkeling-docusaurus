@@ -1,4 +1,4 @@
-### Oefening: Movies
+# Oefening: Movies
 
 Maak een nieuw project aan met de naam `movies-objects`.
 
@@ -20,7 +20,7 @@ Maak een tweede variable aan myfavoritemovie van het type Movie en geef die een 
 
 Maak een derde variable aan myworstmovie van het type Movie en geef die een object mee die de info over jouw meest gehate film bevat en print deze af.
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ```bash
 Movie from file:

@@ -1,4 +1,4 @@
-### Newspaper
+# Newspaper
 
 Maak een nieuw project aan met de naam `newspaper` en installeer express volgens de instructies in de theorie les. 
 

@@ -1,4 +1,4 @@
-### Joke API
+# Joke API
 
 Maak een nieuw project aan met de naam `joke-api`.
 
@@ -16,6 +16,6 @@ Let op dat de `single` grappen een `joke` veld hebben en de `twopart` grappen ee
 
 Na het vertonen van de grap wordt de gebruiker gevraagd of hij nog een grap wil zien. Als de gebruiker `ja` antwoordt, wordt de gebruiker opnieuw gevraagd om een categorie en type te kiezen. Als de gebruiker `nee` antwoordt, wordt de applicatie afgesloten.
 
-#### Voorbeeldinteractie:
+## Voorbeeldinteractie:
 
 ![Jokes Interactie](jokes.gif)

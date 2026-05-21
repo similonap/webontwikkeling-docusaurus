@@ -1,4 +1,4 @@
-### Interest Calculator
+# Interest Calculator
 
 Maak een nieuw project aan met de naam `interest-calculator`.
 
@@ -10,7 +10,7 @@ Het totaal bedrag kan berekend worden met de volgende formule:
 Totaal = bedrag × (1 + interest/100)^jaren
 ```
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ```bash
 Geef het bedrag in: 1000

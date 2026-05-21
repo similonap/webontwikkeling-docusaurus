@@ -1,4 +1,4 @@
-### Redirect Form
+# Redirect Form
 
 Maak een nieuw project aan met de naam `redirect-form` en installeer de `express` en de `ejs` module.
 

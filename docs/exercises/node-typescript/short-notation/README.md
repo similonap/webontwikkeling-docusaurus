@@ -1,4 +1,4 @@
-### Oefening: Short Notation
+# Oefening: Short Notation
 
 Maak een nieuw project aan met de naam `short-notation`
 

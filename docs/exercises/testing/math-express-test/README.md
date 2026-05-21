@@ -1,4 +1,4 @@
-#### Math Express Test
+# Math Express Test
 
 Download het <a href="/webontwikkeling-docusaurus/exercises/testing/math-express-test/starter.zip">starter</a> project. Dit project bevat een express applicatie die een GET en een POST van `/sum` endpoint voorziet. De GET endpoint verwacht twee query parameters `a` en `b` en geeft de som van deze twee getallen terug. De POST endpoint verwacht een JSON body met twee getallen `a` en `b` en geeft de som van deze twee getallen terug.
 

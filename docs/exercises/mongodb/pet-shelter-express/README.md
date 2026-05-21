@@ -1,4 +1,4 @@
-### Pet Shelter Express
+# Pet Shelter Express
 
 Maak een nieuw project aan met de naam `pet-shelter-express` en installeer de `express` en `mongodb` package. 
 

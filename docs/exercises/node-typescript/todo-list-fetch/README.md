@@ -1,4 +1,4 @@
-### Oefening: Todo list Fetch
+# Oefening: Todo list Fetch
 
 Maak een nieuw project met de naam `todo-list-fetch`. Gebruik de vorige todo list (met objecten) als basis.
 

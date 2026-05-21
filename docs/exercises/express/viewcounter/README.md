@@ -1,6 +1,6 @@
-### ViewCounter
+# ViewCounter
 
-#### Opdracht
+## Opdracht
 
 Maak een webserver in express die telkens een pagina teruggeeft met het totaal aantal bezoeken (globaal) en het aantal bezoeken per pad.
 
@@ -8,6 +8,6 @@ Je moet dus een globale teller bijhouden en een teller per pad (bv door een obje
 
 **Voor een handler te schrijven voor alle paden kan je best eens kijken hoe we de 404 handler hebben geschreven in de theorie.**
 
-#### Voorbeeldinteractie
+## Voorbeeldinteractie
 
 <figure><img src={require("./visits.gif").default} alt="" /><figcaption></figcaption></figure>

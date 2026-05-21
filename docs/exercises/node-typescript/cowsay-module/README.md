@@ -1,4 +1,4 @@
-### Cowsay Mo(o)dule
+# Cowsay Mo(o)dule
 
 Maak een nieuw project `cowsay-module` waarin je jouw bronbestanden voor deze oefening kan plaatsen.
 
@@ -10,7 +10,7 @@ Maak een functie `say` die een string als argument neemt en de string doorgeeft 
 
 Als de gebruiker "Meow!" invoert, dan moet de `say` functie een error gooien met de boodschap "Cows don't meow!". Vang deze error op en geef de boodschap weer in de console.
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ```
 What should the cow say? Meow!

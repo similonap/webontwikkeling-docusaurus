@@ -1,4 +1,4 @@
-### Oefening: slow-sum
+# Oefening: slow-sum
 
 Maak een nieuw project aan met de naam `slow-sum` waarin je jouw bronbestanden voor deze oefening kan plaatsen.
 
@@ -30,7 +30,7 @@ Dit zijn 2 functies die een promise terug geven. Ze simuleren een trage som func
 4. Roep deze functie aan met de getallen 6 en 3 en laat het resultaat op het scherm zien. (zie output)
 5. Roep deze functie aan met de getallen 6 en 0 en laat de error op het scherm zien. (zie output)
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ```
 You cannot divide by zero
@@ -39,7 +39,7 @@ You cannot divide by zero
 (1 + 5) * 2 = 12
 ```
 
-#### Uitbreiding
+## Uitbreiding
 
 Maak een kopie van het `index.ts` oefening en noem deze `index_async.ts`
 

@@ -1,15 +1,15 @@
-### Word Guess
+# Word Guess
 
 We beginnen met een bestaande express applicatie. Deze applicatie bevat al een aantal routes en ejs bestanden. De bedoeling is dat je deze applicatie verder uitbreidt met extra functionaliteit. Je kan de starter applicatie hier vinden: <a href="/webontwikkeling-docusaurus/exercises/express/word-guess/starter.zip">Word Guess</a>
 
-#### Includes
+## Includes
 
 - [ ] Maak een `header.ejs` bestand aan dat de header van de pagina bevat (en de bovenkant van de html).
 - [ ] Maak een `footer.ejs` bestand aan dat de footer van de pagina bevat (en de onderkant van de html).
 - [ ] Pas `index.ejs` aan zodat deze de `header.ejs` en `footer.ejs` bevat.
 - [ ] Zorg dat elke ejs pagina vanaf nu de `header.ejs` en `footer.ejs` bevat.
 
-#### Words Module
+## Words Module
 
 - [ ] Schrijf een functie `isFiveLetterWord` die controleert of een woord 5 letters lang is. Deze functie moet een boolean teruggeven.
 - [ ] Schrijf een functie `getFiveLetterWords` die alle woorden van een meegegeven array teruggeeft die 5 letters lang zijn. Gebruik hiervoor de `filter` functie. Gebruik de `isFiveLetterWord` functie die je hiervoor gemaakt hebt.
@@ -26,7 +26,7 @@ toUpperCase(['hello', 'world', 'test', 'word']) // ['HELLO', 'WORLD', 'TEST', 'W
 getRandomWord(['hello', 'world', 'test', 'word']) // 'world'
 ```
 
-#### Words Route
+## Words Route
 
 - [ ] Maak een nieuwe `get` route voor het pad `/words` 
 - [ ] Maak gebruik van de `toUpperCase` functie van de vorige opgave om een array aan te maken van woorden in hoofdletters. Gebruik de al reeds aangemaakte array `words`.
@@ -36,7 +36,7 @@ getRandomWord(['hello', 'world', 'test', 'word']) // 'world'
 
 ![alt text](words.png)
 
-#### Words Form
+## Words Form
 
 - [ ] Maak een nieuwe `get` route voor het pad `/guess`. Zorg ervoor dat het de `guess.ejs` pagina toont.
 - [ ] Maak een nieuwe `post` route voor het pad `/guess`. 
@@ -47,21 +47,21 @@ getRandomWord(['hello', 'world', 'test', 'word']) // 'world'
 
 ![alt text](wordguess.gif)
 
-#### Restart Game
+## Restart Game
 
 - [ ] Maak een nieuwe `get` route voor het pad `/restart`.
 - [ ] Zorg ervoor dat de `randomWord` variabele opnieuw wordt ingevuld met een willekeurig 5 letter woord uit de `words` array.
 - [ ] Stuur de gebruiker terug naar de `/guess` pagina. (redirect)
 - [ ] Voeg een link toe aan de `guess.ejs` pagina die de gebruiker naar de `/restart` route stuurt. Toon deze enkel als het spel is afgelopen (bij success message).
 
-#### Possible Words API
+## Possible Words API
 
 - [ ] Bij het opstarten van de web server moet de `WORDS` array gevuld worden met de woorden uit de API. Deze bevat een lijst van woorden die mogelijk geraden kunnen worden. Gebruik hiervoor een fetch op https://raw.githubusercontent.com/similonap/word-guess-api/main/words.json
 - [ ] Pas de code aan van de `guess` POST route zodat deze de `WORDS` array gebruikt om te controleren of het woord in deze lijst staat. Geef een foutmelding als het woord niet in de lijst staat. WIOHR is een voorbeeld van een woord dat niet in de lijst staat. KRUID is een voorbeeld van een woord dat wel in de lijst staat.
 
 ![alt text](wordguess-2.gif)
 
-#### Possible Words Search
+## Possible Words Search
 
 - [ ] Pas de `/words` route aan zodat hij alleen de eerste 40 woorden van de WORDS array toont.
 - [ ] Voeg een query parameter `q` toe aan de `/words` route. Als deze aanwezig is toon je enkel de woorden die deze query parameter bevatten. (bv. /words?q=hello)

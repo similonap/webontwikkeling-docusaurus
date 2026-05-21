@@ -1,4 +1,4 @@
-### Hello, Name!
+# Hello, Name!
 
 Maak een nieuw project aan met de naam `hello-name` en installeer de readline-sync module.
 

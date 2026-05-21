@@ -1,4 +1,4 @@
-### School API
+# School API
 
 Maak een nieuw project aan met de naam `school-api`.
 
@@ -10,7 +10,7 @@ Vervolgens krijgt de gebruiker een lijst te zien van alle hogescholen en univers
 
 Na het tonen van de data wordt de gebruiker gevraagd of hij nog een land wil opvragen. Als de gebruiker `ja` antwoordt, wordt de gebruiker opnieuw gevraagd om een land te kiezen. Als de gebruiker `nee` antwoordt, wordt de applicatie afgesloten.
 
-#### Voorbeeldinteractie:
+## Voorbeeldinteractie:
 
 ```plaintext
 [1] France

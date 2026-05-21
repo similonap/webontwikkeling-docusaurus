@@ -1,4 +1,4 @@
-### View Counter Cookies
+# View Counter Cookies
 
 Maak een nieuwe express applicatie en installeer de nodige dependencies. Voorzie een homepagina die een bezoeker verwelkomt en het aantal keer dat de bezoeker de pagina heeft bezocht toont. Dit aantal wordt bijgehouden in een cookie. Als de bezoeker de pagina voor de eerste keer bezoekt, toon je een speciale boodschap. 
 

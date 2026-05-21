@@ -1,4 +1,4 @@
-### Newspaper Search
+# Newspaper Search
 
 Bouw verder aan de [newspaper-route](../newspaper-route/README.md) opdracht.
 

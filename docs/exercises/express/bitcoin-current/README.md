@@ -1,4 +1,4 @@
-## Bitcoin Current
+# Bitcoin Current
 
 Maak een nieuw project aan met de naam `bitcoin-current` en installeer express volgens de instructies in de theorie les.
 

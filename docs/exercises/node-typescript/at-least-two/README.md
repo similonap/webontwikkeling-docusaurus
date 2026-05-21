@@ -1,4 +1,4 @@
-### Oefening: at least two
+# Oefening: at least two
 
 Maak een nieuw project aan met een bestand `at-least-two` met de volgende inhoud:
 

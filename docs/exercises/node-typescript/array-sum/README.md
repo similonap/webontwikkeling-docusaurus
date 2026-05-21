@@ -1,4 +1,4 @@
-### Oefening: Array sum
+# Oefening: Array sum
 
 Maak een nieuw project aan met de naam `array-sum`.
 

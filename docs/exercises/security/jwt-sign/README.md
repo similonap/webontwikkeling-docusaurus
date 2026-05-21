@@ -1,4 +1,4 @@
-### JWT Sign
+# JWT Sign
 
 Maak een nieuw node.js project aan met de naam `jwt-sign`. In dit project gaan we een JWT token signen en verifieren aan de hand van de `jsonwebtoken` library en via de http://www.jwt.io website.
 

@@ -1,4 +1,4 @@
-### Catstatic
+# Catstatic
 
 Maak een nieuw project **catstatic** waarin je jouw bronbestanden voor deze oefening kan plaatsen.
 

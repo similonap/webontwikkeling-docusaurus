@@ -1,4 +1,4 @@
-### CatGPT
+# CatGPT
 
 Maak een nieuw project `cat-gpt` waarin je jouw bronbestanden voor deze oefening kan plaatsen.
 
@@ -14,6 +14,6 @@ De applicatie werkt als volgt:
 - Zorg ervoor dat elke sequentie van Meow's een willekeurig leesteken krijgt aan het einde (?,! en .).
 - Zorg ervoor dat de gebruiker de applicatie kan afsluiten door "bye" in te geven. De kat zal nog een laatste keer een aantal "Meow"'s teruggeven.
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ![cat](./catgpt.gif)

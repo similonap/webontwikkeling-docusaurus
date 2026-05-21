@@ -1,4 +1,4 @@
-#### Async Test
+# Async Test
 
 Download het <a href="/webontwikkeling-docusaurus/exercises/testing/async-test/starter.zip">starter</a> project. Dit project bevat een `async.ts` module. Schrijf de volgende testen:
 

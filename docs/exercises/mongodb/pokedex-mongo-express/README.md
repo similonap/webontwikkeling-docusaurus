@@ -1,10 +1,10 @@
-### Pokedexpress
+# Pokedexpress
 
-#### Project Beschrijving
+## Project Beschrijving
 
 In deze opgave gaan we een uitgebreide Pokedex applicatie bouwen met Node/Express en MongoDB.
 
-#### Startproject
+## Startproject
 
 Een groot deel van de applicatie routes en views zijn al op voorhand klaargemaakt. Je mag dit project gebruiken om van te starten.
 
@@ -12,7 +12,7 @@ Er zitten hier een aantal voorgeprogrammeerde vaste waarden in om alles te doen 
 
 <a href="/webontwikkeling-docusaurus/exercises/mongodb/pokedex-mongo-express/starter.zip">Start Project</a>
 
-#### Header/Footer
+## Header/Footer
 
 Zorg ervoor dat alle pagina's de header en de footer includeert zodat de css automatisch wordt toegepast op elke pagina.
 
@@ -24,7 +24,7 @@ Met de header en footer ziet ze er als volgt uit:
 
 ![](./startpage\_empty.png)
 
-#### Start Pagina
+## Start Pagina
 
 De start pagina ziet er als volgt uit. Als je naar de root path gaat ([http://localhost:3000](http://localhost:3000/)) dan krijg je de volgende pagina te zien.
 
@@ -40,7 +40,7 @@ De gebruiker kan dan vervolgens op zijn naam klikken en wordt dan naar zijn pers
 
 **Belangrijk:** Het aanmaken van de Player gebeurt direct in de database maar er dient wel een array bij gehouden te worden met alle Players. Deze wordt in het begin van de applicatie ingeladen. Zorg ervoor dat deze ook geupdated wordt na het aanpassen van de database. Zo moeten we dus niet elke keer een database call doen telkens de gebruiker moet opgevraagd worden.
 
-#### De Player pagina
+## De Player pagina
 
 De player pagina bevindt zich op de route
 
@@ -58,7 +58,7 @@ Hier staan 3 knoppen:
 * Als de gebruiker klikt op EXIT moet je terug naar de root page (/) gaan.
 * Als de gebruiker op SAVE klikt zal de huidige gebruiker aangepast worden in de database. De verdere werking van dit wordt nog later in detail toegelicht. Je mag deze momenteel dus even negeren.
 
-#### De Pokemon pagina
+## De Pokemon pagina
 
 De pokemon pagina bestaat uit 2 delen:
 
@@ -67,7 +67,7 @@ De pokemon pagina bestaat uit 2 delen:
 
 We zullen met de laatste beginnen.
 
-#### Pokemon overzicht
+## Pokemon overzicht
 
 Gebruik [https://pokeapi.co/](https://pokeapi.co/) om alle pokemon met id 1 tot en met 151 in te laden. Slaag deze op in een mongodb database.
 
@@ -91,7 +91,7 @@ Als je op een van de buttons klikt wordt deze toegevoegd aan de pokemon lijst va
 
 **Belangrijk**: Omdat de API niet mag overbevraagd worden (te veel API calls per dag) moet je voorkomen dat de API call elke keer wordt gedaan bij het opstarten. Eenmaal de data in de database zit, moet je deze niet meer inlezen. Je kan dit doen door na te kijken of de collection al gevuld is of niet.
 
-#### Pokemon Team
+## Pokemon Team
 
 **Pokemon toevoegen**
 
@@ -129,7 +129,7 @@ Je kan ook een pokemon uit je team verwijderen. Dit doe je door op X te drukken 
 
 Ook hier zal het Player object met zijn pokemon worden niet verwijderd worden uit database tot er op SAVE gedrukt wordt.
 
-#### Uitbreidingen
+## Uitbreidingen
 
 *   Zorg voor een filtering systeem zodat je de pokemon lijst kan filteren op basis van type.
 

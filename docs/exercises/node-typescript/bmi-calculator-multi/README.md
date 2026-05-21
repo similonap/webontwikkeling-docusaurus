@@ -1,10 +1,10 @@
-### BMI Calculator voor meerdere personen
+# BMI Calculator voor meerdere personen
 
 Maak een nieuw project aan in de `labo2` directory met de naam `bmi-calculator-multi`.
 
 We gaan de applicatie uitbreiden zodat we de BMI van meerdere personen kunnen berekenen. De gebruiker zal een lijst van personen moeten ingeven. Voor elke persoon zal hij zijn gewicht en lengte moeten ingeven. De applicatie zal vervolgens de BMI van elke persoon berekenen en tonen.
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ```bash
 Geef het aantal personen in: 2

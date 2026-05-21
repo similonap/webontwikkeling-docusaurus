@@ -1,4 +1,4 @@
-### Contact Form
+# Contact Form
 
 Maak een nieuw project aan met de naam `contact-form` en installeer de `express` en de `ejs` module.
 

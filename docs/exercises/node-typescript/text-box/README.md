@@ -1,4 +1,4 @@
-### Text-box
+# Text-box
 
 Maak een nieuw project aan met de naam `text-box`.
 
@@ -6,7 +6,7 @@ We gaan in deze oefening een programma maken dat een tekst moet tonen in een tex
 
 Je kan dit doen door gebruik te maken van de `console.log` functie en de `repeat` functie van een string.
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ```bash
 Geef de tekst in: Hello World

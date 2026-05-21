@@ -1,4 +1,4 @@
-### Oefening: Pokemon team
+# Oefening: Pokemon team
 
 Maak een nieuw project aan met de naam `pokemon`&#x20;
 

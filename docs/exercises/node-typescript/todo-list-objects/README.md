@@ -1,4 +1,4 @@
-### Oefening: Todo list
+# Oefening: Todo list
 
 Maak een nieuw project met de naam `todo-list-objects`. Gebruik de vorige todo list als basis.
 

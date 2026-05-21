@@ -1,4 +1,4 @@
-### Maaltafels
+# Maaltafels
 
 Maak een nieuw project **maaltafels** waarin je jouw bronbestanden voor deze oefening kan plaatsen.
 

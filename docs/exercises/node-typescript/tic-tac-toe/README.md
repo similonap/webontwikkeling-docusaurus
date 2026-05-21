@@ -1,4 +1,4 @@
-### Oefening: Tic Tac Toe
+# Oefening: Tic Tac Toe
 
 Maak een nieuw project aan met de naam `tic-tac-toe`.
 
@@ -14,6 +14,6 @@ Als de gebruiker een zet doet op een plaats die niet bestaat dan krijgt hij een 
 
 Als de gebruiker een zet doet die geldig is dan wordt het bord getoond. Als er een winnaar is dan wordt dit getoond en het programma stopt. Als het bord vol is en er is geen winnaar dan wordt dit getoond en het programma stopt.
 
-#### Voorbeeld interactie:
+## Voorbeeld interactie:
 
 <figure><img src={require("./tictactoe.gif").default} alt="" /><figcaption></figcaption></figure>

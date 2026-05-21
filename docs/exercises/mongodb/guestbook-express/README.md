@@ -1,4 +1,4 @@
-### Guestbook Express
+# Guestbook Express
 
 Maak een nieuw project aan met de naam `guestbook-express` en installeer de `express` en `mongodb` package. Je kan deel van de code van de vorige [opgave](../guestbook/README.md) hergebruiken.
 

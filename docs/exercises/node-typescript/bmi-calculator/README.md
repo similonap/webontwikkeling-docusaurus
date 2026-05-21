@@ -1,4 +1,4 @@
-### BMI Calculator
+# BMI Calculator
 
 Maak een nieuw project aan met de naam `bmi-calculator`.
 
@@ -10,7 +10,7 @@ BMI = gewicht / lengte²
 
 Het gewicht wordt ingegeven in kilogram en de lengte in meter.
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 De gebruiker zal zijn gewicht en lengte moeten ingeven. Dit kan je doen door gebruik te maken van de `readline` module. Deze module laat toe om input te lezen van de gebruiker.
 

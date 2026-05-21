@@ -1,4 +1,4 @@
-### Hashing
+# Hashing
 
 Maak een nieuw node project `hashing` aan en installeer de `bcrypt` package. In je code maak je eerst een lijst met gebruikers aan:
 
@@ -20,7 +20,7 @@ Zorg ervoor dat je zelf ook een nieuwe gebruiker toevoegd aan de lijst van gebru
 
 Vraag aan de hand van de readline-sync package de gebruiker om een gebruikersnaam en paswoord. Controleer of de gebruiker bestaat en of het paswoord overeenkomt met het gehashte paswoord in de lijst. Geef een gepaste melding aan de gebruiker.
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ```bash
 Enter a username: user

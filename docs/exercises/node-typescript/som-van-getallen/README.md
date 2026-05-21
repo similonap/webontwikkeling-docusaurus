@@ -1,4 +1,4 @@
-### Oefening: Som van getallen
+# Oefening: Som van getallen
 
 Maak een nieuw project aan met de naam `som-van-getallen`.
 
@@ -6,7 +6,7 @@ We willen een programma maken dat de som van een aantal getallen berekent. De ge
 
 De getallen moeten opgeslagen worden in een array. Je mag een for loop gebruiken om de som te berekenen.
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ```bash
 Hoeveel getallen wil je optellen? 3

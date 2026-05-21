@@ -1,4 +1,4 @@
-### Rate Limiter
+# Rate Limiter
 
 Maak een nieuw project aan met de naam `rate-limiter-middleware` en installeer de `express` en de `ejs` module.
 
@@ -8,7 +8,7 @@ Maak een nieuwe route aan op `/` van de applicatie die een `GET` request afhande
 
 Gebruik de rate limiter middleware om ervoor te zorgen dat de route maar 1 keer per seconde aangeroepen kan worden.
 
-#### Uitbreiding
+## Uitbreiding
 
 Breid de rate limiter middleware uit zodat je de tijd tussen de requests kan instellen. Dit kan je bijvoorbeeld doen door een parameter mee te geven aan de middleware. Als de parameter niet wordt meegegeven, moet de standaard tijd 1 seconde zijn.
 

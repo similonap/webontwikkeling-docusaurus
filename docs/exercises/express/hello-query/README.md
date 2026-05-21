@@ -1,4 +1,4 @@
-### Hello Query
+# Hello Query
 
 Maak een nieuw project aan met de naam `hello-query` en installeer de `express` en de `ejs` module.
 

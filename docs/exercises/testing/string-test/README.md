@@ -1,4 +1,4 @@
-#### String Test
+# String Test
 
 Download het <a href="/webontwikkeling-docusaurus/exercises/testing/string-test/starter.zip">starter</a> project. Dit project bevat een `string-utils.ts` module. Schrijf de volgende testen:
 - Test dat de functie `toUpperFunction` een string naar hoofdletters omzet. bv. "hello"

@@ -1,4 +1,4 @@
-### Math Module
+# Math Module
 
 Maak een nieuw project aan met de naam `math-module`. Maak een nieuwe file aan met de naam `math.ts`. In deze file maak je een module aan met de naam `MathModule`. Deze module bevat de volgende functies:
 

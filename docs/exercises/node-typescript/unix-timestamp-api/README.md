@@ -1,4 +1,4 @@
-### Unix timestamp API
+# Unix timestamp API
 
 Maak een nieuw project aan met de naam `unix-timestamp-api`.
 
@@ -6,7 +6,7 @@ We willen een programma maken dat een unix timestamp omzet naar een leesbaar tij
 
 Je kan de API aanroepen met de fetch functie. Probeer deze opgave op te lossen met behulp van de `async` en `await` keywords. Let er wel op dat je de code in een `async` functie moet plaatsen. 
 
-#### Voorbeeldinteractie:
+## Voorbeeldinteractie:
 
 ```plaintext
 Geef een unix timestamp in aub vb.: 1549892280 : 1549892280 

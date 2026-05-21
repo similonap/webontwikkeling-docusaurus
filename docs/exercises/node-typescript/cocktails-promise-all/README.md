@@ -1,4 +1,4 @@
-### Cocktails Promise All
+# Cocktails Promise All
 
 Maak een nieuw project `cocktails-promise-all` waarin je jouw bronbestanden voor deze oefening kan plaatsen.
 
@@ -10,7 +10,7 @@ Je kan een cocktail via een id via de volgende api call binnenhalen:
 https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11000
 ```
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ```
 Mojito

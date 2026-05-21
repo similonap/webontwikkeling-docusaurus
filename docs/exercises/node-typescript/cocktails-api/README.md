@@ -1,4 +1,4 @@
-### Cocktail API
+# Cocktail API
 
 Maak een nieuw project aan met de naam `cocktails-api`.
 
@@ -11,7 +11,7 @@ https://www.thecocktaildb.com/api/json/v1/1/search.php?s=kiwi
 
 Blijf cocktails opvragen tot de gebruiker een lege string opgeeft.
 
-#### Voorbeeld interactie
+## Voorbeeld interactie
 
 ```plaintext
 -------------------------------------------
