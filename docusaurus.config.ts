@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'Webontwikkeling',
   tagline: 'A long time ago in a browser far, far away...',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/typescript.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -75,7 +75,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/typescript.png',
     colorMode: {
       defaultMode: 'light',
       respectPrefersColorScheme: false,

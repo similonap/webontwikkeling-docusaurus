@@ -187,16 +187,16 @@ Het is niet wenselijk om in tests echte netwerkaanroepen te doen. Dit kan leiden
 - **API-limieten**: externe services kunnen rate limits opleggen.
 - **Trage tests**: netwerkaanroepen vertragen de testsuite.
 
-Daarom gebruiken we **fetch-mock-jest**:
+Daarom gebruiken we **@fetch-mock/jest**:
 
 ```bash
-npm i --save-dev fetch-mock-jest
+npm i --save-dev @fetch-mock/jest
 ```
 
-Met fetch-mock-jest vervang je de echte fetch door een nep-versie die vooraf vastgelegde data teruggeeft:
+Met @fetch-mock/jest vervang je de echte fetch door een nep-versie die vooraf vastgelegde data teruggeeft:
 
 ```typescript
-import fetchMock from 'fetch-mock-jest';
+import fetchMock from '@fetch-mock/jest';
 import { getPosts, getPost } from './post-service';
 
 describe("getPosts", () => {
@@ -224,12 +224,14 @@ describe("getPost", () => {
         }
     });
 });
-```
 
-Na elke test ruim je de mocks op zodat ze andere tests niet beïnvloeden:
+beforeEach(() => {
+    fetchMock.mockGlobal();
+});
 
-```typescript
-afterEach(() => jest.clearAllMocks());
+afterEach(() => {
+    fetchMock.mockRestore();
+});
 ```
 
 After each zorgt ervoor dat alle mocks worden gereset na elke test, zodat je tests onafhankelijk blijven.
