@@ -13,7 +13,7 @@ Als het formulier correct werd ingevuld wordt er willekeurig een foto van een di
 
 Je moet geen input validatie doen voor dit formulier.
 
-Je kan de afbeeldingen van de dieren vinden in deze <a href="/webontwikkeling-docusaurus/exercises/express/petshelter-form/animals.zip">zip file</a>. Je kan de afbeeldingen in de map `public/images` plaatsen.
+Je kan de afbeeldingen van de dieren vinden in deze <a href="/exercises/express/petshelter-form/animals.zip">zip file</a>. Je kan de afbeeldingen in de map `public/images` plaatsen.
 
 **Tips:** 
 - Je hebt twee routes nodig voor dit formulier: een `GET` route om het formulier te tonen en een `POST` route om het formulier te verwerken. Ze mogen allebei dezelfde URL hebben.

@@ -1,6 +1,6 @@
 # Form Express Test
 
-Download het <a href="/webontwikkeling-docusaurus/exercises/testing/form-express-test/starter.zip">starter</a> project. Dit project bevat een express applicatie. Deze applicatie bevat een form waar de geboorte datum en de huidige datum wordt gevraagd. Als de gebruiker dan op `Submit` drukt krijgt hij te zien hoe oud hij was op de gegeven datum.
+Download het <a href="/exercises/testing/form-express-test/starter.zip">starter</a> project. Dit project bevat een express applicatie. Deze applicatie bevat een form waar de geboorte datum en de huidige datum wordt gevraagd. Als de gebruiker dan op `Submit` drukt krijgt hij te zien hoe oud hij was op de gegeven datum.
 
 Schrijf testen voor deze applicatie.
 
