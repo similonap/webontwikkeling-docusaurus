@@ -1,14 +1,6 @@
 import readline from 'readline-sync';
 import { log } from "sloth-log";
-
-function repeatWords(word: string, times: number, delimiter: string) {
-    let output: string = "";
-    for (let i = 0; i < times; i++) {
-        output += word + delimiter;
-    }
-    return output.slice(0, -1);
-}
-
+import { repeatWords } from "./utils";
 
 let input: string = "";
 do {

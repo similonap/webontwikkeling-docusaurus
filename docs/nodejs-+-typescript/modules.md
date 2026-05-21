@@ -256,6 +256,8 @@ describe('areaRectangle', () => {
 });
 ```
 
+Je vraagt je misschien af waarom we hier gebruik maken van een callback functie die een fout gooit in plaats van gewoon `expect(areaRectangle(-2, 3)).toBe(-6)`. Om te voorkomen dat de test direct faalt bij het uitvoeren van `areaRectangle(-2, 3)` omdat deze een fout gooit. Door deze aan te passen naar een callback functie, kunnen we de fout opvangen en controleren of deze de juiste boodschap bevat.
+
 ### Andere testmethodes
 
 Naast `toBe` en `toBeCloseTo` zijn er nog heel veel andere testmethodes die je kan gebruiken in Jest. Hier is een overzicht van de meest gebruikte testmethodes:
