@@ -79,6 +79,30 @@ try {
 }
 ```
 
+## Testen
+
+Ook in tests kan je gebruik maken van async en await. Je kan de test functie async maken en dan de await keyword gebruiken om te wachten tot de Promise is afgerond. 
+
+```typescript
+test("multiply should return the product of two numbers", async () => {
+    const result = await multiply(2, 3);
+    expect(result).toBe(6);
+});
+```
+
+Je kan ook gebruik maken van try catch blokken in je tests om te testen of er een error wordt gegooid. 
+
+```typescript
+test("divide should throw an error when dividing by zero", async () => {
+    try {
+        await divide(10, 0);
+    } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+        expect(error.message).toBe("Cannot divide by zero");
+    }
+});
+```
+
 ## Voorbeeld
 
 Het is nu mogelijk om complexe logica te schrijven zonder dat je code totaal onleesbaar wordt. Stel je voor dat je twee getallen wil uitlezen uit een bestand `getal1.txt` en `getal2.txt`. Vervolgens wil je een vermenigvuldiging uitvoeren en het resultaat wegschrijven naar een bestand `resultaat.txt`. 

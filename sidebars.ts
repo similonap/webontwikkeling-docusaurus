@@ -331,31 +331,6 @@ const sidebars: SidebarsConfig = {
         ]
       },
       {
-        "type": "category",
-        "label": "JWT Tokens",
-        "link": {
-          "type": "doc",
-          "id": "security-and-testing/jwt-tokens/index"
-        },
-        "items": [
-          {
-            "type": "doc",
-            "id": "security-and-testing/jwt-tokens/jwt-npm-package",
-            "label": "JWT NPM package"
-          },
-          {
-            "type": "doc",
-            "id": "security-and-testing/jwt-tokens/tokens-veilig-opslaan",
-            "label": "Tokens veilig opslaan"
-          },
-          {
-            "type": "doc",
-            "id": "security-and-testing/jwt-tokens/token-based-login",
-            "label": "Token Based Login"
-          }
-        ]
-      },
-      {
         "type": "doc",
         "id": "security-and-testing/testing",
         "label": "Testing"
@@ -931,61 +906,6 @@ const sidebars: SidebarsConfig = {
             "type": "doc",
             "id": "exercises/security/pokedex-express-sessions/README",
             "label": "Pokedex Express Sessions"
-          }
-        ]
-      },
-      {
-        "type": "category",
-        "label": "19. Token based login",
-        "link": {
-          "type": "doc",
-          "id": "labos/token-based-login/index"
-        },
-        "items": [
-          {
-            "type": "doc",
-            "id": "exercises/security/jwt-sign/README",
-            "label": "JWT Sign"
-          },
-          {
-            "type": "doc",
-            "id": "exercises/security/login-express-jwt/README",
-            "label": "Login Express JWT"
-          }
-        ]
-      },
-      {
-        "type": "category",
-        "label": "20. Testing",
-        "link": {
-          "type": "doc",
-          "id": "labos/testing/index"
-        },
-        "items": [
-          {
-            "type": "doc",
-            "id": "exercises/testing/math-test/README",
-            "label": "Math Test"
-          },
-          {
-            "type": "doc",
-            "id": "exercises/testing/string-test/README",
-            "label": "String Test"
-          },
-          {
-            "type": "doc",
-            "id": "exercises/testing/math-express-test/README",
-            "label": "Math Express Test"
-          },
-          {
-            "type": "doc",
-            "id": "exercises/testing/form-express-test/README",
-            "label": "Form Express Test"
-          },
-          {
-            "type": "doc",
-            "id": "exercises/testing/pet-shelter-express-test/README",
-            "label": "Pet Shelter Express Test"
           }
         ]
       },

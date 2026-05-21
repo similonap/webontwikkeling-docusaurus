@@ -127,3 +127,109 @@ Je kan ook de `status` property gebruiken om de status code op te vragen. Deze p
     }
 })();
 ```
+
+## Testen
+
+Om fetch-aanroepen te testen gebruiken we **Jest**. Omdat fetch asynchroon werkt én afhankelijk is van een externe server, combineren we twee technieken: async/await testen en mocking.
+
+### Exporteerbare functies
+
+Om code te kunnen testen, moet je die eerst exporteren. Zet je fetch-logica daarom in een aparte module, bijvoorbeeld `post-service.ts`:
+
+```typescript
+interface Post {
+    userId: number;
+    id: number;
+    title: string;
+    body: string;
+}
+
+export async function getPosts(): Promise<Post[]> {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    if (!response.ok) throw new Error(response.status.toString());
+    return response.json();
+}
+
+export async function getPost(id: number): Promise<Post> {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+    if (!response.ok) throw new Error(response.status.toString());
+    return response.json();
+}
+```
+
+### Asynchrone tests
+
+Omdat fetch asynchroon werkt, gebruik je `async` en `await` in je tests:
+
+```typescript
+import { getPost } from "./post-service";
+
+describe("getPost", () => {
+    it("should return a post by id", async () => {
+        const post = await getPost(1);
+        expect(post.id).toBe(1);
+    });
+
+    it("should throw an error when the post is not found", async () => {
+        try {
+            await getPost(99999);
+        } catch (error: any) {
+            expect(error.message).toBeDefined();
+        }
+    });
+});
+```
+
+### Fetch mocken
+
+Het is niet wenselijk om in tests echte netwerkaanroepen te doen. Dit kan leiden tot:
+- **Flakey tests**: de test faalt bij een netwerkstor­ing, ook al is je code correct.
+- **API-limieten**: externe services kunnen rate limits opleggen.
+- **Trage tests**: netwerkaanroepen vertragen de testsuite.
+
+Daarom gebruiken we **fetch-mock-jest**:
+
+```bash
+npm i --save-dev fetch-mock-jest
+```
+
+Met fetch-mock-jest vervang je de echte fetch door een nep-versie die vooraf vastgelegde data teruggeeft:
+
+```typescript
+import fetchMock from 'fetch-mock-jest';
+import { getPosts, getPost } from './post-service';
+
+describe("getPosts", () => {
+    it("should return a list of posts", async () => {
+        const mockPosts = [
+            { userId: 1, id: 1, title: "foo", body: "bar" },
+            { userId: 1, id: 2, title: "baz", body: "qux" },
+        ];
+        fetchMock.get('https://jsonplaceholder.typicode.com/posts', mockPosts);
+
+        const posts = await getPosts();
+        expect(posts).toHaveLength(2);
+        expect(posts[0].title).toBe("foo");
+    });
+});
+
+describe("getPost", () => {
+    it("should throw an error when the server returns 404", async () => {
+        fetchMock.get('https://jsonplaceholder.typicode.com/posts/999', 404);
+
+        try {
+            await getPost(999);
+        } catch (error: any) {
+            expect(error.message).toBe("404");
+        }
+    });
+});
+```
+
+Na elke test ruim je de mocks op zodat ze andere tests niet beïnvloeden:
+
+```typescript
+afterEach(() => jest.clearAllMocks());
+```
+
+After each zorgt ervoor dat alle mocks worden gereset na elke test, zodat je tests onafhankelijk blijven.
