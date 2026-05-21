@@ -29,8 +29,8 @@ function areaRectangle(l: number, w: number): number {
 Tot nu toe heb je altijd deze functies in hetzelfde bestand gezet. Maar stel dat je deze functies ook in een ander bestand wil gebruiken. Dan kan je deze functies in een module zetten door gebruik te maken van een `export` statement.
 
 ```
-<strong>export function areaCircle(r: number): number {
-</strong>    return Math.PI * r * r;
+export function areaCircle(r: number): number {
+    return Math.PI * r * r;
 }
 
 export function areaSquare(s: number): number {

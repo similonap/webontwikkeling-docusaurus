@@ -52,8 +52,8 @@ Zorg vooral voor realistische data. Images kunnen eenvoudig worden gegenereerd v
       "motto": "Balance in All, All in Balance"
     }
   },
-<strong>  {
-</strong>    "id": "FTC-002",
+  {
+    "id": "FTC-002",
     "name": "Shadow Enchantress",
     "description": "A mysterious sorceress cloaked in darkness, wielding shadow magic to manipulate the fabric of reality and ensnare her foes.",
     "age": 324,

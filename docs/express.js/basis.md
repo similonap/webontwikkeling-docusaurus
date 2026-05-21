@@ -160,8 +160,8 @@ Opgelet: De volgorde is hier belangrijk. Zet je deze app.use bovenaan in de appl
 Tot nu toe stuurden we html terug. Maar we kunnen ook data terugsturen. Dit verandert onze web applicatie in een echte API.
 
 ```
-<strong>import express from "express";
-</strong>
+import express from "express";
+
 const app = express();
 
 interface Person {
