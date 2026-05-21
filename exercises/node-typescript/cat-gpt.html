@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">CatGPT | Webontwikkeling</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://similonap.github.io/webontwikkeling-docusaurus/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://similonap.github.io/webontwikkeling-docusaurus/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://similonap.github.io/webontwikkeling-docusaurus/exercises/node-typescript/cat-gpt"><meta data-rh="true" property="og:locale" content="nl"><meta data-rh="true" name="docusaurus_locale" content="nl"><meta data-rh="true" name="docsearch:language" content="nl"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="CatGPT | Webontwikkeling"><meta data-rh="true" name="description" content="Maak een nieuw project cat-gpt waarin je jouw bronbestanden voor deze oefening kan plaatsen."><meta data-rh="true" property="og:description" content="Maak een nieuw project cat-gpt waarin je jouw bronbestanden voor deze oefening kan plaatsen."><link data-rh="true" rel="icon" href="/webontwikkeling-docusaurus/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://similonap.github.io/webontwikkeling-docusaurus/exercises/node-typescript/cat-gpt"><link data-rh="true" rel="alternate" href="https://similonap.github.io/webontwikkeling-docusaurus/exercises/node-typescript/cat-gpt" hreflang="nl"><link data-rh="true" rel="alternate" href="https://similonap.github.io/webontwikkeling-docusaurus/exercises/node-typescript/cat-gpt" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"6. Modules en NPM Packages","item":"https://similonap.github.io/webontwikkeling-docusaurus/labos/labo6/"},{"@type":"ListItem","position":2,"name":"Cat GPT","item":"https://similonap.github.io/webontwikkeling-docusaurus/exercises/node-typescript/cat-gpt/"}]}</script><link rel="stylesheet" href="/webontwikkeling-docusaurus/assets/css/styles.fc60f0a3.css">
-<script src="/webontwikkeling-docusaurus/assets/js/runtime~main.ddb58a7b.js" defer="defer"></script>
+<script src="/webontwikkeling-docusaurus/assets/js/runtime~main.2d59defa.js" defer="defer"></script>
 <script src="/webontwikkeling-docusaurus/assets/js/main.4b5f19b2.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -17,11 +17,18 @@
 <p>De applicatie werkt als volgt:</p>
 <ul>
 <li class="">Vraag via readline-sync input van de gebruiker aan de hand van een &quot;&gt;&quot; prompt.</li>
-<li class="">Maak een functie aan &quot;repeatWords&quot; die een woord een aantal keer herhaalt en afprint. De functie heeft 3 parameters:<!-- -->
+<li class="">Maak een functie aan &quot;repeatWords&quot; die een woord een aantal keer herhaalt en afprint. Plaats deze functie in een apart bestand <code>utils.ts</code> en exporteer ze. Importeer ze vervolgens in je hoofdbestand. De functie heeft 3 parameters:<!-- -->
 <ul>
 <li class="">word: het woord dat herhaald moet worden.</li>
 <li class="">times: het aantal keer dat het woord herhaald moet worden.</li>
 <li class="">delimiter: het teken dat gebruikt wordt om de woorden te scheiden.</li>
+</ul>
+</li>
+<li class="">Schrijf unit tests voor de <code>repeatWords</code> functie in een apart testbestand <code>utils.test.ts</code>. Test minstens de volgende gevallen:<!-- -->
+<ul>
+<li class="">Het woord wordt het juiste aantal keer herhaald.</li>
+<li class="">De delimiter staat correct tussen de woorden.</li>
+<li class="">Een <code>times</code> van 1 geeft enkel het woord terug zonder delimiter.</li>
 </ul>
 </li>
 <li class="">Gebruik de npm package &quot;sloth-log&quot; om een tekst vertraagd af te printen. Voor meer informatie bekijk de documentatie.</li>
