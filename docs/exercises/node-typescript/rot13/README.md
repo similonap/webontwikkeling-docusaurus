@@ -1,4 +1,4 @@
-# Oefening: Rot13
+# Rot13
 
 Maak een nieuw project aan met de naam `rot13`.
 

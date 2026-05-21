@@ -1,4 +1,4 @@
-# Oefening: Wiskundige functies
+# Wiskundige functies
 
 Maak een nieuw project aan met de naam `math-fun`.
 

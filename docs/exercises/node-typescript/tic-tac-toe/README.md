@@ -1,4 +1,4 @@
-# Oefening: Tic Tac Toe
+# Tic Tac Toe
 
 Maak een nieuw project aan met de naam `tic-tac-toe`.
 

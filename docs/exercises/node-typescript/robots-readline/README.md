@@ -1,4 +1,4 @@
-# Oefening: Robot Readline
+# Robot Readline
 
 Ga naar `https://cc.assimilate.be/challenges/readline` in je browser om de opdracht te bekijken. Dit is een interactieve opdracht waarbij je een robot moet programmeren. 
 

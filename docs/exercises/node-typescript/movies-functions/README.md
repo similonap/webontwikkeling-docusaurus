@@ -1,4 +1,4 @@
-# Oefening: Movies (vervolg)
+# Movies (vervolg)
 
 Deze oefening gaat verder op de Movies oefening.
 

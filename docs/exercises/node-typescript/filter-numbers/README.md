@@ -1,4 +1,4 @@
-# Oefening: Filter Numbers
+# Filter Numbers
 
 Maak een nieuw project aan met de naam `filter-numbers`.
 

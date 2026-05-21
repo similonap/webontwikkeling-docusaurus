@@ -1,4 +1,4 @@
-# Oefening: fake fetch
+# fake fetch
 
 Maak een nieuw project aan met de naam `fake-fetch` waarin je jouw bronbestanden voor deze oefening kan plaatsen.
 

@@ -1,4 +1,4 @@
-# Oefening: slow-sum
+# slow-sum
 
 Maak een nieuw project aan met de naam `slow-sum` waarin je jouw bronbestanden voor deze oefening kan plaatsen.
 

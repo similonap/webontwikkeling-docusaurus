@@ -1,4 +1,4 @@
-# Oefening: Recepten
+# Recepten
 
 Maak een nieuw project aan met de naam `recepten`.
 

@@ -1,4 +1,4 @@
-# Oefening: Movies
+# Movies
 
 Maak een nieuw project aan met de naam `movies-objects`.
 

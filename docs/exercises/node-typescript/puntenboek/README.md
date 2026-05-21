@@ -1,4 +1,4 @@
-# Oefening: Puntenboek
+# Puntenboek
 
 Maak een nieuw project aan met de naam `puntenboek`.
 

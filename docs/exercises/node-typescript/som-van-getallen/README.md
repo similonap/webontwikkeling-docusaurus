@@ -1,4 +1,4 @@
-# Oefening: Som van getallen
+# Som van getallen
 
 Maak een nieuw project aan met de naam `som-van-getallen`.
 

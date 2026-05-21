@@ -1,4 +1,4 @@
-# Oefening: Bitcoin Api
+# Bitcoin Api
 
 Maak een nieuw project `bitcoin-api` waarin je jouw bronbestanden voor deze oefening kan plaatsen.
 
