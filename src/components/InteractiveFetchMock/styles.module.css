@@ -1,0 +1,457 @@
+.container {
+    --sim-pipeline-bg: #1e1e1e;
+    --sim-pipeline-node-bg: #333;
+    --sim-pipeline-node-border: #444;
+    --sim-pipeline-node-text: #888;
+    --sim-pipeline-edge: #444;
+
+    --sim-editor-bg: #1e1e1e;
+    --sim-editor-header: #2d2d2d;
+    --sim-editor-border: #444;
+    --sim-editor-text: #d4d4d4;
+    --sim-editor-line-numbers-text: #858585;
+
+    --sim-console-bg: #1e1e1e;
+    --sim-console-header: #333;
+    --sim-console-border: #444;
+    --sim-console-text: #fff;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: var(--ifm-color-emphasis-100);
+    border-radius: var(--ifm-global-radius);
+    border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+:global([data-theme='light']) .container {
+    --sim-pipeline-bg: #f5f5f5;
+    --sim-pipeline-node-bg: #e8e8e8;
+    --sim-pipeline-node-border: #d0d0d0;
+    --sim-pipeline-node-text: #666;
+    --sim-pipeline-edge: #d0d0d0;
+
+    --sim-editor-bg: #f9f9f9;
+    --sim-editor-header: #ececec;
+    --sim-editor-border: #d0d0d0;
+    --sim-editor-text: #24292e;
+    --sim-editor-line-numbers-text: #999;
+
+    --sim-console-bg: #f5f5f5;
+    --sim-console-header: #e8e8e8;
+    --sim-console-border: #d0d0d0;
+    --sim-console-text: #24292e;
+}
+
+/* ─── Pipeline ─────────────────────────────────────────────── */
+
+.pipeline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: var(--sim-pipeline-bg);
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.5rem;
+}
+
+.pipelineNode {
+    background: var(--sim-pipeline-node-bg);
+    color: var(--sim-pipeline-node-text);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.6rem;
+    border: 2px solid var(--sim-pipeline-node-border);
+    transition: all 0.3s ease;
+    text-align: center;
+    z-index: 2;
+    min-width: 60px;
+    position: relative;
+}
+
+.pipelineNodeActive {
+    background: #f8c51c;
+    color: #000;
+    border-color: #f8c51c;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(248, 197, 28, 0.4);
+}
+
+/* fetchMock node after simulation: all mocked */
+.pipelineNodeIntercepted {
+    background: #27c93f;
+    color: #fff;
+    border-color: #27c93f;
+    box-shadow: 0 0 12px rgba(39, 201, 63, 0.35);
+}
+
+/* fetchMock node after simulation: real fetch used */
+.pipelineNodeBypassed {
+    background: var(--sim-pipeline-node-bg);
+    color: var(--sim-pipeline-node-text);
+    opacity: 0.55;
+}
+
+.pipelineEdgeActive {
+    background: #f8c51c;
+}
+
+.pipelineEdge {
+    height: 3px;
+    background: var(--sim-pipeline-edge);
+    flex: 1;
+    margin: 0 -10px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionBubble {
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f8c51c;
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.58rem;
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    animation: bubblePopCentered 0.3s ease-out;
+    pointer-events: none;
+    font-weight: bold;
+}
+
+.actionBubbleNoMatch {
+    background: #4dabf7;
+    color: #000;
+}
+
+@keyframes bubblePopCentered {
+    0% { transform: translateX(-50%) scale(0.5) translateY(10px); opacity: 0; }
+    100% { transform: translateX(-50%) scale(1) translateY(0); opacity: 1; }
+}
+
+/* ─── Editor ────────────────────────────────────────────────── */
+
+.editorContainer {
+    background: var(--sim-editor-bg);
+    border-radius: 6px;
+    overflow: hidden;
+    color: var(--sim-editor-text);
+    font-family: var(--ifm-font-family-monospace);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.editorHeader {
+    background: var(--sim-editor-header);
+    padding: 0.5rem 1rem;
+    font-size: 0.58rem;
+    border-bottom: 1px solid var(--sim-editor-border);
+    display: flex;
+    color: var(--sim-editor-text);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.editorActions {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.presetBtn {
+    background: #f8c51c;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    font-size: 0.6rem;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    transition: opacity 0.15s;
+}
+
+.presetBtn:hover {
+    opacity: 0.85;
+}
+
+.presetBtnReal {
+    background: #4dabf7;
+    color: #000;
+}
+
+.resetBtn {
+    background: none;
+    border: none;
+    color: var(--sim-editor-line-numbers-text);
+    cursor: pointer;
+    font-size: 0.62rem;
+}
+
+.resetBtn:hover {
+    color: #fff;
+}
+
+.editorContent {
+    position: relative;
+    border-bottom: 1px solid var(--sim-editor-border);
+}
+
+.runBar {
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.runBtn {
+    background: #27c93f;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 18px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+}
+
+.runBtn:hover:not(:disabled) {
+    background: #22b037;
+}
+
+.runBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.runBtnLoading {
+    background: #555;
+}
+
+/* ─── Simulators row ────────────────────────────────────────── */
+
+.simulators {
+    display: flex;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .simulators { flex-direction: column; }
+}
+
+.console {
+    flex: 1;
+    height: 250px;
+    background: var(--sim-console-bg);
+    border-radius: 6px;
+    overflow: hidden;
+    color: var(--sim-console-text);
+    font-family: var(--ifm-font-family-monospace);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.consoleHeader {
+    background: var(--sim-console-header);
+    padding: 0.5rem 1rem;
+    font-size: 0.58rem;
+    border-bottom: 1px solid var(--sim-console-border);
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content {
+    padding: 0.75rem 1rem;
+    overflow-y: auto;
+    flex: 1;
+    font-size: 0.7rem;
+}
+
+/* ─── Terminal entries ──────────────────────────────────────── */
+
+.logLine {
+    color: #a6e22e;
+    margin-bottom: 0.3rem;
+    word-break: break-all;
+    line-height: 1.5;
+}
+
+.logError {
+    color: #ff5f56;
+}
+
+.logSystem {
+    color: var(--sim-pipeline-node-text);
+    font-style: italic;
+    font-size: 0.62rem;
+    margin-bottom: 0.25rem;
+}
+
+.logSuccess {
+    color: #27c93f;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.65rem;
+}
+
+.logFail {
+    color: #ff5f56;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.65rem;
+}
+
+.assertPass {
+    color: #27c93f;
+    margin-bottom: 0.3rem;
+    word-break: break-all;
+    line-height: 1.5;
+}
+
+.assertFail {
+    color: #ff5f56;
+    margin-bottom: 0.3rem;
+    word-break: break-all;
+    line-height: 1.5;
+}
+
+/* ─── Network log ───────────────────────────────────────────── */
+
+.networkSummary {
+    font-size: 0.58rem;
+    font-style: normal;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.networkSummaryMock {
+    background: #f8c51c22;
+    color: #f8c51c;
+}
+
+.networkSummaryReal {
+    background: #4dabf722;
+    color: #4dabf7;
+}
+
+.networkRow {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.45rem;
+    font-size: 0.65rem;
+    flex-wrap: wrap;
+    animation: rowFadeIn 0.3s ease-out;
+}
+
+@keyframes rowFadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.sourceBadge {
+    font-size: 0.56rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    letter-spacing: 0.04em;
+}
+
+.sourceBadgeMock {
+    background: #f8c51c;
+    color: #000;
+}
+
+.sourceBadgeReal {
+    background: #4dabf7;
+    color: #000;
+}
+
+.networkMethod {
+    color: var(--sim-pipeline-node-text);
+    flex-shrink: 0;
+    font-size: 0.6rem;
+}
+
+.networkUrl {
+    color: var(--sim-console-text);
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.networkStatus {
+    color: #27c93f;
+    flex-shrink: 0;
+    font-weight: bold;
+}
+
+.networkStatusError {
+    color: #ff5f56;
+}
+
+.networkDuration {
+    color: var(--sim-pipeline-node-text);
+    flex-shrink: 0;
+    font-size: 0.6rem;
+}
+
+.networkPreview {
+    color: var(--sim-pipeline-node-text);
+    font-size: 0.6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+/* ─── Loading ───────────────────────────────────────────────── */
+
+.loadingText {
+    color: #888;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 0.7rem;
+}
+
+.spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.loadingIcon {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(248, 197, 28, 0.25);
+    border-top-color: #f8c51c;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    flex-shrink: 0;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

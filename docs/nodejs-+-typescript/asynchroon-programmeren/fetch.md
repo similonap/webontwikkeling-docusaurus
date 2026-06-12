@@ -235,3 +235,14 @@ afterEach(() => {
 ```
 
 After each zorgt ervoor dat alle mocks worden gereset na elke test, zodat je tests onafhankelijk blijven.
+
+## Interactieve demo
+
+Probeer hieronder het verschil tussen een test **met** en **zonder** fetch mock. Gebruik de knoppen om te wisselen, of pas de code zelf aan.
+
+- **Met mock** — `fetchMock.get()` onderschept de fetch. De request gaat nooit het internet op: je ontvangt altijd de data die jij zelf instelt. De test slaagt.
+- **Zonder mock** — de echte fetch gaat naar `jsonplaceholder.typicode.com`. De echte API geeft 100 posts terug met andere titels, waardoor de assertions falen.
+
+import InteractiveFetchMock from '@site/src/components/InteractiveFetchMock';
+
+<InteractiveFetchMock />

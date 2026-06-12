@@ -1,0 +1,732 @@
+.container {
+    --sim-zone-bg: #1e1e1e;
+    --sim-zone-border: #444;
+    --sim-zone-text: #d4d4d4;
+    --sim-muted-text: #888;
+    --sim-card-bg: #2d2d2d;
+    --sim-card-border: #444;
+    --sim-browser-bg: #252526;
+    --sim-page-bg: #fff;
+
+    --sim-client: #4dabf7;
+    --sim-server: #27c93f;
+    --sim-network: #f8c51c;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: var(--ifm-color-emphasis-100);
+    border-radius: var(--ifm-global-radius);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    font-family: var(--ifm-font-family-monospace);
+}
+
+:global([data-theme='light']) .container {
+    --sim-zone-bg: #f7f7f7;
+    --sim-zone-border: #d0d0d0;
+    --sim-zone-text: #24292e;
+    --sim-muted-text: #777;
+    --sim-card-bg: #ececec;
+    --sim-card-border: #d0d0d0;
+    --sim-browser-bg: #fdfdfd;
+    --sim-page-bg: #fff;
+}
+
+/* ─── Zones ─────────────────────────────────────────────────── */
+
+.zones {
+    display: flex;
+    gap: 0.75rem;
+    align-items: stretch;
+}
+
+@media (max-width: 996px) {
+    .zones { flex-direction: column; }
+}
+
+.zone {
+    flex: 1;
+    min-width: 0;
+    background: var(--sim-zone-bg);
+    border: 2px solid var(--sim-zone-border);
+    border-radius: 8px;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.zoneClientActive {
+    border-color: var(--sim-client);
+    box-shadow: 0 0 14px rgba(77, 171, 247, 0.35);
+}
+
+.zoneServerActive {
+    border-color: var(--sim-server);
+    box-shadow: 0 0 14px rgba(39, 201, 63, 0.35);
+}
+
+.zoneAsleep {
+    opacity: 0.45;
+}
+
+.zoneHeader {
+    font-size: 0.62rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    padding: 0.35rem 0.6rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.zoneHeaderClient {
+    background: rgba(77, 171, 247, 0.15);
+    color: var(--sim-client);
+}
+
+.zoneHeaderServer {
+    background: rgba(39, 201, 63, 0.15);
+    color: var(--sim-server);
+}
+
+.asleepBadge {
+    background: var(--sim-card-bg);
+    color: var(--sim-muted-text);
+    padding: 1px 7px;
+    border-radius: 4px;
+    font-size: 0.58rem;
+    font-weight: normal;
+    font-style: italic;
+}
+
+/* ─── Netwerk-laan ──────────────────────────────────────────── */
+
+.networkLane {
+    width: 130px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: opacity 0.3s ease;
+    opacity: 0.5;
+}
+
+.networkLaneActive {
+    opacity: 1;
+}
+
+@media (max-width: 996px) {
+    .networkLane { width: 100%; padding: 0.25rem 0; }
+}
+
+.networkLabel {
+    font-size: 0.55rem;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    color: var(--sim-muted-text);
+}
+
+.packetLabel {
+    background: var(--sim-network);
+    color: #000;
+    font-size: 0.56rem;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-align: center;
+    word-break: break-all;
+    max-width: 100%;
+    animation: packetPop 0.3s ease-out;
+}
+
+@keyframes packetPop {
+    from { transform: scale(0.6); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+
+.flowTrack {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.flowTrackLeft {
+    flex-direction: row-reverse;
+}
+
+.flowLine {
+    flex: 1;
+    min-width: 0;
+    height: 6px;
+    border-radius: 3px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--sim-network) 0px,
+        var(--sim-network) 9px,
+        rgba(248, 197, 28, 0.18) 9px,
+        rgba(248, 197, 28, 0.18) 18px
+    );
+    background-size: 18px 100%;
+    animation: flowRight 0.45s linear infinite;
+}
+
+.flowTrackLeft .flowLine {
+    animation-name: flowLeft;
+}
+
+@keyframes flowRight {
+    from { background-position-x: 0; }
+    to   { background-position-x: 18px; }
+}
+
+@keyframes flowLeft {
+    from { background-position-x: 0; }
+    to   { background-position-x: -18px; }
+}
+
+.flowHead {
+    width: 0;
+    height: 0;
+    flex-shrink: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 12px solid var(--sim-network);
+    margin-left: -1px;
+}
+
+.flowTrackLeft .flowHead {
+    border-left: none;
+    border-right: 12px solid var(--sim-network);
+    margin-left: 0;
+    margin-right: -1px;
+}
+
+.networkIdle {
+    color: var(--sim-muted-text);
+    font-size: 0.8rem;
+}
+
+.noTraffic {
+    text-align: center;
+    font-size: 0.6rem;
+    font-weight: bold;
+    color: var(--sim-client);
+    background: rgba(77, 171, 247, 0.12);
+    padding: 0.5rem 0.7rem;
+    border-radius: 6px;
+    line-height: 1.6;
+    animation: packetPop 0.3s ease-out;
+}
+
+/* ─── Browser ───────────────────────────────────────────────── */
+
+.browser {
+    background: var(--sim-browser-bg);
+    border: 1px solid var(--sim-card-border);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.browserBar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.6rem;
+    background: var(--sim-card-bg);
+    border-bottom: 1px solid var(--sim-card-border);
+}
+
+.dots {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+
+.dotRed { background: #ff5f56; }
+.dotYellow { background: #ffbd2e; }
+.dotGreen { background: #27c93f; }
+
+.addressBar {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: var(--sim-zone-bg);
+    border: 1px solid var(--sim-card-border);
+    border-radius: 12px;
+    padding: 2px 10px;
+    min-width: 0;
+}
+
+.protocol {
+    color: var(--sim-muted-text);
+    font-size: 0.6rem;
+    flex-shrink: 0;
+}
+
+.addressInput {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--sim-zone-text);
+    font-family: var(--ifm-font-family-monospace);
+    font-size: 0.6rem;
+    padding: 3px 0 3px 2px;
+}
+
+.goBtn {
+    background: none;
+    border: none;
+    color: var(--sim-zone-text);
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 0 2px;
+    flex-shrink: 0;
+}
+
+.browserContent {
+    flex: 1;
+    min-height: 220px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sim-page-bg);
+}
+
+.browserHint {
+    color: #999;
+    font-size: 0.68rem;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.loadingIcon {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(77, 171, 247, 0.25);
+    border-top-color: var(--sim-client);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.notFound {
+    color: #555;
+    font-size: 0.85rem;
+    font-family: var(--ifm-font-family-monospace);
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+.pageTitle {
+    color: #111;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.8rem;
+    margin: 0;
+    animation: packetPop 0.3s ease-out;
+}
+
+.pageButton {
+    background: #efefef;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    color: #111;
+    padding: 5px 16px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.pageButton:hover:not(:disabled) {
+    background: #e0e0e0;
+}
+
+.pageButton:disabled {
+    cursor: default;
+}
+
+.pageButtonPulse {
+    animation: buttonPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(77, 171, 247, 0.55); }
+    50%      { box-shadow: 0 0 0 8px rgba(77, 171, 247, 0); }
+}
+
+.clientSideBadge {
+    background: rgba(77, 171, 247, 0.12);
+    color: #1971c2;
+    font-size: 0.62rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 4px;
+    animation: packetPop 0.3s ease-out;
+}
+
+/* ─── Alert-dialoog ─────────────────────────────────────────── */
+
+.alertBackdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 1.5rem;
+    z-index: 5;
+}
+
+.alertBox {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    min-width: 220px;
+    overflow: hidden;
+    animation: packetPop 0.2s ease-out;
+}
+
+.alertHeader {
+    padding: 0.6rem 1rem 0.2rem;
+    color: #555;
+    font-size: 0.62rem;
+    font-family: var(--ifm-font-family-base);
+}
+
+.alertBody {
+    padding: 0.3rem 1rem 0.6rem;
+    color: #111;
+    font-size: 0.78rem;
+    font-family: var(--ifm-font-family-base);
+}
+
+.alertFooter {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.4rem 0.8rem 0.7rem;
+}
+
+.alertOk {
+    background: #1a73e8;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 18px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.alertOk:hover {
+    background: #1765cc;
+}
+
+/* ─── Flip: hello.ejs → HTML output ─────────────────────────── */
+
+.flipBox {
+    perspective: 900px;
+}
+
+.flipInner {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.7s ease;
+}
+
+.flipped {
+    transform: rotateY(180deg);
+}
+
+.flipFront,
+.flipBack {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.flipFront {
+    position: relative;
+}
+
+.flipBack {
+    position: absolute;
+    inset: 0;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+}
+
+.flipBack .fileCard {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ─── Code-kaarten ──────────────────────────────────────────── */
+
+.fileCard {
+    background: var(--sim-card-bg);
+    border: 1px solid var(--sim-card-border);
+    border-radius: 6px;
+    overflow: hidden;
+    animation: packetPop 0.3s ease-out;
+}
+
+.fileHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.7rem;
+    border-bottom: 1px solid var(--sim-card-border);
+    font-size: 0.6rem;
+}
+
+.fileName {
+    color: var(--sim-zone-text);
+    font-weight: bold;
+}
+
+.fileTag {
+    font-size: 0.55rem;
+    font-weight: bold;
+    padding: 1px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.fileTagServer {
+    background: rgba(39, 201, 63, 0.15);
+    color: var(--sim-server);
+}
+
+.fileTagClient {
+    background: rgba(77, 171, 247, 0.15);
+    color: var(--sim-client);
+}
+
+.code {
+    margin: 0;
+    padding: 0.5rem 0;
+    background: transparent;
+    font-size: 0.62rem;
+    line-height: 1.7;
+    overflow-x: auto;
+}
+
+.codeLine {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0 0.7rem;
+    white-space: pre;
+    border-left: 3px solid transparent;
+    transition: background 0.2s ease;
+}
+
+.codeLineActive {
+    background: rgba(248, 197, 28, 0.13);
+    border-left-color: var(--sim-network);
+}
+
+.lineNo {
+    color: var(--sim-muted-text);
+    width: 1.1em;
+    text-align: right;
+    flex-shrink: 0;
+    user-select: none;
+}
+
+.lineText {
+    color: var(--sim-zone-text);
+}
+
+.substituted {
+    background: rgba(248, 197, 28, 0.25);
+    color: var(--sim-network);
+    font-weight: bold;
+    border-radius: 3px;
+    padding: 0 2px;
+}
+
+.valueBubble {
+    background: var(--sim-network);
+    color: #000;
+    font-size: 0.56rem;
+    font-weight: bold;
+    padding: 1px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+    animation: packetPop 0.3s ease-out;
+}
+
+/* ─── Stap-uitleg ───────────────────────────────────────────── */
+
+.stepBar {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: var(--sim-zone-bg);
+    border: 1px solid var(--sim-zone-border);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    min-height: 4.2rem;
+}
+
+.zoneBadge {
+    font-size: 0.58rem;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    padding: 3px 9px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.zoneBadgeClient {
+    background: var(--sim-client);
+    color: #000;
+}
+
+.zoneBadgeServer {
+    background: var(--sim-server);
+    color: #000;
+}
+
+.zoneBadgeNetwork {
+    background: var(--sim-network);
+    color: #000;
+}
+
+.stepText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+}
+
+.stepTitle {
+    color: var(--sim-zone-text);
+    font-size: 0.72rem;
+    font-weight: bold;
+}
+
+.stepDescription {
+    color: var(--sim-muted-text);
+    font-size: 0.66rem;
+    line-height: 1.6;
+    font-family: var(--ifm-font-family-base);
+}
+
+/* ─── Controls ──────────────────────────────────────────────── */
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.playBtn {
+    background: #27c93f;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 18px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.playBtn:hover {
+    background: #22b037;
+}
+
+.stepBtn {
+    background: var(--sim-card-bg);
+    color: var(--sim-zone-text);
+    border: 1px solid var(--sim-card-border);
+    border-radius: 6px;
+    padding: 5px 14px;
+    font-size: 0.68rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.stepBtn:disabled,
+.resetBtn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.resetBtn {
+    background: none;
+    border: none;
+    color: var(--sim-muted-text);
+    cursor: pointer;
+    font-size: 0.66rem;
+}
+
+.resetBtn:hover:not(:disabled) {
+    color: var(--sim-zone-text);
+}
+
+.progressDots {
+    display: flex;
+    gap: 5px;
+    margin-left: auto;
+    align-items: center;
+}
+
+.progressDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.progressDotClient { background: var(--sim-client); }
+.progressDotServer { background: var(--sim-server); }
+.progressDotNetwork { background: var(--sim-network); }
+
+.progressDotActive {
+    transform: scale(1.5);
+}
+
+.progressDotFuture {
+    opacity: 0.25;
+}

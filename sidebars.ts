@@ -225,6 +225,11 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "doc",
+        "id": "express.js/client-side-javascript",
+        "label": "Client Side Javascript"
+      },
+      {
+        "type": "doc",
         "id": "express.js/deployment",
         "label": "Deployment"
       }
