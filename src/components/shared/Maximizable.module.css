@@ -1,0 +1,77 @@
+/* ============================================================
+   Maximizable — wrapper that adds a full-screen overlay toggle
+   to any interactive component.
+   ============================================================ */
+
+.wrapper {
+    position: relative;
+    margin: 2rem 0;
+}
+
+.content {
+    position: relative;
+    min-width: 0;
+}
+
+/* The inner component keeps its own 2rem margin; neutralize it here so the
+   wrapper controls outer spacing and the toggle button aligns to the
+   component's real top-right corner. (Higher specificity than .container.) */
+.wrapper .content > :not(.toggleButton) {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.toggleButton {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    color: var(--ifm-color-emphasis-700);
+    background: var(--ifm-background-color);
+    border: 1px solid var(--ifm-color-emphasis-300);
+    border-radius: var(--ifm-global-radius);
+    cursor: pointer;
+    opacity: 0.65;
+    transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.toggleButton:hover {
+    opacity: 1;
+    color: var(--ifm-color-primary);
+    border-color: var(--ifm-color-primary);
+}
+
+.toggleButton:focus-visible {
+    opacity: 1;
+    outline: 2px solid var(--ifm-color-primary);
+    outline-offset: 2px;
+}
+
+/* ---- Maximized: dimmed lightbox with the demo centered ---- */
+
+.maximized {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    margin: 0;
+    padding: 2rem;
+    overflow: auto;
+    /* Dim the whole course behind the popped-out demo. */
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+}
+
+/* margin:auto in a scrollable flex container centers the card on both axes
+   while still allowing scroll when the demo is taller than the viewport. */
+.maximized .content {
+    margin: auto;
+    width: min(1400px, 100%);
+    border-radius: var(--ifm-global-radius);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.55);
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { withMaximize } from '../shared/Maximizable';
 import { useColorMode } from '@docusaurus/theme-common';
 import Editor, { type BeforeMount } from '@monaco-editor/react';
 import styles from './styles.module.css';
@@ -77,7 +78,7 @@ interface PipelineNode {
     type: 'client' | 'middleware' | 'route' | 'response';
 }
 
-export default function InteractiveMiddleware() {
+function InteractiveMiddleware() {
     const [code, setCode] = useState(DEFAULT_CODE);
     const [events, setEvents] = useState<SimulationEvent[]>([]);
     const [stepIndex, setStepIndex] = useState(-1);
@@ -495,3 +496,5 @@ export default function InteractiveMiddleware() {
         </div>
     );
 }
+
+export default withMaximize(InteractiveMiddleware);

@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { withMaximize } from '../shared/Maximizable';
 import styles from './styles.module.css';
 
 const SERVER_LINES = [
@@ -209,7 +210,7 @@ function CodeCard({
   );
 }
 
-export default function InteractiveClientServer() {
+function InteractiveClientServer() {
   const [urlInput, setUrlInput] = useState('/hello?name=Joske');
   const [sim, setSim] = useState<Simulation | null>(null);
   const [stepIndex, setStepIndex] = useState(-1);
@@ -521,3 +522,5 @@ export default function InteractiveClientServer() {
     </div>
   );
 }
+
+export default withMaximize(InteractiveClientServer);

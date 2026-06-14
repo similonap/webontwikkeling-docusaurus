@@ -1,5 +1,7 @@
 # Functions
 
+import Quiz from '@site/src/components/Quiz';
+
 ## Functies met function keyword
 
 Functies in TypeScript worden gedeclareerd met de `function` keyword. De parameters van een functie worden gedeclareerd met hun naam en type. De return type van een functie wordt gedeclareerd na de parameters.
@@ -271,3 +273,7 @@ let numbers = [1,2,3,4,5];
 numbers.forEach(element => console.log(element));
 forEeach(numbers, element => console.log(element));
 ```
+
+## Test je kennis
+
+<Quiz url="/quizzes/functions.json" />

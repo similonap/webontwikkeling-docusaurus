@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { withMaximize } from '../shared/Maximizable';
 import { useColorMode } from '@docusaurus/theme-common';
 import Editor from '@monaco-editor/react';
 import styles from './styles.module.css';
@@ -188,7 +189,7 @@ const PIPELINE_NODES = [
   { id: 'response', label: 'Response' },
 ];
 
-export default function InteractiveFetchMock() {
+function InteractiveFetchMock() {
   const [code, setCode] = useState(WITH_MOCK_CODE);
   const [events, setEvents] = useState<SimEvent[]>([]);
   const [stepIndex, setStepIndex] = useState(-1);
@@ -483,3 +484,5 @@ export default function InteractiveFetchMock() {
     </div>
   );
 }
+
+export default withMaximize(InteractiveFetchMock);

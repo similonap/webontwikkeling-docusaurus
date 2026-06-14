@@ -1,4 +1,5 @@
 import React, { useRef, useCallback, useState } from 'react';
+import { withMaximize } from '../shared/Maximizable';
 import styles from './styles.module.css';
 import { useReduceAnimation } from '../shared/useReduceAnimation';
 import type { AnimationRefs, BadgeAnimation } from '../shared/useReduceAnimation';
@@ -138,7 +139,7 @@ function deriveVisualState(stepIndex: number): VisualState {
 // Component
 // ---------------------------------------------------------------------------
 
-export default function InteractiveMap() {
+function InteractiveMap() {
     const [typeInference, setTypeInference] = useState(false);
     const [returnStatement, setReturnStatement] = useState(false);
 
@@ -358,3 +359,5 @@ export default function InteractiveMap() {
         </div>
     );
 }
+
+export default withMaximize(InteractiveMap);

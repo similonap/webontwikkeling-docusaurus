@@ -1,4 +1,5 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
+import { withMaximize } from '../shared/Maximizable';
 import styles from './styles.module.css';
 
 type FileStatus = 'modified' | 'untracked';
@@ -256,7 +257,7 @@ function processCommand(cmd: string, state: GitState): { newState: GitState; lin
     return { newState, lines };
 }
 
-export default function InteractiveGit() {
+function InteractiveGit() {
     const [git, setGit] = useState<GitState>(INITIAL_STATE);
     const [input, setInput] = useState('');
     const [history, setHistory] = useState<TerminalLine[]>([
@@ -461,3 +462,5 @@ export default function InteractiveGit() {
         </div>
     );
 }
+
+export default withMaximize(InteractiveGit);

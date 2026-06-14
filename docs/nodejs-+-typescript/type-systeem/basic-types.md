@@ -1,5 +1,7 @@
 # Basic types
 
+import Quiz from '@site/src/components/Quiz';
+
 Tot nu toe hebben we nog niet concreet gezien wat het grote verschil is tussen TypeScript en JavaScript. Zoals de naam zegt is de belangrijkste toevoeging van TypeScript is het toevoegen van types. Dit is een concept dat we kennen uit andere talen zoals C# en Java. Types zorgen ervoor dat je variabelen kan declareren met een bepaald type. Dit zorgt ervoor dat je code minder foutgevoelig is en dat je code leesbaarder is voor een programmeurs. Zeker als je functies gaat gebruiken van anderen is het belangrijk dat je weet welke types je moet meegeven en welke types je terugkrijgt. Dit is niet altijd even duidelijk in JavaScript. In TypeScript is dit wel duidelijk.
 
 We gaan verder in dit onderdeel kijken welke types er allemaal zijn in TypeScript maar we gaan beginnen met een klein voorbeeldje van waarom types handig kunnen zijn. Stel dat je de volgende variabele tegenkomt in een stuk code:
@@ -269,3 +271,7 @@ if (lightStatusStr === "ON" || lightStatusStr === "DIMMED" || lightStatusStr ===
     console.log("Invalid status");
 }
 ```
+
+## Test je kennis
+
+<Quiz url="/quizzes/basic-types.json" />

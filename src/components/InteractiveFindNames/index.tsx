@@ -1,4 +1,5 @@
 import React, { useRef, useCallback, useState } from 'react';
+import { withMaximize } from '../shared/Maximizable';
 import styles from './styles.module.css';
 import { useReduceAnimation } from '../shared/useReduceAnimation';
 import type { AnimationRefs, BadgeAnimation } from '../shared/useReduceAnimation';
@@ -141,7 +142,7 @@ function deriveVisualState(stepIndex: number): VisualState {
 // Component
 // ---------------------------------------------------------------------------
 
-export default function InteractiveFindNames() {
+function InteractiveFindNames() {
     const [typeInference, setTypeInference] = useState(false);
     const [returnStatement, setReturnStatement] = useState(false);
 
@@ -375,3 +376,5 @@ export default function InteractiveFindNames() {
         </div>
     );
 }
+
+export default withMaximize(InteractiveFindNames);

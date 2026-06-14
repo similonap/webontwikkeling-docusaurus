@@ -1,5 +1,7 @@
 # Arrays
 
+import Quiz from '@site/src/components/Quiz';
+
 Tijdens het onderdeel van datatypes hebben we heel kort het concept `Array` laten vallen. In TypeScript is een Array een lijst van waarden. Elke waarde kan aangesproken worden aan de hand van een index.
 
 ### Gebruik
@@ -186,4 +188,8 @@ for (let country of countries) {
     console.log(`${country[0]} ${country[1]} ${country[2]}`)
 }
 ```
+
+## Test je kennis
+
+<Quiz url="/quizzes/arrays.json" />
 

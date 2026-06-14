@@ -1,5 +1,7 @@
 # Interfaces
 
+import Quiz from '@site/src/components/Quiz';
+
 Er bestaan een aantal datatypes in TypeScript die we "primitieve" of "eenvoudige" datatypes noemen. Dit is omdat de waarden altijd maar uit 1 enkel ding bestaat. In het hoofdstuk over arrays heb je gezien dat er ook nog een ander soort datatypes bestaat: de complexe datatypes. Deze worden opgebouwd uit meerdere primitieve datatypes. 
 
 Een object is een ander voorbeeld van een complex datatype. In JavaScript en TypeScript kom je objecten haast overal tegen. Daarom is het belangrijk om deze te begrijpen en deze te kunnen gebruiken. 
@@ -370,5 +372,9 @@ console.log(data2.toFixed(2));
 ```
 
 Dit is gevaarlijk omdat we TypeScript vertellen dat `data2` het type `number` heeft, terwijl het in werkelijkheid het type `string` heeft. Als we nu een methode zouden gebruiken die alleen voor `number` beschikbaar is, dan krijgen we een foutmelding op runtime.
+
+## Test je kennis
+
+<Quiz url="/quizzes/interfaces.json" />
 
 
