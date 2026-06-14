@@ -9,6 +9,7 @@ De `map` functie stelt je in staat om elk item in een lijst (array) te pakken, e
 import InteractiveMap from '@site/src/components/InteractiveMap';
 import InteractiveMapStudents from '@site/src/components/InteractiveMapStudents';
 import InteractiveMapIndex from '@site/src/components/InteractiveMapIndex';
+import Quiz from '@site/src/components/Quiz';
 
 <InteractiveMap />
 
@@ -32,3 +33,7 @@ console.log(genummerdeTaken.join("\n"));
 ```
 
 <InteractiveMapIndex />
+
+## Test je kennis
+
+<Quiz url="/quizzes/map.json" />
