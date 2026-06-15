@@ -67,10 +67,16 @@ window.addEventListener("load", () => {
 Als je deze code in de browser wilt laten werken, moet je deze eerst compileren naar JavaScript. We kunnen `esbuild` gebruiken om dit te doen. 
 
 ```bash
-esbuild scripts/index.ts --bundle --outfile=public/js/index.js --platform=browser
+npx esbuild scripts/index.ts --bundle --outfile=public/js/index.js --platform=browser
 ```
 
 We geven hier aan dat we `scripts/index.ts` willen bundelen en het resultaat willen opslaan als `public/js/index.js`. De `--platform=browser`-vlag zorgt ervoor dat `esbuild` de code optimaliseert voor gebruik in de browser.
+
+We kunnen ook de hele `scripts`-folder bundelen door `scripts/*` te gebruiken in plaats van `scripts/index.ts`. Dit is handig als we meerdere TypeScript-bestanden hebben die we willen bundelen.
+
+```bash
+npx esbuild scripts/* --bundle --outdir=public/js --platform=browser
+```
 
 Zodra we het JavaScript-bestand hebben, kunnen we het integreren in onze EJS-template. We voegen een `<script>`-tag toe die verwijst naar ons gecompileerde JavaScript-bestand:
 
@@ -98,6 +104,29 @@ app.get("/hello", (req, res) => {
 
 Nu, wanneer je de pagina laadt, zal de browser het `index.js`-bestand laden en uitvoeren. Je zou in de console van de browser de boodschap "De pagina is geladen! (client-side TypeScript)" moeten zien verschijnen.
 
+## Package.json scripts
+
+Om het compileren van TypeScript naar JavaScript gemakkelijker te maken, kunnen we een script toevoegen aan onze `package.json`-file. Dit maakt het mogelijk om gewoon `npm run build:client` te typen in plaats van de volledige `esbuild`-opdracht telkens te moeten intypen. 
+
+```json title="package.json"
+{
+  "scripts": {
+    "test": "jest",
+    "build:client": "esbuild scripts/* --minify --bundle --outdir=public/js --platform=browser",
+    "start": "npm run build:client && nodemon index.ts",
+    "dev": "concurrently \"npm run start\" \"npm run build:client -- --watch\""
+  },
+}
+```
+
+Vergeet niet om `esbuild` en `concurrently` toe te voegen aan je `devDependencies` als je deze nog niet hebt geïnstalleerd.
+
+```bash
+npm install --save-dev esbuild
+```
+
+Als je nu `npm run dev` uitvoert, zal het script automatisch zowel de server starten als je client-side TypeScript-bestanden bundelen en opnieuw bundelen telkens je een wijziging aanbrengt.
+
 ## DOM manipulaties in TypeScript
 
 ### Wat is de DOM?
@@ -118,7 +147,7 @@ import InteractiveDOMTree from '@site/src/components/InteractiveDOMTree';
 
 <InteractiveDOMTree />
 
-### QuerySelector
+### querySelector
 
 De server side TypeScript code in Express kan na het versturen van de HTML pagina geen invloed meer hebben op de DOM, maar client-side TypeScript kan dat wel. We kunnen bijvoorbeeld een knop toevoegen die, wanneer erop geklikt wordt, de tekst van een paragraaf verandert. 
 
@@ -156,7 +185,7 @@ En in onze EJS-template:
 
 Je merkt op dat we bij de `querySelector`-aanroepen de juiste types hebben opgegeven (`HTMLButtonElement` en `HTMLHeadingElement`). Dit is een van de voordelen van TypeScript: we krijgen type-informatie over de DOM-elementen, wat ons helpt om fouten te voorkomen en betere autocompletion te krijgen in onze editor. We kijken hier ook of de elementen daadwerkelijk gevonden zijn voordat we proberen ze te gebruiken, wat een goede praktijk is bij het werken met de DOM. Wanneer je nu op de knop klikt, zal de tekst van de header veranderen naar "De tekst is veranderd!" zonder dat de pagina opnieuw hoeft te laden. 
 
-### QuerySelectorAll
+### querySelectorAll
 
 Je kan ook meerdere elementen tegelijk selecteren met `querySelectorAll`. Stel dat we meerdere paragrafen hebben en we willen ze allemaal van kleur veranderen wanneer we op een knop klikken:
 
@@ -216,50 +245,43 @@ Van zodra je een DOM-element hebt geselecteerd, kun je verschillende eigenschapp
 
 ### DOM Elementen toevoegen en verwijderen
 
-Stel dat we een taken lijst hebben en we willen de mogelijkheid bieden om taken toe te voegen en te verwijderen. We zouden de initiële HTML kunnen hebben zoals:
+Je kan ook nieuwe elementen aan de DOM toevoegen of bestaande elementen verwijderen. Om een nieuw element toe te voegen, kun je `document.createElement` gebruiken om een nieuw DOM-element te maken, en vervolgens `appendChild` om het toe te voegen aan een bestaand element. Bijvoorbeeld:
 
-```html title="views/todo.ejs"
+```html
 <html>
   <body>
-    <h1>Mijn Takenlijst</h1>
-    <ul id="taskList">
-      <li>Taak 1 <button class="deleteBtn">Verwijder</button></li>
-      <li>Taak 2 <button class="deleteBtn">Verwijder</button></li>
-    </ul>
-    <input type="text" id="newTaskInput" placeholder="Nieuwe taak">
-    <button id="addTaskBtn">Voeg taak toe</button>
-    <script src="/js/index.js"></script>
+    <ul id="list"></ul>
+
+    <button id="addBtn">Add</button>
+    <button id="removeBtn">Remove</button>
+
+    <script src="/js/hello.js"></script>
   </body>
 </html>
 ```
 
-en dan in ons `index.ts` bestand:
-
 ```typescript title="scripts/index.ts"
 window.addEventListener("load", () => {
-    const taskList = document.querySelector<HTMLUListElement>("#taskList");
-    const newTaskInput = document.querySelector<HTMLInputElement>("#newTaskInput");
-    const addTaskBtn = document.querySelector<HTMLButtonElement>("#addTaskBtn");
+    const list = document.querySelector<HTMLDivElement>("#list");
+    const addBtn = document.querySelector<HTMLButtonElement>("#addBtn");
+    const removeBtn = document.querySelector<HTMLButtonElement>("#removeBtn");
 
-    if (!taskList || !newTaskInput || !addTaskBtn) return;
+    if (!list || !addBtn || !removeBtn) {
+        console.error("Runtime error: DOM-elementen niet gevonden!");
+        return;
+    }
 
-    taskList.addEventListener("click", (event) => {
-        const target = event.target as HTMLElement;
-        if (target.classList.contains("deleteBtn")) {
-            const li = target.parentElement;
-            if (li) li.remove();
-        }
+    addBtn.addEventListener("click", () => {
+        const newElement = document.createElement("li");
+        newElement.innerText = "Element"
+        list.appendChild(newElement);
     });
 
-    addTaskBtn.addEventListener("click", () => {
-        const text = newTaskInput.value.trim();
-        if (!text) return;
-
-        const li = document.createElement("li");
-        li.innerHTML = `${text} <button class="deleteBtn">Verwijder</button>`;
-        taskList.appendChild(li);
-        
-        newTaskInput.value = "";
+    removeBtn.addEventListener("click", () => {
+        if (list.lastChild) {
+            list.removeChild(list.lastChild);
+        }
     });
 });
 ```
+
