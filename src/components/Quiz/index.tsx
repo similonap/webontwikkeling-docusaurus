@@ -733,12 +733,80 @@ function QuestionCard({
 }
 
 // ---------------------------------------------------------------------------
+// Stabiele, per-bezoeker willekeurige antwoordvolgorde
+//
+// We schudden de antwoordopties van keuzevragen door elkaar met een seeded
+// PRNG. De vragen zelf blijven in hun originele volgorde. De seed wordt één keer
+// per quiz (op basis van de url) gekozen en in localStorage bewaard, zodat de
+// volgorde voor diezelfde bezoeker voor altijd hetzelfde blijft.
+// ---------------------------------------------------------------------------
+
+// mulberry32 — kleine, snelle deterministische PRNG.
+function mulberry32(a: number): () => number {
+  return function () {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// Fisher-Yates: geeft een nieuwe, geschudde kopie terug.
+function shuffled<T>(arr: T[], rng: () => number): T[] {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Schud de antwoordopties van een keuzevraag en pas de antwoord-index(en) aan.
+// Andere vraagtypes blijven ongewijzigd.
+function withShuffledOptions(q: QuizQuestion, rng: () => number): QuizQuestion {
+  if (q.type !== 'single' && q.type !== 'multiple') return q;
+  const order = shuffled(
+    q.options.map((_, i) => i),
+    rng
+  );
+  const options = order.map((i) => q.options[i]);
+  const newPos: Record<number, number> = {};
+  order.forEach((oldIndex, pos) => {
+    newPos[oldIndex] = pos;
+  });
+  if (q.type === 'single') {
+    return { ...q, options, answer: newPos[q.answer] };
+  }
+  return { ...q, options, answers: q.answers.map((a) => newPos[a]).sort((a, b) => a - b) };
+}
+
+// Haal de bewaarde seed voor deze quiz op, of kies er één en bewaar ze.
+function getQuizSeed(key: string): number {
+  const storageKey = `quiz:seed:${key}`;
+  if (typeof window === 'undefined') return 0;
+  try {
+    const existing = window.localStorage.getItem(storageKey);
+    if (existing !== null && Number.isFinite(Number(existing))) {
+      return Number(existing);
+    }
+    const seed = Math.floor(Math.random() * 0xffffffff) >>> 0;
+    window.localStorage.setItem(storageKey, String(seed));
+    return seed;
+  } catch {
+    // localStorage geblokkeerd (bv. privémodus): val terug op de vaste volgorde.
+    return 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Main component
 // ---------------------------------------------------------------------------
 
 export default function Quiz({ url }: QuizProps) {
   const resolvedUrl = useBaseUrl(url);
   const [data, setData] = useState<QuizData | null>(null);
+  const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [statuses, setStatuses] = useState<Status[]>([]);
 
@@ -755,8 +823,13 @@ export default function Quiz({ url }: QuizProps) {
       })
       .then((json: QuizData) => {
         if (cancelled) return;
+        // Schud per vraag de antwoordopties met een per-bezoeker stabiele seed
+        // (zie getQuizSeed). De volgorde van de vragen zelf blijft behouden.
+        const rng = mulberry32(getQuizSeed(url));
+        const prepared = json.questions.map((q) => withShuffledOptions(q, rng));
         setData(json);
-        setStatuses(json.questions.map(() => 'unanswered'));
+        setQuestions(prepared);
+        setStatuses(prepared.map(() => 'unanswered'));
       })
       .catch((e) => {
         if (!cancelled) setError(String(e.message || e));
@@ -796,15 +869,15 @@ export default function Quiz({ url }: QuizProps) {
           )}
         </div>
         <div className={styles.score} aria-live="polite">
-          {correct} / {data.questions.length} juist
-          {answered < data.questions.length && (
+          {correct} / {questions.length} juist
+          {answered < questions.length && (
             <span className={styles.scoreSub}>{answered} beantwoord</span>
           )}
         </div>
       </div>
 
       <ol className={styles.list}>
-        {data.questions.map((question, i) => (
+        {questions.map((question, i) => (
           <QuestionCard
             key={question.id ?? i}
             question={question}
