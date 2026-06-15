@@ -1,5 +1,7 @@
 # Modules
 
+import Quiz from '@site/src/components/Quiz';
+
 ## Eigen Modules Maken
 
 ### Wat zijn modules?
@@ -473,3 +475,7 @@ console.log(_.round(4.006, 2));
 ```
 
 In die oefeningen zullen we nog een aantal handige functies van `lodash` bekijken.
+
+## Test je kennis
+
+<Quiz url="/quizzes/modules.json" />

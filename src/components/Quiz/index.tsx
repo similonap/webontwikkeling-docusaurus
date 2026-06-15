@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useColorMode } from '@docusaurus/theme-common';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Editor from '@monaco-editor/react';
+import CodeBlock from '@theme/CodeBlock';
 import { runCode } from './tsRunner';
 import type { RunOutcome } from './tsRunner';
 import type {
@@ -96,7 +97,7 @@ function parseInline(line: string): React.ReactNode[] {
 }
 
 // Tiny inline renderer: turns `code` into <code> and keeps line breaks.
-function RichText({ text }: { text: string }) {
+function InlineText({ text }: { text: string }) {
   const lines = text.split('\n');
   return (
     <>
@@ -106,6 +107,71 @@ function RichText({ text }: { text: string }) {
           {li < lines.length - 1 && <br />}
         </React.Fragment>
       ))}
+    </>
+  );
+}
+
+type Segment =
+  | { type: 'text'; content: string }
+  | { type: 'code'; lang: string; content: string };
+
+// Split text into inline-text segments and fenced code blocks (```lang … ```).
+function splitSegments(text: string): Segment[] {
+  const segments: Segment[] = [];
+  const lines = text.split('\n');
+  let textBuf: string[] = [];
+
+  const flushText = () => {
+    if (textBuf.length) {
+      segments.push({ type: 'text', content: textBuf.join('\n') });
+      textBuf = [];
+    }
+  };
+
+  let i = 0;
+  while (i < lines.length) {
+    const fence = /^\s*```(\w*)\s*$/.exec(lines[i]);
+    if (fence) {
+      flushText();
+      const lang = fence[1] || '';
+      const codeLines: string[] = [];
+      i++;
+      while (i < lines.length && !/^\s*```\s*$/.test(lines[i])) {
+        codeLines.push(lines[i]);
+        i++;
+      }
+      i++; // sla de sluit-fence over
+      segments.push({ type: 'code', lang, content: codeLines.join('\n') });
+    } else {
+      textBuf.push(lines[i]);
+      i++;
+    }
+  }
+  flushText();
+  return segments;
+}
+
+// Renders inline `code`, line breaks AND fenced code blocks. Inline-only text
+// keeps rendering as before (valid inside <span>/<p>); fenced blocks use
+// Docusaurus' own <CodeBlock> so highlighting matches the rest of the site.
+function RichText({ text }: { text: string }) {
+  const segments = useMemo(() => splitSegments(text), [text]);
+
+  if (!segments.some((s) => s.type === 'code')) {
+    return <InlineText text={text} />;
+  }
+
+  return (
+    <>
+      {segments.map((seg, si) =>
+        seg.type === 'code' ? (
+          <CodeBlock key={si} language={seg.lang || undefined}>
+            {seg.content}
+          </CodeBlock>
+        ) : seg.content.trim() === '' ? null : (
+          <InlineText key={si} text={seg.content} />
+        )
+      )}
     </>
   );
 }
@@ -149,7 +215,9 @@ function SingleChoice({ question, status, onStatus }: QuestionRenderProps<Single
                   disabled={locked}
                   onChange={() => setSelected(i)}
                 />
-                <RichText text={opt} />
+                <span className={styles.optionText}>
+                  <RichText text={opt} />
+                </span>
               </label>
             </li>
           );
@@ -206,7 +274,9 @@ function MultipleChoice({ question, status, onStatus }: QuestionRenderProps<Mult
                   disabled={locked}
                   onChange={() => toggle(i)}
                 />
-                <RichText text={opt} />
+                <span className={styles.optionText}>
+                  <RichText text={opt} />
+                </span>
               </label>
             </li>
           );
@@ -648,9 +718,9 @@ function QuestionCard({
     >
       <div className={styles.prompt}>
         <span className={styles.number}>{index + 1}</span>
-        <span className={styles.promptText}>
+        <div className={styles.promptText}>
           <RichText text={question.prompt} />
-        </span>
+        </div>
       </div>
       {body}
       {status !== 'unanswered' && question.explanation && (
@@ -720,9 +790,9 @@ export default function Quiz({ url }: QuizProps) {
         <div>
           {data.title && <h3 className={styles.title}>{data.title}</h3>}
           {data.description && (
-            <p className={styles.description}>
+            <div className={styles.description}>
               <RichText text={data.description} />
-            </p>
+            </div>
           )}
         </div>
         <div className={styles.score} aria-live="polite">

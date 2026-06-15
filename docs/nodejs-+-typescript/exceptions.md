@@ -1,5 +1,7 @@
 # Exceptions
 
+import Quiz from '@site/src/components/Quiz';
+
 ## Throw
 
 Soms kan het gebeuren dat er een fout optreedt tijdens het uitvoeren van je programma. Dit kan bijvoorbeeld gebeuren als je een bestand wil openen dat niet bestaat. In dit geval zal je programma crashen of vreemd gedrag beginnen vertonen. Bijvoorbeeld als je een functie wil schrijven voor het delen van twee getallen. Als je de functie aanroept met een deler die gelijk is aan 0, dan zal de functie een foutmelding moeten geven. 
@@ -129,3 +131,7 @@ function divide(a: number, b: number): number {
 ```
 
 Dan kan je uiteraard wel niet meer gebruik maken van de `message` property van het Error object.
+
+## Test je kennis
+
+<Quiz url="/quizzes/exceptions.json" />
