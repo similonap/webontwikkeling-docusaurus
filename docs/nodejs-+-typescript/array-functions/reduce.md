@@ -6,7 +6,7 @@ hide_table_of_contents: true
 
 De reduce-functie is waarschijnlijk de meest krachtige, maar ook de meest intimiderende array-methode in TypeScript. Zie het als het Zwitserse zakmes: je kunt er bijna alles mee bouwen (van een simpele optelsom tot een compleet geavanceerd object), mits je weet hoe je het gereedschap moet vasthouden.
 
-De functie verwacht twee dingen: een callback-functie en een initiële waarde. 
+De functie verwacht een callback-functie en (optioneel) een initiële waarde. 
 
 ```tsx
 array.reduce((accumulator, currentValue) => {
@@ -152,3 +152,9 @@ import InteractiveReduceMax from '@site/src/components/InteractiveReduceMax';
 import InteractiveReduceUnique from '@site/src/components/InteractiveReduceUnique';
 
 <InteractiveReduceUnique />
+
+import Quiz from '@site/src/components/Quiz';
+
+## Test je kennis
+
+<Quiz url="/quizzes/reduce.json" />
