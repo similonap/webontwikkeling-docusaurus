@@ -7,6 +7,7 @@ hide_table_of_contents: true
 De `find` methode zal het eerste element van de array teruggeven waarvoor de callback functie `true` teruggeeft. Zodra een match gevonden is, stopt `find` meteen — de overige elementen worden niet meer bekeken.
 
 import InteractiveFind from '@site/src/components/InteractiveFind';
+import Quiz from '@site/src/components/Quiz';
 
 <InteractiveFind />
 
@@ -23,3 +24,7 @@ console.log(firstD); // undefined
 import InteractiveFindNames from '@site/src/components/InteractiveFindNames';
 
 <InteractiveFindNames />
+
+## Test je kennis
+
+<Quiz url="/quizzes/find.json" />
