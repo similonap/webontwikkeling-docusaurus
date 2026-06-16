@@ -273,7 +273,7 @@ window.addEventListener("load", () => {
 
     addBtn.addEventListener("click", () => {
         const newElement = document.createElement("li");
-        newElement.innerText = "Element"
+        newElement.innerText = "Element";
         list.appendChild(newElement);
     });
 
@@ -285,3 +285,254 @@ window.addEventListener("load", () => {
 });
 ```
 
+## Voorbeelden
+
+### Form validatie
+
+Een veelvoorkomend gebruik van client-side JavaScript is het valideren van formulieren voordat ze naar de server worden gestuurd. De meeste eenvoudige validatie kan via HTML voorkomen worden, zoals het gebruik van `required` of `type="email"`, maar soms wil je meer geavanceerde validatie uitvoeren, zoals het controleren van wachtwoordsterkte of het vergelijken van twee velden. In dat geval kan client-side TypeScript je helpen om deze validatie uit te voeren voordat het formulier wordt verzonden.
+
+```html title="views/register.ejs"
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="registration-container">
+      <form id="registrationForm" action="/register" method="POST">
+        <h2>Create Account</h2>
+        <div id="error" class="error-message"></div>
+
+        <div class="form-group">
+          <input type="text" id="username" placeholder="Username" required />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          <div id="passwordStrength" class="strength-meter"></div>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            required
+          />
+        </div>
+
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </body>
+</html>
+```
+
+met de volgende route in `index.ts`:
+
+```typescript title="index.ts"
+app.post("/register", (req, res) => {
+    const { username, password, confirmPassword } = req.body;
+    if (password !== confirmPassword) {
+        res.status(400).send("Passwords do not match!");
+        return;
+    }
+
+    // Hier zou je normaal gezien de gebruiker aanmaken in de database
+    res.send("User registered successfully!");
+});
+
+Dit zou uiteraard werken, maar het is niet ideaal om de gebruiker pas na het verzenden van het formulier te vertellen dat de wachtwoorden niet overeenkomen. Het is beter om deze validatie al op de client uit te voeren, zodat de gebruiker meteen feedback krijgt zonder dat er een netwerkverzoek nodig is. We kunnen dit doen met client-side TypeScript:
+
+```html title="views/register.ejs"
+    <script src="/js/register.js"></script>
+```
+
+```typescript title="scripts/register.ts"
+window.addEventListener("load", () => {
+    const form = document.querySelector<HTMLFormElement>("#registrationForm");
+    const errorDiv = document.querySelector<HTMLDivElement>("#error");
+    const passwordInput = document.querySelector<HTMLInputElement>("#password");
+    const confirmPasswordInput = document.querySelector<HTMLInputElement>("#confirmPassword");
+    const strengthBar = document.querySelector<HTMLDivElement>("#passwordStrength");
+
+    if (!form || !passwordInput || !confirmPasswordInput || !strengthBar || !errorDiv) {
+        console.error("Runtime error: DOM-elementen niet gevonden!");
+        return;
+    }
+
+    passwordInput.addEventListener("input", (event) => {
+       const value = passwordInput.value;
+
+        const criteria = [
+            value.length >= 8,
+            /[A-Z]/.test(value),
+            /[a-z]/.test(value),
+            /\d/.test(value),
+            /[!@#$%^&*(),.?":{}|<>]/.test(value)
+        ];
+        
+        const score = criteria.filter(Boolean).length;
+        
+        const width = (score / 5) * 100;
+        strengthBar.style.width = value.length > 0 ? `${width}%` : "0%";
+        
+        const colors = ["#ff4d4d", "#ff4d4d", "#ffa500", "#ffa500", "#2ecc71", "#2ecc71"];
+        strengthBar.style.backgroundColor = colors[score];
+    })
+
+    form.addEventListener("submit", (event) => {
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            event.preventDefault();
+            if (errorDiv) {
+                errorDiv.innerText = "Passwords do not match!";
+            }
+        }
+    });
+});
+```
+
+Nog interessanter is dat we dit voorbeeld ook kunnen uitbreiden met een live username check. We kunnen een API-route maken die controleert of een gebruikersnaam al in gebruik is, en deze route aanroepen vanuit onze client-side TypeScript telkens de gebruiker iets intypt in het username veld. Op die manier kunnen we de gebruiker meteen feedback geven over de beschikbaarheid van de gekozen gebruikersnaam.
+
+```typescript title="index.ts"
+const existingUsernames : string[] = ["Alice", "Bob", "Charlie"];
+
+app.get("/api/check-username", (req, res) => {
+    const username = req.query.username as string;
+    const isAvailable = !existingUsernames.includes(username);
+    res.json({ available: isAvailable });
+});
+```
+
+```typescript title="scripts/register.ts"
+    const usernameInput = document.querySelector<HTMLInputElement>("#username");
+
+    if (!usernameInput) {
+        console.error("Runtime error: Username input niet gevonden!");
+        return;
+    }
+
+    usernameInput.addEventListener("input", async () => {
+        const username = usernameInput.value;
+        if (username.length === 0) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/check-username?username=${encodeURIComponent(username)}`);
+            const data = await response.json();
+            if (!data.available) {
+                errorDiv.innerText = "Username is already taken!";
+            } else {
+                errorDiv.innerText = "";
+            }
+        } catch (error) {
+            console.error("Error checking username availability:", error);
+        }
+    });
+```
+
+Door het gebruik van `esbuild` worden ook automatisch alle imports in `register.ts` meegenomen in de bundel, dus we hoeven ons geen zorgen te maken over het handmatig toevoegen van extra `<script>`-tags voor eventuele dependencies die we gebruiken in onze client-side TypeScript-code. We kunnen hier zelf een extra dependency toevoegen, bijvoorbeeld `debounce`, om te voorkomen dat we te veel netwerkverzoeken sturen terwijl de gebruiker aan het typen is:
+
+```bash
+npm install debounce
+```
+
+```typescript title="scripts/register.ts"
+import debounce from "debounce";
+
+const checkUsernameAvailability = debounce(async (username: string) => {
+    if (username.length === 0) {
+        errorDiv.innerText = "";
+        return;
+    }
+
+    try {
+        const response = await fetch(`/api/check-username?username=${encodeURIComponent(username)}`);
+        const data = await response.json();
+        if (!data.available) {
+            errorDiv.innerText = "Username is already taken!";
+        } else {
+            errorDiv.innerText = "";
+        }
+    } catch (error) {
+        console.error("Error checking username availability:", error);
+    }
+}, 300);
+
+usernameInput.addEventListener("input", () => {
+    checkUsernameAvailability(usernameInput.value);
+});
+```
+
+### Zoeken
+
+Een ander veelvoorkomend gebruik van client-side JavaScript is het implementeren van een zoekfunctie die resultaten toont terwijl de gebruiker typt. Zo krijg je een veel snellere en soepelere gebruikerservaring, omdat je niet hoeft te wachten op een netwerkverzoek telkens de gebruiker iets intypt. We kunnen dit doen door een API-route te maken die zoekt in een lijst van items, en deze route aan te roepen vanuit onze client-side TypeScript telkens de gebruiker iets intypt in het zoekveld.
+
+```typescript title="index.ts"
+const items : string[] = ["Apple", "Banana", "Cherry", "Date", "Elderberry", "Fig", "Grape"];
+
+app.get("/api/search", (req, res) => {
+    const query = typeof req.query.q === "string" ? req.query.q.toLowerCase() : "";
+    const results = items.filter(item => item.toLowerCase().includes(query));
+    res.json({ results });
+});
+
+app.get("/search", (req, res) => {
+    res.render("search", { items });
+});
+```
+
+```html title="views/search.ejs"
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="search-container">
+      <h2>Search Items</h2>
+      <input type="text" id="searchInput" placeholder="Type to search..." />
+      <ul id="resultsList">
+        <% for (const item of items) { %>
+          <li><%= item %></li>
+        <% } %>
+      </ul>
+    </div>
+    <script src="/js/search.js"></script>
+  </body>
+</html>
+```
+
+```typescript title="scripts/search.ts"
+window.addEventListener("load", () => {
+    const searchInput = document.querySelector<HTMLInputElement>("#searchInput");
+    const resultsList = document.querySelector<HTMLUListElement>("#resultsList");
+
+    if (!searchInput || !resultsList) {
+        console.error("Runtime error: DOM-elementen niet gevonden!");
+        return;
+    }
+
+    searchInput.addEventListener("input", async () => {
+        const query = searchInput.value;
+        try {
+            const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+            const data = await response.json();
+            resultsList.innerHTML = "";
+            for (const item of data.results) {
+                const li = document.createElement("li");
+                li.textContent = item;
+                resultsList.appendChild(li);
+            }
+        } catch (error) {
+            console.error("Error performing search:", error);
+        }
+    });
+});
+```
+
+Je merkt op dat we hier een combinatie van client-side TypeScript en server-side Express gebruiken om een interactieve zoekfunctie te creëren. De server biedt een API-route die zoekt in een lijst van items, en de client-side TypeScript roept deze route aan telkens de gebruiker iets intypt, en toont de resultaten direct op de pagina. Dit is een veelgebruikte patroon in moderne webapplicaties om een snelle en responsieve gebruikerservaring te bieden.
