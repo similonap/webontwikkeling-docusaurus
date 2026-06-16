@@ -1,4 +1,4 @@
-# Client Side JavaScript
+# Client Side TypeScript
 
 Tot nu toe lag de focus in deze cursus op TypeScript aan de serverkant: alle code in de routes werd op de server uitgevoerd. Dat geldt ook voor de code in EJS-templates. Dit kan verwarrend lijken, omdat die code verweven is met HTML en je daardoor zou verwachten dat ze in de browser draait. In werkelijkheid is het gewoon server-side code die HTML genereert. Express en EJS zijn dus eigenlijk niets meer dan hulpmiddelen om HTML op te bouwen: de client ontvangt enkel het eindresultaat (pure HTML) en heeft er geen weet van dat daar TypeScript-code achter zit.
 
