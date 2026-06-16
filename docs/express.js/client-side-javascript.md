@@ -345,6 +345,7 @@ app.post("/register", (req, res) => {
     // Hier zou je normaal gezien de gebruiker aanmaken in de database
     res.send("User registered successfully!");
 });
+```
 
 Dit zou uiteraard werken, maar het is niet ideaal om de gebruiker pas na het verzenden van het formulier te vertellen dat de wachtwoorden niet overeenkomen. Het is beter om deze validatie al op de client uit te voeren, zodat de gebruiker meteen feedback krijgt zonder dat er een netwerkverzoek nodig is. We kunnen dit doen met client-side TypeScript:
 
