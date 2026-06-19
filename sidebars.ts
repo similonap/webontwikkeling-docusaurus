@@ -151,6 +151,21 @@ const sidebars: SidebarsConfig = {
             "label": "Extra voorbeelden"
           }
         ]
+      },
+      {
+        "type": "category",
+        "label": "Testen",
+        "link": {
+          "type": "doc",
+          "id": "nodejs-+-typescript/testen/index"
+        },
+        "items": [
+          {
+            "type": "doc",
+            "id": "nodejs-+-typescript/testen/nodejs-testen",
+            "label": "Node.js testen"
+          }
+        ]
       }
     ]
   },
@@ -232,6 +247,11 @@ const sidebars: SidebarsConfig = {
         "type": "doc",
         "id": "express.js/deployment",
         "label": "Deployment"
+      },
+      {
+        "type": "doc",
+        "id": "express.js/testen",
+        "label": "Express testen"
       }
     ]
   },
@@ -298,12 +318,17 @@ const sidebars: SidebarsConfig = {
             "label": "CRUD"
           }
         ]
+      },
+      {
+        "type": "doc",
+        "id": "mongodb/mocking",
+        "label": "Mocking"
       }
     ]
   },
   {
     "type": "category",
-    "label": "Security & Testing",
+    "label": "Security",
     "items": [
       {
         "type": "doc",
@@ -334,11 +359,6 @@ const sidebars: SidebarsConfig = {
             "label": "Session Based Login"
           }
         ]
-      },
-      {
-        "type": "doc",
-        "id": "security-and-testing/testing",
-        "label": "Testing"
       }
     ]
   },
