@@ -647,11 +647,11 @@ const sidebars: SidebarsConfig = {
           "id": "labos/testen/index"
         },
         "items": [
-          { "type": "doc", "id": "exercises/testing/string-test/README", "label": "String Test" },
-          { "type": "doc", "id": "exercises/testing/math-test/README", "label": "Math Test" },
-          { "type": "doc", "id": "exercises/testing/exceptions-test/README", "label": "Exceptions Test" },
-          { "type": "doc", "id": "exercises/testing/async-test/README", "label": "Async Test" },
-          { "type": "doc", "id": "exercises/testing/todo-list-test/README", "label": "Todo List Test" }
+          { "type": "doc", "id": "exercises/node-typescript/string-test/README", "label": "String Test" },
+          { "type": "doc", "id": "exercises/node-typescript/math-test/README", "label": "Math Test" },
+          { "type": "doc", "id": "exercises/node-typescript/exceptions-test/README", "label": "Exceptions Test" },
+          { "type": "doc", "id": "exercises/node-typescript/async-test/README", "label": "Async Test" },
+          { "type": "doc", "id": "exercises/node-typescript/todo-list-test/README", "label": "Todo List Test" }
         ]
       },
       {
@@ -796,7 +796,42 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "13. Herhaling",
+        "label": "13. Express Testen",
+        "link": {
+          "type": "doc",
+          "id": "labos/express-testen/index"
+        },
+        "items": [
+          {
+            "type": "doc",
+            "id": "exercises/express/math-express-test/README",
+            "label": "Math Express Test"
+          },
+          {
+            "type": "doc",
+            "id": "exercises/express/form-express-test/README",
+            "label": "Form Express Test"
+          },
+          {
+            "type": "doc",
+            "id": "exercises/express/hello-query-test/README",
+            "label": "Hello Query Test"
+          },
+          {
+            "type": "doc",
+            "id": "exercises/express/contact-form-test/README",
+            "label": "Contact Form Test"
+          },
+          {
+            "type": "doc",
+            "id": "exercises/express/pet-shelter-express-test/README",
+            "label": "Pet Shelter Express Test"
+          }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "14. Herhaling",
         "link": {
           "type": "doc",
           "id": "labos/labo12/index"
@@ -816,7 +851,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "14. Mongo Basics",
+        "label": "15. Mongo Basics",
         "link": {
           "type": "doc",
           "id": "labos/labo13/index"
@@ -841,7 +876,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "15. Mongo Queries",
+        "label": "16. Mongo Queries",
         "link": {
           "type": "doc",
           "id": "labos/mongo-queries/index"
@@ -861,7 +896,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "16. Mongo + Express",
+        "label": "17. Mongo + Express",
         "link": {
           "type": "doc",
           "id": "labos/mongo-+-express/index"
@@ -886,7 +921,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "17. CRUD",
+        "label": "18. CRUD",
         "link": {
           "type": "doc",
           "id": "labos/crud/index"
@@ -906,7 +941,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "18. Session & Cookies",
+        "label": "19. Session & Cookies",
         "link": {
           "type": "doc",
           "id": "labos/session-and-cookies/index"
@@ -931,7 +966,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "19. Session based login",
+        "label": "20. Session based login",
         "link": {
           "type": "doc",
           "id": "labos/session-based-login/index"
@@ -951,7 +986,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "22. Herhaling",
+        "label": "23. Herhaling",
         "link": {
           "type": "doc",
           "id": "labos/herhaling/index"
