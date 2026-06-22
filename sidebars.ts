@@ -647,7 +647,6 @@ const sidebars: SidebarsConfig = {
           "id": "labos/testen/index"
         },
         "items": [
-          { "type": "doc", "id": "exercises/node-typescript/string-test/README", "label": "String Test" },
           { "type": "doc", "id": "exercises/node-typescript/math-test/README", "label": "Math Test" },
           { "type": "doc", "id": "exercises/node-typescript/exceptions-test/README", "label": "Exceptions Test" },
           { "type": "doc", "id": "exercises/node-typescript/async-test/README", "label": "Async Test" },

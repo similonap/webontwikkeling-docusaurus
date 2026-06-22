@@ -7,12 +7,6 @@ Bekijk voor het labo aan te vangen eerst de volgende topics:
 * [Testen](../../nodejs-+-typescript/testen/index.md)
 * [Node.js testen](../../nodejs-+-typescript/testen/nodejs-testen.md)
 
-### String Test
-
-
-[string-test](../../exercises/node-typescript/string-test/README.md)
-
-
 ### Math Test
 
 
