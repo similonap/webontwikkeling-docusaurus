@@ -641,7 +641,22 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "7. Express",
+        "label": "7. Testen",
+        "link": {
+          "type": "doc",
+          "id": "labos/testen/index"
+        },
+        "items": [
+          { "type": "doc", "id": "exercises/testing/string-test/README", "label": "String Test" },
+          { "type": "doc", "id": "exercises/testing/math-test/README", "label": "Math Test" },
+          { "type": "doc", "id": "exercises/testing/exceptions-test/README", "label": "Exceptions Test" },
+          { "type": "doc", "id": "exercises/testing/async-test/README", "label": "Async Test" },
+          { "type": "doc", "id": "exercises/testing/todo-list-test/README", "label": "Todo List Test" }
+        ]
+      },
+      {
+        "type": "category",
+        "label": "8. Express",
         "link": {
           "type": "doc",
           "id": "labos/labo7/index"
@@ -666,7 +681,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "8. EJS + Static",
+        "label": "9. EJS + Static",
         "link": {
           "type": "doc",
           "id": "labos/labo8/index"
@@ -696,7 +711,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "9. Get Request",
+        "label": "10. Get Request",
         "link": {
           "type": "doc",
           "id": "labos/labo9/index"
@@ -731,7 +746,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "10. Post Request",
+        "label": "11. Post Request",
         "link": {
           "type": "doc",
           "id": "labos/labo10/index"
@@ -756,7 +771,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "11. Router en Middleware",
+        "label": "12. Router en Middleware",
         "link": {
           "type": "doc",
           "id": "labos/labo11/index"
@@ -781,7 +796,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "12. Herhaling",
+        "label": "13. Herhaling",
         "link": {
           "type": "doc",
           "id": "labos/labo12/index"
@@ -801,7 +816,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "13. Mongo Basics",
+        "label": "14. Mongo Basics",
         "link": {
           "type": "doc",
           "id": "labos/labo13/index"
@@ -826,7 +841,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "14. Mongo Queries",
+        "label": "15. Mongo Queries",
         "link": {
           "type": "doc",
           "id": "labos/mongo-queries/index"
@@ -846,7 +861,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "15. Mongo + Express",
+        "label": "16. Mongo + Express",
         "link": {
           "type": "doc",
           "id": "labos/mongo-+-express/index"
@@ -871,7 +886,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "16. CRUD",
+        "label": "17. CRUD",
         "link": {
           "type": "doc",
           "id": "labos/crud/index"
@@ -891,7 +906,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "17. Session & Cookies",
+        "label": "18. Session & Cookies",
         "link": {
           "type": "doc",
           "id": "labos/session-and-cookies/index"
@@ -916,7 +931,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "18. Session based login",
+        "label": "19. Session based login",
         "link": {
           "type": "doc",
           "id": "labos/session-based-login/index"
@@ -936,7 +951,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "21. Herhaling",
+        "label": "22. Herhaling",
         "link": {
           "type": "doc",
           "id": "labos/herhaling/index"
