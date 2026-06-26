@@ -118,9 +118,30 @@ const sidebars: SidebarsConfig = {
         "label": "Exceptions"
       },
       {
+        "type": "category",
+        "label": "Modules, npm & testing",
+        "items": [
+          {
+            "type": "doc",
+            "id": "nodejs-+-typescript/modules-npm/modules",
+            "label": "Modules"
+          },
+          {
+            "type": "doc",
+            "id": "nodejs-+-typescript/modules-npm/npm-packages",
+            "label": "Node Package Manager (npm)"
+          },
+          {
+            "type": "doc",
+            "id": "nodejs-+-typescript/modules-npm/quiz",
+            "label": "Quiz"
+          },
+        ]
+      },
+      {
         "type": "doc",
-        "id": "nodejs-+-typescript/modules",
-        "label": "Modules"
+        "id": "nodejs-+-typescript/testing",
+        "label": "Testing"
       },
       {
         "type": "category",
@@ -149,21 +170,6 @@ const sidebars: SidebarsConfig = {
             "type": "doc",
             "id": "nodejs-+-typescript/asynchroon-programmeren/extra",
             "label": "Extra voorbeelden"
-          }
-        ]
-      },
-      {
-        "type": "category",
-        "label": "Testen",
-        "link": {
-          "type": "doc",
-          "id": "nodejs-+-typescript/testen/index"
-        },
-        "items": [
-          {
-            "type": "doc",
-            "id": "nodejs-+-typescript/testen/nodejs-testen",
-            "label": "Node.js testen"
           }
         ]
       }
@@ -332,17 +338,17 @@ const sidebars: SidebarsConfig = {
     "items": [
       {
         "type": "doc",
-        "id": "security-and-testing/environment-variables",
+        "id": "security/environment-variables",
         "label": "Environment Variables"
       },
       {
         "type": "doc",
-        "id": "security-and-testing/cookies",
+        "id": "security/cookies",
         "label": "Cookies"
       },
       {
         "type": "doc",
-        "id": "security-and-testing/hashing",
+        "id": "security/hashing",
         "label": "Hashing"
       },
       {
@@ -350,12 +356,12 @@ const sidebars: SidebarsConfig = {
         "label": "Sessions",
         "link": {
           "type": "doc",
-          "id": "security-and-testing/sessions"
+          "id": "security/sessions"
         },
         "items": [
           {
             "type": "doc",
-            "id": "security-and-testing/session-based-login",
+            "id": "security/session-based-login",
             "label": "Session Based Login"
           }
         ]
@@ -606,7 +612,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "6. Modules en NPM Packages",
+        "label": "6. Modules, npm & testing",
         "link": {
           "type": "doc",
           "id": "labos/labo6/index"
@@ -636,17 +642,7 @@ const sidebars: SidebarsConfig = {
             "type": "doc",
             "id": "exercises/node-typescript/rainbow-chalk/README",
             "label": "Rainbow Chalk"
-          }
-        ]
-      },
-      {
-        "type": "category",
-        "label": "7. Testen",
-        "link": {
-          "type": "doc",
-          "id": "labos/testen/index"
-        },
-        "items": [
+          },
           { "type": "doc", "id": "exercises/node-typescript/math-test/README", "label": "Math Test" },
           { "type": "doc", "id": "exercises/node-typescript/exceptions-test/README", "label": "Exceptions Test" },
           { "type": "doc", "id": "exercises/node-typescript/async-test/README", "label": "Async Test" },
@@ -655,7 +651,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "8. Express",
+        "label": "7. Express",
         "link": {
           "type": "doc",
           "id": "labos/labo7/index"
@@ -680,7 +676,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "9. EJS + Static",
+        "label": "8. EJS + Static",
         "link": {
           "type": "doc",
           "id": "labos/labo8/index"
@@ -710,7 +706,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "10. Get Request",
+        "label": "9. Get Request",
         "link": {
           "type": "doc",
           "id": "labos/labo9/index"
@@ -745,7 +741,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "11. Post Request",
+        "label": "10. Post Request",
         "link": {
           "type": "doc",
           "id": "labos/labo10/index"
@@ -770,7 +766,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "12. Router en Middleware",
+        "label": "11. Router en Middleware",
         "link": {
           "type": "doc",
           "id": "labos/labo11/index"
@@ -795,7 +791,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "13. Express Testen",
+        "label": "12. Express Testen",
         "link": {
           "type": "doc",
           "id": "labos/express-testen/index"
@@ -830,7 +826,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "14. Herhaling",
+        "label": "13. Herhaling",
         "link": {
           "type": "doc",
           "id": "labos/labo12/index"
@@ -850,7 +846,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "15. Mongo Basics",
+        "label": "14. Mongo Basics",
         "link": {
           "type": "doc",
           "id": "labos/labo13/index"
@@ -875,7 +871,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "16. Mongo Queries",
+        "label": "15. Mongo Queries",
         "link": {
           "type": "doc",
           "id": "labos/mongo-queries/index"
@@ -895,7 +891,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "17. Mongo + Express",
+        "label": "16. Mongo + Express",
         "link": {
           "type": "doc",
           "id": "labos/mongo-+-express/index"
@@ -915,12 +911,17 @@ const sidebars: SidebarsConfig = {
             "type": "doc",
             "id": "exercises/mongodb/pokemon-team-express/README",
             "label": "Pokemon Team Express"
+          },
+          {
+            "type": "doc",
+            "id": "exercises/mongodb/pet-shelter-express-test/README",
+            "label": "Pet Shelter Express Test"
           }
         ]
       },
       {
         "type": "category",
-        "label": "18. CRUD",
+        "label": "17. CRUD",
         "link": {
           "type": "doc",
           "id": "labos/crud/index"
@@ -940,7 +941,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "19. Session & Cookies",
+        "label": "18. Session & Cookies",
         "link": {
           "type": "doc",
           "id": "labos/session-and-cookies/index"
@@ -965,7 +966,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "20. Session based login",
+        "label": "19. Session based login",
         "link": {
           "type": "doc",
           "id": "labos/session-based-login/index"
@@ -985,7 +986,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "23. Herhaling",
+        "label": "22. Herhaling",
         "link": {
           "type": "doc",
           "id": "labos/herhaling/index"
