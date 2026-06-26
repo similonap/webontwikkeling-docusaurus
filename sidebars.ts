@@ -741,27 +741,74 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "10. Post Request",
+        "label": "10. Post Requests & testing",
         "link": {
           "type": "doc",
           "id": "labos/labo10/index"
         },
         "items": [
           {
-            "type": "doc",
-            "id": "exercises/express/petshelter-form/README",
-            "label": "Pet Shelter"
+            "type": "category",
+            "label": "POST requests",
+            "link": {
+              "type": "doc",
+              "id": "labos/labo10/index"
+            },
+            "items": [
+
+              {
+                "type": "doc",
+                "id": "exercises/express/petshelter-form/README",
+                "label": "Pet Shelter"
+              },
+              {
+                "type": "doc",
+                "id": "exercises/express/redirect-form/README",
+                "label": "Redirect Form"
+              },
+              {
+                "type": "doc",
+                "id": "exercises/express/contact-form/README",
+                "label": "Contact Form"
+              }
+            ]
           },
           {
-            "type": "doc",
-            "id": "exercises/express/redirect-form/README",
-            "label": "Redirect Form"
+            "type": "category",
+            "label": "Express testen",
+            "link": {
+              "type": "doc",
+              "id": "labos/labo10/index"
+            },
+
+            "items": [
+              {
+                "type": "doc",
+                "id": "exercises/express/math-express-test/README",
+                "label": "Math Express Test"
+              },
+              {
+                "type": "doc",
+                "id": "exercises/express/hello-query-test/README",
+                "label": "Hello Query Test"
+              },
+              {
+                "type": "doc",
+                "id": "exercises/express/form-express-test/README",
+                "label": "Form Express Test"
+              },
+              {
+                "type": "doc",
+                "id": "exercises/express/contact-form-test/README",
+                "label": "Contact Form Test"
+              },
+              {
+                "type": "doc",
+                "id": "exercises/express/pet-shelter-express-test/README",
+                "label": "Pet Shelter Test"
+              },
+            ]
           },
-          {
-            "type": "doc",
-            "id": "exercises/express/contact-form/README",
-            "label": "Contact Form"
-          }
         ]
       },
       {
@@ -791,42 +838,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "12. Express Testen",
-        "link": {
-          "type": "doc",
-          "id": "labos/express-testen/index"
-        },
-        "items": [
-          {
-            "type": "doc",
-            "id": "exercises/express/math-express-test/README",
-            "label": "Math Express Test"
-          },
-          {
-            "type": "doc",
-            "id": "exercises/express/form-express-test/README",
-            "label": "Form Express Test"
-          },
-          {
-            "type": "doc",
-            "id": "exercises/express/hello-query-test/README",
-            "label": "Hello Query Test"
-          },
-          {
-            "type": "doc",
-            "id": "exercises/express/contact-form-test/README",
-            "label": "Contact Form Test"
-          },
-          {
-            "type": "doc",
-            "id": "exercises/express/pet-shelter-express-test/README",
-            "label": "Pet Shelter Express Test"
-          }
-        ]
-      },
-      {
-        "type": "category",
-        "label": "13. Herhaling",
+        "label": "12. Herhaling",
         "link": {
           "type": "doc",
           "id": "labos/labo12/index"
@@ -846,7 +858,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "14. Mongo Basics",
+        "label": "13. Mongo Basics",
         "link": {
           "type": "doc",
           "id": "labos/labo13/index"
@@ -871,7 +883,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "15. Mongo Queries",
+        "label": "14. Mongo Queries",
         "link": {
           "type": "doc",
           "id": "labos/mongo-queries/index"
@@ -891,7 +903,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "16. Mongo + Express",
+        "label": "15. Mongo + Express",
         "link": {
           "type": "doc",
           "id": "labos/mongo-+-express/index"
@@ -921,7 +933,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "17. CRUD",
+        "label": "16. CRUD",
         "link": {
           "type": "doc",
           "id": "labos/crud/index"
@@ -941,7 +953,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "18. Session & Cookies",
+        "label": "17. Session & Cookies",
         "link": {
           "type": "doc",
           "id": "labos/session-and-cookies/index"
@@ -966,7 +978,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "19. Session based login",
+        "label": "18. Session based login",
         "link": {
           "type": "doc",
           "id": "labos/session-based-login/index"
@@ -986,7 +998,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "22. Herhaling",
+        "label": "21. Herhaling",
         "link": {
           "type": "doc",
           "id": "labos/herhaling/index"
