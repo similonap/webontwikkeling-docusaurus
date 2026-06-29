@@ -45,6 +45,70 @@ Om te zorgen dat je al je Jest-tests kan laten lopen met npm test, voeg je dit t
 }
 ```
 
+## Testen van asynchrone functies
+
+Ook in tests kan je gebruik maken van async en await. Je kan de test functie async maken en dan de await keyword gebruiken om te wachten tot de Promise is afgerond.
+
+```typescript
+test("multiply should return the product of two numbers", async () => {
+    const result = await multiply(2, 3);
+    expect(result).toBe(6);
+});
+```
+
+Je kan ook gebruik maken van try catch blokken in je tests om te testen of er een error wordt gegooid.
+
+```typescript
+test("divide should throw an error when dividing by zero", async () => {
+    try {
+        await divide(10, 0);
+    } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+        expect(error.message).toBe("Cannot divide by zero");
+    }
+});
+```
+
+#### Voorbeeld
+
+Het is nu mogelijk om complexe logica te schrijven zonder dat je code totaal onleesbaar wordt. Stel je voor dat je twee getallen wil uitlezen uit een bestand `getal1.txt` en `getal2.txt`. Vervolgens wil je een vermenigvuldiging uitvoeren en het resultaat wegschrijven naar een bestand `resultaat.txt`.
+
+Dit zou er met promises als volgt uitzien:
+
+```typescript
+import { readFile, writeFile } from "fs/promises";
+
+readFile("getal1.txt", "utf-8").then((getal1) => {
+    readFile("getal2.txt", "utf-8").then((getal2) => {
+        multiply(parseInt(getal1), parseInt(getal2)).then((result) => {
+            writeFile("resultaat.txt", result.toString(), "utf-8").then(() => {
+                console.log("Done");
+            });
+        });
+    });
+});
+```
+
+Dit kan met async en await als volgt:
+
+```typescript
+import { readFile, writeFile } from "fs/promises";
+
+async function main() {
+    try {
+        const getal1 = await readFile("getal1.txt", "utf-8");
+        const getal2 = await readFile("getal2.txt", "utf-8");
+        const result = await multiply(parseInt(getal1), parseInt(getal2));
+        await writeFile("resultaat.txt", result.toString(), "utf-8");
+        console.log("Done");
+    } catch (error) {
+        console.log(error);
+    }
+}
+```
+
+Zo zie je dat de code veel leesbaarder is geworden en veel minder indentatie heeft.
+
 ## Testen van modules
 
 Een heel belangrijke reden om modules te gebruiken is dat je deze modules eenvoudig kan testen. Als je al je code in één bestand zet dan is het moeilijk om deze code te testen. Je kan dan niet gemakkelijk bepaalde functies isoleren en testen. Door gebruik te maken van modules kan je deze functies isoleren en testen. Het testen van functies in modules noemen we ook vaak unit testing. Dit is een manier van testen waarbij je individuele functies test in plaats van het hele programma.
@@ -52,7 +116,13 @@ Een heel belangrijke reden om modules te gebruiken is dat je deze modules eenvou
 
 ### Testen van functies in modules
 
-[//]: # (todo: areaRectaqngle code toevoegen)
+We gaan terug naar het voorbeeld van de `areaRectangle` functie uit het module hoofdstuk. Deze functie berekent de oppervlakte van een rechthoek. We hebben deze functie in een module gezet met de naam `area.ts`. De inhoud van dit bestand is als volgt:
+
+```typescript
+export function areaRectangle(l: number, w: number): number {
+    return l * w;
+}
+```
 
 Stel dat je de functie `areaRectangle` wil testen. Je kan dan een nieuw bestand aanmaken met de naam `area.test.ts`. In dit bestand kan je de functie importeren en vervolgens testen.
 
