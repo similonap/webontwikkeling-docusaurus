@@ -119,7 +119,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "Modules, npm & testing",
+        "label": "Modules & npm",
         "items": [
           {
             "type": "doc",
