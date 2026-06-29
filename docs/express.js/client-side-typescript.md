@@ -470,6 +470,8 @@ usernameInput.addEventListener("input", () => {
 });
 ```
 
+**Belangrijk:** Client-side validatie is handig voor een betere gebruikerservaring, maar het is geen vervanging voor server-side validatie. Een kwaadwillende gebruiker kan de client-side code omzeilen en direct een verzoek naar de server sturen door bijvoorbeeld een tool zoals Postman te gebruiken. Daarom is het essentieel om altijd server-side validatie uit te voeren, ongeacht de client-side validatie. Reken dus nooit alleen op client-side validatie voor de veiligheid van je applicatie.
+
 ### Zoeken
 
 Een ander veelvoorkomend gebruik van client-side JavaScript is het implementeren van een zoekfunctie die resultaten toont terwijl de gebruiker typt. Zo krijg je een veel snellere en soepelere gebruikerservaring, omdat je niet hoeft te wachten op een netwerkverzoek telkens de gebruiker iets intypt. We kunnen dit doen door een API-route te maken die zoekt in een lijst van items, en deze route aan te roepen vanuit onze client-side TypeScript telkens de gebruiker iets intypt in het zoekveld.
