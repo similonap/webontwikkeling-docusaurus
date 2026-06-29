@@ -118,9 +118,30 @@ const sidebars: SidebarsConfig = {
         "label": "Exceptions"
       },
       {
+        "type": "category",
+        "label": "Modules, npm & testing",
+        "items": [
+          {
+            "type": "doc",
+            "id": "nodejs-+-typescript/modules-npm/modules",
+            "label": "Modules"
+          },
+          {
+            "type": "doc",
+            "id": "nodejs-+-typescript/modules-npm/npm-packages",
+            "label": "Node Package Manager (npm)"
+          },
+          {
+            "type": "doc",
+            "id": "nodejs-+-typescript/modules-npm/quiz",
+            "label": "Quiz"
+          },
+        ]
+      },
+      {
         "type": "doc",
-        "id": "nodejs-+-typescript/modules",
-        "label": "Modules"
+        "id": "nodejs-+-typescript/testing",
+        "label": "Testing"
       },
       {
         "type": "category",
@@ -232,6 +253,11 @@ const sidebars: SidebarsConfig = {
         "type": "doc",
         "id": "express.js/deployment",
         "label": "Deployment"
+      },
+      {
+        "type": "doc",
+        "id": "express.js/testen",
+        "label": "Express testen"
       }
     ]
   },
@@ -298,26 +324,31 @@ const sidebars: SidebarsConfig = {
             "label": "CRUD"
           }
         ]
+      },
+      {
+        "type": "doc",
+        "id": "mongodb/mocking",
+        "label": "Mocking"
       }
     ]
   },
   {
     "type": "category",
-    "label": "Security & Testing",
+    "label": "Security",
     "items": [
       {
         "type": "doc",
-        "id": "security-and-testing/environment-variables",
+        "id": "security/environment-variables",
         "label": "Environment Variables"
       },
       {
         "type": "doc",
-        "id": "security-and-testing/cookies",
+        "id": "security/cookies",
         "label": "Cookies"
       },
       {
         "type": "doc",
-        "id": "security-and-testing/hashing",
+        "id": "security/hashing",
         "label": "Hashing"
       },
       {
@@ -325,20 +356,15 @@ const sidebars: SidebarsConfig = {
         "label": "Sessions",
         "link": {
           "type": "doc",
-          "id": "security-and-testing/sessions"
+          "id": "security/sessions"
         },
         "items": [
           {
             "type": "doc",
-            "id": "security-and-testing/session-based-login",
+            "id": "security/session-based-login",
             "label": "Session Based Login"
           }
         ]
-      },
-      {
-        "type": "doc",
-        "id": "security-and-testing/testing",
-        "label": "Testing"
       }
     ]
   },
@@ -586,7 +612,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "6. Modules en NPM Packages",
+        "label": "6. Modules, npm & testing",
         "link": {
           "type": "doc",
           "id": "labos/labo6/index"
@@ -616,7 +642,11 @@ const sidebars: SidebarsConfig = {
             "type": "doc",
             "id": "exercises/node-typescript/rainbow-chalk/README",
             "label": "Rainbow Chalk"
-          }
+          },
+          { "type": "doc", "id": "exercises/node-typescript/math-test/README", "label": "Math Test" },
+          { "type": "doc", "id": "exercises/node-typescript/exceptions-test/README", "label": "Exceptions Test" },
+          { "type": "doc", "id": "exercises/node-typescript/async-test/README", "label": "Async Test" },
+          { "type": "doc", "id": "exercises/node-typescript/todo-list-test/README", "label": "Todo List Test" }
         ]
       },
       {
@@ -711,27 +741,74 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "10. Post Request",
+        "label": "10. Post Requests & testing",
         "link": {
           "type": "doc",
           "id": "labos/labo10/index"
         },
         "items": [
           {
-            "type": "doc",
-            "id": "exercises/express/petshelter-form/README",
-            "label": "Pet Shelter"
+            "type": "category",
+            "label": "POST requests",
+            "link": {
+              "type": "doc",
+              "id": "labos/labo10/index"
+            },
+            "items": [
+
+              {
+                "type": "doc",
+                "id": "exercises/express/petshelter-form/README",
+                "label": "Pet Shelter"
+              },
+              {
+                "type": "doc",
+                "id": "exercises/express/redirect-form/README",
+                "label": "Redirect Form"
+              },
+              {
+                "type": "doc",
+                "id": "exercises/express/contact-form/README",
+                "label": "Contact Form"
+              }
+            ]
           },
           {
-            "type": "doc",
-            "id": "exercises/express/redirect-form/README",
-            "label": "Redirect Form"
+            "type": "category",
+            "label": "Express testen",
+            "link": {
+              "type": "doc",
+              "id": "labos/labo10/index"
+            },
+
+            "items": [
+              {
+                "type": "doc",
+                "id": "exercises/express/math-express-test/README",
+                "label": "Math Express Test"
+              },
+              {
+                "type": "doc",
+                "id": "exercises/express/hello-query-test/README",
+                "label": "Hello Query Test"
+              },
+              {
+                "type": "doc",
+                "id": "exercises/express/form-express-test/README",
+                "label": "Form Express Test"
+              },
+              {
+                "type": "doc",
+                "id": "exercises/express/contact-form-test/README",
+                "label": "Contact Form Test"
+              },
+              {
+                "type": "doc",
+                "id": "exercises/express/pet-shelter-express-test/README",
+                "label": "Pet Shelter Test"
+              },
+            ]
           },
-          {
-            "type": "doc",
-            "id": "exercises/express/contact-form/README",
-            "label": "Contact Form"
-          }
         ]
       },
       {
@@ -846,6 +923,11 @@ const sidebars: SidebarsConfig = {
             "type": "doc",
             "id": "exercises/mongodb/pokemon-team-express/README",
             "label": "Pokemon Team Express"
+          },
+          {
+            "type": "doc",
+            "id": "exercises/mongodb/pet-shelter-express-test/README",
+            "label": "Pet Shelter Express Test"
           }
         ]
       },
