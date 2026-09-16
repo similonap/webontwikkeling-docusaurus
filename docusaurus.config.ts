@@ -5,6 +5,9 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
+  // sidebars.ts selects the shared pages that belong to this course.
+  // Add document IDs here only for pages that should exist outside the sidebar.
+  customFields: {course: {extraDocs: []}},
   title: 'Webontwikkeling',
   tagline: 'A long time ago in a browser far, far away...',
   favicon: 'img/typescript.png',
@@ -63,7 +66,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/similonap/web-monorepo-docusaurus/edit/main/',
         },
         blog: false, // Disable blog for now to focus on the course
         theme: {
