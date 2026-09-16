@@ -125,3 +125,29 @@ publiceren. Een handmatige workflowrun bouwt dezelfde vastgelegde bronversie.
 
 Bij de eerste ingebruikname moet de vastgelegde monorepo-commit beschikbaar zijn
 op GitHub voordat deze workflow of een nieuwe remote checkout kan slagen.
+
+## Vercel
+
+Gebruik de root van deze cursusrepository als **Root Directory** in Vercel.
+`vercel.json` legt de instellingen vast:
+
+- **Framework Preset:** Other.
+- **Install Command:** `npm ci --prefix course-material --include=dev`.
+- **Build Command:** `npm run build`.
+- **Output Directory:** `.course/build`.
+
+Vercel haalt de publieke Git-submodule tijdens de checkout op. De installatiestap
+installeert vervolgens de dependencies uit de gedeelde lockfile, inclusief de
+buildtools in `devDependencies`. Alleen `npm install` in de cursusroot installeert
+die pakketten niet, omdat deze repository zelf geen dependencies heeft.
+Dat veroorzaakt een `MODULE_NOT_FOUND`-fout bij het laden van de assemblyscripts.
+
+`cleanUrls` en `trailingSlash` zorgen dat de gegenereerde `.html`-pagina's aansluiten
+op de Docusaurus-URLs zonder extensie of afsluitende slash. De configuratie gebruikt
+de vastgelegde submodule-commit; er wordt geen nieuwere versie van `main` opgehaald.
+
+Na het publiceren van `vercel.json` start je een nieuwe deployment. Het instellen
+van deze waarden in het Vercel-dashboard kan ook, zolang de projectroot de
+cursusrepository blijft.
+
+Zie de [Vercel-configuratiedocumentatie](https://vercel.com/docs/project-configuration/vercel-json).
