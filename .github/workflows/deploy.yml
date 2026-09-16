@@ -24,15 +24,16 @@ jobs:
           fetch-depth: 0
           submodules: recursive
 
+      # Refresh before setup-node calculates the cache key from the shared lockfile.
+      - name: Fetch latest course material
+        run: git submodule update --init --remote --recursive --checkout course-material
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: course-material/package-lock.json
-
-      - name: Install dependencies
-        run: npm ci --prefix course-material
 
       - name: Build website
         run: npm run build

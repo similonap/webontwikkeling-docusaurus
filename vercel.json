@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "installCommand": "npm ci --prefix course-material --include=dev",
+  "installCommand": "",
   "buildCommand": "npm run build",
   "outputDirectory": ".course/build",
   "cleanUrls": true,

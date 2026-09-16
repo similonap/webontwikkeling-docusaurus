@@ -3,13 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "setup": "git submodule update --init --recursive && npm ci --prefix course-material",
+    "setup": "git submodule update --init --remote --recursive --checkout course-material && npm ci --prefix course-material --include=dev",
+    "preassemble": "npm run setup",
     "assemble": "node course-material/scripts/course.cjs --course . assemble",
+    "prestart": "npm run setup",
     "start": "node course-material/scripts/course.cjs --course . start",
+    "predev": "npm run setup",
     "dev": "node course-material/scripts/course.cjs --course . start",
+    "prebuild": "npm run setup",
     "build": "node course-material/scripts/course.cjs --course . build",
     "serve": "node course-material/scripts/course.cjs --course . serve",
     "clear": "node course-material/scripts/course.cjs --course . clear",
+    "pretypecheck": "npm run setup",
     "typecheck": "node course-material/scripts/course.cjs --course . typecheck"
   },
   "engines": {

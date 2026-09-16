@@ -25,10 +25,10 @@ webontwikkeling-docusaurus/
 Voer in deze repository uit:
 
 ```bash
-npm run setup     # submodule initialiseren en de vastgelegde dependencies installeren
-npm run assemble  # alleen samenstellen, inclusief downloads van oefeningen
-npm start        # samenstellen en de ontwikkelserver starten
-npm run build    # samenstellen en een productiebuild maken
+npm run setup     # nieuwste main ophalen en de bijbehorende dependencies installeren
+npm run assemble  # nieuwste main ophalen en samenstellen, inclusief oefeningdownloads
+npm start        # nieuwste main ophalen, samenstellen en de ontwikkelserver starten
+npm run build    # nieuwste main ophalen, samenstellen en een productiebuild maken
 npm run serve    # de bestaande productiebuild bekijken
 ```
 
@@ -82,7 +82,9 @@ Docusaurus-instellingen bepalen hoe ontbrekende links worden gemeld.
 Het script en de afhankelijkheden worden centraal beheerd in de monorepo.
 Deze repository heeft daarom geen eigen dependencies of lockfile. Git bewaart
 voor `course-material/` alleen een verwijzing naar een specifieke monorepo-commit.
-De lessen blijven onderdeel van de monorepo en hebben hun eigen geschiedenis.
+Die verwijzing is het startpunt bij het clonen. De cursuscommando's halen daarna
+automatisch de nieuwste `main` op. De lessen blijven onderdeel van de monorepo
+en hebben hun eigen geschiedenis.
 
 Voor een losse checkout van de monorepo kan je het script ook rechtstreeks uitvoeren:
 
@@ -90,41 +92,49 @@ Voor een losse checkout van de monorepo kan je het script ook rechtstreeks uitvo
 node /pad/naar/web-monorepo-docusaurus/scripts/course.cjs --course /pad/naar/cursus build
 ```
 
-## Gedeeld materiaal bijwerken
+## Altijd de nieuwste inhoud
 
-Een gewone checkout, `npm run setup` en de CI-workflow gebruiken steeds de
-monorepo-commit die deze cursus heeft vastgelegd. Ze halen niet automatisch de
-laatste inhoud van `main` binnen. Zo blijft een oudere cursus reproduceerbaar.
-
-Om bewust de nieuwste versie van `main` over te nemen:
+`npm run assemble`, `npm start`, `npm run dev`, `npm run build` en
+`npm run typecheck` voeren via hun npm-prehook eerst `npm run setup` uit:
 
 ```bash
-git submodule update --remote --checkout course-material
-npm ci --prefix course-material
-npm run build
-git add course-material
-git commit -m "Update shared course material"
+git submodule update --init --remote --recursive --checkout course-material
+npm ci --prefix course-material --include=dev
 ```
 
-Gebruik tijdens deze update `npm ci --prefix course-material`: `npm run setup`
-zet de submodule terug naar de momenteel vastgelegde cursusversie.
+Hierdoor wordt voor elke nieuwe assembly de nieuwste gepubliceerde commit van
+`main` opgehaald, volgens de branch in `.gitmodules`. Daarna worden de dependencies
+uit de bijbehorende lockfile geïnstalleerd, inclusief de buildtools. Je hoeft de
+submoduleverwijzing in deze cursus niet meer te committen om nieuwe inhoud te bouwen.
+Een netwerk- of installatiefout stopt de build; er wordt niet stilzwijgend met een
+oude versie verdergegaan. Git wordt zonder `--force` uitgevoerd.
 
-Zorg dat de submodule geen ongecommitteerde wijzigingen bevat voordat je van
-versie wisselt. Je kan inhoud in een aparte monorepo-checkout bewerken, of eerst
-een werkbranch maken met `git -C course-material switch -c mijn-wijziging`.
-Commit en publiceer inhoudswijzigingen in de monorepo voordat je de nieuwe
-submoduleverwijzing in de cursus publiceert. Een gewone submodule-checkout staat
-op een vastgelegde commit (detached HEAD).
+`npm run serve` bekijkt alleen een bestaande build en `npm run clear` ruimt de
+gegenereerde Docusaurus-cache op. Deze commando's halen geen nieuwe inhoud op.
+Een reeds draaiende ontwikkelserver volgt de monorepo niet automatisch: herstart
+`npm start` om nieuwe inhoud op te halen.
 
-Na het ophalen van wijzigingen aan deze cursus voer je `npm run setup` opnieuw
-uit om de submodule en dependencies gelijk te zetten met de vastgelegde versie.
+Een rebuild van dezelfde cursuscommit kan nu andere inhoud bevatten als `main`
+intussen gewijzigd is. De submodule kan lokaal als gewijzigd verschijnen omdat
+zijn checkout verder staat dan de verwijzing in deze repository. Dat is verwacht;
+de scripts committen of pushen die verwijzing niet.
 
-De GitHub Actions-workflow haalt de vastgelegde submodule op, installeert de
-gedeelde lockfile en bouwt `.course/build/`. Een pull request bouwt zonder te
-publiceren. Een handmatige workflowrun bouwt dezelfde vastgelegde bronversie.
+Bewerk en publiceer gedeelde inhoud op een werkbranch in de monorepo.
+Om lokale inhoud te bekijken zonder te synchroniseren, kan je
+het gedeelde script rechtstreeks uitvoeren:
 
-Bij de eerste ingebruikname moet de vastgelegde monorepo-commit beschikbaar zijn
-op GitHub voordat deze workflow of een nieuwe remote checkout kan slagen.
+```bash
+node course-material/scripts/course.cjs --course . build
+```
+
+De GitHub Actions-workflow ververst de submodule voordat de npm-cache wordt
+bepaald. `npm run build` verzorgt daarna de installatie en productiebuild. Een
+pull request bouwt zonder te publiceren.
+
+Een push naar de monorepo start op zichzelf nog geen cursusdeployment. Start
+opnieuw een Vercel-deployment of een handmatige cursusworkflow om de nieuwste
+inhoud te publiceren. Automatisch starten op een monorepo-push vereist een apart
+workflow- of deployment-trigger.
 
 ## Vercel
 
@@ -132,19 +142,19 @@ Gebruik de root van deze cursusrepository als **Root Directory** in Vercel.
 `vercel.json` legt de instellingen vast:
 
 - **Framework Preset:** Other.
-- **Install Command:** `npm ci --prefix course-material --include=dev`.
+- **Install Command:** overgeslagen (`"installCommand": ""` in `vercel.json`).
 - **Build Command:** `npm run build`.
 - **Output Directory:** `.course/build`.
 
-Vercel haalt de publieke Git-submodule tijdens de checkout op. De installatiestap
-installeert vervolgens de dependencies uit de gedeelde lockfile, inclusief de
-buildtools in `devDependencies`. Alleen `npm install` in de cursusroot installeert
-die pakketten niet, omdat deze repository zelf geen dependencies heeft.
-Dat veroorzaakt een `MODULE_NOT_FOUND`-fout bij het laden van de assemblyscripts.
+Vercel haalt de publieke Git-submodule tijdens de checkout op. De aparte
+installatiestap is uitgeschakeld, omdat `npm run build` via `prebuild` eerst de
+nieuwste submodule ophaalt en vervolgens `npm ci --include=dev` daarin uitvoert.
+Zo gebeurt de installatie pas nadat de nieuwste lockfile beschikbaar is, ook
+bij een redeploy van een oudere cursuscommit. Dit voorkomt ontbrekende buildtools
+zoals `@docusaurus/utils` en `archiver`.
 
 `cleanUrls` en `trailingSlash` zorgen dat de gegenereerde `.html`-pagina's aansluiten
-op de Docusaurus-URLs zonder extensie of afsluitende slash. De configuratie gebruikt
-de vastgelegde submodule-commit; er wordt geen nieuwere versie van `main` opgehaald.
+op de Docusaurus-URLs zonder extensie of afsluitende slash.
 
 Na het publiceren van `vercel.json` start je een nieuwe deployment. Het instellen
 van deze waarden in het Vercel-dashboard kan ook, zolang de projectroot de
