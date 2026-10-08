@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
-<title data-rh="true">Pokedexpress | Webontwikkeling</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://webontwikkeling.cloud-ap.be/img/typescript.png"><meta data-rh="true" name="twitter:image" content="https://webontwikkeling.cloud-ap.be/img/typescript.png"><meta data-rh="true" property="og:url" content="https://webontwikkeling.cloud-ap.be/exercises/mongodb/pokedex-mongo-express"><meta data-rh="true" property="og:locale" content="nl"><meta data-rh="true" name="docusaurus_locale" content="nl"><meta data-rh="true" name="docsearch:language" content="nl"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Pokedexpress | Webontwikkeling"><meta data-rh="true" name="description" content="Project Beschrijving"><meta data-rh="true" property="og:description" content="Project Beschrijving"><link data-rh="true" rel="icon" href="/img/typescript.png"><link data-rh="true" rel="canonical" href="https://webontwikkeling.cloud-ap.be/exercises/mongodb/pokedex-mongo-express"><link data-rh="true" rel="alternate" href="https://webontwikkeling.cloud-ap.be/exercises/mongodb/pokedex-mongo-express" hreflang="nl"><link data-rh="true" rel="alternate" href="https://webontwikkeling.cloud-ap.be/exercises/mongodb/pokedex-mongo-express" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"16. CRUD","item":"https://webontwikkeling.cloud-ap.be/labos/crud/"},{"@type":"ListItem","position":2,"name":"Pokedex","item":"https://webontwikkeling.cloud-ap.be/exercises/mongodb/pokedex-mongo-express/"}]}</script><link rel="stylesheet" href="/assets/css/styles.6de0c5e5.css">
-<script src="/assets/js/runtime~main.3bfa0b27.js" defer="defer"></script>
-<script src="/assets/js/main.5f1e57f6.js" defer="defer"></script>
+<title data-rh="true">Pokedexpress | Webontwikkeling</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://webontwikkeling.cloud-ap.be/img/typescript.png"><meta data-rh="true" name="twitter:image" content="https://webontwikkeling.cloud-ap.be/img/typescript.png"><meta data-rh="true" property="og:url" content="https://webontwikkeling.cloud-ap.be/exercises/mongodb/pokedex-mongo-express"><meta data-rh="true" property="og:locale" content="nl"><meta data-rh="true" name="docusaurus_locale" content="nl"><meta data-rh="true" name="docsearch:language" content="nl"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Pokedexpress | Webontwikkeling"><meta data-rh="true" name="description" content="Project Beschrijving"><meta data-rh="true" property="og:description" content="Project Beschrijving"><link data-rh="true" rel="icon" href="/img/typescript.png"><link data-rh="true" rel="canonical" href="https://webontwikkeling.cloud-ap.be/exercises/mongodb/pokedex-mongo-express"><link data-rh="true" rel="alternate" href="https://webontwikkeling.cloud-ap.be/exercises/mongodb/pokedex-mongo-express" hreflang="nl"><link data-rh="true" rel="alternate" href="https://webontwikkeling.cloud-ap.be/exercises/mongodb/pokedex-mongo-express" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"16. CRUD","item":"https://webontwikkeling.cloud-ap.be/labos/crud/"},{"@type":"ListItem","position":2,"name":"Pokedex","item":"https://webontwikkeling.cloud-ap.be/exercises/mongodb/pokedex-mongo-express/"}]}</script><link rel="stylesheet" href="/assets/css/styles.8a0ba5ac.css">
+<script src="/assets/js/runtime~main.f3a03e7a.js" defer="defer"></script>
+<script src="/assets/js/main.c41f9612.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -21,15 +21,15 @@
 <h2 class="anchor anchorTargetStickyNavbar_HocH" id="headerfooter">Header/Footer<a href="#headerfooter" class="hash-link" aria-label="Direct link naar Header/Footer" title="Direct link naar Header/Footer" translate="no">​</a></h2>
 <p>Zorg ervoor dat alle pagina&#x27;s de header en de footer includeert zodat de css automatisch wordt toegepast op elke pagina.</p>
 <p>In het begin zal je pagina er zo uit zien:</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/screenshot-7e479127fb0ca4cca2569bd33d9b204a.png" width="1856" height="566" class="img_kxL4"></p>
+<p><img decoding="async" loading="lazy" src="/assets/images/pokedex-overzicht-7e479127fb0ca4cca2569bd33d9b204a.png" width="1856" height="566" class="img_kxL4"></p>
 <p>Met de header en footer ziet ze er als volgt uit:</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/startpage_empty-a9692c1bb7c6f48382e34d815647587e.png" width="2138" height="592" class="img_kxL4"></p>
+<p><img decoding="async" loading="lazy" src="/assets/images/startpagina-leeg-a9692c1bb7c6f48382e34d815647587e.png" width="2138" height="592" class="img_kxL4"></p>
 <h2 class="anchor anchorTargetStickyNavbar_HocH" id="start-pagina">Start Pagina<a href="#start-pagina" class="hash-link" aria-label="Direct link naar Start Pagina" title="Direct link naar Start Pagina" translate="no">​</a></h2>
 <p>De start pagina ziet er als volgt uit. Als je naar de root path gaat (<a href="http://localhost:3000/" target="_blank" rel="noopener noreferrer" class="">http://localhost:3000</a>) dan krijg je de volgende pagina te zien.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/startpage_empty-a9692c1bb7c6f48382e34d815647587e.png" width="2138" height="592" class="img_kxL4"></p>
+<p><img decoding="async" loading="lazy" src="/assets/images/startpagina-leeg-a9692c1bb7c6f48382e34d815647587e.png" width="2138" height="592" class="img_kxL4"></p>
 <p>De gebruiker krijgt hier een invoerveld te zien met daarnaast een Submit knop. Als deze submit knop wordt aangeklikt dan wordt er in de database een nieuwe Player aangemaakt met de meegegeven naam.</p>
 <p>Na het aanmaken wordt de gebruiker terug naar deze root pagina gestuurd (met <code>res.redirect(&quot;/&quot;)</code>) en krijgt de gebruiker zijn naam te zien in een lijst:</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/startpage_red-9a90b6b71d5924a43f476d26d7d59ee2.png" width="2114" height="638" class="img_kxL4"></p>
+<p><img decoding="async" loading="lazy" src="/assets/images/startpagina-validatie-9a90b6b71d5924a43f476d26d7d59ee2.png" width="2114" height="638" class="img_kxL4"></p>
 <p>De gebruiker kan dan vervolgens op zijn naam klikken en wordt dan naar zijn persoonlijke hoofdpagina gestuurd.</p>
 <p><strong>Belangrijk:</strong> Het aanmaken van de Player gebeurt direct in de database maar er dient wel een array bij gehouden te worden met alle Players. Deze wordt in het begin van de applicatie ingeladen. Zorg ervoor dat deze ook geupdated wordt na het aanpassen van de database. Zo moeten we dus niet elke keer een database call doen telkens de gebruiker moet opgevraagd worden.</p>
 <h2 class="anchor anchorTargetStickyNavbar_HocH" id="de-player-pagina">De Player pagina<a href="#de-player-pagina" class="hash-link" aria-label="Direct link naar De Player pagina" title="Direct link naar De Player pagina" translate="no">​</a></h2>
@@ -71,7 +71,7 @@
 <li class="">maxHP: de base HP van de pokemon</li>
 </ul>
 <p>De pokemon worden als button elementen getoond. Je zou dus 151 buttons op het scherm moeten hebben.</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/pokemonlist-fb5d8f3aabe336d5e4d4ec562b1c5bc5.png" width="2688" height="1014" class="img_kxL4"></p>
+<p><img decoding="async" loading="lazy" src="/assets/images/pokemon-overzicht-fb5d8f3aabe336d5e4d4ec562b1c5bc5.png" width="2688" height="1014" class="img_kxL4"></p>
 <p>Als je op een van de buttons klikt wordt deze toegevoegd aan de pokemon lijst van de gebruiker. Wat dit betekent zie je later.</p>
 <p><strong>Belangrijk</strong>: Omdat de API niet mag overbevraagd worden (te veel API calls per dag) moet je voorkomen dat de API call elke keer wordt gedaan bij het opstarten. Eenmaal de data in de database zit, moet je deze niet meer inlezen. Je kan dit doen door na te kijken of de collection al gevuld is of niet.</p>
 <h2 class="anchor anchorTargetStickyNavbar_HocH" id="pokemon-team">Pokemon Team<a href="#pokemon-team" class="hash-link" aria-label="Direct link naar Pokemon Team" title="Direct link naar Pokemon Team" translate="no">​</a></h2>
@@ -80,7 +80,7 @@
 <p>Het toevoegen gebeurd aan de hand van de volgende route:</p>
 <p><code>POST /player/:id/pokemon/add/:pokeId</code></p>
 <p>Alle informatie moet zichtbaar zijn in de volgende tabel:</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/pokemonteam-0625cfa3bc0d5eccac31149fe4a2f956.png" width="2708" height="1188" class="img_kxL4"></p>
+<p><img decoding="async" loading="lazy" src="/assets/images/pokemon-team-0625cfa3bc0d5eccac31149fe4a2f956.png" width="2708" height="1188" class="img_kxL4"></p>
 <p>Je kan de images gebruiken van de types om een icon te tonen van de pokemon types.</p>
 <p>Breidt je pokemon object uit met een currentHP key en geef deze een waarde tussen 0 en maxHP. Bv als de maxHp 79 is dan zal er een random waarde tussen 0 en 79 gekozen worden.</p>
 <p><strong>Belangrijk:</strong> Het pokemon team mag nog niet worden opgeslagen in de database. Dit mag pas gebeuren op het moment dat de SAVE button gebeurd op de player pagina:</p>
@@ -98,7 +98,7 @@
 <li class="">Zorg voor een filtering systeem zodat je de pokemon lijst kan filteren op basis van type.</li>
 </ul>
 <p><img decoding="async" loading="lazy" src="/assets/images/filtering-7fd65358353b8f9aebc9fafc37a8103c.png" width="1584" height="116" class="img_kxL4"></p>
-<p><img decoding="async" loading="lazy" src="/assets/images/firefilter-4effda9ee61b4abfb13f6203011b4eae.png" width="2696" height="246" class="img_kxL4"></p>
+<p><img decoding="async" loading="lazy" src="/assets/images/vuurtype-filter-4effda9ee61b4abfb13f6203011b4eae.png" width="2696" height="246" class="img_kxL4"></p>
 <ul>
 <li class="">
 <p>Zorg voor een overzicht van je pokemon team:</p>
