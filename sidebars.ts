@@ -1120,7 +1120,7 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "Semester 2",
+        "label": "Milestones",
         "link": {
           "type": "doc",
           "id": "project/semester-2/index"
@@ -1149,36 +1149,6 @@ const sidebars: SidebarsConfig = {
           {
             "type": "doc",
             "id": "project/semester-2/milestone-4-security",
-            "label": "Milestone 4 - Security"
-          }
-        ]
-      },
-      {
-        "type": "category",
-        "label": "Semester 1",
-        "link": {
-          "type": "doc",
-          "id": "project/semester-1/index"
-        },
-        "items": [
-          {
-            "type": "doc",
-            "id": "project/semester-1/node-client",
-            "label": "Milestone 1 - Terminal App"
-          },
-          {
-            "type": "doc",
-            "id": "project/semester-1/milestone-2-express",
-            "label": "Milestone 2 - Express"
-          },
-          {
-            "type": "doc",
-            "id": "project/semester-1/milestone-3-mongodb",
-            "label": "Milestone 3 - MongoDB"
-          },
-          {
-            "type": "doc",
-            "id": "project/semester-1/milestone-4-security",
             "label": "Milestone 4 - Security"
           }
         ]
