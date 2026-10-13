@@ -84,31 +84,91 @@ const sidebars: SidebarsConfig = {
       },
       {
         "type": "category",
-        "label": "Array Functions",
-        "link": {
-          "type": "doc",
-          "id": "nodejs-+-typescript/array-functions/index"
-        },
+        "label": "Arraymethodes",
         "items": [
           {
             "type": "doc",
-            "id": "nodejs-+-typescript/array-functions/map",
-            "label": "Array.map()"
+            "id": "nodejs-+-typescript/array-functions/index",
+            "label": "Overzicht"
+          },
+          {
+            "type": "category",
+            "label": "Basismethodes",
+            "collapsed": false,
+            "items": [
+              {
+                "type": "doc",
+                "id": "nodejs-+-typescript/array-functions/push-pop",
+                "label": "push() en pop()"
+              },
+              {
+                "type": "doc",
+                "id": "nodejs-+-typescript/array-functions/shift-unshift",
+                "label": "shift() en unshift()"
+              },
+              {
+                "type": "doc",
+                "id": "nodejs-+-typescript/array-functions/slice-splice",
+                "label": "slice() en splice()"
+              },
+              {
+                "type": "doc",
+                "id": "nodejs-+-typescript/array-functions/indexof-includes",
+                "label": "indexOf() en includes()"
+              },
+              {
+                "type": "doc",
+                "id": "nodejs-+-typescript/array-functions/concat-join-reverse",
+                "label": "concat(), join(), reverse()"
+              }
+            ]
+          },
+          {
+            "type": "category",
+            "label": "Met een callback",
+            "collapsed": false,
+            "items": [
+              {
+                "type": "doc",
+                "id": "nodejs-+-typescript/array-functions/foreach",
+                "label": "forEach()"
+              },
+              {
+                "type": "doc",
+                "id": "nodejs-+-typescript/array-functions/find",
+                "label": "find() en findIndex()"
+              },
+              {
+                "type": "doc",
+                "id": "nodejs-+-typescript/array-functions/filter",
+                "label": "filter()"
+              },
+              {
+                "type": "doc",
+                "id": "nodejs-+-typescript/array-functions/map",
+                "label": "map()"
+              },
+              {
+                "type": "doc",
+                "id": "nodejs-+-typescript/array-functions/reduce",
+                "label": "reduce()"
+              },
+              {
+                "type": "doc",
+                "id": "nodejs-+-typescript/array-functions/every-some",
+                "label": "every() en some()"
+              },
+              {
+                "type": "doc",
+                "id": "nodejs-+-typescript/array-functions/sort",
+                "label": "sort()"
+              }
+            ]
           },
           {
             "type": "doc",
-            "id": "nodejs-+-typescript/array-functions/filter",
-            "label": "Array.filter()"
-          },
-          {
-            "type": "doc",
-            "id": "nodejs-+-typescript/array-functions/reduce",
-            "label": "Array.reduce()"
-          },
-          {
-            "type": "doc",
-            "id": "nodejs-+-typescript/array-functions/find",
-            "label": "Array.find()"
+            "id": "nodejs-+-typescript/array-functions/chaining",
+            "label": "Chaining"
           }
         ]
       },
